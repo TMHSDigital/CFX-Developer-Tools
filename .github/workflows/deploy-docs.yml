@@ -28,6 +28,15 @@ jobs:
       - name: Install MkDocs Material
         run: pip install mkdocs-material
 
+      - name: Copy non-docs content into docs/ for MkDocs
+        run: |
+          cp CHANGELOG.md docs/CHANGELOG.md
+          cp -r skills docs/skills
+          mkdir -p docs/mcp-server
+          cp mcp-server/README.md docs/mcp-server/README.md
+          mkdir -p docs/assets
+          cp assets/logo.png docs/assets/logo.png
+
       - name: Build site
         run: mkdocs build --strict
 

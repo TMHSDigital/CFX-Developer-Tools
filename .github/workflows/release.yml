@@ -192,6 +192,7 @@ jobs:
 
       - name: Sync GitHub repo metadata
         if: steps.check.outputs.skip == 'false'
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

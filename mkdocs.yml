@@ -6,14 +6,12 @@ repo_url: https://github.com/TMHSDigital/CFX-Developer-Tools
 repo_name: TMHSDigital/CFX-Developer-Tools
 edit_uri: edit/main/
 
-docs_dir: .
-
 nav:
-  - Home: docs/index.md
-  - Getting Started: docs/GETTING-STARTED.md
-  - Architecture: docs/ARCHITECTURE.md
-  - Roadmap: docs/ROADMAP.md
-  - Contributing: docs/CONTRIBUTING.md
+  - Home: index.md
+  - Getting Started: GETTING-STARTED.md
+  - Architecture: ARCHITECTURE.md
+  - Roadmap: ROADMAP.md
+  - Contributing: CONTRIBUTING.md
   - Changelog: CHANGELOG.md
   - Skills:
       - Client-Server Patterns: skills/client-server-patterns/SKILL.md
@@ -73,29 +71,3 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.inlinehilite
   - pymdownx.snippets
-
-exclude_docs: |
-  templates/
-  snippets/
-  node_modules/
-  .github/
-  .cursor/
-  .cursor-plugin/
-  assets/
-  __pycache__/
-  *.py
-  *.json
-  *.lua
-  *.js
-  *.ts
-  *.cs
-  *.svelte
-  *.mdc
-  *.csproj
-  AGENTS.md
-  RESEARCH.md
-  CFX-Developer-Tools-Cursor-Prompt.md
-  LICENSE
-  .cursorrules
-  .gitignore
-  mkdocs.yml
