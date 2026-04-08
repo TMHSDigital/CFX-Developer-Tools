@@ -1,6 +1,6 @@
 # Roadmap
 
-## Milestone 1 - Foundation (v0.1.x, complete)
+## Milestone 1 - Foundation (v0.1.x--v0.2.0, complete)
 
 Core plugin scaffolding and content that enables basic CFX resource development in Cursor.
 
@@ -17,34 +17,46 @@ Core plugin scaffolding and content that enables basic CFX resource development 
 - [x] NUI development skill
 - [x] Database integration skill (oxmysql, mysql-async)
 - [x] 6 coding convention and safety rules (.mdc files)
-- [x] 15 code snippets (7 Lua, 5 JavaScript, 3 C#) (now 20 with state bag snippets added in M2)
+- [x] 15 code snippets (7 Lua, 5 JavaScript, 3 C#)
 - [x] MCP server with 4 tool definitions (scaffold, native lookup, manifest gen, event search)
 - [x] Native function database stubs (GTA5: 50 natives, RDR3: 10 natives)
 - [x] Common events reference database (20 events)
 - [x] Documentation: Getting Started, Architecture, Contributing, Roadmap, Changelog
-- [x] CI/CD: PR validation workflow (JSON lint, manifest checks, em dash detection, template validation, Python syntax)
-- [x] CI/CD: Auto version bump + tag + GitHub Release on merge to main (conventional commits)
-- [x] CI/CD: Scheduled weekly native database update (auto-merge)
-- [x] CI/CD: Stale issue/PR cleanup workflow
+- [x] CI/CD: PR validation, auto release, weekly native updates, stale cleanup
 - [x] AGENTS.md and .cursorrules for AI agent guidance
 - [x] Plugin logo and branding assets
 
 ---
 
-## Milestone 2 - Intelligence (v0.3.0, in progress)
+## Milestone 2 - Intelligence (v0.3.0--v0.4.x, complete)
 
-Make the MCP server useful for real development by expanding the data layer and adding live documentation features.
+Expanded the data layer and added new skills and content for real development workflows.
 
 ### Native function database
 
-- [x] Expand GTA5 native database to 500+ commonly used natives (done: 6300+ natives from runtime.fivem.net)
-- [x] Expand RDR3 native database to 200+ natives (done: 5800+ natives from runtime.fivem.net)
-- [x] Add full parameter type annotations and usage examples for each native
-- [x] Add deprecation flags and replacement recommendations
-- [x] Add namespace/category browsing (PLAYER, VEHICLE, ENTITY, PED, HUD, etc.)
-- [x] Add native hash field to output schema
-- [x] Merge CFX platform natives (942 entries with accurate apiset-based side classification)
+- [x] Expand GTA5 native database to 6300+ real natives from runtime.fivem.net
+- [x] Expand RDR3 native database to 5800+ real natives from runtime.fivem.net
+- [x] Full parameter type annotations and usage examples
+- [x] Deprecation flags and replacement recommendations
+- [x] Namespace/category browsing (44 GTA5 categories, 84 RDR3 categories)
+- [x] Native hash field in output schema
+- [x] Merge 942 CFX platform natives with accurate apiset-based side classification
 - [x] Update weekly CI workflow to fetch from runtime.fivem.net (GTA5, RDR3, CFX sources)
+
+### Content expansion
+
+- [x] State Bags skill covering Entity/Player/Global state, change handlers, replication, and security
+- [x] State Bags snippets for Lua and JavaScript (entity, player, change handler)
+- [x] CfxLua vector/quaternion type documentation in Lua conventions rule and client-server patterns skill
+- [x] NUI Vite + React template with postMessage bridge and HMR dev workflow
+- [x] Balanced FiveM/RedM representation across all documentation, skills, templates, and snippets
+- [x] Comprehensive Getting Started guide for complete beginners with collapsible sections
+
+---
+
+## Milestone 3 - Expansion (planned)
+
+Expand event coverage, add documentation search, and improve code generation intelligence.
 
 ### Documentation search
 
@@ -66,13 +78,6 @@ Make the MCP server useful for real development by expanding the data layer and 
 - [ ] Expose detection result as an MCP tool: `detect_framework`
 - [ ] Cache detection result per workspace session
 
-### Content expansion
-
-- [x] State Bags skill covering Entity/Player/Global state, change handlers, replication, and security patterns
-- [x] State Bags snippets for Lua and JavaScript (entity, player, change handler)
-- [x] CfxLua vector/quaternion type documentation in Lua conventions rule and client-server patterns skill
-- [x] NUI Vite + React template with postMessage bridge and HMR dev workflow
-
 ### Code generation improvements
 
 - [ ] Context-aware boilerplate generation that reads existing code style
@@ -81,7 +86,7 @@ Make the MCP server useful for real development by expanding the data layer and 
 
 ---
 
-## Milestone 3 - Integration
+## Milestone 4 - Integration (planned)
 
 Connect the plugin to live FiveM/RedM server infrastructure for real-time development workflows.
 
@@ -116,7 +121,7 @@ txAdmin exposes a REST API on port 40120 (default) with session cookie authentic
 
 ---
 
-## Milestone 4 - Polish
+## Milestone 5 - Polish (planned)
 
 Harden the plugin for public release and community adoption.
 

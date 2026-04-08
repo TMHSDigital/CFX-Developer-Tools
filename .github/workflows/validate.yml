@@ -105,13 +105,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check for em dashes
+      - name: Check for em dashes and en dashes
         run: |
-          if grep -rP '\x{2014}' --include='*.md' --include='*.lua' --include='*.js' --include='*.cs' --include='*.mdc' --include='*.json' --include='*.py' . 2>/dev/null; then
-            echo "::error::Em dashes found. Use hyphens instead."
+          if grep -rP '[\x{2013}\x{2014}]' --include='*.md' --include='*.lua' --include='*.js' --include='*.cs' --include='*.mdc' --include='*.json' --include='*.py' . 2>/dev/null; then
+            echo "::error::Em dashes or en dashes found. Use hyphens instead."
             exit 1
           fi
-          echo "No em dashes found"
+          echo "No em/en dashes found"
 
       - name: Check for hardcoded credentials
         run: |
@@ -129,6 +129,52 @@ jobs:
             exit 1
           fi
           echo "No deprecated lua54 in templates"
+
+  validate-counts:
+    name: Validate content counts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check skill and snippet counts match plugin.json
+        run: python3 << 'EOF'
+          import json, os, sys
+
+          m = json.load(open('.cursor-plugin/plugin.json'))
+          errors = []
+
+          skill_count = len(m.get('skills', []))
+          rule_count = len(m.get('rules', []))
+
+          snippet_count = sum(
+              len(files)
+              for root, dirs, files in os.walk('snippets')
+              if files
+          )
+
+          template_count = sum(
+              1 for d in os.listdir('templates')
+              if os.path.isdir(os.path.join('templates', d))
+              and os.path.exists(os.path.join('templates', d, 'fxmanifest.lua'))
+          )
+
+          readme = open('README.md').read()
+          if f'{skill_count} skills' not in readme:
+              errors.append(f'README skill count mismatch (expected {skill_count})')
+          if f'{snippet_count} snippets' not in readme:
+              errors.append(f'README snippet count mismatch (expected {snippet_count})')
+          if f'{template_count} templates' not in readme:
+              errors.append(f'README template count mismatch (expected {template_count})')
+          if f'{rule_count} rules' not in readme:
+              errors.append(f'README rule count mismatch (expected {rule_count})')
+
+          if errors:
+              for e in errors:
+                  print(f'::error::{e}', file=sys.stderr)
+              sys.exit(1)
+
+          print(f'Counts verified: {skill_count} skills, {rule_count} rules, {snippet_count} snippets, {template_count} templates')
+          EOF
 
   validate-templates:
     name: Validate fxmanifest templates
@@ -184,4 +230,4 @@ jobs:
           python3 -m py_compile mcp-server/tools/scaffold.py
           python3 -m py_compile mcp-server/tools/natives.py
           python3 -m py_compile mcp-server/tools/manifest_gen.py
-          python3 -m py_compile mcp-server/tools/docs_search.py
+          python3 -m py_compile mcp-server/tools/event_search.py

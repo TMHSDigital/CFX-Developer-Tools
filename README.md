@@ -290,9 +290,10 @@ See [docs/ROADMAP.md](docs/ROADMAP.md) for the full project roadmap.
 | **v0.1.x** | Foundation -- skills, rules, snippets, templates, MCP server, CI/CD | Done |
 | **v0.2.0** | AGENTS.md and .cursorrules for AI agent guidance | Done |
 | **v0.3.0** | Native DB expansion -- 6300+ GTA5, 5800+ RDR3, category browsing, deprecation flags | Done |
-| **v0.4.0** | Documentation search -- FiveM/RedM docs integration via MCP | Planned |
-| **v0.5.0** | Event reference expansion -- 100+ events with examples | Planned |
-| **v0.6.0** | Framework auto-detection -- runtime detection from project files | Planned |
+| **v0.4.x** | Content expansion -- State Bags skill, NUI Vite template, vector docs, FiveM/RedM balance | Done |
+| **v0.5.0** | Documentation search -- FiveM/RedM docs integration via MCP | Planned |
+| **v0.6.0** | Event reference expansion -- 100+ events with examples | Planned |
+| **v0.7.0** | Framework auto-detection -- runtime detection from project files | Planned |
 | **v1.0.0** | Stable release -- marketplace listing, full documentation | Planned |
 
 </details>

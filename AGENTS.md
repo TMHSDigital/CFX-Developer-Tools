@@ -13,6 +13,7 @@ This is a Cursor IDE plugin for FiveM/RedM (CFX) resource development. It contai
 - **`templates/`** -- 7 resource starter templates (standalone, ESX, QBCore, ox_core, JS, C#, NUI Vite)
 - **`mcp-server/`** -- Python MCP server with 4 tools and JSON data files
 - **`docs/`** -- ARCHITECTURE.md, ROADMAP.md, CONTRIBUTING.md, GETTING-STARTED.md
+- **`CHANGELOG.md`** -- manually maintained release history (not auto-generated)
 - **`.github/workflows/`** -- CI/CD automation
 
 ## Branching and commit model
@@ -31,7 +32,8 @@ This is a Cursor IDE plugin for FiveM/RedM (CFX) resource development. It contai
 Checks:
 - JSON validity for plugin.json, mcp.json, native databases, events
 - Plugin manifest required fields, kebab-case name, skill/rule file existence
-- Em dash detection (use hyphens, not em dashes)
+- Content counts in README match actual files on disk (skills, rules, snippets, templates)
+- Em dash and en dash detection (use hyphens, not em/en dashes)
 - Hardcoded credential patterns
 - Deprecated `lua54 'yes'` directive in templates
 - fxmanifest.lua templates have `fx_version`, `games`, `'cerulean'`
@@ -48,7 +50,11 @@ Automatic flow:
 6. Creates git tag `vX.Y.Z`
 7. Creates GitHub Release with grouped release notes
 
+Has a concurrency guard -- only one release can run at a time to prevent race conditions.
+
 **Do not manually edit the version in plugin.json or the README badge.** The release workflow owns both.
+
+**CHANGELOG.md is manually maintained.** Update it when making significant changes. The release workflow does not auto-update it.
 
 ### `update-natives.yml` (weekly on Monday 06:00 UTC, or manual dispatch)
 
@@ -69,7 +75,7 @@ Marks issues/PRs as stale after inactivity and closes them after further inactiv
 
 ## Code conventions
 
-- **No em dashes** -- use hyphens or rewrite. CI will reject em dashes.
+- **No em dashes or en dashes** -- use hyphens or rewrite. CI will reject them.
 - **No `lua54 'yes'`** -- it is deprecated. Lua 5.4 is the only CFX runtime. CI will reject this in templates.
 - **No hardcoded credentials** -- CI scans for password/token/api_key patterns.
 - fxmanifest.lua must use `fx_version 'cerulean'` and include `games`.
@@ -80,9 +86,10 @@ Marks issues/PRs as stale after inactivity and closes them after further inactiv
 
 ### New skill
 
-1. Create `skills/<skill-name>/SKILL.md` with YAML frontmatter
+1. Create `skills/<skill-name>/SKILL.md` with YAML frontmatter (title, description, globs)
 2. Add the path to `plugin.json` under `"skills"`
-3. Use `fix:` or `feat:` commit prefix depending on scope
+3. Update counts in README.md stats line and skills table
+4. Use `fix:` or `feat:` commit prefix depending on scope
 
 ### New rule
 
@@ -93,6 +100,8 @@ Marks issues/PRs as stale after inactivity and closes them after further inactiv
 
 1. Add the file to `snippets/<language>/` (lua, javascript, csharp)
 2. Include a header comment explaining what the snippet does
+3. Update counts in README.md stats line and relevant snippet tables
+4. CI will fail if README counts don't match actual file counts
 
 ### New template
 
@@ -107,7 +116,7 @@ Do not manually edit `mcp-server/data/natives_*.json`. The `update-natives.yml` 
 ## MCP server
 
 - Entry point: `mcp-server/server.py`
-- Tools: `mcp-server/tools/` (scaffold.py, natives.py, manifest_gen.py, docs_search.py)
+- Tools: `mcp-server/tools/` (scaffold.py, natives.py, manifest_gen.py, event_search.py)
 - Shared logic: `mcp-server/tools/manifest_common.py`
 - Data: `mcp-server/data/` (natives_gta5.json, natives_rdr3.json, events.json)
 - Dependencies: `mcp-server/requirements.txt` (pinned ranges)

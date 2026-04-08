@@ -13,7 +13,7 @@ from mcp.server.fastmcp import FastMCP
 from tools.scaffold import scaffold_resource
 from tools.natives import lookup_native
 from tools.manifest_gen import generate_manifest
-from tools.docs_search import search_events
+from tools.event_search import search_events
 
 mcp = FastMCP("cfx-dev-tools")
 

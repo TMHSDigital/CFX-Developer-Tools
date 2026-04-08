@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.4.1 - 2026-04-08
+
+### Fixed
+
+- Balanced FiveM/RedM representation across all documentation, skills, templates, and snippets
+- Updated template `fxmanifest.lua` files to include `rdr3` where appropriate with comments
+- Fixed FiveM-only language in database integration, fxmanifest, NUI, and native function skills
+
+## 0.4.0 - 2026-04-08
+
+### Added
+
+- State Bags skill covering Entity/Player/Global state, change handlers, replication, and security
+- State Bags snippets for Lua (entity, player, handler) and JavaScript (entity, handler)
+- NUI Vite + React template with postMessage bridge, TypeScript, and HMR dev workflow
+- CfxLua vector/quaternion type documentation in Lua conventions rule and client-server patterns skill
+
+### Changed
+
+- Updated README with prominent Getting Started guide links, large badge, and callout
+- Rewrote Getting Started guide for complete beginners with collapsible sections
+
 ## 0.3.0 - 2026-04-08
 
 ### Added
@@ -28,11 +50,19 @@
 - AGENTS.md for AI agent guidance and repository conventions
 - .cursorrules file for Cursor-specific context
 
+## 0.1.2 - 2026-04-08
+
+### Fixed
+
+- Updated README version badge to match release tags
+- Enhanced release workflow to automatically update README badge on version bump
+
 ## 0.1.1 - 2026-04-08
 
 ### Fixed
 
 - Updated README with logo, badges, collapsible sections, and Mermaid architecture diagram
+- Updated RedM native reference links to working URL (rdr3natives.com)
 
 ## 0.1.0 - 2026-04-08
 
@@ -50,7 +80,7 @@
 - GitHub Actions CI/CD:
   - PR validation (JSON lint, manifest checks, em dash detection, template validation, Python syntax)
   - Auto version bump, tag, and GitHub Release on merge to main (conventional commits)
-  - Scheduled weekly native database update from citizenfx/natives (auto-transform, auto-merge)
+  - Scheduled weekly native database update from runtime.fivem.net (auto-transform, auto-merge)
   - Stale issue/PR cleanup
 
 ### Fixed

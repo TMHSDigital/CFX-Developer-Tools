@@ -46,11 +46,19 @@ Add code patterns for common tasks:
 
 ### Native data
 
-Help expand the native function databases:
-- `mcp-server/data/natives_gta5.json` - GTA5 natives
-- `mcp-server/data/natives_rdr3.json` - RDR3 natives
-- Follow the existing JSON structure
-- Include accurate parameter types, return types, descriptions, and side (client/server/shared)
+The native databases (`mcp-server/data/natives_gta5.json`, `natives_rdr3.json`) are **auto-generated** by a weekly CI workflow that fetches from `runtime.fivem.net/doc/`. Do not edit them manually.
+
+To improve the native transformation logic:
+- Edit `.github/scripts/transform_natives.py`
+- Changes to side classification, description parsing, or schema mapping go there
+- You can trigger a manual update via `gh workflow run update-natives.yml`
+
+### Events data
+
+Help expand the event reference database:
+- `mcp-server/data/events.json`
+- Follow the existing JSON structure: `name`, `side`, `description`, `params`, `game`
+- Include accurate side (client/server/shared) and parameter lists
 
 ### Documentation
 

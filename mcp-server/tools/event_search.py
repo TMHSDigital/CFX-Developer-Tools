@@ -1,5 +1,5 @@
 """
-Event search tool.
+Event search tool (event_search.py).
 
 Searches the events.json reference database for common FiveM/RedM events.
 """
