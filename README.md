@@ -36,7 +36,7 @@ Scaffold complete FiveM/RedM resources, look up native functions, generate manif
   <a href="docs/GETTING-STARTED.md"><img src="https://img.shields.io/badge/%F0%9F%93%96_Getting_Started_Guide-blue?style=for-the-badge" alt="Getting Started Guide"></a>
 </p>
 
-> **First time here?** The **[Getting Started guide](docs/GETTING-STARTED.md)** walks you through every step -- from installing Git, Python, and Cursor to building and deploying your first FiveM resource. No prior experience required.
+> **First time here?** The **[Getting Started guide](docs/GETTING-STARTED.md)** walks you through every step -- from installing Git, Python, and Cursor to building and deploying your first FiveM/RedM resource. No prior experience required.
 
 ## How It Works
 
@@ -135,7 +135,7 @@ Then ask the AI agent to scaffold a resource, look up a native, or generate a ma
 
 | Rule | What it does |
 |:-----|:-------------|
-| **Lua Conventions** | Enforces FiveM Lua idioms -- locals, proper event handlers, Citizen threading |
+| **Lua Conventions** | Enforces CFX Lua idioms -- locals, proper event handlers, Citizen threading |
 | **JavaScript Conventions** | Enforces CFX JavaScript patterns -- async/await, proper exports, event typing |
 | **C# Conventions** | Enforces CitizenFX C# patterns -- `[FromSource]`, `BaseScript`, tick handlers |
 | **fxmanifest Standards** | Validates manifest structure, version strings, dependency declarations |
@@ -250,7 +250,7 @@ What native function gets a vehicle's current speed?
 
 **Generate a manifest:**
 ```
-Generate an fxmanifest.lua for an ESX resource with NUI, targeting FiveM only
+Generate an fxmanifest.lua for an ESX resource with NUI, targeting both FiveM and RedM
 ```
 
 **Search events:**
@@ -289,8 +289,8 @@ See [docs/ROADMAP.md](docs/ROADMAP.md) for the full project roadmap.
 |:--------|:----------|:-------|
 | **v0.1.x** | Foundation -- skills, rules, snippets, templates, MCP server, CI/CD | Done |
 | **v0.2.0** | AGENTS.md and .cursorrules for AI agent guidance | Done |
-| **v0.3.0** | Native DB expansion -- 6300+ GTA5, 5800+ RDR3, category browsing, deprecation flags | **Current** |
-| **v0.4.0** | Documentation search -- FiveM docs integration via MCP | Planned |
+| **v0.3.0** | Native DB expansion -- 6300+ GTA5, 5800+ RDR3, category browsing, deprecation flags | Done |
+| **v0.4.0** | Documentation search -- FiveM/RedM docs integration via MCP | Planned |
 | **v0.5.0** | Event reference expansion -- 100+ events with examples | Planned |
 | **v0.6.0** | Framework auto-detection -- runtime detection from project files | Planned |
 | **v1.0.0** | Stable release -- marketplace listing, full documentation | Planned |
@@ -314,9 +314,9 @@ CC BY-NC-ND 4.0 -- see [LICENSE](LICENSE) for details.
 
 &nbsp;
 
-- [FiveM Documentation](https://docs.fivem.net/docs/)
-- [FiveM Native Reference](https://docs.fivem.net/natives/)
-- [RedM Native Reference](https://rdr3natives.com/)
+- [FiveM/RedM Documentation](https://docs.fivem.net/docs/)
+- [GTA5 Native Reference](https://docs.fivem.net/natives/)
+- [RDR3 Native Reference](https://rdr3natives.com/)
 - [Cfx.re Forums](https://forum.cfx.re/)
 - [Cfx.re Platform](https://cfx.re/)
 

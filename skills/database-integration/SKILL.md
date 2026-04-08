@@ -1,12 +1,12 @@
 ---
 title: Database Integration
-description: Guide database setup and queries for FiveM resources using oxmysql
+description: Guide database setup and queries for FiveM/RedM resources using oxmysql
 globs: ["**/*.lua", "**/*.js", "**/*.sql"]
 ---
 
 # Database Integration
 
-Most FiveM RP servers use MySQL for persistent data. The standard library is **oxmysql**, which provides async MySQL queries from Lua and JavaScript resources.
+Most FiveM and RedM RP servers use MySQL for persistent data. The standard library is **oxmysql**, which provides async MySQL queries from Lua and JavaScript resources.
 
 ## Setup
 

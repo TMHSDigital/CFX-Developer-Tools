@@ -158,7 +158,7 @@ def _scaffold_js(base: str, files_created: list[str]) -> None:
         {
             "name": os.path.basename(base),
             "version": "1.0.0",
-            "description": "FiveM JavaScript resource",
+            "description": "FiveM/RedM JavaScript resource",
             "private": True,
             "devDependencies": {
                 "@citizenfx/client": "latest",

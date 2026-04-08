@@ -135,7 +135,7 @@ If this is your first time using a code editor, spend a minute clicking around t
 
 You need a running server to **test** resources, but you do not need one to **build** them. You can use the plugin to generate code and learn even without a server.
 
-When you are ready to test, follow the official guide: [Setting up a FiveM server](https://docs.fivem.net/docs/server-manual/setting-up-a-server/).
+When you are ready to test, follow the official guide: [Setting up a server](https://docs.fivem.net/docs/server-manual/setting-up-a-server/) (covers both FiveM and RedM).
 
 </details>
 
@@ -272,7 +272,7 @@ The AI should respond with information about `GetEntityCoords`, including its pa
 
 Type this prompt:
 
-> Scaffold a new standalone FiveM resource called test-resource in Lua
+> Scaffold a new standalone resource called test-resource in Lua, targeting both FiveM and RedM
 
 The AI should create a `test-resource/` directory containing:
 
@@ -298,7 +298,7 @@ Let's build something real -- a simple resource that displays a welcome message 
 
 In the AI chat, type:
 
-> Create a new standalone FiveM resource called welcome-message in Lua. When a player joins, show them a notification that says "Welcome to the server!" and print their name in the server console.
+> Create a new standalone resource called welcome-message in Lua, targeting both FiveM and RedM. When a player joins, show them a notification that says "Welcome to the server!" and print their name in the server console.
 
 The AI will use its skills and tools to generate the complete resource.
 
@@ -313,7 +313,7 @@ Look at the files in the `welcome-message/` folder:
 
 | File | Purpose |
 |:-----|:--------|
-| `fxmanifest.lua` | Tells FiveM what scripts to load, the game target, and metadata. Every resource needs one. See the [FiveM resource docs](https://docs.fivem.net/docs/scripting-manual/introduction/introduction-to-resources/) for details. |
+| `fxmanifest.lua` | Tells FiveM/RedM what scripts to load, the game target, and metadata. Every resource needs one. See the [resource docs](https://docs.fivem.net/docs/scripting-manual/introduction/introduction-to-resources/) for details. |
 | `client/main.lua` | Runs on each player's game. Handles things the player sees and interacts with. |
 | `server/main.lua` | Runs on the server. Handles authoritative logic, database queries, and player management. |
 | `config.lua` | Shared settings that both client and server scripts can read. |
@@ -325,7 +325,7 @@ Look at the files in the `welcome-message/` folder:
 
 &nbsp;
 
-If you have a FiveM server set up:
+If you have a FiveM or RedM server set up:
 
 1. Copy the entire `welcome-message/` folder into your server's `resources/` directory
 2. Open your server's `server.cfg` file and add this line:
@@ -364,7 +364,7 @@ Here are example prompts to explore the plugin's capabilities. Paste them into t
 &nbsp;
 
 - "Create a new QBCore resource called qb-shops in Lua with database support"
-- "Scaffold a JavaScript FiveM resource called my-hud with NUI support"
+- "Scaffold a JavaScript resource called my-hud with NUI support for FiveM and RedM"
 - "Generate a C# resource for RedM called rdr-horses"
 
 </details>
@@ -385,7 +385,7 @@ Here are example prompts to explore the plugin's capabilities. Paste them into t
 
 &nbsp;
 
-- "Generate an fxmanifest.lua for an ESX resource with NUI, targeting FiveM only"
+- "Generate an fxmanifest.lua for an ESX resource with NUI, targeting both FiveM and RedM"
 - "What directives should I use for a resource that targets both FiveM and RedM?"
 
 </details>
@@ -406,7 +406,7 @@ Here are example prompts to explore the plugin's capabilities. Paste them into t
 &nbsp;
 
 - "Show me how to create and query a MySQL table using oxmysql"
-- "What's the best pattern for upsert queries in FiveM?"
+- "What's the best pattern for upsert queries in FiveM/RedM?"
 
 </details>
 
@@ -427,8 +427,8 @@ Here are example prompts to explore the plugin's capabilities. Paste them into t
 
 - Browse the skills in `skills/` to see the full reference material the AI uses
 - Read the [Architecture](ARCHITECTURE.md) doc to understand how all the pieces fit together
-- Read the [FiveM scripting introduction](https://docs.fivem.net/docs/scripting-manual/introduction/) for the official scripting guide
-- Check the [FiveM native reference](https://docs.fivem.net/natives/) for the full list of game functions
+- Read the [CFX scripting introduction](https://docs.fivem.net/docs/scripting-manual/introduction/) for the official scripting guide
+- Check the [GTA5 native reference](https://docs.fivem.net/natives/) and [RDR3 native reference](https://rdr3natives.com/) for game functions
 - Visit the [Cfx.re forums](https://forum.cfx.re/) for community help and examples
 - See [CONTRIBUTING.md](CONTRIBUTING.md) if you want to help improve this plugin
 
@@ -502,11 +502,11 @@ pip install -r requirements.txt
 </details>
 
 <details>
-<summary><strong>Cursor doesn't know about FiveM</strong></summary>
+<summary><strong>Cursor doesn't know about FiveM/RedM</strong></summary>
 
 &nbsp;
 
-**Symptom:** The AI gives generic coding answers without FiveM-specific knowledge.
+**Symptom:** The AI gives generic coding answers without FiveM/RedM-specific knowledge.
 
 **Cause:** The plugin is not loaded. This usually means you opened the wrong folder.
 
@@ -557,9 +557,10 @@ pip install -r requirements.txt
 | Cursor documentation | [docs.cursor.com](https://docs.cursor.com) |
 | Git for Windows | [git-scm.com/download/win](https://git-scm.com/download/win) |
 | Python downloads | [python.org/downloads](https://www.python.org/downloads/) |
-| FiveM documentation | [docs.fivem.net](https://docs.fivem.net/docs/) |
-| FiveM server setup | [docs.fivem.net/server-manual](https://docs.fivem.net/docs/server-manual/setting-up-a-server/) |
-| FiveM scripting intro | [docs.fivem.net/scripting-manual](https://docs.fivem.net/docs/scripting-manual/introduction/) |
-| FiveM native reference | [docs.fivem.net/natives](https://docs.fivem.net/natives/) |
+| FiveM/RedM documentation | [docs.fivem.net](https://docs.fivem.net/docs/) |
+| Server setup guide | [docs.fivem.net/server-manual](https://docs.fivem.net/docs/server-manual/setting-up-a-server/) |
+| Scripting introduction | [docs.fivem.net/scripting-manual](https://docs.fivem.net/docs/scripting-manual/introduction/) |
+| GTA5 native reference | [docs.fivem.net/natives](https://docs.fivem.net/natives/) |
+| RDR3 native reference | [rdr3natives.com](https://rdr3natives.com/) |
 | Cfx.re forums | [forum.cfx.re](https://forum.cfx.re/) |
 | Plugin GitHub repo | [github.com/TMHSDigital/CFX-Developer-Tools](https://github.com/TMHSDigital/CFX-Developer-Tools) |

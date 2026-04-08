@@ -12,7 +12,7 @@ Natives are built-in functions provided by the GTA5/RDR3 game engine and the CFX
 
 - GTA5 (FiveM) natives: https://docs.fivem.net/natives/
 - RDR3 (RedM) natives: https://rdr3natives.com/
-- CFX natives (shared platform functions): included in the FiveM native reference
+- CFX natives (shared platform functions): included in both native references above
 
 ## Calling conventions
 

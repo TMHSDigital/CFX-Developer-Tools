@@ -14,11 +14,12 @@ Every manifest must include at minimum:
 
 ```lua
 fx_version 'cerulean'
-games { 'gta5' }
+games { 'gta5', 'rdr3' }
 ```
 
 - `fx_version` must always be `'cerulean'` -- this is the current and only supported version
 - `games` accepts `'gta5'` (FiveM), `'rdr3'` (RedM), or both: `{ 'gta5', 'rdr3' }`
+- Use both when your resource works on either platform; use one if it depends on game-specific natives
 
 ## Metadata fields
 
@@ -52,7 +53,7 @@ shared_scripts {
 
 ## Lua 5.4
 
-Lua 5.4 is the only runtime as of June 2025. Lua 5.3 has been fully removed from FiveM.
+Lua 5.4 is the only runtime as of June 2025. Lua 5.3 has been fully removed from FiveM/RedM.
 
 The `lua54 'yes'` directive is **deprecated and ignored**. Do not include it in new manifests. All Lua scripts automatically run on Lua 5.4 (v5.4.8) regardless of manifest settings.
 

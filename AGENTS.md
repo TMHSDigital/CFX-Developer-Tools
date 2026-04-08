@@ -70,7 +70,7 @@ Marks issues/PRs as stale after inactivity and closes them after further inactiv
 ## Code conventions
 
 - **No em dashes** -- use hyphens or rewrite. CI will reject em dashes.
-- **No `lua54 'yes'`** -- it is deprecated. Lua 5.4 is the only FiveM runtime. CI will reject this in templates.
+- **No `lua54 'yes'`** -- it is deprecated. Lua 5.4 is the only CFX runtime. CI will reject this in templates.
 - **No hardcoded credentials** -- CI scans for password/token/api_key patterns.
 - fxmanifest.lua must use `fx_version 'cerulean'` and include `games`.
 - Python code in `mcp-server/` must pass `py_compile`.
@@ -116,7 +116,7 @@ The MCP server is configured in `.cursor/mcp.json` and starts automatically when
 
 ## Key technical facts
 
-- FiveM only supports Lua 5.4 (5.3 removed). The `lua54 'yes'` directive is deprecated and ignored.
+- FiveM and RedM only support Lua 5.4 (5.3 removed). The `lua54 'yes'` directive is deprecated and ignored.
 - C# resources compile to a single DLL referenced in both `client_scripts` and `server_scripts`.
 - `Wait(0)` in Lua loops is a performance anti-pattern in most cases; use appropriate wait times.
 - Server-side event handlers must validate `source` to prevent spoofing.

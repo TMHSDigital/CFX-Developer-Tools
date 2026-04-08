@@ -1,7 +1,7 @@
 {
   "name": "my-resource",
   "version": "1.0.0",
-  "description": "FiveM JavaScript resource",
+  "description": "FiveM/RedM JavaScript resource",
   "private": true,
   "devDependencies": {
     "@citizenfx/client": "latest",

@@ -116,7 +116,7 @@ end)
 Any web framework works inside NUI:
 - **Vanilla HTML/CSS/JS** -- simplest, no build step
 - **React** -- popular for complex UIs
-- **Vue** -- popular in the FiveM community
+- **Vue** -- popular in the FiveM/RedM community
 - **Svelte** -- small bundle size, good for NUI
 
 Keep bundles small. The NUI browser downloads assets from the resource, and large bundles increase load time.
@@ -124,7 +124,7 @@ Keep bundles small. The NUI browser downloads assets from the resource, and larg
 ## Limitations
 
 - **No Node.js APIs** -- NUI runs in a browser context, not Node
-- **Limited persistent storage** -- `localStorage` may work in some FiveM builds but behavior is inconsistent across updates; do not rely on it for important data
+- **Limited persistent storage** -- `localStorage` may work in some FiveM/RedM builds but behavior is inconsistent across updates; do not rely on it for important data
 - **No cross-origin requests** -- only `https://cfx-nui-*` URLs work
 - **No devtools by default** -- use `nui_devtools true` convar in server.cfg for debugging
 - **Single page** -- `ui_page` points to one HTML file; use JS routing for multiple views
@@ -136,7 +136,7 @@ Enable devtools in server.cfg:
 set nui_devtools true
 ```
 
-Once enabled, NUI devtools open in a separate Chromium DevTools window. You can inspect elements, view console logs, and debug CSS. Note: F8 opens the FiveM client console, not the NUI inspector.
+Once enabled, NUI devtools open in a separate Chromium DevTools window. You can inspect elements, view console logs, and debug CSS. Note: F8 opens the game client console, not the NUI inspector.
 
 ## Common patterns
 

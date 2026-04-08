@@ -1,5 +1,5 @@
 // CFX Base Script Pattern (C#)
-// All FiveM C# scripts extend BaseScript from CitizenFX.Core.
+// All FiveM/RedM C# scripts extend BaseScript from CitizenFX.Core.
 // Register event handlers in the constructor and use async Tick for loops.
 
 using System;

@@ -48,7 +48,7 @@ Make the MCP server useful for real development by expanding the data layer and 
 
 ### Documentation search
 
-- [ ] Implement `docs_search` MCP tool that queries the FiveM documentation site
+- [ ] Implement `docs_search` MCP tool that queries the FiveM/RedM documentation site
 - [ ] Cache frequently accessed doc pages locally for offline use
 - [ ] Support searching by topic, function name, or keyword
 
@@ -106,7 +106,7 @@ txAdmin exposes a REST API on port 40120 (default) with session cookie authentic
 
 - [ ] Resource hot-reload: detect file changes and auto-restart the resource via txAdmin
 - [ ] Error log streaming: tail server console for Lua/JS/C# errors related to the active resource
-- [ ] Bridge resource: a FiveM resource that connects to the MCP server for bidirectional debugging
+- [ ] Bridge resource: a FiveM/RedM resource that connects to the MCP server for bidirectional debugging
 - [ ] Player state inspection: read player data (position, health, vehicle) from a running server
 
 ### Server configuration

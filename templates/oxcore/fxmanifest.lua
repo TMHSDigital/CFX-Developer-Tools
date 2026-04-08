@@ -1,5 +1,5 @@
 fx_version 'cerulean'
-games { 'gta5' }
+games { 'gta5' } -- ox_core is FiveM-only; add 'rdr3' if porting to RedM
 
 author 'YourName'
 description 'ox_core resource'
