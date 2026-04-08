@@ -564,3 +564,4 @@ pip install -r requirements.txt
 | RDR3 native reference | [rdr3natives.com](https://rdr3natives.com/) |
 | Cfx.re forums | [forum.cfx.re](https://forum.cfx.re/) |
 | Plugin GitHub repo | [github.com/TMHSDigital/CFX-Developer-Tools](https://github.com/TMHSDigital/CFX-Developer-Tools) |
+| Plugin documentation site | [tmhsdigital.github.io/CFX-Developer-Tools](https://tmhsdigital.github.io/CFX-Developer-Tools/) |

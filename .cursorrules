@@ -9,7 +9,8 @@ You are working on CFX Developer Tools, a Cursor IDE plugin for FiveM and RedM r
 - `templates/` -- 11 resource templates (standalone, esx, qbcore, qbox, oxcore, vorp, rsg, javascript, csharp, nui-vite, nui-svelte)
 - `mcp-server/` -- Python FastAPI MCP server with 6 tools and JSON data files
 - `docs/` -- architecture, roadmap, contributing, getting started
-- `.github/workflows/` -- validate, release, update-natives, update-docs-index, stale
+- `.github/workflows/` -- validate, release, update-natives, update-docs-index, stale, deploy-docs
+- `mkdocs.yml` -- MkDocs Material config; docs site auto-deploys on push to main
 - `AGENTS.md` -- full workflow and contribution guide for AI agents
 - `CHANGELOG.md` -- manually maintained release history
 
@@ -58,6 +59,8 @@ Never manually edit the version in `plugin.json` or the README version badge. Th
 - `release.yml` uses `[skip ci]` on its version bump commit. Don't remove that.
 - `release.yml` paths-ignore excludes `.github/**`, `docs/**`, `*.md`, `LICENSE`. Content-only changes won't trigger releases.
 - `release.yml` has a concurrency guard. Only one release can run at a time.
+- `release.yml` auto-syncs the GitHub repo About section (description, homepage, topics) after every release. Do not manually edit the About section.
+- `deploy-docs.yml` builds the MkDocs Material site and deploys to GitHub Pages on every push to main.
 - `update-natives.yml` commits with `chore:` prefix (patch bump). Don't change to `feat:`.
 - `validate.yml` runs on both PR and push. Keep checks fast.
 - `CHANGELOG.md` is manually maintained. Update it for significant changes.

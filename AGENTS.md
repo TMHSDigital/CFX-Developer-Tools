@@ -2,6 +2,8 @@
 
 This file tells AI coding agents how the CFX Developer Tools repo works and how to contribute correctly.
 
+**Documentation site:** https://tmhsdigital.github.io/CFX-Developer-Tools/ (auto-deployed on push to main)
+
 ## Repository overview
 
 This is a Cursor IDE plugin for FiveM/RedM (CFX) resource development. It contains:
@@ -12,8 +14,9 @@ This is a Cursor IDE plugin for FiveM/RedM (CFX) resource development. It contai
 - **`snippets/`** -- 24 code snippet files (Lua, JS, C#)
 - **`templates/`** -- 11 resource starter templates (standalone, ESX, QBCore, Qbox, ox_core, VORP, RSG, JS, C#, NUI Vite, NUI Svelte)
 - **`mcp-server/`** -- Python MCP server with 6 tools and JSON data files
-- **`docs/`** -- ARCHITECTURE.md, ROADMAP.md, CONTRIBUTING.md, GETTING-STARTED.md
+- **`docs/`** -- ARCHITECTURE.md, ROADMAP.md, CONTRIBUTING.md, GETTING-STARTED.md, index.md (docs site landing page)
 - **`CHANGELOG.md`** -- manually maintained release history (not auto-generated)
+- **`mkdocs.yml`** -- MkDocs Material configuration for the documentation site
 - **`.github/workflows/`** -- CI/CD automation
 
 ## Branching and commit model
@@ -52,7 +55,11 @@ Automatic flow:
 
 Has a concurrency guard -- only one release can run at a time to prevent race conditions.
 
+After a successful release, the workflow also syncs the GitHub repository "About" section (description, homepage URL, and topics) via `gh repo edit`. The description is dynamically generated from live artifact counts (skills, rules, snippets, templates, events, MCP tools).
+
 **Do not manually edit the version in plugin.json or the README badge.** The release workflow owns both.
+
+**Do not manually edit the GitHub repo About section** (description, homepage, topics). The release workflow syncs it automatically on every release.
 
 **CHANGELOG.md is manually maintained.** Update it when making significant changes. The release workflow does not auto-update it.
 
@@ -69,6 +76,10 @@ Has a concurrency guard -- only one release can run at a time to prevent race co
 2. Writes result to `mcp-server/data/docs_index.json`
 3. Validates structure (title, url, section, snippet required)
 4. If changed, commits and pushes directly to main with `chore:` prefix
+
+### `deploy-docs.yml` (runs on push to main and manual dispatch)
+
+Builds the MkDocs Material documentation site from the repository's Markdown files and deploys it to GitHub Pages via `actions/deploy-pages`. The site URL is https://tmhsdigital.github.io/CFX-Developer-Tools/.
 
 ### `stale.yml`
 

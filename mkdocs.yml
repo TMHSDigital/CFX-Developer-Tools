@@ -1,0 +1,101 @@
+site_name: CFX Developer Tools
+site_url: https://tmhsdigital.github.io/CFX-Developer-Tools/
+site_description: AI-powered development toolkit for FiveM and RedM resource development in Cursor IDE
+site_author: TMHSDigital
+repo_url: https://github.com/TMHSDigital/CFX-Developer-Tools
+repo_name: TMHSDigital/CFX-Developer-Tools
+edit_uri: edit/main/
+
+docs_dir: .
+
+nav:
+  - Home: docs/index.md
+  - Getting Started: docs/GETTING-STARTED.md
+  - Architecture: docs/ARCHITECTURE.md
+  - Roadmap: docs/ROADMAP.md
+  - Contributing: docs/CONTRIBUTING.md
+  - Changelog: CHANGELOG.md
+  - Skills:
+      - Client-Server Patterns: skills/client-server-patterns/SKILL.md
+      - Database Integration: skills/database-integration/SKILL.md
+      - Framework Detection: skills/framework-detection/SKILL.md
+      - fxmanifest: skills/fxmanifest/SKILL.md
+      - Native Functions: skills/native-functions/SKILL.md
+      - NUI Development: skills/nui-development/SKILL.md
+      - Performance Optimization: skills/performance-optimization/SKILL.md
+      - Resource Scaffolding: skills/resource-scaffolding/SKILL.md
+      - State Bags: skills/state-bags/SKILL.md
+  - MCP Server: mcp-server/README.md
+
+theme:
+  name: material
+  logo: assets/logo.png
+  favicon: assets/logo.png
+  palette:
+    - scheme: slate
+      primary: deep purple
+      accent: amber
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+    - scheme: default
+      primary: deep purple
+      accent: amber
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+  features:
+    - navigation.instant
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.action.edit
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.details
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+
+exclude_docs: |
+  templates/
+  snippets/
+  node_modules/
+  .github/
+  .cursor/
+  .cursor-plugin/
+  assets/
+  __pycache__/
+  *.py
+  *.json
+  *.lua
+  *.js
+  *.ts
+  *.cs
+  *.svelte
+  *.mdc
+  *.csproj
+  AGENTS.md
+  RESEARCH.md
+  CFX-Developer-Tools-Cursor-Prompt.md
+  LICENSE
+  .cursorrules
+  .gitignore
+  mkdocs.yml

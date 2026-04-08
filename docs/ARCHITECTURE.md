@@ -121,3 +121,9 @@ The `snippets/` directory contains individual code patterns organized by languag
 - `csharp/` - Base scripts, commands, tick handlers
 
 Snippets serve as quick-reference patterns that the AI agent can insert into generated code.
+
+## Documentation site
+
+The project is published as a static documentation site at https://tmhsdigital.github.io/CFX-Developer-Tools/ using [MkDocs Material](https://squidfunk.github.io/mkdocs-material/). Configuration is in `mkdocs.yml` at the repo root.
+
+The site is built and deployed automatically on every push to `main` by the `deploy-docs.yml` GitHub Actions workflow. It reads existing Markdown files directly from the repo -- no content duplication required.

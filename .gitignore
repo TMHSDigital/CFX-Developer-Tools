@@ -45,3 +45,6 @@ Desktop.ini
 bin/
 obj/
 RESEARCH.md
+
+# MkDocs build output
+site/

@@ -12,10 +12,12 @@
   <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"><img src="https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg" alt="License: CC BY-NC-ND 4.0"></a>
   <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-0.6.0-blue.svg" alt="Version"></a>
   <a href="https://github.com/TMHSDigital/CFX-Developer-Tools/stargazers"><img src="https://img.shields.io/github/stars/TMHSDigital/CFX-Developer-Tools?style=flat" alt="GitHub stars"></a>
+  <a href="https://tmhsdigital.github.io/CFX-Developer-Tools/"><img src="https://img.shields.io/badge/docs-online-blue?logo=materialformkdocs&logoColor=white" alt="Documentation"></a>
 </p>
 
 <p align="center">
   <a href="docs/GETTING-STARTED.md"><strong>Getting Started</strong></a> &bull;
+  <a href="https://tmhsdigital.github.io/CFX-Developer-Tools/">Documentation</a> &bull;
   <a href="#features">Features</a> &bull;
   <a href="#quick-start">Quick Start</a> &bull;
   <a href="#mcp-server">MCP Server</a> &bull;
@@ -296,9 +298,10 @@ CFX-Developer-Tools/
   snippets/            Code snippets -- Lua, JS, C# (24 files)
   templates/           Resource starter templates (11 sets)
   mcp-server/          Python MCP server (6 tools) and data files
-  docs/                Architecture, roadmap, contributing guide
+  docs/                Architecture, roadmap, contributing guide, docs site landing page
   assets/              Logo and images
-  .github/             CI/CD workflows
+  .github/             CI/CD workflows (validate, release, update-natives, update-docs-index, stale, deploy-docs)
+  mkdocs.yml           Documentation site configuration
 ```
 
 ## Roadmap
@@ -339,6 +342,7 @@ CC BY-NC-ND 4.0 -- see [LICENSE](LICENSE) for details.
 
 &nbsp;
 
+- [CFX Developer Tools Documentation](https://tmhsdigital.github.io/CFX-Developer-Tools/)
 - [FiveM/RedM Documentation](https://docs.fivem.net/docs/)
 - [GTA5 Native Reference](https://docs.fivem.net/natives/)
 - [RDR3 Native Reference](https://rdr3natives.com/)

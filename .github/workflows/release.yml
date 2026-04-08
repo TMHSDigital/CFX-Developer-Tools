@@ -8,6 +8,7 @@ on:
       - "docs/**"
       - "*.md"
       - "LICENSE"
+      - "mkdocs.yml"
 
 permissions:
   contents: write
@@ -188,3 +189,31 @@ jobs:
           body: ${{ steps.notes.outputs.notes }}
           draft: false
           prerelease: false
+
+      - name: Sync GitHub repo metadata
+        if: steps.check.outputs.skip == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          desc=$(python3 -c "
+          import os, json
+
+          skills = len(json.load(open('.cursor-plugin/plugin.json')).get('skills', []))
+          rules = len(json.load(open('.cursor-plugin/plugin.json')).get('rules', []))
+          snippets = sum(len(files) for _, _, files in os.walk('snippets') if files)
+          templates = sum(
+              1 for d in os.listdir('templates')
+              if os.path.isdir(f'templates/{d}')
+              and os.path.exists(f'templates/{d}/fxmanifest.lua')
+          )
+          events = len(json.load(open('mcp-server/data/events.json')))
+          tools = 6
+          print(
+              f'AI-powered Cursor IDE plugin for FiveM and RedM resource development. '
+              f'{skills} skills, {rules} rules, {tools} MCP tools, 12,000+ natives, '
+              f'{events} events, {snippets} snippets, {templates} templates.'
+          )
+          ")
+          gh repo edit --description "$desc" \
+            --homepage "https://tmhsdigital.github.io/CFX-Developer-Tools/" \
+            --add-topic lua,mcp,game-development,gta5,cursor,fivem,cfx,redm,rdr3,cursor-plugin

@@ -67,6 +67,8 @@ Improve or expand documentation:
 - Add examples
 - Update outdated information
 
+Documentation changes auto-deploy to the [docs site](https://tmhsdigital.github.io/CFX-Developer-Tools/) when merged to main.
+
 ## Code style
 
 - No em dashes anywhere - use hyphens or rewrite the sentence

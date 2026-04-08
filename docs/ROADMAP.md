@@ -189,6 +189,7 @@ Harden the plugin for public release and community adoption.
 
 ### Documentation
 
+- [x] Hosted documentation site (MkDocs Material on GitHub Pages, auto-deploys on push to main)
 - [ ] Video walkthrough or GIF demos for Getting Started
 - [ ] Expanded architecture docs with MCP tool flow diagrams
 - [ ] FAQ and troubleshooting guide
