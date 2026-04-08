@@ -27,8 +27,8 @@ nav:
 
 theme:
   name: material
-  logo: assets/logo.png
-  favicon: assets/logo.png
+  logo: assets/logo-docs.png
+  favicon: assets/favicon.png
   palette:
     - scheme: slate
       primary: deep purple

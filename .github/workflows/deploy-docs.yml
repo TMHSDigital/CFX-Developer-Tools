@@ -36,6 +36,8 @@ jobs:
           cp mcp-server/README.md docs/mcp-server/README.md
           mkdir -p docs/assets
           cp assets/logo.png docs/assets/logo.png
+          cp assets/logo-docs.png docs/assets/logo-docs.png
+          cp assets/favicon.png docs/assets/favicon.png
 
       - name: Build site
         run: mkdocs build --strict
