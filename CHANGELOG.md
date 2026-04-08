@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1 - 2026-04-08
+
+### Fixed
+
+- Updated README with logo, badges, collapsible sections, and Mermaid architecture diagram
+
 ## 0.1.0 - 2026-04-08
 
 ### Added
