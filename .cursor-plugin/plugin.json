@@ -2,7 +2,7 @@
   "name": "cfx-developer-tools",
   "displayName": "CFX Developer Tools",
   "description": "AI-powered development toolkit for FiveM and RedM. Scaffold resources, look up natives, generate manifests, and write optimized scripts in Lua, JavaScript, and C#.",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "author": {
     "name": "TMHSDigital",
     "email": "contact@tmhospitalitystrategies.com"
