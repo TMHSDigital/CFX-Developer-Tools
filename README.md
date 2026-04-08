@@ -69,6 +69,8 @@ pip install -r requirements.txt
 
 4. **Start building** -- ask the AI agent to scaffold a resource, look up a native, or generate a manifest.
 
+> **New to Cursor or FiveM development?** See the **[complete setup guide](docs/GETTING-STARTED.md)** for detailed step-by-step instructions covering everything from installing Git and Python to building your first resource.
+
 ## Features
 
 - **Resource scaffolding** -- Generate complete resources in Lua, JavaScript, or C# with proper `fxmanifest.lua`
