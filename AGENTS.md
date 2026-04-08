@@ -52,9 +52,9 @@ Automatic flow:
 
 ### `update-natives.yml` (weekly on Monday 06:00 UTC, or manual dispatch)
 
-1. Fetches raw native JSON from `citizenfx/natives` on GitHub
+1. Fetches compiled native JSON from `runtime.fivem.net/doc/` (GTA5, RDR3, and CFX platform natives)
 2. Transforms via `.github/scripts/transform_natives.py` into the plugin's flat schema
-3. Validates the output
+3. Validates the output (checks required fields, types, counts)
 4. If changed, commits and pushes directly to main with `chore:` prefix
 
 ### `stale.yml`
@@ -120,7 +120,9 @@ The MCP server is configured in `.cursor/mcp.json` and starts automatically when
 - C# resources compile to a single DLL referenced in both `client_scripts` and `server_scripts`.
 - `Wait(0)` in Lua loops is a performance anti-pattern in most cases; use appropriate wait times.
 - Server-side event handlers must validate `source` to prevent spoofing.
-- The native databases use a flat JSON array schema with `name`, `hash`, `params`, `return_type`, `description`, `category`, `side`.
+- The native databases use a flat JSON array schema with `name`, `hash`, `params`, `return_type`, `description`, `category`, `side`, `deprecated`, `examples`.
+- Native data is sourced from `runtime.fivem.net/doc/` -- GTA5, RDR3, and CFX platform natives are merged per game file.
+- The `lookup_native_tool` supports keyword search, hash lookup, category browsing, and side filtering.
 
 ## License
 

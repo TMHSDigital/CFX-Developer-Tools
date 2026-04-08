@@ -40,11 +40,14 @@ Make the MCP server useful for real development by expanding the data layer and 
 
 ### Native function database
 
-- [ ] Expand GTA5 native database to 500+ commonly used natives
-- [ ] Expand RDR3 native database to 200+ natives
-- [ ] Add full parameter type annotations and usage examples for each native
-- [ ] Add deprecation flags and replacement recommendations
-- [ ] Add namespace/category browsing (PLAYER, VEHICLE, ENTITY, PED, HUD, etc.)
+- [x] Expand GTA5 native database to 500+ commonly used natives (done: 6300+ natives from runtime.fivem.net)
+- [x] Expand RDR3 native database to 200+ natives (done: 5800+ natives from runtime.fivem.net)
+- [x] Add full parameter type annotations and usage examples for each native
+- [x] Add deprecation flags and replacement recommendations
+- [x] Add namespace/category browsing (PLAYER, VEHICLE, ENTITY, PED, HUD, etc.)
+- [x] Add native hash field to output schema
+- [x] Merge CFX platform natives (942 entries with accurate apiset-based side classification)
+- [x] Update weekly CI workflow to fetch from runtime.fivem.net (GTA5, RDR3, CFX sources)
 
 ### Documentation search
 

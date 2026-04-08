@@ -22,13 +22,18 @@ jobs:
 
       - name: Fetch GTA5 natives from upstream
         run: |
-          curl -sfL "https://raw.githubusercontent.com/citizenfx/natives/master/GTA5.json" -o /tmp/gta5_raw.json || { echo "::error::Failed to download GTA5 natives"; exit 1; }
-          echo "Downloaded GTA5 natives"
+          curl -sfL "https://runtime.fivem.net/doc/natives.json" -o /tmp/gta5_raw.json || { echo "::error::Failed to download GTA5 natives"; exit 1; }
+          echo "Downloaded GTA5 natives ($(wc -c < /tmp/gta5_raw.json) bytes)"
 
       - name: Fetch RDR3 natives from upstream
         run: |
-          curl -sfL "https://raw.githubusercontent.com/citizenfx/natives/master/RDR3.json" -o /tmp/rdr3_raw.json || { echo "::error::Failed to download RDR3 natives"; exit 1; }
-          echo "Downloaded RDR3 natives"
+          curl -sfL "https://runtime.fivem.net/doc/natives_rdr3.json" -o /tmp/rdr3_raw.json || { echo "::error::Failed to download RDR3 natives"; exit 1; }
+          echo "Downloaded RDR3 natives ($(wc -c < /tmp/rdr3_raw.json) bytes)"
+
+      - name: Fetch CFX platform natives
+        run: |
+          curl -sfL "https://runtime.fivem.net/doc/natives_cfx.json" -o /tmp/cfx_raw.json || { echo "::error::Failed to download CFX natives"; exit 1; }
+          echo "Downloaded CFX natives ($(wc -c < /tmp/cfx_raw.json) bytes)"
 
       - name: Transform natives to plugin schema
         run: python3 .github/scripts/transform_natives.py
@@ -44,9 +49,11 @@ jobs:
               assert len(data) > 0, f'{path}: empty array'
               for n in data:
                   assert 'name' in n, f'{path}: missing name'
+                  assert 'hash' in n, f'{path}: missing hash in {n[\"name\"]}'
                   assert 'side' in n, f'{path}: missing side in {n[\"name\"]}'
                   assert 'category' in n, f'{path}: missing category in {n[\"name\"]}'
                   assert 'params' in n, f'{path}: missing params in {n[\"name\"]}'
+                  assert isinstance(n.get('deprecated'), bool), f'{path}: deprecated must be bool in {n[\"name\"]}'
               print(f'{game}: {len(data)} natives validated')
           "
 

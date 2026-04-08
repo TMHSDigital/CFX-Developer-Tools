@@ -29,7 +29,11 @@ jobs:
           assert isinstance(data, list), 'Expected array'
           for n in data:
               assert 'name' in n, f'Missing name in {n}'
+              assert 'hash' in n, f'Missing hash in {n.get(\"name\", \"unknown\")}'
               assert 'side' in n, f'Missing side in {n.get(\"name\", \"unknown\")}'
+              assert 'category' in n, f'Missing category in {n.get(\"name\", \"unknown\")}'
+              assert isinstance(n.get('deprecated'), bool), f'deprecated must be bool in {n.get(\"name\", \"unknown\")}'
+              assert n.get('examples') is None or isinstance(n.get('examples'), str), f'examples must be string or null in {n.get(\"name\", \"unknown\")}'
           print(f'GTA5 natives: {len(data)} entries validated')
           "
 
@@ -40,7 +44,11 @@ jobs:
           assert isinstance(data, list), 'Expected array'
           for n in data:
               assert 'name' in n, f'Missing name in {n}'
+              assert 'hash' in n, f'Missing hash in {n.get(\"name\", \"unknown\")}'
               assert 'side' in n, f'Missing side in {n.get(\"name\", \"unknown\")}'
+              assert 'category' in n, f'Missing category in {n.get(\"name\", \"unknown\")}'
+              assert isinstance(n.get('deprecated'), bool), f'deprecated must be bool in {n.get(\"name\", \"unknown\")}'
+              assert n.get('examples') is None or isinstance(n.get('examples'), str), f'examples must be string or null in {n.get(\"name\", \"unknown\")}'
           print(f'RDR3 natives: {len(data)} entries validated')
           "
 

@@ -26,7 +26,7 @@
 ---
 
 <p align="center">
-  8 skills &nbsp;&bull;&nbsp; 6 rules &nbsp;&bull;&nbsp; 4 MCP tools &nbsp;&bull;&nbsp; 15 snippets &nbsp;&bull;&nbsp; 6 templates
+  8 skills &nbsp;&bull;&nbsp; 6 rules &nbsp;&bull;&nbsp; 4 MCP tools &nbsp;&bull;&nbsp; 12,000+ natives &nbsp;&bull;&nbsp; 15 snippets &nbsp;&bull;&nbsp; 6 templates
 </p>
 
 Scaffold complete FiveM/RedM resources, look up native functions, generate manifests, detect frameworks, and write optimized scripts in Lua, JavaScript, and C# — all from within Cursor's AI chat. Covers the full CFX development lifecycle from project setup to database integration.
@@ -282,8 +282,8 @@ See [docs/ROADMAP.md](docs/ROADMAP.md) for the full project roadmap.
 
 | Version | Milestone | Status |
 |:--------|:----------|:-------|
-| **v0.1.0** | Foundation — skills, rules, snippets, templates, MCP server, CI/CD | **Current** |
-| **v0.2.0** | Native DB expansion — 500+ GTA5 natives, 100+ RDR3 natives | Planned |
+| **v0.1.x** | Foundation — skills, rules, snippets, templates, MCP server, CI/CD | Done |
+| **v0.2.0** | Native DB expansion — 6300+ GTA5, 5800+ RDR3, category browsing, deprecation flags | **Current** |
 | **v0.3.0** | Documentation search — FiveM docs integration via MCP | Planned |
 | **v0.4.0** | Event reference expansion — 100+ events with examples | Planned |
 | **v0.5.0** | Framework auto-detection — runtime detection from project files | Planned |

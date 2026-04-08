@@ -60,19 +60,35 @@ Cursor AI Agent  --(MCP protocol)-->  MCP Server  --(reads)-->  Data Files
 | Tool | Purpose |
 |------|---------|
 | `scaffold_resource_tool` | Creates a new resource directory with boilerplate |
-| `lookup_native_tool` | Searches the native function database |
+| `lookup_native_tool` | Searches natives by name, hash, description, or category. Supports namespace browsing. |
 | `generate_manifest_tool` | Generates fxmanifest.lua content |
 | `search_events_tool` | Searches the event reference database |
 
 ### Data files
 
-The `mcp-server/data/` directory contains JSON snapshots:
+The `mcp-server/data/` directory contains JSON databases updated weekly from upstream sources:
 
-- `natives_gta5.json` - GTA5 native functions
-- `natives_rdr3.json` - RDR3 native functions
+- `natives_gta5.json` - GTA5 native functions (~6000+ natives, 44 categories)
+- `natives_rdr3.json` - RDR3 native functions (~5800+ natives, 84 categories)
 - `events.json` - Common FiveM/RedM events
 
-These enable offline lookup without requiring network access to the FiveM documentation.
+Native database schema:
+
+```json
+{
+  "name": "GetVehicleMaxSpeed",
+  "hash": "0x1B8F0DE5",
+  "params": [{"type": "Vehicle", "name": "vehicle"}],
+  "return_type": "float",
+  "description": "Returns the max speed of the vehicle.",
+  "side": "client",
+  "category": "VEHICLE",
+  "deprecated": false,
+  "examples": "```lua\nlocal speed = GetVehicleMaxSpeed(vehicle)\n```"
+}
+```
+
+Data is fetched from `runtime.fivem.net/doc/` (GTA5, RDR3, CFX natives) and transformed by `.github/scripts/transform_natives.py`.
 
 ## Templates
 

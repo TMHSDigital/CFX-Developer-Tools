@@ -60,9 +60,13 @@ Never manually edit the version in `plugin.json` or the README version badge. Th
 
 ## Native databases
 
+Data sourced from `runtime.fivem.net/doc/` (GTA5, RDR3, CFX). ~6000+ GTA5, ~5800+ RDR3 natives.
+
 The flat JSON schema for natives:
 ```json
-{ "name": "string", "hash": "string", "params": [...], "return_type": "string", "description": "string", "category": "string", "side": "client|server|shared" }
+{ "name": "string", "hash": "0x...", "params": [{"type":"","name":""}], "return_type": "string", "description": "string", "category": "string", "side": "client|server|shared", "deprecated": false, "examples": "string|null" }
 ```
+
+The `lookup_native_tool` supports: keyword search, hash lookup, category/namespace browsing (empty query + category), listing all categories (empty query + no category), and side filtering.
 
 Events use: `{ "name", "side", "description", "params", "game" }`.

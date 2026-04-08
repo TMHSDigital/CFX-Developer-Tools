@@ -40,18 +40,20 @@ def scaffold_resource_tool(
 
 @mcp.tool()
 def lookup_native_tool(
-    query: str,
+    query: str = "",
     game: str = "gta5",
     side: str | None = None,
+    category: str | None = None,
 ) -> str:
-    """Search for a FiveM/RedM native function by name or description.
+    """Search for a FiveM/RedM native function by name, description, hash, or category.
 
     Args:
-        query: Search term (name, keyword, or description fragment)
+        query: Search term (name, keyword, hash, or description fragment). Leave empty to browse.
         game: Target game - gta5 or rdr3
         side: Filter by side - client, server, or shared (optional)
+        category: Filter by namespace/category - e.g. VEHICLE, PED, PLAYER (optional). Leave both query and category empty to list all categories.
     """
-    return lookup_native(query, game, side, NATIVES_PATH)
+    return lookup_native(query, game, side, NATIVES_PATH, category)
 
 
 @mcp.tool()
