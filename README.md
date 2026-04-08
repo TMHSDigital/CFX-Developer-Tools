@@ -310,7 +310,7 @@ CC BY-NC-ND 4.0 — see [LICENSE](LICENSE) for details.
 
 - [FiveM Documentation](https://docs.fivem.net/docs/)
 - [FiveM Native Reference](https://docs.fivem.net/natives/)
-- [RedM Native Reference](https://vespura.com/doc/natives/)
+- [RedM Native Reference](https://rdr3natives.com/)
 - [Cfx.re Forums](https://forum.cfx.re/)
 - [Cfx.re Platform](https://cfx.re/)
 
