@@ -80,21 +80,40 @@ jobs:
             echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Update version in plugin.json
+      - name: Update version in plugin.json, README badge, and CHANGELOG
         if: steps.check.outputs.skip == 'false'
         env:
           NEW_VERSION: ${{ steps.new.outputs.version }}
+          OLD_VERSION: ${{ steps.current.outputs.version }}
         run: |
           python3 -c "
-          import json, os
-          path = '.cursor-plugin/plugin.json'
+          import json, os, re, datetime
+
           new_version = os.environ['NEW_VERSION']
+          old_version = os.environ['OLD_VERSION']
+          today = datetime.date.today().isoformat()
+
+          # 1. plugin.json
+          path = '.cursor-plugin/plugin.json'
           with open(path) as f:
               data = json.load(f)
           data['version'] = new_version
           with open(path, 'w') as f:
               json.dump(data, f, indent=2)
+              f.write('\n')
           print(f'Updated plugin.json to {new_version}')
+
+          # 2. README.md version badge
+          readme = 'README.md'
+          with open(readme) as f:
+              content = f.read()
+          content = content.replace(
+              f'version-{old_version}-blue',
+              f'version-{new_version}-blue'
+          )
+          with open(readme, 'w') as f:
+              f.write(content)
+          print(f'Updated README.md badge to {new_version}')
           "
 
       - name: Generate release notes from commits
@@ -146,7 +165,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .cursor-plugin/plugin.json
+          git add .cursor-plugin/plugin.json README.md
           git commit -m "chore: bump version to ${{ steps.new.outputs.version }} [skip ci]"
           git push
 
