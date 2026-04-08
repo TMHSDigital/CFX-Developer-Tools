@@ -15,6 +15,7 @@
 </p>
 
 <p align="center">
+  <a href="docs/GETTING-STARTED.md"><strong>Getting Started</strong></a> &bull;
   <a href="#features">Features</a> &bull;
   <a href="#quick-start">Quick Start</a> &bull;
   <a href="#mcp-server">MCP Server</a> &bull;
@@ -30,6 +31,12 @@
 </p>
 
 Scaffold complete FiveM/RedM resources, look up native functions, generate manifests, detect frameworks, and write optimized scripts in Lua, JavaScript, and C# -- all from within Cursor's AI chat. Covers the full CFX development lifecycle from project setup to database integration.
+
+<p align="center">
+  <a href="docs/GETTING-STARTED.md"><img src="https://img.shields.io/badge/%F0%9F%93%96_Getting_Started_Guide-blue?style=for-the-badge" alt="Getting Started Guide"></a>
+</p>
+
+> **First time here?** The **[Getting Started guide](docs/GETTING-STARTED.md)** walks you through every step -- from installing Git, Python, and Cursor to building and deploying your first FiveM resource. No prior experience required.
 
 ## How It Works
 
@@ -48,28 +55,17 @@ flowchart LR
 
 ## Quick Start
 
-1. **Clone the repo**
+Already have Git, Python 3.10+, and Cursor installed? Here's the short version:
 
 ```bash
 git clone https://github.com/TMHSDigital/CFX-Developer-Tools.git
+# Open CFX-Developer-Tools folder in Cursor (File > Open Folder)
+cd mcp-server && pip install -r requirements.txt
 ```
 
-2. **Open in Cursor**
+Then ask the AI agent to scaffold a resource, look up a native, or generate a manifest.
 
-```
-File > Open Folder > CFX-Developer-Tools
-```
-
-3. **Install MCP server dependencies**
-
-```bash
-cd mcp-server
-pip install -r requirements.txt
-```
-
-4. **Start building** -- ask the AI agent to scaffold a resource, look up a native, or generate a manifest.
-
-> **New to Cursor or FiveM development?** See the **[complete setup guide](docs/GETTING-STARTED.md)** for detailed step-by-step instructions covering everything from installing Git and Python to building your first resource.
+> **Need more detail?** The **[Getting Started guide](docs/GETTING-STARTED.md)** covers installing prerequisites, troubleshooting, and building your first resource step by step.
 
 ## Features
 
