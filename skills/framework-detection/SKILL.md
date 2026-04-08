@@ -6,7 +6,7 @@ globs: ["**/fxmanifest.lua", "**/*.lua"]
 
 # Framework Detection
 
-CFX resources may target a specific framework (ESX, QBCore, ox_core) or run standalone. This skill detects which one is in use and adapts generated code accordingly.
+CFX resources may target a specific framework (ESX, QBCore, Qbox, ox_core) for FiveM or (VORP, RSG) for RedM, or run standalone. This skill detects which one is in use and adapts generated code accordingly.
 
 ## Detection logic
 
@@ -17,7 +17,10 @@ Scan the workspace for these indicators, in priority order:
 ```lua
 dependency 'es_extended'    --> ESX
 dependency 'qb-core'        --> QBCore
+dependency 'qbx_core'       --> Qbox
 dependency 'ox_core'        --> ox_core
+dependency 'vorp_core'      --> VORP (RedM)
+dependency 'rsg-core'       --> RSG (RedM)
 ```
 
 ### 2. Check script imports for framework references
@@ -25,6 +28,7 @@ dependency 'ox_core'        --> ox_core
 ```lua
 '@es_extended/...'          --> ESX
 '@qb-core/...'              --> QBCore
+'@qbx_core/...'             --> Qbox
 '@ox_core/...'              --> ox_core
 ```
 
@@ -33,7 +37,10 @@ dependency 'ox_core'        --> ox_core
 ```lua
 exports['es_extended']:getSharedObject()   --> ESX
 exports['qb-core']:GetCoreObject()         --> QBCore
+exports['qbx_core']                        --> Qbox
 require '@ox_core.lib.init'                --> ox_core
+exports.vorp_core:GetCore()                --> VORP (RedM)
+exports['rsg-core']:GetCoreObject()        --> RSG (RedM)
 ```
 
 ### 4. No matches
@@ -111,6 +118,51 @@ local player = Ox.GetPlayer()               -- client (self)
 ox_core resources typically also use ox_lib for utilities:
 ```lua
 local lib = require '@ox_lib.init'
+```
+
+### Qbox
+
+```lua
+local QBX = exports['qbx_core']
+```
+
+Qbox is the modern successor to QBCore. It integrates ox_lib and shares a similar API shape but uses `qbx_core` exports:
+```lua
+-- Get player data
+local playerData = QBX:GetPlayerData()          -- client
+local player = QBX:GetPlayer(source)            -- server
+
+-- Qbox uses ox_lib for notifications/UI instead of built-in functions
+lib.notify({ description = 'Message here', type = 'success' })
+```
+
+### VORP (RedM)
+
+```lua
+local VORPcore = exports.vorp_core:GetCore()
+```
+
+VORP is the primary RedM RP framework:
+```lua
+-- Get player character
+local user = VORPcore.getUser(source)        -- server
+local character = user.getUsedCharacter
+
+-- VORP inventory
+local VORPinv = exports.vorp_inventory:vorp_inventoryApi()
+```
+
+### RSG (RedM)
+
+```lua
+RSGCore = exports['rsg-core']:GetCoreObject()
+```
+
+RSG mirrors QBCore's API for RedM:
+```lua
+-- Get player data
+local PlayerData = RSGCore.Functions.GetPlayerData()          -- client
+local Player = RSGCore.Functions.GetPlayer(source)            -- server
 ```
 
 ## Adapting generated code

@@ -15,7 +15,7 @@ Before generating any files, ask the user for:
 1. **Resource name** - lowercase, alphanumeric with hyphens (e.g. `my-resource`)
 2. **Game target** - `gta5` (FiveM), `rdr3` (RedM), or both
 3. **Language runtime** - Lua, JavaScript, or C#
-4. **Framework** - ESX, QBCore, ox_core, or standalone (none)
+4. **Framework** - ESX, QBCore, Qbox, ox_core, VORP (RedM), RSG (RedM), or standalone (none)
 5. **Database needed?** - yes/no (determines oxmysql dependency)
 
 ## Directory structure
@@ -121,7 +121,10 @@ Add the correct `dependency` directive based on the chosen framework:
 
 - **ESX**: `dependency 'es_extended'`
 - **QBCore**: `dependency 'qb-core'`
+- **Qbox**: `dependency 'qbx_core'`
 - **ox_core**: `dependency 'ox_core'`
+- **VORP** (RedM): `dependency 'vorp_core'`
+- **RSG** (RedM): `dependency 'rsg-core'`
 - **Standalone**: no dependency directive
 
 ### Database dependency

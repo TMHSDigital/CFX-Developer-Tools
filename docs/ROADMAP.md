@@ -90,6 +90,37 @@ Expanded event coverage, added documentation search and framework detection MCP 
 
 ---
 
+## Milestone 3.5 - Research Alignment (v0.6.0, complete)
+
+Aligned the toolkit with 2026 platform realities based on comprehensive research audit. Added missing frameworks, modern patterns, and expanded content.
+
+### New framework support
+
+- [x] Qbox framework: detection, template, events (10), scaffold init, manifest_common
+- [x] VORP framework (RedM): detection, template, events (4), scaffold init
+- [x] RSG framework (RedM): detection, template, events (5), scaffold init
+- [x] All 7 frameworks in detect_framework.py, manifest_common.py, scaffold.py, server.py
+
+### Modern patterns and content
+
+- [x] NUI Svelte 5 template with Vite and Runes ($state, $derived, $effect)
+- [x] `node_version '22'` in JS template, manifest_gen, and scaffold output
+- [x] Compile-time backtick hashing snippet and rule enhancement
+- [x] Routing bucket (instancing) snippet and skill content
+- [x] Lua 5.4 `<const>` and `<close>` variable attributes snippet and rule content
+- [x] ACE permissions snippet
+- [x] `setImmediate()` thread affinity warning in JS conventions and client-server skill
+- [x] mysql-async/ghmattimysql explicit deprecation in database skill
+- [x] `repository`, `version`, and `escrow_ignore` manifest directives in fxmanifest skill
+- [x] `Citizen.` prefix explicitly deprecated across all rules and skills
+- [x] NUI skill updated to recommend Svelte 5 as the community favorite
+
+### Counts after M3.5
+
+- 9 skills, 6 rules, 24 snippets, 11 templates, 6 MCP tools, 101 events
+
+---
+
 ## Milestone 4 - Integration (planned)
 
 Connect the plugin to live FiveM/RedM server infrastructure for real-time development workflows.
@@ -145,7 +176,7 @@ Harden the plugin for public release and community adoption.
 ### RedM expansion
 
 - [x] Expand RDR3 native database to full coverage (done in M2: 5800+ natives)
-- [ ] Add RedM-specific templates (VORP, RSG framework support)
+- [x] Add RedM-specific templates (VORP, RSG framework support) (done in M3.5)
 - [ ] Add RedM-specific snippets (prompts, scenarios, RDR3 peds)
 - [ ] RedM-specific coding conventions rule
 

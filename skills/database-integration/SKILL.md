@@ -96,22 +96,32 @@ MySQL.query.await('SELECT * FROM players WHERE name = ?', {playerName})
 MySQL.query.await('SELECT * FROM players WHERE name = "' .. playerName .. '"')
 ```
 
-## mysql-async (legacy)
+## mysql-async and ghmattimysql (DEPRECATED)
 
-Older resources may use mysql-async instead of oxmysql. The API is similar but uses different function names:
+**Do not use mysql-async or ghmattimysql in new resources.** Both libraries are abandoned and unmaintained. oxmysql is the only supported MySQL library for FiveM/RedM as of 2026. If you encounter either in existing code, migrate to oxmysql immediately.
+
+Migration is straightforward: oxmysql is backwards-compatible with mysql-async syntax. In most cases, replacing the dependency in fxmanifest.lua is sufficient:
 
 ```lua
--- mysql-async equivalents
-MySQL.Async.fetchAll('SELECT * FROM players WHERE identifier = @id', {['@id'] = identifier}, function(result)
-end)
+-- BEFORE (deprecated)
+server_scripts {
+    '@mysql-async/lib/MySQL.lua',   -- or @ghmattimysql/...
+    'server/*.lua'
+}
 
-MySQL.Async.execute('UPDATE players SET money = @money WHERE identifier = @id', {
-    ['@money'] = newAmount,
-    ['@id'] = identifier
-})
+-- AFTER (current standard)
+server_scripts {
+    '@oxmysql/lib/MySQL.lua',
+    'server/*.lua'
+}
 ```
 
-oxmysql is backwards-compatible with mysql-async syntax, so migrating usually requires only changing the resource dependency.
+Legacy API style (still works with oxmysql for backwards compatibility, but prefer the modern API above):
+
+```lua
+MySQL.Async.fetchAll('SELECT * FROM players WHERE identifier = @id', {['@id'] = identifier}, function(result)
+end)
+```
 
 ## Common schema patterns
 

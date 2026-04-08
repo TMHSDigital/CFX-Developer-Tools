@@ -90,6 +90,8 @@ def generate_manifest(
         client_entries = ["'client/*.lua'"]
         server_entries = ["'server/*.lua'"]
     elif language == "javascript":
+        lines.append("node_version '22'")
+        lines.append("")
         client_entries = ["'client/*.js'"]
         server_entries = ["'server/*.js'"]
     elif language == "csharp":

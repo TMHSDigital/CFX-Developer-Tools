@@ -15,14 +15,20 @@ from tools.manifest_common import FRAMEWORK_DEPS, games_block, validate_inputs, 
 FRAMEWORK_INIT_CLIENT = {
     "esx": "ESX = exports['es_extended']:getSharedObject()\n",
     "qbcore": "QBCore = exports['qb-core']:GetCoreObject()\n",
+    "qbox": "local QBX = exports['qbx_core']\n",
     "oxcore": "local Ox = require '@ox_core.lib.init'\n",
+    "vorp": "local VORPcore = exports.vorp_core:GetCore()\n",
+    "rsg": "RSGCore = exports['rsg-core']:GetCoreObject()\n",
     "standalone": "",
 }
 
 FRAMEWORK_INIT_SERVER = {
     "esx": "ESX = exports['es_extended']:getSharedObject()\n",
     "qbcore": "QBCore = exports['qb-core']:GetCoreObject()\n",
+    "qbox": "local QBX = exports['qbx_core']\n",
     "oxcore": "local Ox = require '@ox_core.lib.init'\n",
+    "vorp": "local VORPcore = exports.vorp_core:GetCore()\n",
+    "rsg": "RSGCore = exports['rsg-core']:GetCoreObject()\n",
     "standalone": "",
 }
 
@@ -110,6 +116,8 @@ def _build_manifest(
         lines.append("    'server/*.lua'")
         lines.append("}")
     elif language == "javascript":
+        lines.append("node_version '22'")
+        lines.append("")
         lines.append("client_scripts {")
         lines.append("    'client/*.js'")
         lines.append("}")

@@ -14,22 +14,32 @@ import re
 MANIFEST_SIGNALS: dict[str, str] = {
     "es_extended": "esx",
     "esx_": "esx",
+    "qbx_core": "qbox",
     "qb-core": "qbcore",
     "qb-": "qbcore",
     "ox_core": "oxcore",
     "ox_lib": "oxcore",
+    "vorp_core": "vorp",
+    "rsg-core": "rsg",
 }
 
 CODE_SIGNALS: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"""exports\s*\[\s*['"]es_extended['"]\s*\]"""), "esx"),
     (re.compile(r"""ESX\s*=\s*exports"""), "esx"),
     (re.compile(r"""getSharedObject"""), "esx"),
+    (re.compile(r"""exports\s*\[\s*['"]qbx_core['"]\s*\]"""), "qbox"),
+    (re.compile(r"""exports\.qbx_core"""), "qbox"),
+    (re.compile(r"""require\s+['"]@qbx_core"""), "qbox"),
     (re.compile(r"""exports\s*\[\s*['"]qb-core['"]\s*\]"""), "qbcore"),
     (re.compile(r"""QBCore\s*=\s*exports"""), "qbcore"),
     (re.compile(r"""GetCoreObject"""), "qbcore"),
     (re.compile(r"""require\s+['"]@ox_core"""), "oxcore"),
     (re.compile(r"""require\s+['"]@ox_lib"""), "oxcore"),
     (re.compile(r"""exports\s*\[\s*['"]ox_lib['"]\s*\]"""), "oxcore"),
+    (re.compile(r"""exports\.vorp_core"""), "vorp"),
+    (re.compile(r"""VORPcore\s*="""), "vorp"),
+    (re.compile(r"""exports\s*\[\s*['"]rsg-core['"]\s*\]"""), "rsg"),
+    (re.compile(r"""RSGCore\s*=\s*exports"""), "rsg"),
 ]
 
 SCANNABLE_EXTENSIONS = {".lua", ".js", ".ts"}
@@ -45,8 +55,14 @@ def detect_framework(workspace_path: str = ".") -> str:
     if not os.path.isdir(workspace_path):
         return f"Error: directory not found: {workspace_path}"
 
-    scores: dict[str, int] = {"esx": 0, "qbcore": 0, "oxcore": 0, "standalone": 0}
-    evidence: dict[str, list[str]] = {"esx": [], "qbcore": [], "oxcore": [], "standalone": []}
+    scores: dict[str, int] = {
+        "esx": 0, "qbcore": 0, "qbox": 0, "oxcore": 0,
+        "vorp": 0, "rsg": 0, "standalone": 0,
+    }
+    evidence: dict[str, list[str]] = {
+        "esx": [], "qbcore": [], "qbox": [], "oxcore": [],
+        "vorp": [], "rsg": [], "standalone": [],
+    }
 
     _scan_manifests(workspace_path, scores, evidence)
     _scan_code(workspace_path, scores, evidence)

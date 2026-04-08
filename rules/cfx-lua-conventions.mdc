@@ -7,7 +7,7 @@ alwaysApply: false
 
 # CFX Lua conventions
 
-- Use `CreateThread` and `Wait` instead of `Citizen.CreateThread` and `Citizen.Wait`
+- Use `CreateThread` and `Wait` (the `Citizen.` prefix is deprecated; never use `Citizen.CreateThread` or `Citizen.Wait`)
 - Prefix all custom events with the resource name: `resourceName:eventName`
 - Always capture `source` as a local in server event handlers: `local source = source`
 - Use `RegisterNetEvent` before adding a handler for net events
@@ -73,3 +73,33 @@ local spawn = vector4(v4.x, v4.y, v4.z, heading)
 - Use `#(a - b)` for distance checks instead of `GetDistanceBetweenCoords`
 - Use `quat` when working with `GetEntityRotation` / `SetEntityRotation` that use quaternion overloads
 - `vector3` values are immutable -- arithmetic creates new vectors
+
+## Lua 5.4 variable attributes
+
+Lua 5.4 provides `<const>` and `<close>` variable attributes. Use them for safer resource code.
+
+### `<const>` -- compile-time immutability
+
+```lua
+local MAX_SLOTS <const> = 40
+local RESOURCE_NAME <const> = GetCurrentResourceName()
+
+MAX_SLOTS = 50  -- ERROR: attempt to assign to const variable
+```
+
+Use `<const>` for configuration values, resource names, and any local that should never be reassigned.
+
+### `<close>` -- automatic cleanup on scope exit
+
+```lua
+local file <close> = io.open('data.json', 'r')
+-- file:close() is called automatically when 'file' goes out of scope
+
+-- Useful pattern for temporary entities
+local function withTemporaryBlip(coords, fn)
+    local blip <close> = setmetatable({ handle = AddBlipForCoord(coords.x, coords.y, coords.z) }, {
+        __close = function(self) RemoveBlip(self.handle) end
+    })
+    fn(blip.handle)
+end
+```

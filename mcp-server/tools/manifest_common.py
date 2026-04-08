@@ -12,12 +12,15 @@ import re
 FRAMEWORK_DEPS = {
     "esx": "es_extended",
     "qbcore": "qb-core",
+    "qbox": "qbx_core",
     "oxcore": "ox_core",
+    "vorp": "vorp_core",
+    "rsg": "rsg-core",
 }
 
 VALID_GAMES = {"gta5", "rdr3", "both"}
 VALID_LANGUAGES = {"lua", "javascript", "csharp"}
-VALID_FRAMEWORKS = {"standalone", "esx", "qbcore", "oxcore"}
+VALID_FRAMEWORKS = {"standalone", "esx", "qbcore", "qbox", "oxcore", "vorp", "rsg"}
 
 AUTHOR_RE = re.compile(r"""author\s+['"]([^'"]+)['"]""")
 DESC_RE = re.compile(r"""description\s+['"]([^'"]+)['"]""")
@@ -37,7 +40,7 @@ def validate_inputs(game: str, language: str, framework: str) -> str | None:
     if language not in VALID_LANGUAGES:
         return f"Error: invalid language '{language}'. Use lua, javascript, or csharp."
     if framework not in VALID_FRAMEWORKS:
-        return f"Error: invalid framework '{framework}'. Use standalone, esx, qbcore, or oxcore."
+        return f"Error: invalid framework '{framework}'. Use standalone, esx, qbcore, qbox, oxcore, vorp, or rsg."
     return None
 
 

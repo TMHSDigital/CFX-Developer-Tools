@@ -36,7 +36,7 @@ def scaffold_resource_tool(
         name: Resource name (lowercase, hyphens allowed)
         game: Target game - gta5, rdr3, or both
         language: Scripting language - lua, javascript, or csharp
-        framework: Framework - standalone, esx, qbcore, or oxcore
+        framework: Framework - standalone, esx, qbcore, qbox, oxcore, vorp, or rsg
         workspace_path: Path to existing workspace to inherit author from (optional)
     """
     return scaffold_resource(name, game, language, framework, workspace_path)
@@ -77,7 +77,7 @@ def generate_manifest_tool(
         name: Resource name
         game: Target game - gta5, rdr3, or both
         language: Scripting language - lua, javascript, or csharp
-        framework: Framework - standalone, esx, qbcore, or oxcore
+        framework: Framework - standalone, esx, qbcore, qbox, oxcore, vorp, or rsg
         scripts: Additional script paths to include
         dependencies: Additional resource dependencies
         has_nui: Whether the resource includes NUI (web UI)
@@ -99,7 +99,7 @@ def search_events_tool(
         query: Search term (event name or keyword). Leave empty to see a summary of all events.
         side: Filter by side - client, server, or shared (optional)
         game: Filter by game - gta5 or rdr3 (optional)
-        framework: Filter by framework - cfx, esx, qbcore, oxcore, baseevents, or chat (optional)
+        framework: Filter by framework - cfx, esx, qbcore, qbox, oxcore, vorp, rsg, baseevents, or chat (optional)
     """
     return search_events(query, side, game, framework, NATIVES_PATH)
 

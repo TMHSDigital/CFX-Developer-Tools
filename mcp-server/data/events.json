@@ -654,5 +654,157 @@
     "side": "shared",
     "game": "gta5",
     "framework": "oxcore"
+  },
+  {
+    "name": "QBX:Client:OnPlayerLoaded",
+    "params": [],
+    "description": "Fired on the client when the Qbox player object is fully loaded and ready.",
+    "side": "client",
+    "game": "gta5",
+    "framework": "qbox"
+  },
+  {
+    "name": "QBX:Client:OnPlayerUnload",
+    "params": [],
+    "description": "Fired on the client when the player is unloading (disconnect or character switch).",
+    "side": "client",
+    "game": "gta5",
+    "framework": "qbox"
+  },
+  {
+    "name": "QBX:Client:OnJobUpdate",
+    "params": ["job"],
+    "description": "Fired on the client when the player's job data changes.",
+    "side": "client",
+    "game": "gta5",
+    "framework": "qbox"
+  },
+  {
+    "name": "QBX:Client:OnGangUpdate",
+    "params": ["gang"],
+    "description": "Fired on the client when the player's gang data changes.",
+    "side": "client",
+    "game": "gta5",
+    "framework": "qbox"
+  },
+  {
+    "name": "QBX:Server:OnPlayerLoaded",
+    "params": ["player"],
+    "description": "Fired on the server when a Qbox player object is fully created and the character joins.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "qbox"
+  },
+  {
+    "name": "QBX:Server:OnPlayerUnload",
+    "params": ["source"],
+    "description": "Fired on the server when a player disconnects or switches character.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "qbox"
+  },
+  {
+    "name": "QBX:Server:OnJobUpdate",
+    "params": ["source", "job"],
+    "description": "Fired on the server when a player's job is updated.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "qbox"
+  },
+  {
+    "name": "QBX:Server:OnMoneyChange",
+    "params": ["source", "moneyType", "amount", "operation", "reason"],
+    "description": "Fired on the server when a player's money changes.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "qbox"
+  },
+  {
+    "name": "QBX:Server:OnGangUpdate",
+    "params": ["source", "gang"],
+    "description": "Fired on the server when a player's gang is updated.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "qbox"
+  },
+  {
+    "name": "vorp:playerLoaded",
+    "params": ["source"],
+    "description": "Fired on the server when a VORP player character is fully loaded.",
+    "side": "server",
+    "game": "rdr3",
+    "framework": "vorp"
+  },
+  {
+    "name": "vorp:playerDropped",
+    "params": ["source"],
+    "description": "Fired on the server when a VORP player disconnects.",
+    "side": "server",
+    "game": "rdr3",
+    "framework": "vorp"
+  },
+  {
+    "name": "vorp:selectedCharacter",
+    "params": ["source"],
+    "description": "Fired on the server when a player selects a character from the character selection screen.",
+    "side": "server",
+    "game": "rdr3",
+    "framework": "vorp"
+  },
+  {
+    "name": "vorp:playerJobChange",
+    "params": ["source", "job"],
+    "description": "Fired on the server when a player's job changes in VORP.",
+    "side": "server",
+    "game": "rdr3",
+    "framework": "vorp"
+  },
+  {
+    "name": "RSGCore:Client:OnPlayerLoaded",
+    "params": [],
+    "description": "Fired on the client when the RSG player object is fully loaded.",
+    "side": "client",
+    "game": "rdr3",
+    "framework": "rsg"
+  },
+  {
+    "name": "RSGCore:Client:OnPlayerUnload",
+    "params": [],
+    "description": "Fired on the client when the RSG player is unloading.",
+    "side": "client",
+    "game": "rdr3",
+    "framework": "rsg"
+  },
+  {
+    "name": "RSGCore:Server:OnPlayerLoaded",
+    "params": ["player"],
+    "description": "Fired on the server when an RSG player object is fully created.",
+    "side": "server",
+    "game": "rdr3",
+    "framework": "rsg"
+  },
+  {
+    "name": "RSGCore:Server:OnPlayerUnload",
+    "params": ["source"],
+    "description": "Fired on the server when an RSG player disconnects or switches character.",
+    "side": "server",
+    "game": "rdr3",
+    "framework": "rsg"
+  },
+  {
+    "name": "RSGCore:Server:OnJobUpdate",
+    "params": ["source", "job"],
+    "description": "Fired on the server when an RSG player's job is updated.",
+    "side": "server",
+    "game": "rdr3",
+    "framework": "rsg"
+  },
+  {
+    "name": "RSGCore:Server:OnMoneyChange",
+    "params": ["source", "moneyType", "amount", "operation"],
+    "description": "Fired on the server when an RSG player's money changes.",
+    "side": "server",
+    "game": "rdr3",
+    "framework": "rsg"
   }
 ]

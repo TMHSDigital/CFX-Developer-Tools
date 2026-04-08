@@ -123,6 +123,24 @@ on('myResource:localEvent', (data) => {
 emit('myResource:localEvent', data);
 ```
 
+### Thread affinity: `setImmediate()` for natives in callbacks
+
+Native functions must be called on the CFX scripting thread. If you call a native inside an async callback (setTimeout, fetch .then, Promise handlers), it will silently fail or crash. Use `setImmediate()` to return to the correct thread first:
+
+```javascript
+// BAD: native called from wrong thread
+setTimeout(() => {
+    const ped = PlayerPedId(); // may silently fail
+}, 1000);
+
+// GOOD: setImmediate returns to the CFX thread
+setTimeout(() => {
+    setImmediate(() => {
+        const ped = PlayerPedId(); // works correctly
+    });
+}, 1000);
+```
+
 ## C# patterns
 
 ### Base script class
@@ -202,6 +220,49 @@ local spawn = vector4(100.0, 200.0, 30.0, 90.0)  -- position + heading
 ```
 
 Vectors are immutable, support arithmetic (`+`, `-`, `*`), length (`#v`), normalization (`norm(v)`), and swizzling (`v.xy`, `v.xyz`). See the **CFX Lua conventions** rule for full details.
+
+## Routing buckets (instances)
+
+Routing buckets isolate groups of players into separate world instances. Players in different buckets cannot see or interact with each other. Common uses: housing interiors, instanced missions, admin dimensions.
+
+### Server-side bucket management
+
+```lua
+-- Move a player to a bucket (server only)
+SetPlayerRoutingBucket(source, bucketId)
+
+-- Move an entity to a bucket
+SetEntityRoutingBucket(entity, bucketId)
+
+-- Get current bucket
+local bucket = GetPlayerRoutingBucket(source)
+local entityBucket = GetEntityRoutingBucket(entity)
+```
+
+### Population control
+
+```lua
+-- Disable ambient peds/vehicles in a bucket (useful for interiors)
+SetRoutingBucketPopulationEnabled(bucketId, false)
+
+-- Lock bucket game mode (strict = entities created in this bucket stay in it)
+SetRoutingBucketEntityLockdownMode(bucketId, 'strict')
+```
+
+### Common instancing pattern
+
+```lua
+-- Server: create an instanced interior for a player
+local instanceBucket = source + 1000  -- unique bucket per player
+
+SetPlayerRoutingBucket(source, instanceBucket)
+SetRoutingBucketPopulationEnabled(instanceBucket, false)
+
+-- When done, return player to the default bucket
+SetPlayerRoutingBucket(source, 0)
+```
+
+Bucket 0 is the default world where all players start.
 
 ## Key rules
 

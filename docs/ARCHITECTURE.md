@@ -29,7 +29,7 @@ Each skill is a `SKILL.md` file with YAML frontmatter. Skills teach the AI agent
 - **Native functions** - How to find and use GTA5/RDR3 native functions
 - **fxmanifest** - How to write correct resource manifests
 - **Client-server patterns** - Correct event and thread patterns across all runtimes
-- **Framework detection** - How to identify ESX/QBCore/ox_core/standalone
+- **Framework detection** - How to identify ESX/QBCore/Qbox/ox_core/VORP/RSG/standalone
 - **Performance optimization** - Best practices for CFX performance
 - **NUI development** - How to build in-game web UIs
 - **Database integration** - How to use oxmysql for database queries
@@ -63,8 +63,8 @@ Cursor AI Agent  --(MCP protocol)-->  MCP Server  --(reads)-->  Data Files
 | `scaffold_resource_tool` | Creates a new resource directory with boilerplate. Inherits author from workspace. |
 | `lookup_native_tool` | Searches natives by name, hash, description, or category. Supports namespace browsing. |
 | `generate_manifest_tool` | Generates fxmanifest.lua content. Auto-detects scripts and NUI from workspace. |
-| `search_events_tool` | Searches 82 events by name, side, game, or framework |
-| `detect_framework_tool` | Scans workspace files to detect ESX, QBCore, ox_core, or standalone |
+| `search_events_tool` | Searches 101 events by name, side, game, or framework |
+| `detect_framework_tool` | Scans workspace files to detect ESX, QBCore, Qbox, ox_core, VORP, RSG, or standalone |
 | `search_docs_tool` | Searches the FiveM/RedM documentation index by keyword or section |
 
 ### Data files
@@ -73,7 +73,7 @@ The `mcp-server/data/` directory contains JSON databases updated by CI:
 
 - `natives_gta5.json` - GTA5 native functions (~6000+ natives, 44 categories) -- updated weekly
 - `natives_rdr3.json` - RDR3 native functions (~5800+ natives, 84 categories) -- updated weekly
-- `events.json` - 82 FiveM/RedM events across CFX, ESX, QBCore, ox_core, baseevents, and chat
+- `events.json` - 101 FiveM/RedM events across CFX, ESX, QBCore, Qbox, ox_core, VORP, RSG, baseevents, and chat
 - `docs_index.json` - ~80 documentation pages from docs.fivem.net -- updated monthly
 
 Native database schema:
@@ -101,10 +101,14 @@ The `templates/` directory contains starter resource structures for:
 - **standalone** - No framework dependency
 - **esx** - ESX framework boilerplate
 - **qbcore** - QBCore framework boilerplate
+- **qbox** - Qbox framework boilerplate (modern QBCore successor)
 - **oxcore** - ox_core framework boilerplate
-- **javascript** - JavaScript runtime starter
+- **vorp** - VORP framework boilerplate (RedM)
+- **rsg** - RSG framework boilerplate (RedM)
+- **javascript** - JavaScript runtime starter with `node_version '22'`
 - **csharp** - C# runtime starter
 - **nui-vite** - Modern NUI with Vite + React, postMessage bridge
+- **nui-svelte** - Modern NUI with Vite + Svelte 5, Runes, postMessage bridge
 
 Templates are used by the scaffolding tool and can also be copied manually.
 
@@ -112,7 +116,7 @@ Templates are used by the scaffolding tool and can also be copied manually.
 
 The `snippets/` directory contains individual code patterns organized by language:
 
-- `lua/` - Thread loops, events, commands, exports, NUI callbacks, configs, state bags
+- `lua/` - Thread loops, events, commands, exports, NUI callbacks, configs, state bags, backtick hashing, routing buckets, variable attributes, ACE permissions
 - `javascript/` - Tick loops, events, commands, NUI callbacks, state bags
 - `csharp/` - Base scripts, commands, tick handlers
 

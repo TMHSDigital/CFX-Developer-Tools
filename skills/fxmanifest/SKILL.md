@@ -27,9 +27,10 @@ games { 'gta5', 'rdr3' }
 author 'YourName'
 description 'What this resource does'
 version '1.0.0'
+repository 'https://github.com/user/repo'
 ```
 
-These are optional but strongly recommended.
+These are optional but strongly recommended. The `repository` field is commonly used by update-checking systems. The `version` field enables automatic update detection when paired with `repository`.
 
 ## Script declarations
 
@@ -135,6 +136,19 @@ C# resources reference compiled DLLs:
 client_scripts { 'Client/ClientMain.net.dll' }
 server_scripts { 'Server/ServerMain.net.dll' }
 ```
+
+## Asset escrow
+
+For paid/Tebex resources using Cfx.re asset escrow:
+
+```lua
+escrow_ignore {
+    'config.lua',
+    'locales/*.lua'
+}
+```
+
+`escrow_ignore` lists files that remain unencrypted so server owners can customize them (configuration, locales). All other files are encrypted by the escrow system.
 
 ## Recommended field order
 

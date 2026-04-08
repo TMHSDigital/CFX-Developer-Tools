@@ -14,5 +14,6 @@ alwaysApply: false
 - Use `setTick` with `await Delay(ms)` for tick loops; avoid Delay(0) unless necessary
 - Server-side scripts can use Node.js built-ins and npm packages via `require`
 - Client-side scripts do NOT have access to Node.js APIs
-- Node.js 22 is available by adding `node_version '22'` in fxmanifest.lua
+- Node.js 22 is available by adding `node_version '22'` in fxmanifest.lua (recommended)
 - Use TypeScript when possible for better type safety with natives
+- WARN: Calling native functions from async callbacks (setTimeout, fetch .then, event handlers) requires `setImmediate()` to return to the CFX scripting thread first. Natives called outside the tick thread will silently fail or crash.

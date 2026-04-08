@@ -1,5 +1,35 @@
 # Changelog
 
+## 0.6.0 - 2026-04-08
+
+### Added
+
+- Qbox framework support: detection, template, events (10), scaffold init, manifest_common
+- VORP framework support: detection, template, events (4), scaffold init (RedM)
+- RSG framework support: detection, template, events (5), scaffold init (RedM)
+- NUI Svelte 5 template with Vite, Runes ($state), and postMessage bridge
+- `node_version '22'` in JavaScript template, manifest_gen, and scaffold output
+- Compile-time backtick hashing snippet (`backtick-hash.lua`)
+- Routing bucket (instancing) snippet (`routing-bucket.lua`) and skill content
+- Lua 5.4 variable attributes snippet (`variable-attributes.lua`) and rule content (`<const>`, `<close>`)
+- ACE permissions snippet (`ace-permissions.lua`)
+- `setImmediate()` thread affinity warning in JS conventions rule and client-server patterns skill
+- mysql-async/ghmattimysql explicit deprecation warning in database integration skill
+- `repository` and `escrow_ignore` manifest directives documented in fxmanifest skill
+
+### Changed
+
+- Event reference expanded from 82 to 101 events with Qbox, VORP, and RSG coverage
+- Template count increased from 7 to 11 (added Qbox, VORP, RSG, NUI Svelte)
+- Snippet count increased from 20 to 24 (added backtick-hash, routing-bucket, variable-attributes, ace-permissions)
+- Framework detection now supports 7 frameworks (added Qbox, VORP, RSG)
+- `manifest_common.py` VALID_FRAMEWORKS and FRAMEWORK_DEPS updated with qbox, vorp, rsg
+- `detect_framework.py` signals updated with qbx_core, vorp_core, rsg-core patterns
+- `scaffold.py` init patterns updated with Qbox, VORP, RSG boilerplate
+- `Citizen.` prefix explicitly marked as deprecated in Lua conventions rule and performance rules
+- NUI development skill updated to recommend Svelte 5 as the community favorite
+- All MCP tool descriptions updated to list all supported frameworks
+
 ## 0.5.0 - 2026-04-08
 
 ### Added

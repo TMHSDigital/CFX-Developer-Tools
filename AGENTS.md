@@ -9,8 +9,8 @@ This is a Cursor IDE plugin for FiveM/RedM (CFX) resource development. It contai
 - **`.cursor-plugin/plugin.json`** -- plugin manifest (version, skills, rules)
 - **`skills/`** -- 9 SKILL.md files teaching the AI domain-specific CFX knowledge
 - **`rules/`** -- 6 .mdc rule files enforcing coding conventions
-- **`snippets/`** -- 20 code snippet files (Lua, JS, C#)
-- **`templates/`** -- 7 resource starter templates (standalone, ESX, QBCore, ox_core, JS, C#, NUI Vite)
+- **`snippets/`** -- 24 code snippet files (Lua, JS, C#)
+- **`templates/`** -- 11 resource starter templates (standalone, ESX, QBCore, Qbox, ox_core, VORP, RSG, JS, C#, NUI Vite, NUI Svelte)
 - **`mcp-server/`** -- Python MCP server with 6 tools and JSON data files
 - **`docs/`** -- ARCHITECTURE.md, ROADMAP.md, CONTRIBUTING.md, GETTING-STARTED.md
 - **`CHANGELOG.md`** -- manually maintained release history (not auto-generated)
@@ -139,9 +139,9 @@ The MCP server is configured in `.cursor/mcp.json` and starts automatically when
 - The native databases use a flat JSON array schema with `name`, `hash`, `params`, `return_type`, `description`, `category`, `side`, `deprecated`, `examples`.
 - Native data is sourced from `runtime.fivem.net/doc/` -- GTA5, RDR3, and CFX platform natives are merged per game file.
 - The `lookup_native_tool` supports keyword search, hash lookup, category browsing, and side filtering.
-- Events use `{ "name", "side", "description", "params", "game", "framework" }`. 82 events across cfx, baseevents, chat, esx, qbcore, oxcore frameworks.
+- Events use `{ "name", "side", "description", "params", "game", "framework" }`. 101 events across cfx, baseevents, chat, esx, qbcore, qbox, oxcore, vorp, rsg frameworks.
 - `docs_index.json` is a searchable index of ~80 FiveM/RedM docs pages, rebuilt monthly by CI. Schema: `{ "title", "url", "section", "snippet" }`.
-- The `detect_framework_tool` scans fxmanifest.lua dependencies (highest weight) and code patterns (`exports['es_extended']`, `QBCore = exports`, `require '@ox_core'`) to report framework, confidence, and evidence.
+- The `detect_framework_tool` scans fxmanifest.lua dependencies (highest weight) and code patterns (`exports['es_extended']`, `QBCore = exports`, `exports['qbx_core']`, `require '@ox_core'`, `exports.vorp_core`, `exports['rsg-core']`) to report framework, confidence, and evidence. Supports ESX, QBCore, Qbox, ox_core, VORP, RSG, and standalone.
 
 ## License
 

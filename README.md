@@ -27,7 +27,7 @@
 ---
 
 <p align="center">
-  9 skills &nbsp;&bull;&nbsp; 6 rules &nbsp;&bull;&nbsp; 6 MCP tools &nbsp;&bull;&nbsp; 12,000+ natives &nbsp;&bull;&nbsp; 82 events &nbsp;&bull;&nbsp; 20 snippets &nbsp;&bull;&nbsp; 7 templates
+  9 skills &nbsp;&bull;&nbsp; 6 rules &nbsp;&bull;&nbsp; 6 MCP tools &nbsp;&bull;&nbsp; 12,000+ natives &nbsp;&bull;&nbsp; 101 events &nbsp;&bull;&nbsp; 24 snippets &nbsp;&bull;&nbsp; 11 templates
 </p>
 
 Scaffold complete FiveM/RedM resources, look up native functions, generate manifests, detect frameworks, search documentation, and write optimized scripts in Lua, JavaScript, and C# -- all from within Cursor's AI chat. Covers the full CFX development lifecycle from project setup to database integration.
@@ -70,27 +70,30 @@ Then ask the AI agent to scaffold a resource, look up a native, or generate a ma
 ## Features
 
 - **Resource scaffolding** -- Generate complete resources in Lua, JavaScript, or C# with proper `fxmanifest.lua`
-- **Framework detection** -- Automatically detect and adapt to ESX, QBCore, ox_core, or standalone
+- **Framework detection** -- Automatically detect and adapt to ESX, QBCore, Qbox, ox_core, VORP, RSG, or standalone
 - **Native function lookup** -- Search GTA5/RDR3 native functions by name or description via MCP tools
 - **Performance-aware coding rules** -- Catch common mistakes (`Wait(0)` in loops, runtime hashing, etc.)
-- **Snippet library** -- 20 copy-paste-ready code patterns across all three runtimes
+- **Snippet library** -- 24 copy-paste-ready code patterns across all three runtimes
 - **NUI development support** -- Skills and patterns for building in-game web UIs
 - **Database integration** -- oxmysql query patterns, schema templates, and migration guidance
-- **Event reference** -- Searchable database of 82 FiveM/RedM events across CFX, ESX, QBCore, and ox_core
+- **Event reference** -- Searchable database of 101 FiveM/RedM events across CFX, ESX, QBCore, Qbox, ox_core, VORP, and RSG
 - **Documentation search** -- Query the FiveM/RedM docs index by keyword or section via MCP tools
-- **Framework auto-detection** -- MCP tool that scans workspace files to detect ESX, QBCore, ox_core, or standalone
+- **Framework auto-detection** -- MCP tool that scans workspace files to detect ESX, QBCore, Qbox, ox_core, VORP, RSG, or standalone
 
 <details>
 <summary><strong>Supported Frameworks</strong></summary>
 
 &nbsp;
 
-| Framework | Status |
-|:----------|:-------|
-| ESX | Supported |
-| QBCore | Supported |
-| ox_core | Supported |
-| Standalone | Supported |
+| Framework | Game | Status |
+|:----------|:-----|:-------|
+| ESX | FiveM | Supported |
+| QBCore | FiveM | Supported |
+| Qbox | FiveM | Supported |
+| ox_core | FiveM | Supported |
+| VORP | RedM | Supported |
+| RSG | RedM | Supported |
+| Standalone | Both | Supported |
 
 </details>
 
@@ -127,7 +130,7 @@ Then ask the AI agent to scaffold a resource, look up a native, or generate a ma
 | **Native Functions** | Look up GTA5/RDR3 natives by name, hash, or description |
 | **fxmanifest** | Author and validate `fxmanifest.lua` files with correct directives |
 | **Client-Server Patterns** | Correct event communication, threading, and state sync patterns |
-| **Framework Detection** | Auto-detect ESX, QBCore, ox_core, or standalone and adapt code accordingly |
+| **Framework Detection** | Auto-detect ESX, QBCore, Qbox, ox_core, VORP, RSG, or standalone and adapt code accordingly |
 | **Performance Optimization** | Identify and fix CFX-specific performance pitfalls |
 | **NUI Development** | Build in-game web UIs with proper message passing and devtools setup |
 | **Database Integration** | oxmysql queries, schema design, migrations, and connection pooling |
@@ -137,17 +140,17 @@ Then ask the AI agent to scaffold a resource, look up a native, or generate a ma
 
 | Rule | What it does |
 |:-----|:-------------|
-| **Lua Conventions** | Enforces CFX Lua idioms -- locals, proper event handlers, Citizen threading |
+| **Lua Conventions** | Enforces CFX Lua idioms -- locals, proper event handlers, vector types, variable attributes |
 | **JavaScript Conventions** | Enforces CFX JavaScript patterns -- async/await, proper exports, event typing |
 | **C# Conventions** | Enforces CitizenFX C# patterns -- `[FromSource]`, `BaseScript`, tick handlers |
 | **fxmanifest Standards** | Validates manifest structure, version strings, dependency declarations |
 | **Security Best Practices** | Flags server-side validation gaps, exposed endpoints, insecure patterns |
 | **Performance Rules** | Catches `Wait(0)`, runtime hashing, unnecessary tick handlers, memory leaks |
 
-## Snippets (20)
+## Snippets (24)
 
 <details>
-<summary><strong>Lua (10)</strong></summary>
+<summary><strong>Lua (14)</strong></summary>
 
 &nbsp;
 
@@ -156,13 +159,17 @@ Then ask the AI agent to scaffold a resource, look up a native, or generate a ma
 | `client-event.lua` | Client-side event handler template |
 | `server-event.lua` | Server-side event handler with source validation |
 | `register-command.lua` | Command registration with permission checks |
-| `thread-loop.lua` | Citizen thread with proper `Wait()` usage |
+| `thread-loop.lua` | Thread with proper `Wait()` usage |
 | `nui-callback.lua` | NUI callback handler for client-side |
 | `export-function.lua` | Exported function pattern |
 | `config-template.lua` | Shared config file structure |
 | `state-bag-entity.lua` | Entity state bag set/read pattern |
 | `state-bag-player.lua` | Player state bag set/read pattern |
 | `state-bag-handler.lua` | State bag change handler |
+| `backtick-hash.lua` | Compile-time hashing with backticks |
+| `routing-bucket.lua` | Routing bucket (instance) management |
+| `variable-attributes.lua` | Lua 5.4 `<const>` and `<close>` attributes |
+| `ace-permissions.lua` | ACE permission checks and config |
 
 </details>
 
@@ -196,17 +203,21 @@ Then ask the AI agent to scaffold a resource, look up a native, or generate a ma
 
 </details>
 
-## Templates (7)
+## Templates (11)
 
 | Template | Description |
 |:---------|:------------|
 | **Standalone** | Minimal Lua resource -- no framework dependency |
 | **ESX** | ESX Legacy-ready resource with `es_extended` integration |
 | **QBCore** | QBCore-ready resource with `qb-core` integration |
+| **Qbox** | Qbox-ready resource with `qbx_core` integration |
 | **ox_core** | ox_core-ready resource with `ox_lib` integration |
-| **JavaScript** | Full JS resource with client/server structure |
+| **VORP** | VORP-ready RedM resource with `vorp_core` integration |
+| **RSG** | RSG-ready RedM resource with `rsg-core` integration |
+| **JavaScript** | Full JS resource with `node_version '22'`, client/server structure |
 | **C#** | .NET resource with `.csproj`, compiled DLL pattern |
 | **NUI Vite** | Modern NUI with Vite + React, postMessage bridge, and HMR |
+| **NUI Svelte** | Modern NUI with Vite + Svelte 5, Runes, postMessage bridge |
 
 ## MCP Server
 
@@ -231,8 +242,8 @@ The server starts automatically when Cursor invokes an MCP tool.
 | `scaffold_resource_tool` | Create a new resource with boilerplate files for any framework/language combo. Inherits author from workspace. |
 | `lookup_native_tool` | Search natives by name, hash, description, or category. Browse namespaces. |
 | `generate_manifest_tool` | Generate a complete `fxmanifest.lua` with correct directives. Auto-detects scripts and NUI from workspace. |
-| `search_events_tool` | Search 82 events by name, side, game, or framework (cfx, esx, qbcore, oxcore, baseevents, chat) |
-| `detect_framework_tool` | Scan workspace files to detect ESX, QBCore, ox_core, or standalone with confidence score |
+| `search_events_tool` | Search 101 events by name, side, game, or framework (cfx, esx, qbcore, qbox, oxcore, vorp, rsg, baseevents, chat) |
+| `detect_framework_tool` | Scan workspace files to detect ESX, QBCore, Qbox, ox_core, VORP, RSG, or standalone with confidence score |
 | `search_docs_tool` | Search the FiveM/RedM documentation index by keyword or section |
 
 </details>
@@ -282,8 +293,8 @@ CFX-Developer-Tools/
   .cursor/             MCP server configuration
   skills/              AI skill files (9 skills)
   rules/               Coding convention rules (6 rules)
-  snippets/            Code snippets -- Lua, JS, C# (20 files)
-  templates/           Resource starter templates (7 sets)
+  snippets/            Code snippets -- Lua, JS, C# (24 files)
+  templates/           Resource starter templates (11 sets)
   mcp-server/          Python MCP server (6 tools) and data files
   docs/                Architecture, roadmap, contributing guide
   assets/              Logo and images
@@ -306,6 +317,7 @@ See [docs/ROADMAP.md](docs/ROADMAP.md) for the full project roadmap.
 | **v0.3.0** | Native DB expansion -- 6300+ GTA5, 5800+ RDR3, category browsing, deprecation flags | Done |
 | **v0.4.x** | Content expansion -- State Bags skill, NUI Vite template, vector docs, FiveM/RedM balance | Done |
 | **v0.5.0** | M3 Expansion -- docs search, 82 events, framework detection, smart code gen | Done |
+| **v0.6.0** | M3.5 Research Alignment -- Qbox/VORP/RSG, Svelte NUI, 101 events, 24 snippets, 11 templates | Done |
 | **v1.0.0** | Stable release -- marketplace listing, full documentation | Planned |
 
 </details>

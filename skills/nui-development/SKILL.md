@@ -114,12 +114,12 @@ end)
 ## Framework choices
 
 Any web framework works inside NUI:
+- **Svelte 5** -- the most popular NUI framework in the CFX community (2026). Uses Runes (`$state`, `$derived`, `$effect`) instead of stores. Smallest bundle size, excellent for NUI. Use the `nui-svelte` template.
+- **React** -- widely used, large ecosystem. Use the `nui-vite` template.
+- **Vue** -- popular alternative with good community support
 - **Vanilla HTML/CSS/JS** -- simplest, no build step
-- **React** -- popular for complex UIs
-- **Vue** -- popular in the FiveM/RedM community
-- **Svelte** -- small bundle size, good for NUI
 
-Keep bundles small. The NUI browser downloads assets from the resource, and large bundles increase load time.
+Keep bundles small. The NUI browser downloads assets from the resource, and large bundles increase load time. Svelte produces the smallest bundles for equivalent functionality.
 
 ## Limitations
 
