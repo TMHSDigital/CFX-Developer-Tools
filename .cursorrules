@@ -1,0 +1,68 @@
+You are working on CFX Developer Tools, a Cursor IDE plugin for FiveM and RedM resource development.
+
+## Repo structure
+
+- `.cursor-plugin/plugin.json` -- plugin manifest (version is auto-managed by CI)
+- `skills/` -- 8 SKILL.md files (resource scaffolding, natives, fxmanifest, client-server, framework detection, performance, NUI, database)
+- `rules/` -- 6 .mdc rule files (Lua, JS, C# conventions, fxmanifest standards, security, performance)
+- `snippets/` -- 15 code snippets organized by language (lua, javascript, csharp)
+- `templates/` -- 6 resource templates (standalone, esx, qbcore, oxcore, javascript, csharp)
+- `mcp-server/` -- Python FastAPI MCP server with 4 tools and JSON data files
+- `docs/` -- architecture, roadmap, contributing, getting started
+- `.github/workflows/` -- validate, release, update-natives, stale
+- `AGENTS.md` -- full workflow and contribution guide for AI agents
+
+## Commit conventions
+
+Use conventional commits. The release workflow auto-bumps version based on prefix:
+- `feat:` = minor bump
+- `feat!:` or `BREAKING CHANGE` = major bump
+- `fix:`, `chore:`, `docs:`, `refactor:`, etc. = patch bump
+
+## Version management
+
+Never manually edit the version in `plugin.json` or the README version badge. The release workflow (`release.yml`) auto-updates both on push to main.
+
+## Hard rules
+
+- No em dashes anywhere. Use hyphens or rewrite.
+- No `lua54 'yes'` in any template or generated manifest. Lua 5.4 is the only runtime; the directive is deprecated.
+- No hardcoded credentials, tokens, API keys, or passwords.
+- All fxmanifest.lua must use `fx_version 'cerulean'` and include `games`.
+- Python in `mcp-server/` must pass `py_compile`.
+- Server-side event handlers must validate `source`.
+- C# resources use a single compiled DLL referenced in both `client_scripts` and `server_scripts`.
+
+## When editing skills or rules
+
+- Skills are SKILL.md with YAML frontmatter. Keep them accurate to current FiveM/RedM APIs.
+- Rules are .mdc with frontmatter (`description`, `globs`, `alwaysApply`). They enforce conventions in generated code.
+- After adding/removing a skill or rule, update `plugin.json` to register it.
+
+## When editing the MCP server
+
+- Shared manifest logic lives in `mcp-server/tools/manifest_common.py`. Don't duplicate it.
+- Don't manually edit `mcp-server/data/natives_*.json`. The update-natives workflow manages these.
+- Dependencies are pinned in `mcp-server/requirements.txt`.
+
+## When editing templates
+
+- Every template directory needs at minimum a `fxmanifest.lua`.
+- Never include `lua54 'yes'`.
+- Follow the existing pattern: fxmanifest.lua + client.lua/js + server.lua/js (or .csproj + .cs).
+
+## When editing workflows
+
+- `release.yml` uses `[skip ci]` on its version bump commit. Don't remove that.
+- `release.yml` paths-ignore excludes `.github/**`, `docs/**`, `*.md`, `LICENSE`. Content-only changes won't trigger releases.
+- `update-natives.yml` commits with `chore:` prefix (patch bump). Don't change to `feat:`.
+- `validate.yml` runs on both PR and push. Keep checks fast.
+
+## Native databases
+
+The flat JSON schema for natives:
+```json
+{ "name": "string", "hash": "string", "params": [...], "return_type": "string", "description": "string", "category": "string", "side": "client|server|shared" }
+```
+
+Events use: `{ "name", "side", "description", "params", "game" }`.
