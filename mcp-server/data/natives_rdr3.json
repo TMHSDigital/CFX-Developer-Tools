@@ -1,0 +1,82 @@
+[
+  {
+    "name": "PlayerPedId",
+    "params": [],
+    "return_type": "Ped",
+    "description": "Returns the ped entity handle for the local player.",
+    "side": "client",
+    "category": "PLAYER"
+  },
+  {
+    "name": "GetEntityCoords",
+    "params": [{"name": "entity", "type": "Entity"}, {"name": "alive", "type": "BOOL"}],
+    "return_type": "Vector3",
+    "description": "Returns the current coordinates of the specified entity.",
+    "side": "shared",
+    "category": "ENTITY"
+  },
+  {
+    "name": "GetPlayerName",
+    "params": [{"name": "playerId", "type": "int"}],
+    "return_type": "string",
+    "description": "Returns the name of the player.",
+    "side": "shared",
+    "category": "PLAYER"
+  },
+  {
+    "name": "RegisterCommand",
+    "params": [{"name": "commandName", "type": "string"}, {"name": "handler", "type": "func"}, {"name": "restricted", "type": "BOOL"}],
+    "return_type": "void",
+    "description": "Registers a chat command.",
+    "side": "shared",
+    "category": "CFX"
+  },
+  {
+    "name": "TriggerServerEvent",
+    "params": [{"name": "eventName", "type": "string"}, {"name": "...", "type": "any"}],
+    "return_type": "void",
+    "description": "Triggers an event on the server from the client.",
+    "side": "client",
+    "category": "CFX"
+  },
+  {
+    "name": "TriggerClientEvent",
+    "params": [{"name": "eventName", "type": "string"}, {"name": "playerId", "type": "int"}, {"name": "...", "type": "any"}],
+    "return_type": "void",
+    "description": "Triggers an event on a specific client from the server.",
+    "side": "server",
+    "category": "CFX"
+  },
+  {
+    "name": "Wait",
+    "params": [{"name": "milliseconds", "type": "int"}],
+    "return_type": "void",
+    "description": "Yields the current thread for the specified number of milliseconds.",
+    "side": "shared",
+    "category": "CFX"
+  },
+  {
+    "name": "CreateThread",
+    "params": [{"name": "handler", "type": "func"}],
+    "return_type": "void",
+    "description": "Creates a new coroutine thread.",
+    "side": "shared",
+    "category": "CFX"
+  },
+  {
+    "name": "GetHashKey",
+    "params": [{"name": "string", "type": "string"}],
+    "return_type": "Hash",
+    "description": "Returns a hash of the input string.",
+    "side": "shared",
+    "category": "MISC"
+  },
+  {
+    "name": "DeleteEntity",
+    "params": [{"name": "entity", "type": "Entity"}],
+    "return_type": "void",
+    "description": "Deletes the specified entity.",
+    "side": "client",
+    "category": "ENTITY"
+  }
+]

@@ -1,0 +1,402 @@
+[
+  {
+    "name": "PlayerPedId",
+    "params": [],
+    "return_type": "Ped",
+    "description": "Returns the ped entity handle for the local player.",
+    "side": "client",
+    "category": "PLAYER"
+  },
+  {
+    "name": "GetPlayerPed",
+    "params": [{"name": "playerId", "type": "int"}],
+    "return_type": "Ped",
+    "description": "Returns the ped entity handle for a given player ID.",
+    "side": "shared",
+    "category": "PLAYER"
+  },
+  {
+    "name": "GetEntityCoords",
+    "params": [{"name": "entity", "type": "Entity"}, {"name": "alive", "type": "BOOL"}],
+    "return_type": "Vector3",
+    "description": "Returns the current coordinates of the specified entity.",
+    "side": "shared",
+    "category": "ENTITY"
+  },
+  {
+    "name": "SetEntityCoords",
+    "params": [{"name": "entity", "type": "Entity"}, {"name": "x", "type": "float"}, {"name": "y", "type": "float"}, {"name": "z", "type": "float"}, {"name": "xAxis", "type": "BOOL"}, {"name": "yAxis", "type": "BOOL"}, {"name": "zAxis", "type": "BOOL"}, {"name": "clearArea", "type": "BOOL"}],
+    "return_type": "void",
+    "description": "Sets the coordinates of an entity.",
+    "side": "client",
+    "category": "ENTITY"
+  },
+  {
+    "name": "GetEntityHeading",
+    "params": [{"name": "entity", "type": "Entity"}],
+    "return_type": "float",
+    "description": "Returns the heading (rotation around Z axis) of the entity.",
+    "side": "shared",
+    "category": "ENTITY"
+  },
+  {
+    "name": "SetEntityHeading",
+    "params": [{"name": "entity", "type": "Entity"}, {"name": "heading", "type": "float"}],
+    "return_type": "void",
+    "description": "Sets the heading of the entity.",
+    "side": "client",
+    "category": "ENTITY"
+  },
+  {
+    "name": "GetEntityModel",
+    "params": [{"name": "entity", "type": "Entity"}],
+    "return_type": "Hash",
+    "description": "Returns the model hash of the entity.",
+    "side": "shared",
+    "category": "ENTITY"
+  },
+  {
+    "name": "DeleteEntity",
+    "params": [{"name": "entity", "type": "Entity"}],
+    "return_type": "void",
+    "description": "Deletes the specified entity.",
+    "side": "client",
+    "category": "ENTITY"
+  },
+  {
+    "name": "DoesEntityExist",
+    "params": [{"name": "entity", "type": "Entity"}],
+    "return_type": "BOOL",
+    "description": "Returns whether the entity exists.",
+    "side": "shared",
+    "category": "ENTITY"
+  },
+  {
+    "name": "GetEntityHealth",
+    "params": [{"name": "entity", "type": "Entity"}],
+    "return_type": "int",
+    "description": "Returns the current health of the entity.",
+    "side": "shared",
+    "category": "ENTITY"
+  },
+  {
+    "name": "SetEntityHealth",
+    "params": [{"name": "entity", "type": "Entity"}, {"name": "value", "type": "int"}],
+    "return_type": "void",
+    "description": "Sets the health of the entity.",
+    "side": "client",
+    "category": "ENTITY"
+  },
+  {
+    "name": "IsEntityDead",
+    "params": [{"name": "entity", "type": "Entity"}],
+    "return_type": "BOOL",
+    "description": "Returns whether the entity is dead.",
+    "side": "client",
+    "category": "ENTITY"
+  },
+  {
+    "name": "CreateVehicle",
+    "params": [{"name": "modelHash", "type": "Hash"}, {"name": "x", "type": "float"}, {"name": "y", "type": "float"}, {"name": "z", "type": "float"}, {"name": "heading", "type": "float"}, {"name": "isNetwork", "type": "BOOL"}, {"name": "netMissionEntity", "type": "BOOL"}],
+    "return_type": "Vehicle",
+    "description": "Creates a vehicle at the specified position.",
+    "side": "client",
+    "category": "VEHICLE"
+  },
+  {
+    "name": "GetVehiclePedIsIn",
+    "params": [{"name": "ped", "type": "Ped"}, {"name": "lastVehicle", "type": "BOOL"}],
+    "return_type": "Vehicle",
+    "description": "Returns the vehicle the ped is currently in. Pass true for last vehicle.",
+    "side": "client",
+    "category": "VEHICLE"
+  },
+  {
+    "name": "IsPedInAnyVehicle",
+    "params": [{"name": "ped", "type": "Ped"}, {"name": "atGetIn", "type": "BOOL"}],
+    "return_type": "BOOL",
+    "description": "Returns whether the ped is in any vehicle.",
+    "side": "client",
+    "category": "VEHICLE"
+  },
+  {
+    "name": "SetVehicleNumberPlateText",
+    "params": [{"name": "vehicle", "type": "Vehicle"}, {"name": "plateText", "type": "string"}],
+    "return_type": "void",
+    "description": "Sets the license plate text on a vehicle (max 8 characters).",
+    "side": "client",
+    "category": "VEHICLE"
+  },
+  {
+    "name": "GetVehicleNumberPlateText",
+    "params": [{"name": "vehicle", "type": "Vehicle"}],
+    "return_type": "string",
+    "description": "Returns the license plate text of the vehicle.",
+    "side": "shared",
+    "category": "VEHICLE"
+  },
+  {
+    "name": "SetVehicleEngineOn",
+    "params": [{"name": "vehicle", "type": "Vehicle"}, {"name": "value", "type": "BOOL"}, {"name": "instantly", "type": "BOOL"}, {"name": "disableAutoStart", "type": "BOOL"}],
+    "return_type": "void",
+    "description": "Turns the vehicle engine on or off.",
+    "side": "client",
+    "category": "VEHICLE"
+  },
+  {
+    "name": "SetVehicleDoorOpen",
+    "params": [{"name": "vehicle", "type": "Vehicle"}, {"name": "doorIndex", "type": "int"}, {"name": "loose", "type": "BOOL"}, {"name": "openInstantly", "type": "BOOL"}],
+    "return_type": "void",
+    "description": "Opens a specific door on the vehicle.",
+    "side": "client",
+    "category": "VEHICLE"
+  },
+  {
+    "name": "RegisterCommand",
+    "params": [{"name": "commandName", "type": "string"}, {"name": "handler", "type": "func"}, {"name": "restricted", "type": "BOOL"}],
+    "return_type": "void",
+    "description": "Registers a chat command. If restricted is true, requires ACE permission.",
+    "side": "shared",
+    "category": "CFX"
+  },
+  {
+    "name": "TriggerServerEvent",
+    "params": [{"name": "eventName", "type": "string"}, {"name": "...", "type": "any"}],
+    "return_type": "void",
+    "description": "Triggers an event on the server from the client.",
+    "side": "client",
+    "category": "CFX"
+  },
+  {
+    "name": "TriggerClientEvent",
+    "params": [{"name": "eventName", "type": "string"}, {"name": "playerId", "type": "int"}, {"name": "...", "type": "any"}],
+    "return_type": "void",
+    "description": "Triggers an event on a specific client from the server.",
+    "side": "server",
+    "category": "CFX"
+  },
+  {
+    "name": "TriggerEvent",
+    "params": [{"name": "eventName", "type": "string"}, {"name": "...", "type": "any"}],
+    "return_type": "void",
+    "description": "Triggers a local event (not sent over the network).",
+    "side": "shared",
+    "category": "CFX"
+  },
+  {
+    "name": "RegisterNetEvent",
+    "params": [{"name": "eventName", "type": "string"}, {"name": "handler", "type": "func"}],
+    "return_type": "void",
+    "description": "Registers a handler for a network event.",
+    "side": "shared",
+    "category": "CFX"
+  },
+  {
+    "name": "GetHashKey",
+    "params": [{"name": "string", "type": "string"}],
+    "return_type": "Hash",
+    "description": "Returns a hash of the input string. Use backtick syntax in Lua for compile-time hashing.",
+    "side": "shared",
+    "category": "MISC"
+  },
+  {
+    "name": "GetPlayerName",
+    "params": [{"name": "playerId", "type": "int"}],
+    "return_type": "string",
+    "description": "Returns the name of the player.",
+    "side": "shared",
+    "category": "PLAYER"
+  },
+  {
+    "name": "GetPlayerIdentifiers",
+    "params": [{"name": "playerId", "type": "int"}],
+    "return_type": "table",
+    "description": "Returns a table of all identifiers for the player (license, steam, discord, etc.).",
+    "side": "server",
+    "category": "PLAYER"
+  },
+  {
+    "name": "GetNumPlayerIdentifiers",
+    "params": [{"name": "playerId", "type": "int"}],
+    "return_type": "int",
+    "description": "Returns the number of identifiers for the player.",
+    "side": "server",
+    "category": "PLAYER"
+  },
+  {
+    "name": "GetPlayerIdentifier",
+    "params": [{"name": "playerId", "type": "int"}, {"name": "index", "type": "int"}],
+    "return_type": "string",
+    "description": "Returns a specific identifier for the player by index.",
+    "side": "server",
+    "category": "PLAYER"
+  },
+  {
+    "name": "DropPlayer",
+    "params": [{"name": "playerId", "type": "int"}, {"name": "reason", "type": "string"}],
+    "return_type": "void",
+    "description": "Drops (kicks) a player from the server with a reason message.",
+    "side": "server",
+    "category": "PLAYER"
+  },
+  {
+    "name": "GetPlayers",
+    "params": [],
+    "return_type": "table",
+    "description": "Returns a table of all connected player IDs.",
+    "side": "server",
+    "category": "PLAYER"
+  },
+  {
+    "name": "SendNUIMessage",
+    "params": [{"name": "data", "type": "table"}],
+    "return_type": "void",
+    "description": "Sends a message (table/JSON) to the NUI browser.",
+    "side": "client",
+    "category": "CFX"
+  },
+  {
+    "name": "RegisterNUICallback",
+    "params": [{"name": "callbackName", "type": "string"}, {"name": "handler", "type": "func"}],
+    "return_type": "void",
+    "description": "Registers a callback that can be invoked from the NUI browser via fetch.",
+    "side": "client",
+    "category": "CFX"
+  },
+  {
+    "name": "SetNuiFocus",
+    "params": [{"name": "hasFocus", "type": "BOOL"}, {"name": "hasCursor", "type": "BOOL"}],
+    "return_type": "void",
+    "description": "Sets NUI keyboard focus and cursor visibility.",
+    "side": "client",
+    "category": "CFX"
+  },
+  {
+    "name": "Wait",
+    "params": [{"name": "milliseconds", "type": "int"}],
+    "return_type": "void",
+    "description": "Yields the current thread for the specified number of milliseconds.",
+    "side": "shared",
+    "category": "CFX"
+  },
+  {
+    "name": "CreateThread",
+    "params": [{"name": "handler", "type": "func"}],
+    "return_type": "void",
+    "description": "Creates a new coroutine thread.",
+    "side": "shared",
+    "category": "CFX"
+  },
+  {
+    "name": "GetGameTimer",
+    "params": [],
+    "return_type": "int",
+    "description": "Returns the number of milliseconds since the game started.",
+    "side": "shared",
+    "category": "MISC"
+  },
+  {
+    "name": "GetCurrentResourceName",
+    "params": [],
+    "return_type": "string",
+    "description": "Returns the name of the currently executing resource.",
+    "side": "shared",
+    "category": "CFX"
+  },
+  {
+    "name": "GetResourceState",
+    "params": [{"name": "resourceName", "type": "string"}],
+    "return_type": "string",
+    "description": "Returns the state of a resource (started, stopped, etc.).",
+    "side": "shared",
+    "category": "CFX"
+  },
+  {
+    "name": "AddBlipForCoord",
+    "params": [{"name": "x", "type": "float"}, {"name": "y", "type": "float"}, {"name": "z", "type": "float"}],
+    "return_type": "Blip",
+    "description": "Creates a map blip at the given coordinates.",
+    "side": "client",
+    "category": "HUD"
+  },
+  {
+    "name": "SetBlipSprite",
+    "params": [{"name": "blip", "type": "Blip"}, {"name": "spriteId", "type": "int"}],
+    "return_type": "void",
+    "description": "Sets the sprite (icon) for a blip.",
+    "side": "client",
+    "category": "HUD"
+  },
+  {
+    "name": "SetBlipColour",
+    "params": [{"name": "blip", "type": "Blip"}, {"name": "color", "type": "int"}],
+    "return_type": "void",
+    "description": "Sets the color of a blip.",
+    "side": "client",
+    "category": "HUD"
+  },
+  {
+    "name": "SetBlipScale",
+    "params": [{"name": "blip", "type": "Blip"}, {"name": "scale", "type": "float"}],
+    "return_type": "void",
+    "description": "Sets the display scale of a blip.",
+    "side": "client",
+    "category": "HUD"
+  },
+  {
+    "name": "BeginTextCommandSetBlipName",
+    "params": [{"name": "textLabel", "type": "string"}],
+    "return_type": "void",
+    "description": "Begins setting a custom name for a blip. Follow with AddTextComponentSubstringPlayerName and EndTextCommandSetBlipName.",
+    "side": "client",
+    "category": "HUD"
+  },
+  {
+    "name": "RemoveBlip",
+    "params": [{"name": "blip", "type": "Blip"}],
+    "return_type": "void",
+    "description": "Removes a blip from the map.",
+    "side": "client",
+    "category": "HUD"
+  },
+  {
+    "name": "DrawMarker",
+    "params": [{"name": "type", "type": "int"}, {"name": "posX", "type": "float"}, {"name": "posY", "type": "float"}, {"name": "posZ", "type": "float"}, {"name": "dirX", "type": "float"}, {"name": "dirY", "type": "float"}, {"name": "dirZ", "type": "float"}, {"name": "rotX", "type": "float"}, {"name": "rotY", "type": "float"}, {"name": "rotZ", "type": "float"}, {"name": "scaleX", "type": "float"}, {"name": "scaleY", "type": "float"}, {"name": "scaleZ", "type": "float"}, {"name": "red", "type": "int"}, {"name": "green", "type": "int"}, {"name": "blue", "type": "int"}, {"name": "alpha", "type": "int"}, {"name": "bobUpAndDown", "type": "BOOL"}, {"name": "faceCamera", "type": "BOOL"}, {"name": "p19", "type": "int"}, {"name": "rotate", "type": "BOOL"}, {"name": "textureDict", "type": "string"}, {"name": "textureName", "type": "string"}, {"name": "drawOnEnts", "type": "BOOL"}],
+    "return_type": "void",
+    "description": "Draws a 3D marker at the specified position. Must be called every frame.",
+    "side": "client",
+    "category": "GRAPHICS"
+  },
+  {
+    "name": "RequestModel",
+    "params": [{"name": "modelHash", "type": "Hash"}],
+    "return_type": "void",
+    "description": "Requests loading of a model. Must wait until HasModelLoaded returns true.",
+    "side": "client",
+    "category": "STREAMING"
+  },
+  {
+    "name": "HasModelLoaded",
+    "params": [{"name": "modelHash", "type": "Hash"}],
+    "return_type": "BOOL",
+    "description": "Returns whether the model has finished loading.",
+    "side": "client",
+    "category": "STREAMING"
+  },
+  {
+    "name": "SetModelAsNoLongerNeeded",
+    "params": [{"name": "modelHash", "type": "Hash"}],
+    "return_type": "void",
+    "description": "Marks the model as no longer needed, allowing the engine to unload it.",
+    "side": "client",
+    "category": "STREAMING"
+  },
+  {
+    "name": "IsControlJustPressed",
+    "params": [{"name": "inputGroup", "type": "int"}, {"name": "control", "type": "int"}],
+    "return_type": "BOOL",
+    "description": "Returns whether a control was just pressed this frame.",
+    "side": "client",
+    "category": "CONTROLS"
+  }
+]

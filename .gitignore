@@ -1,0 +1,46 @@
+# Build prompt (not part of the plugin)
+CFX-Developer-Tools-Cursor-Prompt.md
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+.venv/
+venv/
+env/
+.env
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Cursor workspace files (keep .cursor/mcp.json via negation)
+.cursor/*
+!.cursor/mcp.json
+
+# IDE
+.vscode/
+*.swp
+*.swo
+*~
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Compiled C# output
+*.dll
+*.pdb
+*.mdb
+bin/
+obj/

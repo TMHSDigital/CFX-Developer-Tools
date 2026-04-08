@@ -1,0 +1,179 @@
+name: Validate
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate-json:
+    name: Validate JSON files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate plugin.json
+        run: python3 -c "import json; json.load(open('.cursor-plugin/plugin.json'))"
+
+      - name: Validate mcp.json
+        run: python3 -c "import json; json.load(open('.cursor/mcp.json'))"
+
+      - name: Validate natives_gta5.json
+        run: python3 -c "
+          import json
+          data = json.load(open('mcp-server/data/natives_gta5.json'))
+          assert isinstance(data, list), 'Expected array'
+          for n in data:
+              assert 'name' in n, f'Missing name in {n}'
+              assert 'side' in n, f'Missing side in {n.get(\"name\", \"unknown\")}'
+          print(f'GTA5 natives: {len(data)} entries validated')
+          "
+
+      - name: Validate natives_rdr3.json
+        run: python3 -c "
+          import json
+          data = json.load(open('mcp-server/data/natives_rdr3.json'))
+          assert isinstance(data, list), 'Expected array'
+          for n in data:
+              assert 'name' in n, f'Missing name in {n}'
+              assert 'side' in n, f'Missing side in {n.get(\"name\", \"unknown\")}'
+          print(f'RDR3 natives: {len(data)} entries validated')
+          "
+
+      - name: Validate events.json
+        run: python3 -c "
+          import json
+          data = json.load(open('mcp-server/data/events.json'))
+          assert isinstance(data, list), 'Expected array'
+          for e in data:
+              assert 'name' in e, f'Missing name in {e}'
+              assert 'side' in e, f'Missing side in {e.get(\"name\", \"unknown\")}'
+          print(f'Events: {len(data)} entries validated')
+          "
+
+  validate-plugin-manifest:
+    name: Validate plugin manifest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check required manifest fields
+        run: python3 -c "
+          import json
+          m = json.load(open('.cursor-plugin/plugin.json'))
+          required = ['name', 'displayName', 'description', 'version', 'author', 'license', 'skills', 'rules']
+          missing = [f for f in required if f not in m]
+          assert not missing, f'Missing fields: {missing}'
+          import re
+          assert re.match(r'^[a-z0-9]+(-[a-z0-9]+)*$', m['name']), 'name must be lowercase kebab-case'
+          print('Plugin manifest valid')
+          "
+
+      - name: Check skill files exist
+        run: python3 -c "
+          import json, os
+          m = json.load(open('.cursor-plugin/plugin.json'))
+          for skill in m.get('skills', []):
+              assert os.path.exists(skill), f'Skill not found: {skill}'
+          print(f'All {len(m[\"skills\"])} skill files exist')
+          "
+
+      - name: Check rule files exist
+        run: python3 -c "
+          import json, os
+          m = json.load(open('.cursor-plugin/plugin.json'))
+          for rule in m.get('rules', []):
+              assert os.path.exists(rule), f'Rule not found: {rule}'
+          print(f'All {len(m[\"rules\"])} rule files exist')
+          "
+
+  validate-content:
+    name: Validate content quality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for em dashes
+        run: |
+          if grep -rP '\x{2014}' --include='*.md' --include='*.lua' --include='*.js' --include='*.cs' --include='*.mdc' --include='*.json' --include='*.py' . 2>/dev/null; then
+            echo "::error::Em dashes found. Use hyphens instead."
+            exit 1
+          fi
+          echo "No em dashes found"
+
+      - name: Check for hardcoded credentials
+        run: |
+          patterns='password\s*=\s*["\x27][^"\x27]+|api_key\s*=\s*["\x27][^"\x27]+|token\s*=\s*["\x27][A-Za-z0-9]+'
+          if grep -rPi "$patterns" --include='*.lua' --include='*.js' --include='*.py' --include='*.json' . 2>/dev/null | grep -v 'YOUR_SESSION_COOKIE\|example\|placeholder\|mock'; then
+            echo "::error::Possible hardcoded credentials found."
+            exit 1
+          fi
+          echo "No hardcoded credentials found"
+
+      - name: Check deprecated lua54 directive in templates
+        run: |
+          if grep -r "lua54" templates/ 2>/dev/null; then
+            echo "::error::lua54 directive found in templates. It is deprecated and should be removed."
+            exit 1
+          fi
+          echo "No deprecated lua54 in templates"
+
+  validate-templates:
+    name: Validate fxmanifest templates
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check fxmanifest.lua files have required fields
+        run: python3 << 'EOF'
+          import os, re, sys
+
+          errors = []
+          for root, dirs, files in os.walk("templates"):
+              for f in files:
+                  if f == "fxmanifest.lua":
+                      path = os.path.join(root, f)
+                      content = open(path).read()
+
+                      if "fx_version" not in content:
+                          errors.append(f"{path}: missing fx_version")
+                      if "games" not in content:
+                          errors.append(f"{path}: missing games")
+                      if "'cerulean'" not in content:
+                          errors.append(f"{path}: fx_version should be cerulean")
+
+          if errors:
+              for e in errors:
+                  print(f"::error::{e}", file=sys.stderr)
+              sys.exit(1)
+
+          print("All fxmanifest.lua templates valid")
+          EOF
+
+  validate-python:
+    name: Validate MCP server
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r mcp-server/requirements.txt
+
+      - name: Check Python syntax
+        run: python3 -m py_compile mcp-server/server.py
+
+      - name: Check tool modules syntax
+        run: |
+          python3 -m py_compile mcp-server/tools/manifest_common.py
+          python3 -m py_compile mcp-server/tools/scaffold.py
+          python3 -m py_compile mcp-server/tools/natives.py
+          python3 -m py_compile mcp-server/tools/manifest_gen.py
+          python3 -m py_compile mcp-server/tools/docs_search.py

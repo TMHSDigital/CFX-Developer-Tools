@@ -1,0 +1,19 @@
+---
+title: CFX Lua conventions
+description: Coding conventions for Lua scripts in FiveM and RedM resources
+globs: ["**/*.lua"]
+alwaysApply: false
+---
+
+# CFX Lua conventions
+
+- Use `CreateThread` and `Wait` instead of `Citizen.CreateThread` and `Citizen.Wait`
+- Prefix all custom events with the resource name: `resourceName:eventName`
+- Always capture `source` as a local in server event handlers: `local source = source`
+- Use `RegisterNetEvent` before adding a handler for net events
+- Use compile-time hashing with backticks for model names: `adder`
+- Localize frequently accessed functions: `local Wait = Wait`
+- Use `config.lua` for all configurable values; never hardcode coordinates, item names, job names, or prices
+- Every resource must clean up on stop: blips, markers, entities, NUI focus
+- Use `shared_scripts` for code that runs identically on both client and server
+- Files should be organized as: `client/*.lua`, `server/*.lua`, `shared/*.lua`

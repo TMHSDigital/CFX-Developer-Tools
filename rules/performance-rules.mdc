@@ -1,0 +1,18 @@
+---
+title: Performance rules
+description: Performance optimization rules for CFX resources
+globs: ["**/*.lua", "**/*.js", "**/*.cs"]
+alwaysApply: true
+---
+
+# CFX performance rules
+
+- WARN: `Wait(0)` or `Delay(0)` in a loop. Only acceptable for drawing or per-frame input checks.
+- WARN: `GetHashKey()` calls with string literals. Use backtick compile-time hashing instead.
+- WARN: `GetDistanceBetweenCoords` or `Vdist`. Use `#(vec1 - vec2)` vector math instead.
+- WARN: `Citizen.CreateThread` or `Citizen.Wait`. Use the global `CreateThread` and `Wait` aliases.
+- WARN: Net events firing more than once per second per player. Consider state bags instead.
+- WARN: Missing `Wait()` in any `while true` loop. This will freeze the game.
+- WARN: Creating entities or blips without cleanup in `onResourceStop`.
+- INFO: Use `resmon 1` in server console to profile resource performance.
+- INFO: Target under 0.2ms idle for well-optimized resources.
