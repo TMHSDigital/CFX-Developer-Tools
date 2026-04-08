@@ -170,6 +170,39 @@ Always prefix events with the resource name to avoid collisions:
 
 Never use generic names like `onPlayerDeath` or `getData` -- they will collide with other resources.
 
+## State Bags (modern alternative)
+
+For *persistent data sync* (player status, entity properties, server config), prefer **State Bags** over `TriggerClientEvent` patterns. State Bags automatically replicate and don't require manual event wiring.
+
+See the **State Bags** skill for full patterns. Quick reference:
+
+```lua
+-- Server: sync data via state bag (auto-replicated)
+Player(source).state:set('myResource:job', 'police', true)
+Entity(vehicle).state:set('myResource:fuel', 100.0, true)
+GlobalState.weather = 'RAIN'
+
+-- Client: read
+local job = LocalPlayer.state['myResource:job']
+local fuel = Entity(vehicle).state['myResource:fuel']
+local weather = GlobalState.weather
+```
+
+Use events for one-time commands (play sound, show notification). Use State Bags for state that persists while the entity/player exists.
+
+## Vector types in client-server code
+
+CfxLua provides native `vector2`, `vector3`, `vector4`, and `quat` types. Use them instead of coordinate tables or triples.
+
+```lua
+local pos = GetEntityCoords(PlayerPedId())  -- returns vector3
+local dist = #(pos - targetPos)             -- distance check
+
+local spawn = vector4(100.0, 200.0, 30.0, 90.0)  -- position + heading
+```
+
+Vectors are immutable, support arithmetic (`+`, `-`, `*`), length (`#v`), normalization (`norm(v)`), and swizzling (`v.xy`, `v.xyz`). See the **CFX Lua conventions** rule for full details.
+
 ## Key rules
 
 1. **Never trust the client** -- always validate `source` and all parameters on the server
@@ -177,3 +210,4 @@ Never use generic names like `onPlayerDeath` or `getData` -- they will collide w
 3. **Use `Wait()` in every loop** -- a `while true` loop without `Wait()` will freeze the game
 4. **Clean up on stop** -- listen for `onResourceStop` to remove blips, entities, and NUI focus
 5. **Rate-limit events** -- do not fire net events more than once per second per player unless necessary
+6. **Prefer State Bags for persistent data** -- use events for one-shot commands, State Bags for synced state

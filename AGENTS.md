@@ -7,10 +7,10 @@ This file tells AI coding agents how the CFX Developer Tools repo works and how 
 This is a Cursor IDE plugin for FiveM/RedM (CFX) resource development. It contains:
 
 - **`.cursor-plugin/plugin.json`** -- plugin manifest (version, skills, rules)
-- **`skills/`** -- 8 SKILL.md files teaching the AI domain-specific CFX knowledge
+- **`skills/`** -- 9 SKILL.md files teaching the AI domain-specific CFX knowledge
 - **`rules/`** -- 6 .mdc rule files enforcing coding conventions
-- **`snippets/`** -- 15 code snippet files (Lua, JS, C#)
-- **`templates/`** -- 6 resource starter templates (standalone, ESX, QBCore, ox_core, JS, C#)
+- **`snippets/`** -- 20 code snippet files (Lua, JS, C#)
+- **`templates/`** -- 7 resource starter templates (standalone, ESX, QBCore, ox_core, JS, C#, NUI Vite)
 - **`mcp-server/`** -- Python MCP server with 4 tools and JSON data files
 - **`docs/`** -- ARCHITECTURE.md, ROADMAP.md, CONTRIBUTING.md, GETTING-STARTED.md
 - **`.github/workflows/`** -- CI/CD automation

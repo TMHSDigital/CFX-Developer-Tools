@@ -18,7 +18,7 @@
   <a href="#features">Features</a> &bull;
   <a href="#quick-start">Quick Start</a> &bull;
   <a href="#mcp-server">MCP Server</a> &bull;
-  <a href="#skills-8">Skills</a> &bull;
+  <a href="#skills-9">Skills</a> &bull;
   <a href="#rules-6">Rules</a> &bull;
   <a href="#roadmap">Roadmap</a>
 </p>
@@ -26,7 +26,7 @@
 ---
 
 <p align="center">
-  8 skills &nbsp;&bull;&nbsp; 6 rules &nbsp;&bull;&nbsp; 4 MCP tools &nbsp;&bull;&nbsp; 12,000+ natives &nbsp;&bull;&nbsp; 15 snippets &nbsp;&bull;&nbsp; 6 templates
+  9 skills &nbsp;&bull;&nbsp; 6 rules &nbsp;&bull;&nbsp; 4 MCP tools &nbsp;&bull;&nbsp; 12,000+ natives &nbsp;&bull;&nbsp; 20 snippets &nbsp;&bull;&nbsp; 7 templates
 </p>
 
 Scaffold complete FiveM/RedM resources, look up native functions, generate manifests, detect frameworks, and write optimized scripts in Lua, JavaScript, and C# -- all from within Cursor's AI chat. Covers the full CFX development lifecycle from project setup to database integration.
@@ -75,7 +75,7 @@ pip install -r requirements.txt
 - **Framework detection** -- Automatically detect and adapt to ESX, QBCore, ox_core, or standalone
 - **Native function lookup** -- Search GTA5/RDR3 native functions by name or description via MCP tools
 - **Performance-aware coding rules** -- Catch common mistakes (`Wait(0)` in loops, runtime hashing, etc.)
-- **Snippet library** -- 15 copy-paste-ready code patterns across all three runtimes
+- **Snippet library** -- 20 copy-paste-ready code patterns across all three runtimes
 - **NUI development support** -- Skills and patterns for building in-game web UIs
 - **Database integration** -- oxmysql query patterns, schema templates, and migration guidance
 - **Event reference** -- Searchable database of common FiveM/RedM events
@@ -119,7 +119,7 @@ pip install -r requirements.txt
 
 </details>
 
-## Skills (8)
+## Skills (9)
 
 | Skill | What it does |
 |:------|:-------------|
@@ -131,6 +131,7 @@ pip install -r requirements.txt
 | **Performance Optimization** | Identify and fix CFX-specific performance pitfalls |
 | **NUI Development** | Build in-game web UIs with proper message passing and devtools setup |
 | **Database Integration** | oxmysql queries, schema design, migrations, and connection pooling |
+| **State Bags** | Modern data sync with Entity/Player/Global state bags, change handlers, and security |
 
 ## Rules (6)
 
@@ -143,10 +144,10 @@ pip install -r requirements.txt
 | **Security Best Practices** | Flags server-side validation gaps, exposed endpoints, insecure patterns |
 | **Performance Rules** | Catches `Wait(0)`, runtime hashing, unnecessary tick handlers, memory leaks |
 
-## Snippets (15)
+## Snippets (20)
 
 <details>
-<summary><strong>Lua (7)</strong></summary>
+<summary><strong>Lua (10)</strong></summary>
 
 &nbsp;
 
@@ -159,11 +160,14 @@ pip install -r requirements.txt
 | `nui-callback.lua` | NUI callback handler for client-side |
 | `export-function.lua` | Exported function pattern |
 | `config-template.lua` | Shared config file structure |
+| `state-bag-entity.lua` | Entity state bag set/read pattern |
+| `state-bag-player.lua` | Player state bag set/read pattern |
+| `state-bag-handler.lua` | State bag change handler |
 
 </details>
 
 <details>
-<summary><strong>JavaScript (5)</strong></summary>
+<summary><strong>JavaScript (7)</strong></summary>
 
 &nbsp;
 
@@ -174,6 +178,8 @@ pip install -r requirements.txt
 | `register-command.js` | Command registration |
 | `thread-loop.js` | Tick-based loop pattern |
 | `nui-callback.js` | NUI callback registration |
+| `state-bag-entity.js` | Entity state bag set/read pattern |
+| `state-bag-handler.js` | State bag change handler |
 
 </details>
 
@@ -190,7 +196,7 @@ pip install -r requirements.txt
 
 </details>
 
-## Templates (6)
+## Templates (7)
 
 | Template | Description |
 |:---------|:------------|
@@ -200,6 +206,7 @@ pip install -r requirements.txt
 | **ox_core** | ox_core-ready resource with `ox_lib` integration |
 | **JavaScript** | Full JS resource with client/server structure |
 | **C#** | .NET resource with `.csproj`, compiled DLL pattern |
+| **NUI Vite** | Modern NUI with Vite + React, postMessage bridge, and HMR |
 
 ## MCP Server
 
@@ -261,10 +268,10 @@ What events fire when a player connects to the server?
 CFX-Developer-Tools/
   .cursor-plugin/      Plugin manifest
   .cursor/             MCP server configuration
-  skills/              AI skill files (8 skills)
+  skills/              AI skill files (9 skills)
   rules/               Coding convention rules (6 rules)
-  snippets/            Code snippets -- Lua, JS, C# (15 files)
-  templates/           Resource starter templates (6 sets)
+  snippets/            Code snippets -- Lua, JS, C# (20 files)
+  templates/           Resource starter templates (7 sets)
   mcp-server/          Python MCP server and data files
   docs/                Architecture, roadmap, contributing guide
   assets/              Logo and images

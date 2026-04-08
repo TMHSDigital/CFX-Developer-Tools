@@ -28,7 +28,8 @@
     "skills/framework-detection/SKILL.md",
     "skills/performance-optimization/SKILL.md",
     "skills/nui-development/SKILL.md",
-    "skills/database-integration/SKILL.md"
+    "skills/database-integration/SKILL.md",
+    "skills/state-bags/SKILL.md"
   ],
   "rules": [
     "rules/cfx-lua-conventions.mdc",

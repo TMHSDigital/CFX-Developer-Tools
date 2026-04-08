@@ -33,6 +33,7 @@ Each skill is a `SKILL.md` file with YAML frontmatter. Skills teach the AI agent
 - **Performance optimization** - Best practices for CFX performance
 - **NUI development** - How to build in-game web UIs
 - **Database integration** - How to use oxmysql for database queries
+- **State Bags** - Modern data synchronization using Entity/Player/Global state bags
 
 Skills are activated based on context (file type, user request) and provide the agent with the technical knowledge to generate correct code.
 
@@ -100,6 +101,7 @@ The `templates/` directory contains starter resource structures for:
 - **oxcore** - ox_core framework boilerplate
 - **javascript** - JavaScript runtime starter
 - **csharp** - C# runtime starter
+- **nui-vite** - Modern NUI with Vite + React, postMessage bridge
 
 Templates are used by the scaffolding tool and can also be copied manually.
 
@@ -107,8 +109,8 @@ Templates are used by the scaffolding tool and can also be copied manually.
 
 The `snippets/` directory contains individual code patterns organized by language:
 
-- `lua/` - Thread loops, events, commands, exports, NUI callbacks, configs
-- `javascript/` - Tick loops, events, commands, NUI callbacks
+- `lua/` - Thread loops, events, commands, exports, NUI callbacks, configs, state bags
+- `javascript/` - Tick loops, events, commands, NUI callbacks, state bags
 - `csharp/` - Base scripts, commands, tick handlers
 
 Snippets serve as quick-reference patterns that the AI agent can insert into generated code.

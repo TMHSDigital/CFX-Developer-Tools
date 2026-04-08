@@ -17,7 +17,7 @@ Core plugin scaffolding and content that enables basic CFX resource development 
 - [x] NUI development skill
 - [x] Database integration skill (oxmysql, mysql-async)
 - [x] 6 coding convention and safety rules (.mdc files)
-- [x] 15 code snippets (7 Lua, 5 JavaScript, 3 C#)
+- [x] 15 code snippets (7 Lua, 5 JavaScript, 3 C#) (now 20 with state bag snippets added in M2)
 - [x] MCP server with 4 tool definitions (scaffold, native lookup, manifest gen, event search)
 - [x] Native function database stubs (GTA5: 50 natives, RDR3: 10 natives)
 - [x] Common events reference database (20 events)
@@ -65,6 +65,13 @@ Make the MCP server useful for real development by expanding the data layer and 
 - [ ] Auto-detect framework from fxmanifest.lua and script imports
 - [ ] Expose detection result as an MCP tool: `detect_framework`
 - [ ] Cache detection result per workspace session
+
+### Content expansion
+
+- [x] State Bags skill covering Entity/Player/Global state, change handlers, replication, and security patterns
+- [x] State Bags snippets for Lua and JavaScript (entity, player, change handler)
+- [x] CfxLua vector/quaternion type documentation in Lua conventions rule and client-server patterns skill
+- [x] NUI Vite + React template with postMessage bridge and HMR dev workflow
 
 ### Code generation improvements
 
