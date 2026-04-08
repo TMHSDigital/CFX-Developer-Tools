@@ -13,6 +13,7 @@ This guide takes you from zero to building FiveM/RedM resources with AI assistan
 7. [Build your first resource](#7-build-your-first-resource)
 8. [What to try next](#8-what-to-try-next)
 9. [Troubleshooting](#9-troubleshooting)
+10. [Useful links](#useful-links)
 
 ---
 
@@ -25,15 +26,25 @@ This guide takes you from zero to building FiveM/RedM resources with AI assistan
 - Generate a correct `fxmanifest.lua` with all the right directives
 - Write code that follows FiveM/RedM best practices automatically
 
-The plugin includes **9 skills** (knowledge the AI uses), **6 rules** (coding conventions it enforces), **20 code snippets**, **7 starter templates**, and **4 MCP tools** that let the AI call functions directly (like searching 12,000+ native functions).
+The plugin includes **9 skills**, **6 rules**, **20 code snippets**, **7 starter templates**, and **4 MCP tools** (including a searchable database of 12,000+ native functions).
 
-### What is Cursor?
+<details>
+<summary><strong>What is Cursor?</strong></summary>
+
+&nbsp;
 
 [Cursor](https://www.cursor.com/) is a code editor with a built-in AI assistant. It looks and works like VS Code, but adds an AI chat panel where you can ask questions about your code, request changes, and have the AI write entire files for you. If you have used VS Code before, Cursor will feel familiar. If you haven't, don't worry -- this guide covers what you need.
 
-### What is FiveM / RedM?
+</details>
+
+<details>
+<summary><strong>What is FiveM / RedM?</strong></summary>
+
+&nbsp;
 
 [FiveM](https://docs.fivem.net/docs/) is a modification framework for GTA V that lets you run custom multiplayer servers. [RedM](https://redm.net/) is the equivalent for Red Dead Redemption 2. Both use "resources" -- packages of scripts and assets that add features to your server. This plugin helps you build those resources.
+
+</details>
 
 ---
 
@@ -41,7 +52,10 @@ The plugin includes **9 skills** (knowledge the AI uses), **6 rules** (coding co
 
 You need three things installed before you can use the plugin. All steps below are for **Windows**.
 
-### 2a. Install Git
+<details>
+<summary><strong>2a. Install Git</strong></summary>
+
+&nbsp;
 
 Git is a tool for downloading and managing code. You need it to download the plugin.
 
@@ -58,7 +72,12 @@ git --version
 
 You should see something like `git version 2.53.0.windows.2`. If you see an error like `'git' is not recognized`, close PowerShell and reopen it -- the installer updated your system PATH and PowerShell needs to reload it.
 
-### 2b. Install Python 3.10 or newer
+</details>
+
+<details>
+<summary><strong>2b. Install Python 3.10 or newer</strong></summary>
+
+&nbsp;
 
 Python runs the plugin's MCP server, which gives the AI access to tools like native function lookup.
 
@@ -83,7 +102,12 @@ pip --version
 
 You should see something like `pip 24.3.1 from ...`. If either command gives a "not recognized" error, see the [Troubleshooting](#python-or-pip-not-recognized) section below.
 
-### 2c. Install Cursor
+</details>
+
+<details>
+<summary><strong>2c. Install Cursor</strong></summary>
+
+&nbsp;
 
 Cursor is the code editor where you will use this plugin.
 
@@ -102,11 +126,18 @@ Once Cursor is open, you will see:
 
 If this is your first time using a code editor, spend a minute clicking around to get oriented. The [Cursor documentation](https://docs.cursor.com) has more details.
 
-### 2d. Optional -- set up a FiveM or RedM server
+</details>
+
+<details>
+<summary><strong>2d. Optional -- set up a FiveM or RedM server</strong></summary>
+
+&nbsp;
 
 You need a running server to **test** resources, but you do not need one to **build** them. You can use the plugin to generate code and learn even without a server.
 
 When you are ready to test, follow the official guide: [Setting up a FiveM server](https://docs.fivem.net/docs/server-manual/setting-up-a-server/).
+
+</details>
 
 ---
 
@@ -114,7 +145,10 @@ When you are ready to test, follow the official guide: [Setting up a FiveM serve
 
 There are two ways to get the plugin files onto your computer.
 
-### Method A -- Git clone (recommended)
+<details>
+<summary><strong>Method A -- Git clone (recommended)</strong></summary>
+
+&nbsp;
 
 This method is preferred because it makes updating easier later.
 
@@ -133,7 +167,12 @@ git clone https://github.com/TMHSDigital/CFX-Developer-Tools.git
 
 4. Git will create a `CFX-Developer-Tools` folder containing all the plugin files.
 
-### Method B -- ZIP download
+</details>
+
+<details>
+<summary><strong>Method B -- ZIP download</strong></summary>
+
+&nbsp;
 
 If you don't want to use Git:
 
@@ -142,6 +181,8 @@ If you don't want to use Git:
 3. Click **Download ZIP**
 4. Extract the ZIP file somewhere convenient (right-click > "Extract All")
 5. The extracted folder may be named `CFX-Developer-Tools-main` -- you can rename it to `CFX-Developer-Tools` if you like
+
+</details>
 
 ---
 
@@ -152,14 +193,23 @@ If you don't want to use Git:
 3. Navigate to the `CFX-Developer-Tools` folder you just downloaded
 4. Click **Select Folder**
 
-Cursor will open the project. A few things happen automatically:
-
-- Cursor reads `.cursor-plugin/plugin.json` and registers the plugin
-- The 9 skills become available to the AI assistant
-- The 6 coding rules activate based on file types you open
-- The MCP server configuration is loaded from `.cursor/mcp.json`
-
 You may see a prompt asking you to **trust the workspace**. Click **Yes, I trust the authors** -- this is needed for the plugin and terminal to work.
+
+<details>
+<summary><strong>What happens automatically</strong></summary>
+
+&nbsp;
+
+When you open the folder, Cursor:
+
+- Reads `.cursor-plugin/plugin.json` and registers the plugin
+- Makes the 9 skills available to the AI assistant
+- Activates the 6 coding rules based on file types you open
+- Loads the MCP server configuration from `.cursor/mcp.json`
+
+You don't need to do anything to trigger these -- they happen on folder open.
+
+</details>
 
 ---
 
@@ -167,15 +217,20 @@ You may see a prompt asking you to **trust the workspace**. Click **Yes, I trust
 
 The MCP (Model Context Protocol) server is a small Python program that gives the AI access to tools like native function lookup and resource scaffolding. You need to install its dependencies once.
 
-### Open the terminal
+<details>
+<summary><strong>What is a terminal?</strong></summary>
 
-Click **Terminal > New Terminal** in the menu bar, or press `` Ctrl+` `` (that is the backtick key, usually to the left of the 1 key). A panel will open at the bottom of the window with a command prompt.
+&nbsp;
 
-> **What is a terminal?** It's a text-based way to run commands on your computer. You type a command, press Enter, and it runs. Cursor has one built in so you don't have to open a separate window.
+A terminal is a text-based way to run commands on your computer. You type a command, press Enter, and it runs. Cursor has one built in so you don't have to open a separate window.
+
+To open it: click **Terminal > New Terminal** in the menu bar, or press `` Ctrl+` `` (the backtick key, usually to the left of the 1 key).
+
+</details>
 
 ### Install dependencies
 
-Type these commands one at a time, pressing Enter after each:
+Open the terminal and type these commands one at a time, pressing Enter after each:
 
 ```
 cd mcp-server
@@ -185,11 +240,9 @@ cd mcp-server
 pip install -r requirements.txt
 ```
 
-The first command moves you into the `mcp-server` folder. The second installs three Python packages the server needs. You will see some download progress and then a success message.
+The first command moves into the `mcp-server` folder. The second installs three Python packages the server needs. You will see some download progress and then a success message.
 
-### That's it
-
-You do not need to manually start the MCP server. Cursor will start it automatically the first time the AI needs to call one of its tools. The configuration that tells Cursor how to start it lives in `.cursor/mcp.json`.
+You do **not** need to manually start the MCP server. Cursor starts it automatically the first time the AI calls one of its tools. The configuration lives in `.cursor/mcp.json`.
 
 ---
 
@@ -197,11 +250,12 @@ You do not need to manually start the MCP server. Cursor will start it automatic
 
 Let's confirm the plugin is active and the MCP tools are responding.
 
-### Open the AI chat
+Open the AI chat by clicking the chat icon in the right sidebar, or pressing `Ctrl+L`.
 
-Click the chat icon in the right sidebar, or press `Ctrl+L`. A chat panel will open where you can type messages to the AI assistant.
+<details>
+<summary><strong>Test 1 -- ask about a native function</strong></summary>
 
-### Test 1 -- ask about a native function
+&nbsp;
 
 Type this prompt and press Enter:
 
@@ -209,7 +263,12 @@ Type this prompt and press Enter:
 
 The AI should respond with information about `GetEntityCoords`, including its parameters and return type. This confirms that the **native functions skill** is active. If the AI also mentions searching the native database, the **MCP tools** are working too.
 
-### Test 2 -- scaffold a resource
+</details>
+
+<details>
+<summary><strong>Test 2 -- scaffold a resource</strong></summary>
+
+&nbsp;
 
 Type this prompt:
 
@@ -222,6 +281,8 @@ The AI should create a `test-resource/` directory containing:
 - `server/main.lua` -- server-side script
 - `config.lua` -- configuration file
 
+</details>
+
 If both tests worked, you are ready to go. If something went wrong, check the [Troubleshooting](#9-troubleshooting) section.
 
 ---
@@ -230,7 +291,10 @@ If both tests worked, you are ready to go. If something went wrong, check the [T
 
 Let's build something real -- a simple resource that displays a welcome message when a player joins the server.
 
-### Step 1 -- ask the AI to build it
+<details>
+<summary><strong>Step 1 -- ask the AI to build it</strong></summary>
+
+&nbsp;
 
 In the AI chat, type:
 
@@ -238,7 +302,12 @@ In the AI chat, type:
 
 The AI will use its skills and tools to generate the complete resource.
 
-### Step 2 -- understand what was generated
+</details>
+
+<details>
+<summary><strong>Step 2 -- understand what was generated</strong></summary>
+
+&nbsp;
 
 Look at the files in the `welcome-message/` folder:
 
@@ -249,7 +318,12 @@ Look at the files in the `welcome-message/` folder:
 | `server/main.lua` | Runs on the server. Handles authoritative logic, database queries, and player management. |
 | `config.lua` | Shared settings that both client and server scripts can read. |
 
-### Step 3 -- deploy to your server
+</details>
+
+<details>
+<summary><strong>Step 3 -- deploy to your server</strong></summary>
+
+&nbsp;
 
 If you have a FiveM server set up:
 
@@ -263,7 +337,12 @@ ensure welcome-message
 3. Restart your server (or run `ensure welcome-message` in the server console)
 4. Join the server -- you should see the welcome notification
 
-### Step 4 -- iterate
+</details>
+
+<details>
+<summary><strong>Step 4 -- iterate</strong></summary>
+
+&nbsp;
 
 Now ask the AI to modify it:
 
@@ -271,45 +350,80 @@ Now ask the AI to modify it:
 
 The AI will update `config.lua` and the scripts to read from it. This is the core workflow: describe what you want, let the AI build it, test it, refine it.
 
+</details>
+
 ---
 
 ## 8. What to try next
 
 Here are example prompts to explore the plugin's capabilities. Paste them into the AI chat.
 
-### Resource scaffolding
+<details>
+<summary><strong>Resource scaffolding prompts</strong></summary>
+
+&nbsp;
 
 - "Create a new QBCore resource called qb-shops in Lua with database support"
 - "Scaffold a JavaScript FiveM resource called my-hud with NUI support"
 - "Generate a C# resource for RedM called rdr-horses"
 
-### Native function lookup
+</details>
+
+<details>
+<summary><strong>Native function lookup prompts</strong></summary>
+
+&nbsp;
 
 - "What native function sets a vehicle's speed?"
 - "List all VEHICLE category natives"
 - "How do I teleport a player to specific coordinates?"
 
-### Manifest generation
+</details>
+
+<details>
+<summary><strong>Manifest generation prompts</strong></summary>
+
+&nbsp;
 
 - "Generate an fxmanifest.lua for an ESX resource with NUI, targeting FiveM only"
 - "What directives should I use for a resource that targets both FiveM and RedM?"
 
-### NUI (in-game web UI)
+</details>
+
+<details>
+<summary><strong>NUI (in-game web UI) prompts</strong></summary>
+
+&nbsp;
 
 - "Create a simple NUI menu for my resource using the NUI Vite template"
 - "How do I send data from a Lua client script to a NUI panel?"
 
-### Database
+</details>
+
+<details>
+<summary><strong>Database prompts</strong></summary>
+
+&nbsp;
 
 - "Show me how to create and query a MySQL table using oxmysql"
 - "What's the best pattern for upsert queries in FiveM?"
 
-### State Bags
+</details>
+
+<details>
+<summary><strong>State Bags prompts</strong></summary>
+
+&nbsp;
 
 - "How do I sync vehicle fuel across all clients using State Bags?"
 - "Show me a player state bag pattern for syncing job data"
 
-### Learning more
+</details>
+
+<details>
+<summary><strong>Learning more</strong></summary>
+
+&nbsp;
 
 - Browse the skills in `skills/` to see the full reference material the AI uses
 - Read the [Architecture](ARCHITECTURE.md) doc to understand how all the pieces fit together
@@ -318,11 +432,16 @@ Here are example prompts to explore the plugin's capabilities. Paste them into t
 - Visit the [Cfx.re forums](https://forum.cfx.re/) for community help and examples
 - See [CONTRIBUTING.md](CONTRIBUTING.md) if you want to help improve this plugin
 
+</details>
+
 ---
 
 ## 9. Troubleshooting
 
-### Python or pip not recognized
+<details>
+<summary><strong>Python or pip not recognized</strong></summary>
+
+&nbsp;
 
 **Symptom:** Running `python --version` or `pip --version` in PowerShell gives `'python' is not recognized as an internal or external command`.
 
@@ -343,7 +462,12 @@ Alternatively, you can use the full path. The default Python install location on
 C:\Users\<YourName>\AppData\Local\Programs\Python\Python3xx\python.exe
 ```
 
-### pip install fails with a permission error
+</details>
+
+<details>
+<summary><strong>pip install fails with a permission error</strong></summary>
+
+&nbsp;
 
 **Symptom:** `pip install -r requirements.txt` fails with `Permission denied` or `Access is denied`.
 
@@ -353,7 +477,12 @@ C:\Users\<YourName>\AppData\Local\Programs\Python\Python3xx\python.exe
 pip install --user -r requirements.txt
 ```
 
-### MCP tools not responding
+</details>
+
+<details>
+<summary><strong>MCP tools not responding</strong></summary>
+
+&nbsp;
 
 **Symptom:** The AI answers general questions but doesn't seem to use the native lookup or scaffolding tools.
 
@@ -370,7 +499,12 @@ pip install -r requirements.txt
 
 4. Restart Cursor completely (close and reopen)
 
-### Cursor doesn't know about FiveM
+</details>
+
+<details>
+<summary><strong>Cursor doesn't know about FiveM</strong></summary>
+
+&nbsp;
 
 **Symptom:** The AI gives generic coding answers without FiveM-specific knowledge.
 
@@ -378,7 +512,12 @@ pip install -r requirements.txt
 
 **Fix:** Make sure you opened the exact `CFX-Developer-Tools` folder in Cursor -- the folder that contains `.cursor-plugin/plugin.json` at its root. You can verify by checking if the file explorer sidebar shows `skills/`, `rules/`, `templates/`, etc. at the top level.
 
-### Resource won't start on the server
+</details>
+
+<details>
+<summary><strong>Resource won't start on the server</strong></summary>
+
+&nbsp;
 
 **Symptom:** You copied the resource to your server but it doesn't load, or you get errors in the server console.
 
@@ -390,7 +529,12 @@ pip install -r requirements.txt
 4. Look at the server console for error messages -- they usually tell you exactly what's wrong
 5. If using a framework (ESX, QBCore), make sure the framework resource is started first
 
-### Git clone fails
+</details>
+
+<details>
+<summary><strong>Git clone fails</strong></summary>
+
+&nbsp;
 
 **Symptom:** `git clone` gives a network error or permission error.
 
@@ -399,6 +543,8 @@ pip install -r requirements.txt
 1. Make sure you have an internet connection
 2. Try the URL in your browser to confirm the repo is accessible: [github.com/TMHSDigital/CFX-Developer-Tools](https://github.com/TMHSDigital/CFX-Developer-Tools)
 3. If you're behind a corporate firewall or VPN, try the [ZIP download method](#method-b----zip-download) instead
+
+</details>
 
 ---
 
