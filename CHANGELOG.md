@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.2.0 - 2026-04-08
+## 0.3.0 - 2026-04-08
 
 ### Added
 
@@ -20,6 +20,13 @@
 - Weekly update workflow now fetches GTA5, RDR3, and CFX natives separately
 - Schema validation in CI now checks for hash, deprecated, and examples fields
 - Side classification uses upstream apiset field for CFX natives instead of regex heuristics
+
+## 0.2.0 - 2026-04-08
+
+### Added
+
+- AGENTS.md for AI agent guidance and repository conventions
+- .cursorrules file for Cursor-specific context
 
 ## 0.1.1 - 2026-04-08
 

@@ -29,7 +29,7 @@
   8 skills &nbsp;&bull;&nbsp; 6 rules &nbsp;&bull;&nbsp; 4 MCP tools &nbsp;&bull;&nbsp; 12,000+ natives &nbsp;&bull;&nbsp; 15 snippets &nbsp;&bull;&nbsp; 6 templates
 </p>
 
-Scaffold complete FiveM/RedM resources, look up native functions, generate manifests, detect frameworks, and write optimized scripts in Lua, JavaScript, and C# — all from within Cursor's AI chat. Covers the full CFX development lifecycle from project setup to database integration.
+Scaffold complete FiveM/RedM resources, look up native functions, generate manifests, detect frameworks, and write optimized scripts in Lua, JavaScript, and C# -- all from within Cursor's AI chat. Covers the full CFX development lifecycle from project setup to database integration.
 
 ## How It Works
 
@@ -67,18 +67,18 @@ cd mcp-server
 pip install -r requirements.txt
 ```
 
-4. **Start building** — ask the AI agent to scaffold a resource, look up a native, or generate a manifest.
+4. **Start building** -- ask the AI agent to scaffold a resource, look up a native, or generate a manifest.
 
 ## Features
 
-- **Resource scaffolding** — Generate complete resources in Lua, JavaScript, or C# with proper `fxmanifest.lua`
-- **Framework detection** — Automatically detect and adapt to ESX, QBCore, ox_core, or standalone
-- **Native function lookup** — Search GTA5/RDR3 native functions by name or description via MCP tools
-- **Performance-aware coding rules** — Catch common mistakes (`Wait(0)` in loops, runtime hashing, etc.)
-- **Snippet library** — 15 copy-paste-ready code patterns across all three runtimes
-- **NUI development support** — Skills and patterns for building in-game web UIs
-- **Database integration** — oxmysql query patterns, schema templates, and migration guidance
-- **Event reference** — Searchable database of common FiveM/RedM events
+- **Resource scaffolding** -- Generate complete resources in Lua, JavaScript, or C# with proper `fxmanifest.lua`
+- **Framework detection** -- Automatically detect and adapt to ESX, QBCore, ox_core, or standalone
+- **Native function lookup** -- Search GTA5/RDR3 native functions by name or description via MCP tools
+- **Performance-aware coding rules** -- Catch common mistakes (`Wait(0)` in loops, runtime hashing, etc.)
+- **Snippet library** -- 15 copy-paste-ready code patterns across all three runtimes
+- **NUI development support** -- Skills and patterns for building in-game web UIs
+- **Database integration** -- oxmysql query patterns, schema templates, and migration guidance
+- **Event reference** -- Searchable database of common FiveM/RedM events
 
 <details>
 <summary><strong>Supported Frameworks</strong></summary>
@@ -136,9 +136,9 @@ pip install -r requirements.txt
 
 | Rule | What it does |
 |:-----|:-------------|
-| **Lua Conventions** | Enforces FiveM Lua idioms — locals, proper event handlers, Citizen threading |
-| **JavaScript Conventions** | Enforces CFX JavaScript patterns — async/await, proper exports, event typing |
-| **C# Conventions** | Enforces CitizenFX C# patterns — `[FromSource]`, `BaseScript`, tick handlers |
+| **Lua Conventions** | Enforces FiveM Lua idioms -- locals, proper event handlers, Citizen threading |
+| **JavaScript Conventions** | Enforces CFX JavaScript patterns -- async/await, proper exports, event typing |
+| **C# Conventions** | Enforces CitizenFX C# patterns -- `[FromSource]`, `BaseScript`, tick handlers |
 | **fxmanifest Standards** | Validates manifest structure, version strings, dependency declarations |
 | **Security Best Practices** | Flags server-side validation gaps, exposed endpoints, insecure patterns |
 | **Performance Rules** | Catches `Wait(0)`, runtime hashing, unnecessary tick handlers, memory leaks |
@@ -146,7 +146,7 @@ pip install -r requirements.txt
 ## Snippets (15)
 
 <details>
-<summary><strong>Lua (6)</strong></summary>
+<summary><strong>Lua (7)</strong></summary>
 
 &nbsp;
 
@@ -194,7 +194,7 @@ pip install -r requirements.txt
 
 | Template | Description |
 |:---------|:------------|
-| **Standalone** | Minimal Lua resource — no framework dependency |
+| **Standalone** | Minimal Lua resource -- no framework dependency |
 | **ESX** | ESX Legacy-ready resource with `es_extended` integration |
 | **QBCore** | QBCore-ready resource with `qb-core` integration |
 | **ox_core** | ox_core-ready resource with `ox_lib` integration |
@@ -222,7 +222,7 @@ The server starts automatically when Cursor invokes an MCP tool.
 | Tool | Description |
 |:-----|:------------|
 | `scaffold_resource_tool` | Create a new resource with boilerplate files for any framework/language combo |
-| `lookup_native_tool` | Search the native function database by name, hash, or description |
+| `lookup_native_tool` | Search natives by name, hash, description, or category. Browse namespaces. |
 | `generate_manifest_tool` | Generate a complete `fxmanifest.lua` with correct directives |
 | `search_events_tool` | Search the event reference database by name, side, or keyword |
 
@@ -263,7 +263,7 @@ CFX-Developer-Tools/
   .cursor/             MCP server configuration
   skills/              AI skill files (8 skills)
   rules/               Coding convention rules (6 rules)
-  snippets/            Code snippets — Lua, JS, C# (15 files)
+  snippets/            Code snippets -- Lua, JS, C# (15 files)
   templates/           Resource starter templates (6 sets)
   mcp-server/          Python MCP server and data files
   docs/                Architecture, roadmap, contributing guide
@@ -282,12 +282,13 @@ See [docs/ROADMAP.md](docs/ROADMAP.md) for the full project roadmap.
 
 | Version | Milestone | Status |
 |:--------|:----------|:-------|
-| **v0.1.x** | Foundation — skills, rules, snippets, templates, MCP server, CI/CD | Done |
-| **v0.2.0** | Native DB expansion — 6300+ GTA5, 5800+ RDR3, category browsing, deprecation flags | **Current** |
-| **v0.3.0** | Documentation search — FiveM docs integration via MCP | Planned |
-| **v0.4.0** | Event reference expansion — 100+ events with examples | Planned |
-| **v0.5.0** | Framework auto-detection — runtime detection from project files | Planned |
-| **v1.0.0** | Stable release — marketplace listing, full documentation | Planned |
+| **v0.1.x** | Foundation -- skills, rules, snippets, templates, MCP server, CI/CD | Done |
+| **v0.2.0** | AGENTS.md and .cursorrules for AI agent guidance | Done |
+| **v0.3.0** | Native DB expansion -- 6300+ GTA5, 5800+ RDR3, category browsing, deprecation flags | **Current** |
+| **v0.4.0** | Documentation search -- FiveM docs integration via MCP | Planned |
+| **v0.5.0** | Event reference expansion -- 100+ events with examples | Planned |
+| **v0.6.0** | Framework auto-detection -- runtime detection from project files | Planned |
+| **v1.0.0** | Stable release -- marketplace listing, full documentation | Planned |
 
 </details>
 
@@ -301,7 +302,7 @@ If this plugin is useful to you, consider [sponsoring the project](https://githu
 
 ## License
 
-CC BY-NC-ND 4.0 — see [LICENSE](LICENSE) for details.
+CC BY-NC-ND 4.0 -- see [LICENSE](LICENSE) for details.
 
 <details>
 <summary><strong>CFX Reference Links</strong></summary>

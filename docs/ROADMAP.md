@@ -1,6 +1,6 @@
 # Roadmap
 
-## Milestone 1 - Foundation (current)
+## Milestone 1 - Foundation (v0.1.x, complete)
 
 Core plugin scaffolding and content that enables basic CFX resource development in Cursor.
 
@@ -18,23 +18,20 @@ Core plugin scaffolding and content that enables basic CFX resource development 
 - [x] Database integration skill (oxmysql, mysql-async)
 - [x] 6 coding convention and safety rules (.mdc files)
 - [x] 15 code snippets (7 Lua, 5 JavaScript, 3 C#)
-- [x] MCP server stub with 4 tool definitions (scaffold, native lookup, manifest gen, event search)
+- [x] MCP server with 4 tool definitions (scaffold, native lookup, manifest gen, event search)
 - [x] Native function database stubs (GTA5: 50 natives, RDR3: 10 natives)
 - [x] Common events reference database (20 events)
 - [x] Documentation: Getting Started, Architecture, Contributing, Roadmap, Changelog
 - [x] CI/CD: PR validation workflow (JSON lint, manifest checks, em dash detection, template validation, Python syntax)
 - [x] CI/CD: Auto version bump + tag + GitHub Release on merge to main (conventional commits)
-- [x] CI/CD: Scheduled weekly native database update from citizenfx/natives (auto-merge)
+- [x] CI/CD: Scheduled weekly native database update (auto-merge)
 - [x] CI/CD: Stale issue/PR cleanup workflow
-
-### Out of scope for M1
-
-- MCP tools are defined but not yet fully tested end-to-end
-- Native databases are stubs until the first scheduled update runs
+- [x] AGENTS.md and .cursorrules for AI agent guidance
+- [x] Plugin logo and branding assets
 
 ---
 
-## Milestone 2 - Intelligence
+## Milestone 2 - Intelligence (v0.3.0, in progress)
 
 Make the MCP server useful for real development by expanding the data layer and adding live documentation features.
 
@@ -131,14 +128,14 @@ Harden the plugin for public release and community adoption.
 
 ### RedM expansion
 
-- [ ] Expand RDR3 native database to full coverage
+- [x] Expand RDR3 native database to full coverage (done in M2: 5800+ natives)
 - [ ] Add RedM-specific templates (VORP, RSG framework support)
 - [ ] Add RedM-specific snippets (prompts, scenarios, RDR3 peds)
 - [ ] RedM-specific coding conventions rule
 
 ### Community and marketplace
 
-- [ ] Plugin logo and branding assets
+- [x] Plugin logo and branding assets
 - [ ] Submission to the Cursor Marketplace (requires public Git repo, valid manifest, manual review)
 - [ ] Community template contribution workflow (PR template, validation script)
 - [ ] Plugin versioning and update strategy
