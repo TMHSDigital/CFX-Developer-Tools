@@ -2,11 +2,18 @@
 Manifest generation tool.
 
 Generates a properly formatted fxmanifest.lua based on parameters.
+Can optionally scan a workspace directory to auto-populate scripts and NUI.
 """
 
 from __future__ import annotations
 
-from tools.manifest_common import FRAMEWORK_DEPS, VALID_GAMES, VALID_LANGUAGES, VALID_FRAMEWORKS, validate_inputs
+from tools.manifest_common import (
+    FRAMEWORK_DEPS,
+    validate_inputs,
+    read_workspace_context,
+    scan_script_files,
+    detect_nui_presence,
+)
 
 
 def generate_manifest(
@@ -17,6 +24,7 @@ def generate_manifest(
     scripts: list[str] | None = None,
     dependencies: list[str] | None = None,
     has_nui: bool = False,
+    workspace_path: str | None = None,
 ) -> str:
     """Generate fxmanifest.lua content and return it as a string."""
 
@@ -28,6 +36,25 @@ def generate_manifest(
     if error:
         return error
 
+    author = "YourName"
+    description = name
+
+    if workspace_path:
+        ctx = read_workspace_context(workspace_path)
+        author = ctx.get("author", author)
+        description = ctx.get("description", description)
+
+        scanned = scan_script_files(workspace_path)
+        if not scripts and any(scanned.values()):
+            scripts = []
+            for f in scanned.get("client", []):
+                scripts.append(f)
+            for f in scanned.get("server", []):
+                scripts.append(f)
+
+        if not has_nui:
+            has_nui = detect_nui_presence(workspace_path)
+
     if game == "both":
         games_str = "{ 'gta5', 'rdr3' }"
     else:
@@ -37,13 +64,12 @@ def generate_manifest(
         "fx_version 'cerulean'",
         f"games {games_str}",
         "",
-        "author 'YourName'",
-        f"description '{name}'",
+        f"author '{author}'",
+        f"description '{description}'",
         "version '1.0.0'",
         "",
     ]
 
-    # Dependencies
     all_deps: list[str] = []
     fw_dep = FRAMEWORK_DEPS.get(framework)
     if fw_dep:
@@ -56,7 +82,6 @@ def generate_manifest(
     if all_deps:
         lines.append("")
 
-    # Scripts
     if language == "lua":
         lines.append("shared_scripts {")
         lines.append("    'config.lua'")
@@ -73,9 +98,9 @@ def generate_manifest(
 
     if scripts:
         for s in scripts:
-            if "client" in s.lower():
+            if "client" in s.lower() or s.startswith("cl_"):
                 client_entries.append(f"'{s}'")
-            elif "server" in s.lower():
+            elif "server" in s.lower() or s.startswith("sv_"):
                 server_entries.append(f"'{s}'")
             else:
                 client_entries.append(f"'{s}'")

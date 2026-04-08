@@ -54,35 +54,39 @@ Expanded the data layer and added new skills and content for real development wo
 
 ---
 
-## Milestone 3 - Expansion (planned)
+## Milestone 3 - Expansion (v0.5.0, complete)
 
-Expand event coverage, add documentation search, and improve code generation intelligence.
+Expanded event coverage, added documentation search and framework detection MCP tools, and improved code generation intelligence.
 
 ### Documentation search
 
-- [ ] Implement `docs_search` MCP tool that queries the FiveM/RedM documentation site
-- [ ] Cache frequently accessed doc pages locally for offline use
-- [ ] Support searching by topic, function name, or keyword
+- [x] Implement `search_docs_tool` MCP tool that queries a local index of FiveM/RedM documentation
+- [x] Pre-built local index (~80 pages) from docs.fivem.net, updated monthly by CI
+- [x] Support searching by topic, function name, keyword, or section filter
+- [x] CI workflow (`update-docs-index.yml`) for automated monthly index rebuilds
 
 ### Event reference
 
-- [ ] Expand events.json to 100+ events (base game, CFX, and popular framework events)
-- [ ] Add ESX-specific events (esx:playerLoaded, esx:setJob, etc.)
-- [ ] Add QBCore-specific events (QBCore:Client:OnPlayerLoaded, etc.)
-- [ ] Add ox_core events
+- [x] Expand events.json from 20 to 82 events (base game, CFX, and popular framework events)
+- [x] Add ESX-specific events (15 events: esx:playerLoaded, esx:setJob, etc.)
+- [x] Add QBCore-specific events (15 events: QBCore:Client:OnPlayerLoaded, etc.)
+- [x] Add ox_core events (8 events: ox:playerLoaded, ox:setGroup, etc.)
+- [x] Add chat resource events (7 events)
+- [x] Add `game` and `framework` fields to event schema with filter support
 
 ### Framework auto-detection
 
-- [ ] Implement workspace scanning in the MCP server (not just skill instructions)
-- [ ] Auto-detect framework from fxmanifest.lua and script imports
-- [ ] Expose detection result as an MCP tool: `detect_framework`
-- [ ] Cache detection result per workspace session
+- [x] Implement workspace scanning MCP tool (`detect_framework_tool`)
+- [x] Auto-detect framework from fxmanifest.lua dependencies and script imports
+- [x] Scan code patterns (`exports['es_extended']`, `QBCore = exports`, `require '@ox_core'`)
+- [x] Return framework name, confidence level, and evidence
 
 ### Code generation improvements
 
-- [ ] Context-aware boilerplate generation that reads existing code style
-- [ ] Smarter manifest generation that scans existing files for script paths
-- [ ] Template variable substitution (resource name, author, etc.)
+- [x] Context-aware scaffolding that reads existing workspace for author/description
+- [x] Smarter manifest generation that scans existing files for script paths and NUI
+- [x] Template variable substitution utility (`substitute_variables`)
+- [x] Workspace-aware `scaffold_resource_tool` and `generate_manifest_tool`
 
 ---
 

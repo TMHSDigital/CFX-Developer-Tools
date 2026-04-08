@@ -3,7 +3,7 @@ CFX Developer Tools - MCP Server
 
 A Model Context Protocol server that provides tools for FiveM/RedM
 resource development: scaffolding, native lookup, manifest generation,
-and event search.
+event search, documentation search, and framework detection.
 """
 
 import os
@@ -14,6 +14,8 @@ from tools.scaffold import scaffold_resource
 from tools.natives import lookup_native
 from tools.manifest_gen import generate_manifest
 from tools.event_search import search_events
+from tools.docs_search import search_docs
+from tools.detect_framework import detect_framework
 
 mcp = FastMCP("cfx-dev-tools")
 
@@ -26,6 +28,7 @@ def scaffold_resource_tool(
     game: str,
     language: str,
     framework: str,
+    workspace_path: str | None = None,
 ) -> str:
     """Create a new FiveM/RedM resource with boilerplate files.
 
@@ -34,8 +37,9 @@ def scaffold_resource_tool(
         game: Target game - gta5, rdr3, or both
         language: Scripting language - lua, javascript, or csharp
         framework: Framework - standalone, esx, qbcore, or oxcore
+        workspace_path: Path to existing workspace to inherit author from (optional)
     """
-    return scaffold_resource(name, game, language, framework)
+    return scaffold_resource(name, game, language, framework, workspace_path)
 
 
 @mcp.tool()
@@ -65,6 +69,7 @@ def generate_manifest_tool(
     scripts: list[str] | None = None,
     dependencies: list[str] | None = None,
     has_nui: bool = False,
+    workspace_path: str | None = None,
 ) -> str:
     """Generate a properly formatted fxmanifest.lua file.
 
@@ -76,22 +81,53 @@ def generate_manifest_tool(
         scripts: Additional script paths to include
         dependencies: Additional resource dependencies
         has_nui: Whether the resource includes NUI (web UI)
+        workspace_path: Path to existing resource directory to auto-detect scripts, author, and NUI (optional)
     """
-    return generate_manifest(name, game, language, framework, scripts, dependencies, has_nui)
+    return generate_manifest(name, game, language, framework, scripts, dependencies, has_nui, workspace_path)
 
 
 @mcp.tool()
 def search_events_tool(
-    query: str,
+    query: str = "",
     side: str | None = None,
+    game: str | None = None,
+    framework: str | None = None,
 ) -> str:
     """Search for common FiveM/RedM events by name or description.
 
     Args:
-        query: Search term (event name or keyword)
-        side: Filter by side - client or server (optional)
+        query: Search term (event name or keyword). Leave empty to see a summary of all events.
+        side: Filter by side - client, server, or shared (optional)
+        game: Filter by game - gta5 or rdr3 (optional)
+        framework: Filter by framework - cfx, esx, qbcore, oxcore, baseevents, or chat (optional)
     """
-    return search_events(query, side, NATIVES_PATH)
+    return search_events(query, side, game, framework, NATIVES_PATH)
+
+
+@mcp.tool()
+def detect_framework_tool(
+    workspace_path: str = ".",
+) -> str:
+    """Detect which FiveM/RedM framework a resource uses by scanning its files.
+
+    Args:
+        workspace_path: Path to the resource directory to scan (defaults to current directory)
+    """
+    return detect_framework(workspace_path)
+
+
+@mcp.tool()
+def search_docs_tool(
+    query: str = "",
+    section: str | None = None,
+) -> str:
+    """Search the FiveM/RedM documentation index by keyword.
+
+    Args:
+        query: Search term (topic, function name, or keyword). Leave empty to see index summary.
+        section: Filter by section - scripting-manual, scripting-reference, game-references, server-manual, stock-resources, getting-started, developer-docs, or support (optional)
+    """
+    return search_docs(query, section, NATIVES_PATH)
 
 
 if __name__ == "__main__":

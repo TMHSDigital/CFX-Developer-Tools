@@ -60,18 +60,21 @@ Cursor AI Agent  --(MCP protocol)-->  MCP Server  --(reads)-->  Data Files
 
 | Tool | Purpose |
 |------|---------|
-| `scaffold_resource_tool` | Creates a new resource directory with boilerplate |
+| `scaffold_resource_tool` | Creates a new resource directory with boilerplate. Inherits author from workspace. |
 | `lookup_native_tool` | Searches natives by name, hash, description, or category. Supports namespace browsing. |
-| `generate_manifest_tool` | Generates fxmanifest.lua content |
-| `search_events_tool` | Searches the event reference database |
+| `generate_manifest_tool` | Generates fxmanifest.lua content. Auto-detects scripts and NUI from workspace. |
+| `search_events_tool` | Searches 82 events by name, side, game, or framework |
+| `detect_framework_tool` | Scans workspace files to detect ESX, QBCore, ox_core, or standalone |
+| `search_docs_tool` | Searches the FiveM/RedM documentation index by keyword or section |
 
 ### Data files
 
-The `mcp-server/data/` directory contains JSON databases updated weekly from upstream sources:
+The `mcp-server/data/` directory contains JSON databases updated by CI:
 
-- `natives_gta5.json` - GTA5 native functions (~6000+ natives, 44 categories)
-- `natives_rdr3.json` - RDR3 native functions (~5800+ natives, 84 categories)
-- `events.json` - Common FiveM/RedM events
+- `natives_gta5.json` - GTA5 native functions (~6000+ natives, 44 categories) -- updated weekly
+- `natives_rdr3.json` - RDR3 native functions (~5800+ natives, 84 categories) -- updated weekly
+- `events.json` - 82 FiveM/RedM events across CFX, ESX, QBCore, ox_core, baseevents, and chat
+- `docs_index.json` - ~80 documentation pages from docs.fivem.net -- updated monthly
 
 Native database schema:
 

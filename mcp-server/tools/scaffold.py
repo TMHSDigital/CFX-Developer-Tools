@@ -10,7 +10,7 @@ from __future__ import annotations
 import os
 import json
 
-from tools.manifest_common import FRAMEWORK_DEPS, games_block, validate_inputs
+from tools.manifest_common import FRAMEWORK_DEPS, games_block, validate_inputs, read_workspace_context
 
 FRAMEWORK_INIT_CLIENT = {
     "esx": "ESX = exports['es_extended']:getSharedObject()\n",
@@ -32,6 +32,7 @@ def scaffold_resource(
     game: str,
     language: str,
     framework: str,
+    workspace_path: str | None = None,
 ) -> str:
     """Create resource files and return a summary of what was created."""
 
@@ -44,6 +45,11 @@ def scaffold_resource(
     if error:
         return error
 
+    author = "YourName"
+    if workspace_path:
+        ctx = read_workspace_context(workspace_path)
+        author = ctx.get("author", author)
+
     games_str = games_block(game)
     files_created: list[str] = []
 
@@ -51,8 +57,7 @@ def scaffold_resource(
 
     os.makedirs(base, exist_ok=True)
 
-    # fxmanifest.lua
-    manifest = _build_manifest(name, games_str, language, framework)
+    manifest = _build_manifest(name, games_str, language, framework, author)
     _write(base, "fxmanifest.lua", manifest, files_created)
 
     if language == "lua":
@@ -75,12 +80,13 @@ def _build_manifest(
     games_str: str,
     language: str,
     framework: str,
+    author: str = "YourName",
 ) -> str:
     lines = [
         "fx_version 'cerulean'",
         f"games {games_str}",
         "",
-        f"author 'YourName'",
+        f"author '{author}'",
         f"description '{name}'",
         "version '1.0.0'",
         "",

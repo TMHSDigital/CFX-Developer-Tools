@@ -27,10 +27,10 @@
 ---
 
 <p align="center">
-  9 skills &nbsp;&bull;&nbsp; 6 rules &nbsp;&bull;&nbsp; 4 MCP tools &nbsp;&bull;&nbsp; 12,000+ natives &nbsp;&bull;&nbsp; 20 snippets &nbsp;&bull;&nbsp; 7 templates
+  9 skills &nbsp;&bull;&nbsp; 6 rules &nbsp;&bull;&nbsp; 6 MCP tools &nbsp;&bull;&nbsp; 12,000+ natives &nbsp;&bull;&nbsp; 82 events &nbsp;&bull;&nbsp; 20 snippets &nbsp;&bull;&nbsp; 7 templates
 </p>
 
-Scaffold complete FiveM/RedM resources, look up native functions, generate manifests, detect frameworks, and write optimized scripts in Lua, JavaScript, and C# -- all from within Cursor's AI chat. Covers the full CFX development lifecycle from project setup to database integration.
+Scaffold complete FiveM/RedM resources, look up native functions, generate manifests, detect frameworks, search documentation, and write optimized scripts in Lua, JavaScript, and C# -- all from within Cursor's AI chat. Covers the full CFX development lifecycle from project setup to database integration.
 
 <p align="center">
   <a href="docs/GETTING-STARTED.md"><img src="https://img.shields.io/badge/%F0%9F%93%96_Getting_Started_Guide-blue?style=for-the-badge" alt="Getting Started Guide"></a>
@@ -43,10 +43,10 @@ Scaffold complete FiveM/RedM resources, look up native functions, generate manif
 ```mermaid
 flowchart LR
     A["You ask Cursor\na CFX question"] --> B["Cursor loads\na Skill"]
-    B --> C{"MCP server\navailable?"}
-    C -- Yes --> D["CFX MCP Server\n(4 tools)"]
+    B -->     C{"MCP server\navailable?"}
+    C -- Yes --> D["CFX MCP Server\n(6 tools)"]
     C -- No --> E["Skill guidance\nonly"]
-    D --> F["Scaffold, lookup,\ngenerate, search"]
+    D --> F["Scaffold, lookup,\ngenerate, search,\ndetect, docs"]
     E --> G["AI-assisted answer\nin Cursor chat"]
     F --> G
 ```
@@ -76,7 +76,9 @@ Then ask the AI agent to scaffold a resource, look up a native, or generate a ma
 - **Snippet library** -- 20 copy-paste-ready code patterns across all three runtimes
 - **NUI development support** -- Skills and patterns for building in-game web UIs
 - **Database integration** -- oxmysql query patterns, schema templates, and migration guidance
-- **Event reference** -- Searchable database of common FiveM/RedM events
+- **Event reference** -- Searchable database of 82 FiveM/RedM events across CFX, ESX, QBCore, and ox_core
+- **Documentation search** -- Query the FiveM/RedM docs index by keyword or section via MCP tools
+- **Framework auto-detection** -- MCP tool that scans workspace files to detect ESX, QBCore, ox_core, or standalone
 
 <details>
 <summary><strong>Supported Frameworks</strong></summary>
@@ -220,16 +222,18 @@ pip install -r requirements.txt
 The server starts automatically when Cursor invokes an MCP tool.
 
 <details>
-<summary><strong>Available Tools (4)</strong></summary>
+<summary><strong>Available Tools (6)</strong></summary>
 
 &nbsp;
 
 | Tool | Description |
 |:-----|:------------|
-| `scaffold_resource_tool` | Create a new resource with boilerplate files for any framework/language combo |
+| `scaffold_resource_tool` | Create a new resource with boilerplate files for any framework/language combo. Inherits author from workspace. |
 | `lookup_native_tool` | Search natives by name, hash, description, or category. Browse namespaces. |
-| `generate_manifest_tool` | Generate a complete `fxmanifest.lua` with correct directives |
-| `search_events_tool` | Search the event reference database by name, side, or keyword |
+| `generate_manifest_tool` | Generate a complete `fxmanifest.lua` with correct directives. Auto-detects scripts and NUI from workspace. |
+| `search_events_tool` | Search 82 events by name, side, game, or framework (cfx, esx, qbcore, oxcore, baseevents, chat) |
+| `detect_framework_tool` | Scan workspace files to detect ESX, QBCore, ox_core, or standalone with confidence score |
+| `search_docs_tool` | Search the FiveM/RedM documentation index by keyword or section |
 
 </details>
 
@@ -258,6 +262,16 @@ Generate an fxmanifest.lua for an ESX resource with NUI, targeting both FiveM an
 What events fire when a player connects to the server?
 ```
 
+**Search documentation:**
+```
+How do I set up NUI callbacks?
+```
+
+**Detect framework:**
+```
+What framework does this resource use?
+```
+
 </details>
 
 ## Project Structure
@@ -270,7 +284,7 @@ CFX-Developer-Tools/
   rules/               Coding convention rules (6 rules)
   snippets/            Code snippets -- Lua, JS, C# (20 files)
   templates/           Resource starter templates (7 sets)
-  mcp-server/          Python MCP server and data files
+  mcp-server/          Python MCP server (6 tools) and data files
   docs/                Architecture, roadmap, contributing guide
   assets/              Logo and images
   .github/             CI/CD workflows
@@ -291,9 +305,7 @@ See [docs/ROADMAP.md](docs/ROADMAP.md) for the full project roadmap.
 | **v0.2.0** | AGENTS.md and .cursorrules for AI agent guidance | Done |
 | **v0.3.0** | Native DB expansion -- 6300+ GTA5, 5800+ RDR3, category browsing, deprecation flags | Done |
 | **v0.4.x** | Content expansion -- State Bags skill, NUI Vite template, vector docs, FiveM/RedM balance | Done |
-| **v0.5.0** | Documentation search -- FiveM/RedM docs integration via MCP | Planned |
-| **v0.6.0** | Event reference expansion -- 100+ events with examples | Planned |
-| **v0.7.0** | Framework auto-detection -- runtime detection from project files | Planned |
+| **v0.5.0** | M3 Expansion -- docs search, 82 events, framework detection, smart code gen | Done |
 | **v1.0.0** | Stable release -- marketplace listing, full documentation | Planned |
 
 </details>

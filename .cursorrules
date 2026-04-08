@@ -7,9 +7,9 @@ You are working on CFX Developer Tools, a Cursor IDE plugin for FiveM and RedM r
 - `rules/` -- 6 .mdc rule files (Lua, JS, C# conventions, fxmanifest standards, security, performance)
 - `snippets/` -- 20 code snippets organized by language (lua, javascript, csharp)
 - `templates/` -- 7 resource templates (standalone, esx, qbcore, oxcore, javascript, csharp, nui-vite)
-- `mcp-server/` -- Python FastAPI MCP server with 4 tools and JSON data files
+- `mcp-server/` -- Python FastAPI MCP server with 6 tools and JSON data files
 - `docs/` -- architecture, roadmap, contributing, getting started
-- `.github/workflows/` -- validate, release, update-natives, stale
+- `.github/workflows/` -- validate, release, update-natives, update-docs-index, stale
 - `AGENTS.md` -- full workflow and contribution guide for AI agents
 - `CHANGELOG.md` -- manually maintained release history
 
@@ -73,4 +73,8 @@ The flat JSON schema for natives:
 
 The `lookup_native_tool` supports: keyword search, hash lookup, category/namespace browsing (empty query + category), listing all categories (empty query + no category), and side filtering.
 
-Events use: `{ "name", "side", "description", "params", "game" }`.
+Events use: `{ "name", "side", "description", "params", "game", "framework" }`. 82 events across cfx, baseevents, chat, esx, qbcore, oxcore.
+
+Docs index: `mcp-server/data/docs_index.json` -- ~80 pages from docs.fivem.net, rebuilt monthly by CI. Schema: `{ "title", "url", "section", "snippet" }`.
+
+Framework detection: `detect_framework_tool` scans fxmanifest.lua deps and code patterns. Returns framework name, confidence, and evidence.

@@ -3,120 +3,656 @@
     "name": "onResourceStart",
     "params": ["resourceName"],
     "description": "Fired when a resource starts. The resourceName parameter is the name of the started resource.",
-    "side": "shared"
+    "side": "shared",
+    "game": "shared",
+    "framework": "cfx"
   },
   {
     "name": "onResourceStop",
     "params": ["resourceName"],
     "description": "Fired when a resource stops. Use this to clean up entities, blips, and NUI focus.",
-    "side": "shared"
+    "side": "shared",
+    "game": "shared",
+    "framework": "cfx"
   },
   {
     "name": "onResourceStarting",
     "params": ["resourceName"],
     "description": "Fired before a resource starts. Can be cancelled with CancelEvent().",
-    "side": "server"
+    "side": "server",
+    "game": "shared",
+    "framework": "cfx"
   },
   {
     "name": "onServerResourceStart",
     "params": ["resourceName"],
     "description": "Fired on the server when any resource starts.",
-    "side": "server"
+    "side": "server",
+    "game": "shared",
+    "framework": "cfx"
   },
   {
     "name": "onServerResourceStop",
     "params": ["resourceName"],
     "description": "Fired on the server when any resource stops.",
-    "side": "server"
+    "side": "server",
+    "game": "shared",
+    "framework": "cfx"
+  },
+  {
+    "name": "onResourceListRefresh",
+    "params": [],
+    "description": "Fired when the resource list is refreshed (e.g. after 'refresh' command). Server only.",
+    "side": "server",
+    "game": "shared",
+    "framework": "cfx"
   },
   {
     "name": "playerConnecting",
     "params": ["name", "setKickReason", "deferrals"],
     "description": "Fired when a player is connecting. Use deferrals to show loading messages or reject the connection.",
-    "side": "server"
+    "side": "server",
+    "game": "shared",
+    "framework": "cfx"
   },
   {
     "name": "playerDropped",
     "params": ["reason"],
     "description": "Fired when a player disconnects. Source is the player who dropped.",
-    "side": "server"
+    "side": "server",
+    "game": "shared",
+    "framework": "cfx"
   },
   {
     "name": "playerJoining",
     "params": ["source", "oldId"],
     "description": "Fired when a player is joining (after connecting, before fully loaded).",
-    "side": "server"
+    "side": "server",
+    "game": "shared",
+    "framework": "cfx"
   },
   {
     "name": "onClientMapStart",
     "params": [],
     "description": "Fired on the client when the game map has loaded.",
-    "side": "client"
+    "side": "client",
+    "game": "shared",
+    "framework": "cfx"
+  },
+  {
+    "name": "onClientMapStop",
+    "params": [],
+    "description": "Fired on the client when the game map is unloading.",
+    "side": "client",
+    "game": "shared",
+    "framework": "cfx"
+  },
+  {
+    "name": "onClientGameTypeStart",
+    "params": ["resource"],
+    "description": "Fired on the client when a gametype resource starts.",
+    "side": "client",
+    "game": "shared",
+    "framework": "cfx"
+  },
+  {
+    "name": "onClientGameTypeStop",
+    "params": ["resource"],
+    "description": "Fired on the client when a gametype resource stops.",
+    "side": "client",
+    "game": "shared",
+    "framework": "cfx"
   },
   {
     "name": "onClientResourceStart",
     "params": ["resourceName"],
     "description": "Fired on the client when a resource starts.",
-    "side": "client"
+    "side": "client",
+    "game": "shared",
+    "framework": "cfx"
   },
   {
     "name": "onClientResourceStop",
     "params": ["resourceName"],
     "description": "Fired on the client when a resource stops.",
-    "side": "client"
+    "side": "client",
+    "game": "shared",
+    "framework": "cfx"
   },
   {
     "name": "gameEventTriggered",
     "params": ["eventName", "eventArgs"],
-    "description": "Fired when a game event is triggered (e.g. CEventNetworkEntityDamage).",
-    "side": "client"
+    "description": "Fired when a game event is triggered (e.g. CEventNetworkEntityDamage). Use to detect deaths, damage, etc.",
+    "side": "client",
+    "game": "shared",
+    "framework": "cfx"
   },
   {
-    "name": "baseevents:onPlayerDied",
-    "params": ["killerType", "deathCoords"],
-    "description": "Fired when the local player dies (requires baseevents resource).",
-    "side": "client"
+    "name": "populationPedCreating",
+    "params": ["x", "y", "z", "model", "overrideCalls"],
+    "description": "Fired when the game is about to create an ambient ped. Can be cancelled to prevent ped spawning.",
+    "side": "client",
+    "game": "gta5",
+    "framework": "cfx"
   },
   {
-    "name": "baseevents:onPlayerKilled",
-    "params": ["killerId", "deathData"],
-    "description": "Fired when the local player is killed by another player (requires baseevents resource).",
-    "side": "client"
+    "name": "respawnPlayerPedEvent",
+    "params": [],
+    "description": "Fired when a player's ped is respawned.",
+    "side": "client",
+    "game": "shared",
+    "framework": "cfx"
   },
   {
-    "name": "baseevents:enteringVehicle",
-    "params": ["vehicle", "seat", "displayName"],
-    "description": "Fired when the player starts entering a vehicle (requires baseevents resource).",
-    "side": "client"
+    "name": "vehicleComponentControlEvent",
+    "params": [],
+    "description": "Fired when a vehicle component control event occurs.",
+    "side": "client",
+    "game": "gta5",
+    "framework": "cfx"
   },
   {
-    "name": "baseevents:enteredVehicle",
-    "params": ["vehicle", "seat", "displayName"],
-    "description": "Fired when the player finishes entering a vehicle (requires baseevents resource).",
-    "side": "client"
+    "name": "entityCreating",
+    "params": ["handle"],
+    "description": "Fired when a networked entity is about to be created. Can be cancelled to prevent creation.",
+    "side": "server",
+    "game": "shared",
+    "framework": "cfx"
   },
   {
-    "name": "baseevents:leftVehicle",
-    "params": ["vehicle", "seat", "displayName"],
-    "description": "Fired when the player exits a vehicle (requires baseevents resource).",
-    "side": "client"
+    "name": "entityCreated",
+    "params": ["handle"],
+    "description": "Fired when a networked entity has been created.",
+    "side": "server",
+    "game": "shared",
+    "framework": "cfx"
   },
   {
-    "name": "chatMessage",
-    "params": ["author", "color", "text"],
-    "description": "Fired when a chat message is sent. Can be cancelled to suppress the message.",
-    "side": "server"
+    "name": "entityRemoved",
+    "params": ["handle"],
+    "description": "Fired when a networked entity has been removed.",
+    "side": "server",
+    "game": "shared",
+    "framework": "cfx"
   },
   {
-    "name": "rconCommand",
-    "params": ["commandName", "args"],
-    "description": "Fired when an RCON command is executed.",
-    "side": "server"
+    "name": "playerEnteredScope",
+    "params": ["data"],
+    "description": "Fired when a player enters the scope of another player. data contains 'for' and 'player' fields.",
+    "side": "server",
+    "game": "shared",
+    "framework": "cfx"
+  },
+  {
+    "name": "playerLeftScope",
+    "params": ["data"],
+    "description": "Fired when a player leaves the scope of another player. data contains 'for' and 'player' fields.",
+    "side": "server",
+    "game": "shared",
+    "framework": "cfx"
   },
   {
     "name": "explosionEvent",
     "params": ["sender", "ev"],
     "description": "Fired when an explosion event is received. Can be cancelled for anti-cheat purposes.",
-    "side": "server"
+    "side": "server",
+    "game": "shared",
+    "framework": "cfx"
+  },
+  {
+    "name": "weaponDamageEvent",
+    "params": ["sender", "ev"],
+    "description": "Fired when a weapon damage event is received from a client. Can be cancelled for anti-cheat.",
+    "side": "server",
+    "game": "shared",
+    "framework": "cfx"
+  },
+  {
+    "name": "startProjectileEvent",
+    "params": ["sender", "ev"],
+    "description": "Fired when a projectile is fired. Can be cancelled. Includes weapon hash and target coords.",
+    "side": "server",
+    "game": "shared",
+    "framework": "cfx"
+  },
+  {
+    "name": "fireEvent",
+    "params": ["sender", "ev"],
+    "description": "Fired when a fire is started. Can be cancelled for anti-cheat or controlled environments.",
+    "side": "server",
+    "game": "shared",
+    "framework": "cfx"
+  },
+  {
+    "name": "ptFxEvent",
+    "params": ["sender", "ev"],
+    "description": "Fired when a particle effect event is triggered. Can be cancelled.",
+    "side": "server",
+    "game": "shared",
+    "framework": "cfx"
+  },
+  {
+    "name": "rconCommand",
+    "params": ["commandName", "args"],
+    "description": "Fired when an RCON command is executed.",
+    "side": "server",
+    "game": "shared",
+    "framework": "cfx"
+  },
+  {
+    "name": "txAdmin:events:serverShuttingDown",
+    "params": [],
+    "description": "Fired by txAdmin when the server is shutting down. Use for graceful cleanup.",
+    "side": "server",
+    "game": "shared",
+    "framework": "cfx"
+  },
+  {
+    "name": "txAdmin:events:scheduledRestart",
+    "params": ["secondsRemaining"],
+    "description": "Fired by txAdmin when a scheduled restart is approaching.",
+    "side": "server",
+    "game": "shared",
+    "framework": "cfx"
+  },
+  {
+    "name": "baseevents:onPlayerDied",
+    "params": ["killerType", "deathCoords"],
+    "description": "Fired when the local player dies (requires baseevents resource).",
+    "side": "client",
+    "game": "shared",
+    "framework": "baseevents"
+  },
+  {
+    "name": "baseevents:onPlayerKilled",
+    "params": ["killerId", "deathData"],
+    "description": "Fired when the local player is killed by another player (requires baseevents resource).",
+    "side": "client",
+    "game": "shared",
+    "framework": "baseevents"
+  },
+  {
+    "name": "baseevents:enteringVehicle",
+    "params": ["vehicle", "seat", "displayName"],
+    "description": "Fired when the player starts entering a vehicle (requires baseevents resource).",
+    "side": "client",
+    "game": "shared",
+    "framework": "baseevents"
+  },
+  {
+    "name": "baseevents:enteredVehicle",
+    "params": ["vehicle", "seat", "displayName"],
+    "description": "Fired when the player finishes entering a vehicle (requires baseevents resource).",
+    "side": "client",
+    "game": "shared",
+    "framework": "baseevents"
+  },
+  {
+    "name": "baseevents:leftVehicle",
+    "params": ["vehicle", "seat", "displayName"],
+    "description": "Fired when the player exits a vehicle (requires baseevents resource).",
+    "side": "client",
+    "game": "shared",
+    "framework": "baseevents"
+  },
+  {
+    "name": "chatMessage",
+    "params": ["author", "color", "text"],
+    "description": "Fired when a chat message is sent. Can be cancelled to suppress the message.",
+    "side": "server",
+    "game": "shared",
+    "framework": "chat"
+  },
+  {
+    "name": "chat:addMessage",
+    "params": ["message"],
+    "description": "Add a message to the chat window. message is a table with args (array of text) and optional color.",
+    "side": "client",
+    "game": "shared",
+    "framework": "chat"
+  },
+  {
+    "name": "chat:addSuggestion",
+    "params": ["command", "help", "params"],
+    "description": "Add a command suggestion to the chat input. Shows autocomplete when typing the command.",
+    "side": "client",
+    "game": "shared",
+    "framework": "chat"
+  },
+  {
+    "name": "chat:addSuggestions",
+    "params": ["suggestions"],
+    "description": "Add multiple command suggestions at once. Each suggestion has name, help, and params fields.",
+    "side": "client",
+    "game": "shared",
+    "framework": "chat"
+  },
+  {
+    "name": "chat:addTemplate",
+    "params": ["templateId", "htmlTemplate"],
+    "description": "Add a custom HTML template for chat messages.",
+    "side": "client",
+    "game": "shared",
+    "framework": "chat"
+  },
+  {
+    "name": "chat:clear",
+    "params": [],
+    "description": "Clear all messages from the chat window.",
+    "side": "client",
+    "game": "shared",
+    "framework": "chat"
+  },
+  {
+    "name": "chat:removeSuggestion",
+    "params": ["command"],
+    "description": "Remove a previously added command suggestion from the chat.",
+    "side": "client",
+    "game": "shared",
+    "framework": "chat"
+  },
+  {
+    "name": "esx:playerLoaded",
+    "params": ["playerId", "xPlayer", "isNew"],
+    "description": "Fired when a player's xPlayer object is fully created and the character joins the world.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "esx"
+  },
+  {
+    "name": "esx:setJob",
+    "params": ["source", "job", "lastJob"],
+    "description": "Fired after any change in a player's job. Includes the new job table and the previous job table.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "esx"
+  },
+  {
+    "name": "esx:setDuty",
+    "params": ["source", "dutyState"],
+    "description": "Fired after any change in a player's job duty state.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "esx"
+  },
+  {
+    "name": "esx:setGroups",
+    "params": ["source", "newGroups", "lastGroups"],
+    "description": "Fired after any change in a player's groups.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "esx"
+  },
+  {
+    "name": "esx:addGroup",
+    "params": ["source", "groupName", "groupGrade"],
+    "description": "Fired after a new group is added to a player.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "esx"
+  },
+  {
+    "name": "esx:removeGroup",
+    "params": ["source", "groupName", "groupGrade"],
+    "description": "Fired after a group is removed from a player.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "esx"
+  },
+  {
+    "name": "esx:jobsRefreshed",
+    "params": [],
+    "description": "Fired when the jobs table is refreshed via ESX.RefreshJobs().",
+    "side": "server",
+    "game": "gta5",
+    "framework": "esx"
+  },
+  {
+    "name": "esx:playerDeath",
+    "params": ["data"],
+    "description": "Fired on the server when a player dies. data contains killerServerId, distance, and death circumstances.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "esx"
+  },
+  {
+    "name": "esx:onPlayerSpawn",
+    "params": ["data"],
+    "description": "Fired on the client when the player respawns after death.",
+    "side": "client",
+    "game": "gta5",
+    "framework": "esx"
+  },
+  {
+    "name": "esx:playerJumping",
+    "params": [],
+    "description": "Fired on the client when the player jumps.",
+    "side": "client",
+    "game": "gta5",
+    "framework": "esx"
+  },
+  {
+    "name": "esx:setAccountMoney",
+    "params": ["account"],
+    "description": "Fired when a player's account money changes. account is the updated account table.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "esx"
+  },
+  {
+    "name": "esx:addInventoryItem",
+    "params": ["source", "item", "count"],
+    "description": "Fired when an item is added to a player's inventory.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "esx"
+  },
+  {
+    "name": "esx:removeInventoryItem",
+    "params": ["source", "item", "count"],
+    "description": "Fired when an item is removed from a player's inventory.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "esx"
+  },
+  {
+    "name": "esx:showNotification",
+    "params": ["message", "type", "duration"],
+    "description": "Fired on the client to display a notification. type can be 'info', 'success', 'error'.",
+    "side": "client",
+    "game": "gta5",
+    "framework": "esx"
+  },
+  {
+    "name": "esx:showHelpNotification",
+    "params": ["message", "thisFrame", "beep", "duration"],
+    "description": "Fired on the client to display a help notification (floating text).",
+    "side": "client",
+    "game": "gta5",
+    "framework": "esx"
+  },
+  {
+    "name": "QBCore:Client:OnPlayerLoaded",
+    "params": [],
+    "description": "Fired on the client when the player's data has finished loading.",
+    "side": "client",
+    "game": "gta5",
+    "framework": "qbcore"
+  },
+  {
+    "name": "QBCore:Client:OnPlayerUnload",
+    "params": [],
+    "description": "Fired on the client when the player is unloading (disconnect/character switch).",
+    "side": "client",
+    "game": "gta5",
+    "framework": "qbcore"
+  },
+  {
+    "name": "QBCore:Client:OnJobUpdate",
+    "params": ["job"],
+    "description": "Fired on the client when the player's job changes. job is the new job table.",
+    "side": "client",
+    "game": "gta5",
+    "framework": "qbcore"
+  },
+  {
+    "name": "QBCore:Client:OnGangUpdate",
+    "params": ["gang"],
+    "description": "Fired on the client when the player's gang changes. gang is the new gang table.",
+    "side": "client",
+    "game": "gta5",
+    "framework": "qbcore"
+  },
+  {
+    "name": "QBCore:Client:OnMoneyChange",
+    "params": ["moneyType", "amount", "operation", "reason"],
+    "description": "Fired on the client when the player's money changes. operation is 'add' or 'remove'.",
+    "side": "client",
+    "game": "gta5",
+    "framework": "qbcore"
+  },
+  {
+    "name": "QBCore:Client:UpdateObject",
+    "params": [],
+    "description": "Fired on the client to refresh the QBCore shared object. Listen and re-fetch with exports.",
+    "side": "client",
+    "game": "gta5",
+    "framework": "qbcore"
+  },
+  {
+    "name": "QBCore:Client:OnPlayerData",
+    "params": [],
+    "description": "Fired on the client when player data is updated (generic catch-all for data changes).",
+    "side": "client",
+    "game": "gta5",
+    "framework": "qbcore"
+  },
+  {
+    "name": "QBCore:Server:OnPlayerLoaded",
+    "params": [],
+    "description": "Fired on the server when a player finishes loading. source is the server ID.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "qbcore"
+  },
+  {
+    "name": "QBCore:Server:PlayerDropped",
+    "params": [],
+    "description": "Fired on the server when a QBCore player disconnects. Fires after playerDropped.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "qbcore"
+  },
+  {
+    "name": "QBCore:Server:OnJobUpdate",
+    "params": ["source", "job"],
+    "description": "Fired on the server when a player's job changes.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "qbcore"
+  },
+  {
+    "name": "QBCore:Server:OnGangUpdate",
+    "params": ["source", "gang"],
+    "description": "Fired on the server when a player's gang changes.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "qbcore"
+  },
+  {
+    "name": "QBCore:Server:OnMoneyChange",
+    "params": ["source", "moneyType", "amount", "operation", "reason"],
+    "description": "Fired on the server when a player's money changes.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "qbcore"
+  },
+  {
+    "name": "QBCore:Server:SetDuty",
+    "params": ["source", "onDuty"],
+    "description": "Fired on the server when a player's duty status changes.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "qbcore"
+  },
+  {
+    "name": "QBCore:Server:OnPermissionUpdate",
+    "params": [],
+    "description": "Fired on the server when player permissions are updated.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "qbcore"
+  },
+  {
+    "name": "QBCore:Server:UpdateObject",
+    "params": [],
+    "description": "Fired on the server to refresh the QBCore shared object.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "qbcore"
+  },
+  {
+    "name": "ox:playerLoaded",
+    "params": ["source", "userId", "charId"],
+    "description": "Fired when an ox_core player finishes loading their character.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "oxcore"
+  },
+  {
+    "name": "ox:playerLogout",
+    "params": ["source", "userId", "charId"],
+    "description": "Fired when an ox_core player logs out or switches characters.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "oxcore"
+  },
+  {
+    "name": "ox:setGroup",
+    "params": ["source", "groupName", "grade"],
+    "description": "Fired when a player's group (job/gang/role) is changed.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "oxcore"
+  },
+  {
+    "name": "ox:setActiveGroup",
+    "params": ["source", "groupName", "grade"],
+    "description": "Fired when a player's active group changes (the group currently displayed/active).",
+    "side": "server",
+    "game": "gta5",
+    "framework": "oxcore"
+  },
+  {
+    "name": "ox:playerDeath",
+    "params": ["source"],
+    "description": "Fired when an ox_core player dies.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "oxcore"
+  },
+  {
+    "name": "ox:statusChange",
+    "params": ["source", "status", "value"],
+    "description": "Fired when a player's status (hunger, thirst, stress, etc.) changes.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "oxcore"
+  },
+  {
+    "name": "ox:setPlayerData",
+    "params": ["source", "key", "value"],
+    "description": "Fired when arbitrary player data is set via ox_core.",
+    "side": "server",
+    "game": "gta5",
+    "framework": "oxcore"
+  },
+  {
+    "name": "ox:resourceReady",
+    "params": ["resourceName"],
+    "description": "Fired when an ox_core-dependent resource is ready to run (after ox_core init).",
+    "side": "shared",
+    "game": "gta5",
+    "framework": "oxcore"
   }
 ]

@@ -11,7 +11,7 @@ This is a Cursor IDE plugin for FiveM/RedM (CFX) resource development. It contai
 - **`rules/`** -- 6 .mdc rule files enforcing coding conventions
 - **`snippets/`** -- 20 code snippet files (Lua, JS, C#)
 - **`templates/`** -- 7 resource starter templates (standalone, ESX, QBCore, ox_core, JS, C#, NUI Vite)
-- **`mcp-server/`** -- Python MCP server with 4 tools and JSON data files
+- **`mcp-server/`** -- Python MCP server with 6 tools and JSON data files
 - **`docs/`** -- ARCHITECTURE.md, ROADMAP.md, CONTRIBUTING.md, GETTING-STARTED.md
 - **`CHANGELOG.md`** -- manually maintained release history (not auto-generated)
 - **`.github/workflows/`** -- CI/CD automation
@@ -61,6 +61,13 @@ Has a concurrency guard -- only one release can run at a time to prevent race co
 1. Fetches compiled native JSON from `runtime.fivem.net/doc/` (GTA5, RDR3, and CFX platform natives)
 2. Transforms via `.github/scripts/transform_natives.py` into the plugin's flat schema
 3. Validates the output (checks required fields, types, counts)
+4. If changed, commits and pushes directly to main with `chore:` prefix
+
+### `update-docs-index.yml` (monthly on 1st at 06:00 UTC, or manual dispatch)
+
+1. Runs `.github/scripts/build_docs_index.py` to crawl ~80 pages from docs.fivem.net
+2. Writes result to `mcp-server/data/docs_index.json`
+3. Validates structure (title, url, section, snippet required)
 4. If changed, commits and pushes directly to main with `chore:` prefix
 
 ### `stale.yml`
@@ -116,9 +123,9 @@ Do not manually edit `mcp-server/data/natives_*.json`. The `update-natives.yml` 
 ## MCP server
 
 - Entry point: `mcp-server/server.py`
-- Tools: `mcp-server/tools/` (scaffold.py, natives.py, manifest_gen.py, event_search.py)
+- Tools: `mcp-server/tools/` (scaffold.py, natives.py, manifest_gen.py, event_search.py, docs_search.py, detect_framework.py)
 - Shared logic: `mcp-server/tools/manifest_common.py`
-- Data: `mcp-server/data/` (natives_gta5.json, natives_rdr3.json, events.json)
+- Data: `mcp-server/data/` (natives_gta5.json, natives_rdr3.json, events.json, docs_index.json)
 - Dependencies: `mcp-server/requirements.txt` (pinned ranges)
 
 The MCP server is configured in `.cursor/mcp.json` and starts automatically when Cursor invokes a tool.
@@ -132,6 +139,9 @@ The MCP server is configured in `.cursor/mcp.json` and starts automatically when
 - The native databases use a flat JSON array schema with `name`, `hash`, `params`, `return_type`, `description`, `category`, `side`, `deprecated`, `examples`.
 - Native data is sourced from `runtime.fivem.net/doc/` -- GTA5, RDR3, and CFX platform natives are merged per game file.
 - The `lookup_native_tool` supports keyword search, hash lookup, category browsing, and side filtering.
+- Events use `{ "name", "side", "description", "params", "game", "framework" }`. 82 events across cfx, baseevents, chat, esx, qbcore, oxcore frameworks.
+- `docs_index.json` is a searchable index of ~80 FiveM/RedM docs pages, rebuilt monthly by CI. Schema: `{ "title", "url", "section", "snippet" }`.
+- The `detect_framework_tool` scans fxmanifest.lua dependencies (highest weight) and code patterns (`exports['es_extended']`, `QBCore = exports`, `require '@ox_core'`) to report framework, confidence, and evidence.
 
 ## License
 

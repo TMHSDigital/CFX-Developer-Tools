@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.5.0 - 2026-04-08
+
+### Added
+
+- Documentation search MCP tool (`search_docs_tool`) with local index of ~80 FiveM/RedM docs pages
+- Framework auto-detection MCP tool (`detect_framework_tool`) scanning fxmanifest deps and code patterns
+- CI workflow (`update-docs-index.yml`) for monthly docs index rebuilds
+- `build_docs_index.py` CI script to crawl and index docs.fivem.net pages
+- Event `game` and `framework` fields for filtering by GTA5/RDR3 and framework origin
+- 62 new events: ESX (15), QBCore (15), ox_core (8), chat (7), and additional CFX platform events
+- Framework and game filters to `search_events_tool`
+- Workspace scanning utilities (`read_workspace_context`, `scan_script_files`, `detect_nui_presence`) in manifest_common.py
+- Template variable substitution (`substitute_variables`) in manifest_common.py
+
+### Changed
+
+- Event reference expanded from 20 to 82 events with framework/game metadata
+- `scaffold_resource_tool` now accepts `workspace_path` to inherit author from existing manifests
+- `generate_manifest_tool` now accepts `workspace_path` to auto-detect scripts, author, and NUI presence
+- MCP server tool count increased from 4 to 6
+- docs_index.json validation added to validate.yml
+- detect_framework.py added to py_compile checks in validate.yml
+
 ## 0.4.1 - 2026-04-08
 
 ### Fixed

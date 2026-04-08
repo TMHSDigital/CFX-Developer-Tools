@@ -60,7 +60,21 @@ jobs:
           for e in data:
               assert 'name' in e, f'Missing name in {e}'
               assert 'side' in e, f'Missing side in {e.get(\"name\", \"unknown\")}'
+              assert 'framework' in e, f'Missing framework in {e.get(\"name\", \"unknown\")}'
+              assert 'game' in e, f'Missing game in {e.get(\"name\", \"unknown\")}'
           print(f'Events: {len(data)} entries validated')
+          "
+
+      - name: Validate docs_index.json
+        run: python3 -c "
+          import json
+          data = json.load(open('mcp-server/data/docs_index.json'))
+          assert isinstance(data, list), 'Expected array'
+          for page in data:
+              assert 'title' in page, f'Missing title'
+              assert 'url' in page, f'Missing url'
+              assert 'section' in page, f'Missing section'
+          print(f'Docs index: {len(data)} pages validated')
           "
 
   validate-plugin-manifest:
@@ -231,3 +245,5 @@ jobs:
           python3 -m py_compile mcp-server/tools/natives.py
           python3 -m py_compile mcp-server/tools/manifest_gen.py
           python3 -m py_compile mcp-server/tools/event_search.py
+          python3 -m py_compile mcp-server/tools/docs_search.py
+          python3 -m py_compile mcp-server/tools/detect_framework.py
