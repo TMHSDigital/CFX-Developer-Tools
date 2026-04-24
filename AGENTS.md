@@ -1,3 +1,5 @@
+<!-- standards-version: 1.6.3 -->
+
 # AGENTS.md
 
 This file tells AI coding agents how the CFX Developer Tools repo works and how to contribute correctly.
