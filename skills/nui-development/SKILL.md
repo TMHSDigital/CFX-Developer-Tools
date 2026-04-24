@@ -2,6 +2,7 @@
 title: NUI Development
 description: Guide development of NUI (in-game web UI) interfaces for FiveM and RedM
 globs: ["**/fxmanifest.lua", "**/*.html", "**/*.css"]
+standards-version: 1.6.3
 ---
 
 # NUI Development

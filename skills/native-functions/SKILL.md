@@ -2,6 +2,7 @@
 title: Native Function Lookup
 description: Help the AI agent find and correctly use FiveM and RedM native functions
 globs: ["**/*.lua", "**/*.js", "**/*.cs"]
+standards-version: 1.6.3
 ---
 
 # Native Function Lookup

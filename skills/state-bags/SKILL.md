@@ -2,6 +2,7 @@
 title: State Bags
 description: Modern data synchronization using State Bags instead of TriggerClientEvent patterns
 globs: ["**/*.lua", "**/*.js", "**/*.cs"]
+standards-version: 1.6.3
 ---
 
 # State Bags

@@ -3,6 +3,7 @@ title: fxmanifest standards
 description: Standards for FiveM/RedM resource manifest files
 globs: ["**/fxmanifest.lua"]
 alwaysApply: true
+standards-version: 1.6.3
 ---
 
 # fxmanifest.lua standards

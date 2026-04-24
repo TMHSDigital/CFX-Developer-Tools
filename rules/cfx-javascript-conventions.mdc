@@ -3,6 +3,7 @@ title: CFX JavaScript conventions
 description: Coding conventions for JavaScript scripts in FiveM and RedM resources
 globs: ["**/*.js", "**/*.ts"]
 alwaysApply: false
+standards-version: 1.6.3
 ---
 
 # CFX JavaScript conventions
