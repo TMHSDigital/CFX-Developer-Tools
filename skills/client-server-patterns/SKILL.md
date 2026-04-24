@@ -2,6 +2,7 @@
 title: Client-Server Patterns
 description: Correct patterns for client/server scripting in Lua, JavaScript, and C# for CFX
 globs: ["**/*.lua", "**/*.js", "**/*.cs"]
+standards-version: 1.6.3
 ---
 
 # Client-Server Patterns

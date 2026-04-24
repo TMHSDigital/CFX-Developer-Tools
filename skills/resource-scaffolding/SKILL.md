@@ -2,6 +2,7 @@
 title: Resource Scaffolding
 description: Guide the AI agent through creating a new FiveM or RedM resource from scratch
 globs: ["**/fxmanifest.lua"]
+standards-version: 1.6.3
 ---
 
 # Resource Scaffolding

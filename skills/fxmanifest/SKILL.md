@@ -2,6 +2,7 @@
 title: fxmanifest.lua Expert
 description: Expert knowledge on writing and editing FiveM/RedM resource manifest files
 globs: ["**/fxmanifest.lua"]
+standards-version: 1.6.3
 ---
 
 # fxmanifest.lua Expert

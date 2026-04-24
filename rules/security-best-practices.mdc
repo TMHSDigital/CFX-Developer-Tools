@@ -3,6 +3,7 @@ title: Security best practices
 description: Security rules for FiveM/RedM resource development
 globs: ["**/*.lua", "**/*.js", "**/*.cs"]
 alwaysApply: false
+standards-version: 1.6.3
 ---
 
 # CFX security best practices
