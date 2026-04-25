@@ -2,7 +2,7 @@
 title: Framework Detection
 description: Detect which framework a project is using and adapt code generation accordingly
 globs: ["**/fxmanifest.lua", "**/*.lua"]
-standards-version: 1.6.3
+standards-version: 1.7.0
 ---
 
 # Framework Detection

@@ -2,7 +2,7 @@
 title: Database Integration
 description: Guide database setup and queries for FiveM/RedM resources using oxmysql
 globs: ["**/*.lua", "**/*.js", "**/*.sql"]
-standards-version: 1.6.3
+standards-version: 1.7.0
 ---
 
 # Database Integration
