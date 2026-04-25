@@ -14,7 +14,7 @@ jobs:
     name: Validate JSON files
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Validate plugin.json
         run: python3 -c "import json; json.load(open('.cursor-plugin/plugin.json'))"
@@ -85,7 +85,7 @@ jobs:
     name: Validate plugin manifest
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Check required manifest fields
         run: |
@@ -124,7 +124,7 @@ jobs:
     name: Validate content quality
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Check for em dashes and en dashes
         run: |
@@ -155,7 +155,7 @@ jobs:
     name: Validate content counts
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Check skill and snippet counts match plugin.json
         run: |
@@ -202,7 +202,7 @@ jobs:
     name: Validate fxmanifest templates
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Check fxmanifest.lua files have required fields
         run: |
@@ -235,9 +235,9 @@ jobs:
     name: Validate MCP server
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
