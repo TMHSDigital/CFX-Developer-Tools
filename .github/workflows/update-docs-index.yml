@@ -23,7 +23,8 @@ jobs:
         run: python3 .github/scripts/build_docs_index.py
 
       - name: Validate index
-        run: python3 -c "
+        run: |
+          python3 << 'EOF'
           import json
           data = json.load(open('mcp-server/data/docs_index.json'))
           assert isinstance(data, list), 'Expected array'
@@ -34,7 +35,7 @@ jobs:
               assert 'section' in page, f'Missing section'
               assert 'snippet' in page, f'Missing snippet'
           print(f'Docs index: {len(data)} pages validated')
-          "
+          EOF
 
       - name: Check for changes
         id: diff
