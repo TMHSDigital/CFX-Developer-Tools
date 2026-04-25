@@ -9,6 +9,10 @@ on:
       - "*.md"
       - "LICENSE"
       - "mkdocs.yml"
+      - "skills/**"
+      - "rules/**/*.mdc"
+      - "AGENTS.md"
+      - "CLAUDE.md"
 
 permissions:
   contents: write
