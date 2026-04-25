@@ -38,7 +38,8 @@ jobs:
         run: python3 .github/scripts/transform_natives.py
 
       - name: Validate transformed data
-        run: python3 -c "
+        run: |
+          python3 << 'EOF'
           import json
 
           for game in ['gta5', 'rdr3']:
@@ -48,13 +49,13 @@ jobs:
               assert len(data) > 0, f'{path}: empty array'
               for n in data:
                   assert 'name' in n, f'{path}: missing name'
-                  assert 'hash' in n, f'{path}: missing hash in {n[\"name\"]}'
-                  assert 'side' in n, f'{path}: missing side in {n[\"name\"]}'
-                  assert 'category' in n, f'{path}: missing category in {n[\"name\"]}'
-                  assert 'params' in n, f'{path}: missing params in {n[\"name\"]}'
-                  assert isinstance(n.get('deprecated'), bool), f'{path}: deprecated must be bool in {n[\"name\"]}'
+                  assert 'hash' in n, f'{path}: missing hash in {n["name"]}'
+                  assert 'side' in n, f'{path}: missing side in {n["name"]}'
+                  assert 'category' in n, f'{path}: missing category in {n["name"]}'
+                  assert 'params' in n, f'{path}: missing params in {n["name"]}'
+                  assert isinstance(n.get('deprecated'), bool), f'{path}: deprecated must be bool in {n["name"]}'
               print(f'{game}: {len(data)} natives validated')
-          "
+          EOF
 
       - name: Check for changes
         id: diff

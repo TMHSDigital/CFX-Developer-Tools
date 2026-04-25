@@ -23,50 +23,54 @@ jobs:
         run: python3 -c "import json; json.load(open('.cursor/mcp.json'))"
 
       - name: Validate natives_gta5.json
-        run: python3 -c "
+        run: |
+          python3 << 'EOF'
           import json
           data = json.load(open('mcp-server/data/natives_gta5.json'))
           assert isinstance(data, list), 'Expected array'
           for n in data:
               assert 'name' in n, f'Missing name in {n}'
-              assert 'hash' in n, f'Missing hash in {n.get(\"name\", \"unknown\")}'
-              assert 'side' in n, f'Missing side in {n.get(\"name\", \"unknown\")}'
-              assert 'category' in n, f'Missing category in {n.get(\"name\", \"unknown\")}'
-              assert isinstance(n.get('deprecated'), bool), f'deprecated must be bool in {n.get(\"name\", \"unknown\")}'
-              assert n.get('examples') is None or isinstance(n.get('examples'), str), f'examples must be string or null in {n.get(\"name\", \"unknown\")}'
+              assert 'hash' in n, f'Missing hash in {n.get("name", "unknown")}'
+              assert 'side' in n, f'Missing side in {n.get("name", "unknown")}'
+              assert 'category' in n, f'Missing category in {n.get("name", "unknown")}'
+              assert isinstance(n.get('deprecated'), bool), f'deprecated must be bool in {n.get("name", "unknown")}'
+              assert n.get('examples') is None or isinstance(n.get('examples'), str), f'examples must be string or null in {n.get("name", "unknown")}'
           print(f'GTA5 natives: {len(data)} entries validated')
-          "
+          EOF
 
       - name: Validate natives_rdr3.json
-        run: python3 -c "
+        run: |
+          python3 << 'EOF'
           import json
           data = json.load(open('mcp-server/data/natives_rdr3.json'))
           assert isinstance(data, list), 'Expected array'
           for n in data:
               assert 'name' in n, f'Missing name in {n}'
-              assert 'hash' in n, f'Missing hash in {n.get(\"name\", \"unknown\")}'
-              assert 'side' in n, f'Missing side in {n.get(\"name\", \"unknown\")}'
-              assert 'category' in n, f'Missing category in {n.get(\"name\", \"unknown\")}'
-              assert isinstance(n.get('deprecated'), bool), f'deprecated must be bool in {n.get(\"name\", \"unknown\")}'
-              assert n.get('examples') is None or isinstance(n.get('examples'), str), f'examples must be string or null in {n.get(\"name\", \"unknown\")}'
+              assert 'hash' in n, f'Missing hash in {n.get("name", "unknown")}'
+              assert 'side' in n, f'Missing side in {n.get("name", "unknown")}'
+              assert 'category' in n, f'Missing category in {n.get("name", "unknown")}'
+              assert isinstance(n.get('deprecated'), bool), f'deprecated must be bool in {n.get("name", "unknown")}'
+              assert n.get('examples') is None or isinstance(n.get('examples'), str), f'examples must be string or null in {n.get("name", "unknown")}'
           print(f'RDR3 natives: {len(data)} entries validated')
-          "
+          EOF
 
       - name: Validate events.json
-        run: python3 -c "
+        run: |
+          python3 << 'EOF'
           import json
           data = json.load(open('mcp-server/data/events.json'))
           assert isinstance(data, list), 'Expected array'
           for e in data:
               assert 'name' in e, f'Missing name in {e}'
-              assert 'side' in e, f'Missing side in {e.get(\"name\", \"unknown\")}'
-              assert 'framework' in e, f'Missing framework in {e.get(\"name\", \"unknown\")}'
-              assert 'game' in e, f'Missing game in {e.get(\"name\", \"unknown\")}'
+              assert 'side' in e, f'Missing side in {e.get("name", "unknown")}'
+              assert 'framework' in e, f'Missing framework in {e.get("name", "unknown")}'
+              assert 'game' in e, f'Missing game in {e.get("name", "unknown")}'
           print(f'Events: {len(data)} entries validated')
-          "
+          EOF
 
       - name: Validate docs_index.json
-        run: python3 -c "
+        run: |
+          python3 << 'EOF'
           import json
           data = json.load(open('mcp-server/data/docs_index.json'))
           assert isinstance(data, list), 'Expected array'
@@ -75,7 +79,7 @@ jobs:
               assert 'url' in page, f'Missing url'
               assert 'section' in page, f'Missing section'
           print(f'Docs index: {len(data)} pages validated')
-          "
+          EOF
 
   validate-plugin-manifest:
     name: Validate plugin manifest
@@ -84,7 +88,8 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Check required manifest fields
-        run: python3 -c "
+        run: |
+          python3 << 'EOF'
           import json
           m = json.load(open('.cursor-plugin/plugin.json'))
           required = ['name', 'displayName', 'description', 'version', 'author', 'license', 'skills', 'rules']
@@ -93,25 +98,27 @@ jobs:
           import re
           assert re.match(r'^[a-z0-9]+(-[a-z0-9]+)*$', m['name']), 'name must be lowercase kebab-case'
           print('Plugin manifest valid')
-          "
+          EOF
 
       - name: Check skill files exist
-        run: python3 -c "
+        run: |
+          python3 << 'EOF'
           import json, os
           m = json.load(open('.cursor-plugin/plugin.json'))
           for skill in m.get('skills', []):
               assert os.path.exists(skill), f'Skill not found: {skill}'
-          print(f'All {len(m[\"skills\"])} skill files exist')
-          "
+          print(f'All {len(m["skills"])} skill files exist')
+          EOF
 
       - name: Check rule files exist
-        run: python3 -c "
+        run: |
+          python3 << 'EOF'
           import json, os
           m = json.load(open('.cursor-plugin/plugin.json'))
           for rule in m.get('rules', []):
               assert os.path.exists(rule), f'Rule not found: {rule}'
-          print(f'All {len(m[\"rules\"])} rule files exist')
-          "
+          print(f'All {len(m["rules"])} rule files exist')
+          EOF
 
   validate-content:
     name: Validate content quality
@@ -151,7 +158,8 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Check skill and snippet counts match plugin.json
-        run: python3 << 'EOF'
+        run: |
+          python3 << 'EOF'
           import json, os, sys
 
           m = json.load(open('.cursor-plugin/plugin.json'))
@@ -197,7 +205,8 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Check fxmanifest.lua files have required fields
-        run: python3 << 'EOF'
+        run: |
+          python3 << 'EOF'
           import os, re, sys
 
           errors = []
