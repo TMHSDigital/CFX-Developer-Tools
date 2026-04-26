@@ -3,16 +3,6 @@ name: Release
 on:
   push:
     branches: [main]
-    paths-ignore:
-      - ".github/**"
-      - "docs/**"
-      - "*.md"
-      - "LICENSE"
-      - "mkdocs.yml"
-      - "skills/**"
-      - "rules/**/*.mdc"
-      - "AGENTS.md"
-      - "CLAUDE.md"
 
 permissions:
   contents: write
