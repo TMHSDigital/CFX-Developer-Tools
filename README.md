@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"><img src="https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg" alt="License: CC BY-NC-ND 4.0"></a>
-  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-0.8.1-blue.svg" alt="Version"></a>
+  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-0.8.2-blue.svg" alt="Version"></a>
   <a href="https://github.com/TMHSDigital/CFX-Developer-Tools/stargazers"><img src="https://img.shields.io/github/stars/TMHSDigital/CFX-Developer-Tools?style=flat" alt="GitHub stars"></a>
   <a href="https://tmhsdigital.github.io/CFX-Developer-Tools/"><img src="https://img.shields.io/badge/docs-online-blue?logo=materialformkdocs&logoColor=white" alt="Documentation"></a>
 </p>
