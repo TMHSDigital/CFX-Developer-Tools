@@ -2,7 +2,7 @@
 title: Performance Optimization
 description: CFX-specific performance best practices for FiveM and RedM resources
 globs: ["**/*.lua", "**/*.js", "**/*.cs"]
-standards-version: 1.7.0
+standards-version: 1.9.0
 ---
 
 # Performance Optimization

@@ -3,7 +3,7 @@ title: CFX Lua conventions
 description: Coding conventions for Lua scripts in FiveM and RedM resources
 globs: ["**/*.lua"]
 alwaysApply: false
-standards-version: 1.7.0
+standards-version: 1.9.0
 ---
 
 # CFX Lua conventions
