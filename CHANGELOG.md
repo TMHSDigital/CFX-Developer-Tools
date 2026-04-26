@@ -140,6 +140,10 @@
 
 - Removed deprecated `lua54 'yes'` directive from all templates and code generation (Lua 5.4 is now the only runtime)
 
+## [0.8.3] - 2026-04-26
+
+See [release notes](https://github.com/TMHSDigital/CFX-Developer-Tools/releases/tag/v0.8.3) for details.
+
 ## [0.8.2] - 2026-04-26
 
 See [release notes](https://github.com/TMHSDigital/CFX-Developer-Tools/releases/tag/v0.8.2) for details.
