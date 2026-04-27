@@ -12654,7 +12654,7 @@
     "hash": "0x804B9F7B",
     "params": [],
     "return_type": "int",
-    "description": "Returns the internal build number of the current game being executed.\n\nPossible values:\n\n*   FiveM\n    *   1604\n    *   2060\n    *   2189\n    *   2372\n    *   2545\n    *   2612\n    *   2699\n    *   2802\n    *   2944\n    *   3095\n    *   3258\n    *   3323\n    *   3407\n    *   3570\n    *   3751\n*   RedM\n    *   1311\n    *   1355\n    *   1436\n    *   1491\n*   LibertyM\n    *   43\n*   FXServer\n    *   0",
+    "description": "Returns the internal build number of the current game being executed.\n\nPossible values:\n\n*   FiveM\n    *   1604\n    *   2060\n    *   2189\n    *   2372\n    *   2545\n    *   2612\n    *   2699\n    *   2802\n    *   2944\n    *   3095\n    *   3258\n    *   3323\n    *   3407\n    *   3570\n    *   3751\n    *   3788\n*   RedM\n    *   1311\n    *   1355\n    *   1436\n    *   1491\n*   LibertyM\n    *   43\n*   FXServer\n    *   0",
     "side": "shared",
     "category": "CFX",
     "deprecated": false,
