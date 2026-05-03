@@ -52,3 +52,4 @@ site/
 
 # DTD#27: release-doc-sync v1 migration verification
 
+.claude/settings.local.json
