@@ -12,7 +12,7 @@ CFX Developer Tools is a Cursor IDE plugin for FiveM and RedM (CFX) resource dev
 
 This is a monorepo. Skills, rules, snippets, templates, and the companion MCP server live in the same repository because CFX resource development crosses all of those layers in a single workflow.
 
-**Version:** 0.8.4
+**Version:** 0.8.5
 **License:** CC-BY-NC-ND-4.0
 **Author:** TMHSDigital
 
