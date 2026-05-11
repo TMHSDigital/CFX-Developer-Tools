@@ -21605,7 +21605,7 @@
       }
     ],
     "return_type": "void",
-    "description": "Sets the displayed sprite for a specific blip.\r\nThere's a [list of sprites](https://docs.fivem.net/game-references/blips/) on the FiveM documentation site.\n\n**This is the server-side RPC native equivalent of the client native [SET_BLIP_SPRITE](?\\_0xDF735600A4696DAF).**",
+    "description": "Sets the displayed sprite for a specific blip.\r\nThere's a [list of sprites](https://docs.fivem.net/docs/game-references/blips/) on the FiveM documentation site.\n\n**This is the server-side RPC native equivalent of the client native [SET_BLIP_SPRITE](?\\_0xDF735600A4696DAF).**",
     "side": "server",
     "category": "CFX",
     "deprecated": false,
