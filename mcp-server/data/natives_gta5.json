@@ -9669,10 +9669,10 @@
       }
     ],
     "return_type": "BOOL",
-    "description": "Returns whether or not the specified player has enough information to start a commerce session for.",
+    "description": "> This native is deprecated and may be removed in a future version. Use the [Tebex API](https://docs.tebex.io/) instead.\n\nReturns whether or not the specified player has enough information to start a commerce session for.",
     "side": "server",
     "category": "CFX",
-    "deprecated": false,
+    "deprecated": true,
     "examples": null
   },
   {
@@ -10486,10 +10486,10 @@
       }
     ],
     "return_type": "BOOL",
-    "description": "Requests whether or not the player owns the specified SKU.",
+    "description": "> This native is deprecated and may be removed in a future version. Use [`DOES_PLAYER_OWN_SKU_EXT`](#\\_0xDEF0480B) instead.\n\nRequests whether or not the player owns the specified SKU.",
     "side": "server",
     "category": "CFX",
-    "deprecated": false,
+    "deprecated": true,
     "examples": null
   },
   {
@@ -13718,7 +13718,7 @@
       }
     ],
     "return_type": "int",
-    "description": "Gets the amount of metadata values with the specified key existing in the specified resource's manifest.\r\nSee also: [Resource manifest](https://docs.fivem.net/docs/scripting-reference/resource-manifest/resource-manifest/)",
+    "description": "Gets the amount of metadata values with the specified key existing in the specified resource's manifest.\r\nSee also: [Resource manifest](https://docs.fivem.net/docs/scripting-reference/resource-manifest/)",
     "side": "shared",
     "category": "CFX",
     "deprecated": false,
@@ -15355,7 +15355,7 @@
       }
     ],
     "return_type": "char*",
-    "description": "Gets the metadata value at a specified key/index from a resource's manifest.\r\nSee also: [Resource manifest](https://docs.fivem.net/docs/scripting-reference/resource-manifest/resource-manifest/)",
+    "description": "Gets the metadata value at a specified key/index from a resource's manifest.\r\nSee also: [Resource manifest](https://docs.fivem.net/docs/scripting-reference/resource-manifest/)",
     "side": "shared",
     "category": "CFX",
     "deprecated": false,
@@ -18558,6 +18558,17 @@
     "examples": null
   },
   {
+    "name": "IsGameEnhancedVersion",
+    "hash": "0x4DD998F6",
+    "params": [],
+    "return_type": "BOOL",
+    "description": "",
+    "side": "client",
+    "category": "CFX",
+    "deprecated": false,
+    "examples": null
+  },
+  {
     "name": "IsHeliTailBoomBreakable",
     "hash": "0x23E46BD7",
     "params": [
@@ -18857,10 +18868,10 @@
       }
     ],
     "return_type": "BOOL",
-    "description": "Requests whether or not the commerce data for the specified player has loaded.",
+    "description": "> This native is deprecated and may be removed in a future version. Use [`IS_PLAYER_COMMERCE_INFO_LOADED_EXT`](#\\_0x1D14F4FE) instead.\n\nRequests whether or not the commerce data for the specified player has loaded.",
     "side": "server",
     "category": "CFX",
-    "deprecated": false,
+    "deprecated": true,
     "examples": null
   },
   {
@@ -19292,10 +19303,10 @@
       }
     ],
     "return_type": "void",
-    "description": "Requests the commerce data for the specified player, including the owned SKUs. Use `IS_PLAYER_COMMERCE_INFO_LOADED` to check if it has loaded.",
+    "description": "> This native is deprecated and may be removed in a future version. Use [`LOAD_PLAYER_COMMERCE_DATA_EXT`](#\\_0x7995539E) instead.\n\nRequests the commerce data for the specified player, including the owned SKUs. Use `IS_PLAYER_COMMERCE_INFO_LOADED` to check if it has loaded.",
     "side": "server",
     "category": "CFX",
-    "deprecated": false,
+    "deprecated": true,
     "examples": null
   },
   {
@@ -20906,10 +20917,10 @@
       }
     ],
     "return_type": "void",
-    "description": "Requests the specified player to buy the passed SKU. This'll pop up a prompt on the client, which upon acceptance\r\nwill open the browser prompting further purchase details.",
+    "description": "> This native is deprecated and may be removed in a future version. Use the [Tebex API](https://docs.tebex.io/) instead.\n\nRequests the specified player to buy the passed SKU. This'll pop up a prompt on the client, which upon acceptance\r\nwill open the browser prompting further purchase details.",
     "side": "server",
     "category": "CFX",
-    "deprecated": false,
+    "deprecated": true,
     "examples": null
   },
   {
@@ -23555,7 +23566,7 @@
       }
     ],
     "return_type": "void",
-    "description": "**Note**: This native is deprecated and doesn't work anymore. Use [loadscreen_manual_shutdown](https://docs.fivem.net/docs/scripting-reference/resource-manifest/resource-manifest/#loadscreen_manual_shutdown) in the fxmanifest.lua instead.",
+    "description": "**Note**: This native is deprecated and doesn't work anymore. Use [loadscreen_manual_shutdown](https://docs.fivem.net/docs/scripting-reference/resource-manifest/#loadscreen_manual_shutdown) in the fxmanifest.lua instead.",
     "side": "client",
     "category": "CFX",
     "deprecated": true,
