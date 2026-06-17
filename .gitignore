@@ -37,6 +37,7 @@ yarn.lock
 .DS_Store
 Thumbs.db
 Desktop.ini
+NVIDIA Corporation/
 
 # Compiled C# output
 *.dll
