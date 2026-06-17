@@ -50,20 +50,19 @@ local function getNearestPed()
     return nearest
 end
 
--- Pick a random drug the player can attempt to sell. The server re-validates inventory.
-local function pickDrug()
-    return Config.Drugs[math.random(1, #Config.Drugs)]
-end
-
-local lastSale = 0
+-- The ped we last offered to, so we can play the reaction on the server's verdict.
+local pendingPed = nil
+-- Local cooldown for snappy feedback only. The server enforces the real one.
+local lastAttempt = 0
 
 local function attemptSale()
     if Config.RequireOnFoot and IsPedInAnyVehicle(PlayerPedId(), false) then
+        notify('Get out of the vehicle first.', 'error')
         return
     end
 
     local now = GetGameTimer()
-    if now - lastSale < Config.Cooldown * 1000 then
+    if now - lastAttempt < Config.Cooldown * 1000 then
         notify('You need to lay low for a moment.', 'error')
         return
     end
@@ -74,44 +73,47 @@ local function attemptSale()
         return
     end
 
-    lastSale = now
-
-    local drug = pickDrug()
-    local roll = math.random()
-    local pedNet = PedToNet(ped)
-
-    if roll <= Config.Chances.accept then
-        notify(('Selling %s...'):format(drug.label), 'primary')
-        TaskTurnPedToFaceEntity(ped, PlayerPedId(), 1500)
-        Wait(1200)
-        TriggerServerEvent('drug-sell:server:sell', drug.item)
-    elseif roll <= Config.Chances.accept + Config.Chances.decline then
-        notify('They waved you off.', 'error')
-        TaskSmartFleePed(ped, PlayerPedId(), 60.0, -1, false, false)
-        SetPedKeepTask(ped, true)
-    else
-        notify('Wrong customer. They are calling the cops!', 'error')
-        TaskSmartFleePed(ped, PlayerPedId(), 100.0, -1, false, false)
-        SetPedKeepTask(ped, true)
-        local coords = GetEntityCoords(PlayerPedId())
-        TriggerServerEvent(Config.PoliceAlertEvent, { x = coords.x, y = coords.y, z = coords.z })
-    end
+    lastAttempt = now
+    pendingPed = ped
+    TaskTurnPedToFaceEntity(ped, PlayerPedId(), 1500)
+    -- The server picks the drug, rolls the outcome, and moves the money.
+    TriggerServerEvent('drug-sell:server:sell')
 end
+
+-- A command + key mapping replaces a per-frame IsControlJustReleased poll,
+-- so this resource idles at 0.00ms and players can rebind the key.
+RegisterCommand('drugsell', function()
+    attemptSale()
+end, false)
+RegisterKeyMapping('drugsell', 'Offer drugs to the nearest ped', 'keyboard', Config.DefaultKey)
 
 CreateThread(function()
     resolveFramework()
-    while true do
-        Wait(0)
-        if IsControlJustReleased(0, Config.SellKey) then
-            attemptSale()
-        end
-    end
 end)
 
-RegisterNetEvent('drug-sell:client:saleResult', function(ok, label, amount)
-    if ok then
-        notify(('Sold for $%d.'):format(amount), 'success')
-    else
+-- The server is authoritative: it decides sold / declined / cops and we only
+-- play the matching reaction on the ped and notify the player.
+RegisterNetEvent('drug-sell:client:saleResult', function(outcome, label, amount)
+    local ped = pendingPed
+    pendingPed = nil
+
+    if outcome == 'sold' then
+        notify(('Sold %s for $%d.'):format(label or 'drugs', amount or 0), 'success')
+    elseif outcome == 'declined' then
+        notify('They waved you off.', 'error')
+        if ped and DoesEntityExist(ped) then
+            TaskSmartFleePed(ped, PlayerPedId(), 60.0, -1, false, false)
+            SetPedKeepTask(ped, true)
+        end
+    elseif outcome == 'cops' then
+        notify('Wrong customer - they are calling the cops!', 'error')
+        if ped and DoesEntityExist(ped) then
+            TaskSmartFleePed(ped, PlayerPedId(), 100.0, -1, false, false)
+            SetPedKeepTask(ped, true)
+        end
+    elseif outcome == 'cooldown' then
+        notify('You need to lay low for a moment.', 'error')
+    elseif outcome == 'empty' then
         notify(('You have no %s to sell.'):format(label or 'drugs'), 'error')
     end
 end)

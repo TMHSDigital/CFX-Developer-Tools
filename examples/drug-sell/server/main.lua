@@ -14,16 +14,25 @@ local function resolveFramework()
 end
 resolveFramework()
 
-local function findDrug(item)
-    for _, drug in ipairs(Config.Drugs) do
-        if drug.item == item then
-            return drug
-        end
+-- How many of `item` the player is holding. 0 if none / unknown.
+local function getItemCount(src, item)
+    if Framework == 'esx' then
+        local xPlayer = FW.GetPlayerFromId(src)
+        if not xPlayer then return 0 end
+        local inv = xPlayer.getInventoryItem(item)
+        return inv and inv.count or 0
+    elseif Framework == 'qb' then
+        local Player = FW.Functions.GetPlayer(src)
+        if not Player then return 0 end
+        local has = Player.Functions.GetItemByName(item)
+        return has and has.amount or 0
+    else
+        -- Standalone has no inventory backend. Test-only behaviour.
+        return Config.StandaloneInfiniteStock and math.huge or 0
     end
-    return nil
 end
 
--- Returns true if the player held >= amount and the item was removed.
+-- Returns true if `amount` of `item` was actually removed from the player.
 local function removeItem(src, item, amount)
     if Framework == 'esx' then
         local xPlayer = FW.GetPlayerFromId(src)
@@ -39,8 +48,7 @@ local function removeItem(src, item, amount)
         if not has or has.amount < amount then return false end
         return Player.Functions.RemoveItem(item, amount)
     else
-        -- Standalone: trust nothing, but no inventory backend exists. Treat as held.
-        return true
+        return Config.StandaloneInfiniteStock == true
     end
 end
 
@@ -60,27 +68,67 @@ local function addMoney(src, amount)
     end
 end
 
-RegisterNetEvent('drug-sell:server:sell', function(item)
+-- Server-enforced per-player cooldown. The client cooldown is not trusted: a
+-- modded client can fire 'drug-sell:server:sell' as fast as it likes, so the
+-- rate limit and the whole outcome live here.
+local lastSale = {}
+
+RegisterNetEvent('drug-sell:server:sell', function()
     local src = source
     if not src or src <= 0 then return end
 
-    local drug = findDrug(item)
-    if not drug then return end
-
-    if not removeItem(src, drug.item, drug.amount) then
-        TriggerClientEvent('drug-sell:client:saleResult', src, false, drug.label, 0)
+    local now = GetGameTimer()
+    if now - (lastSale[src] or 0) < Config.Cooldown * 1000 then
+        TriggerClientEvent('drug-sell:client:saleResult', src, 'cooldown')
         return
     end
 
-    local price = math.random(drug.minPrice, drug.maxPrice) * drug.amount
-    addMoney(src, price)
-    TriggerClientEvent('drug-sell:client:saleResult', src, true, drug.label, price)
+    -- Sell the first configured drug the player actually holds.
+    local drug
+    for _, d in ipairs(Config.Drugs) do
+        if getItemCount(src, d.item) >= d.amount then
+            drug = d
+            break
+        end
+    end
+    if not drug then
+        TriggerClientEvent('drug-sell:client:saleResult', src, 'empty')
+        return
+    end
+
+    -- Stamp the cooldown only once a genuine attempt is happening.
+    lastSale[src] = now
+
+    local accept = Config.Chances.accept or 0
+    local decline = Config.Chances.decline or 0
+    local roll = math.random()
+
+    if roll <= accept then
+        if not removeItem(src, drug.item, drug.amount) then
+            TriggerClientEvent('drug-sell:client:saleResult', src, 'empty', drug.label)
+            return
+        end
+        local price = math.random(drug.minPrice, drug.maxPrice) * drug.amount
+        addMoney(src, price)
+        TriggerClientEvent('drug-sell:client:saleResult', src, 'sold', drug.label, price)
+    elseif roll <= accept + decline then
+        TriggerClientEvent('drug-sell:client:saleResult', src, 'declined', drug.label)
+    else
+        TriggerClientEvent('drug-sell:client:saleResult', src, 'cops', drug.label)
+        -- Coords are read server-side (OneSync) so the client cannot spoof them.
+        local coords = GetEntityCoords(GetPlayerPed(src))
+        TriggerEvent(Config.PoliceAlertEvent, src, { x = coords.x, y = coords.y, z = coords.z })
+    end
 end)
 
-RegisterNetEvent(Config.PoliceAlertEvent, function(coords)
-    local src = source
-    if not src or src <= 0 then return end
-    if type(coords) ~= 'table' or not coords.x then return end
-    -- Hook your dispatch/CAD here. Example: notify on-duty police.
-    print(('[drug-sell] Police alert from %d at %.1f, %.1f, %.1f'):format(src, coords.x, coords.y, coords.z))
+-- Example dispatch hook. Replace the body with your CAD/dispatch integration;
+-- any other resource can also AddEventHandler(Config.PoliceAlertEvent, ...).
+AddEventHandler(Config.PoliceAlertEvent, function(playerSrc, coords)
+    print(('[drug-sell] Police alert: player %s at %.1f, %.1f, %.1f')
+        :format(playerSrc, coords.x, coords.y, coords.z))
+end)
+
+-- Stop the cooldown table from growing without bound.
+AddEventHandler('playerDropped', function()
+    lastSale[source] = nil
 end)

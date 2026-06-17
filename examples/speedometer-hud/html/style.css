@@ -1,0 +1,43 @@
+/* Transparent body is essential for NUI overlays: anything not painted here
+   shows the game underneath. A solid background would black out the screen. */
+body {
+    background: transparent;
+    margin: 0;
+    overflow: hidden;
+    font-family: "Segoe UI", Arial, sans-serif;
+    user-select: none;
+}
+
+#speedo {
+    position: fixed;
+    right: 2.5vw;
+    bottom: 2.5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 12px 18px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.45);
+    color: #ffffff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    line-height: 1;
+}
+
+/* Toggled by app.js instead of inline styles to keep the JS routing simple. */
+#speedo.hidden {
+    display: none;
+}
+
+#value {
+    font-size: 56px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+#unit {
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-top: 2px;
+}

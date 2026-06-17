@@ -28,7 +28,8 @@ CFX-Developer-Tools/
   rules/
     <rule-name>.mdc          # Cursor rule files
   snippets/                  # Lua, JS, C# code snippets
-  templates/                 # Resource starter templates
+  templates/                 # Resource starter templates (blank per-framework skeletons)
+  examples/                  # Complete, runnable reference resources
   mcp-server/
     server.py                # MCP server entry point (Python, FastMCP)
     tools/                   # One module per tool
