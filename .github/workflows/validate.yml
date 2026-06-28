@@ -256,3 +256,5 @@ jobs:
           python3 -m py_compile mcp-server/tools/event_search.py
           python3 -m py_compile mcp-server/tools/docs_search.py
           python3 -m py_compile mcp-server/tools/detect_framework.py
+          python3 -m py_compile mcp-server/tools/txadmin_client.py
+          python3 -m py_compile mcp-server/tools/txadmin.py

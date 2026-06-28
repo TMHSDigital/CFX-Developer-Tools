@@ -66,6 +66,12 @@ Cursor AI Agent  --(MCP protocol)-->  MCP Server  --(reads)-->  Data Files
 | `search_events_tool` | Searches 101 events by name, side, game, or framework |
 | `detect_framework_tool` | Scans workspace files to detect ESX, QBCore, Qbox, ox_core, VORP, RSG, or standalone |
 | `search_docs_tool` | Searches the FiveM/RedM documentation index by keyword or section |
+| `txadmin_server_control_tool` | Starts, stops, or restarts the FXServer through a running txAdmin panel |
+| `txadmin_resource_control_tool` | Starts, stops, restarts, or ensures a single resource through txAdmin |
+| `txadmin_player_search_tool` | Searches players by name, notes, or identifier through txAdmin |
+| `txadmin_kick_player_tool` | Kicks an online player by netid through txAdmin |
+
+The four txAdmin tools talk to a running txAdmin panel over HTTP, authenticating with credentials from the `TXADMIN_URL` / `TXADMIN_USERNAME` / `TXADMIN_PASSWORD` environment variables.
 
 ### Data files
 

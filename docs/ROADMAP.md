@@ -129,12 +129,12 @@ Connect the plugin to live FiveM/RedM server infrastructure for real-time develo
 
 txAdmin exposes a REST API on port 40120 (default) with session cookie authentication.
 
-- [ ] Add MCP tool: `txadmin_server_control` (start, stop, restart FXServer)
-- [ ] Add MCP tool: `txadmin_resource_control` (start, stop, restart, refresh individual resources)
-- [ ] Add MCP tool: `txadmin_player_search` (search connected players by name or identifier)
-- [ ] Add MCP tool: `txadmin_kick_player` (kick with reason)
-- [ ] Add connection configuration (host, port, session token via environment variable)
-- [ ] Add skill for txAdmin setup and authentication
+- [x] Add MCP tool: `txadmin_server_control` (start, stop, restart FXServer)
+- [x] Add MCP tool: `txadmin_resource_control` (start, stop, restart, ensure individual resources)
+- [x] Add MCP tool: `txadmin_player_search` (search players by name, notes, or identifier)
+- [x] Add MCP tool: `txadmin_kick_player` (kick with reason)
+- [x] Add connection configuration (URL, username, password via environment variables)
+- [x] Add skill for txAdmin setup and authentication
 
 ### RCON and server commands
 

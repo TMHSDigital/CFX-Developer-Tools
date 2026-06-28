@@ -6,7 +6,7 @@ Project documentation for Claude Code and AI assistants working on this reposito
 
 ## Project Overview
 
-CFX Developer Tools is a Cursor IDE plugin for FiveM and RedM (CFX) resource development. It includes 9 skills, 6 rules, 24 code snippets, 11 starter templates, and a companion Python MCP server with 6 tools for resource scaffolding, native lookup, manifest generation, framework detection, and live doc and event search.
+CFX Developer Tools is a Cursor IDE plugin for FiveM and RedM (CFX) resource development. It includes 10 skills, 6 rules, 24 code snippets, 11 starter templates, and a companion Python MCP server with 10 tools for resource scaffolding, native lookup, manifest generation, framework detection, live doc and event search, and txAdmin server control.
 
 **Works with:** Cursor (plugin), Claude Code (terminal and in-editor), and any MCP-compatible client.
 
@@ -40,7 +40,7 @@ CFX-Developer-Tools/
     workflows/               # CI / release / native-update / docs-index automation
 ```
 
-## Skills (9)
+## Skills (10)
 
 | Skill | Description |
 |-------|-------------|
@@ -53,6 +53,7 @@ CFX-Developer-Tools/
 | `nui-development` | NUI lifecycle, message routing, asset loading, callbacks, and Vite / Svelte integration |
 | `database-integration` | oxmysql, ghmattimysql, MariaDB connection patterns, prepared statements, migration flow |
 | `state-bags` | StateBag CRUD, replicated vs local, change handlers, and replacement of legacy SetX patterns |
+| `txadmin-integration` | Control a running server, manage resources, search players, and kick players through the txAdmin API |
 
 ## Rules (6)
 
@@ -65,9 +66,9 @@ CFX-Developer-Tools/
 | `security-best-practices.mdc` | Global | Flag hardcoded API keys, server-trust violations, unsafe NUI callbacks, missing input validation |
 | `performance-rules.mdc` | CFX resource files | Flag thread blockers, unbounded loops, missing `Wait()` in `CreateThread`, expensive natives in tight loops |
 
-## MCP Server (6 tools)
+## MCP Server (10 tools)
 
-The companion MCP server is Python-based (FastMCP). It exposes CFX-aware tools that read from local data files (`mcp-server/data/`) and the working tree.
+The companion MCP server is Python-based (FastMCP). It exposes CFX-aware tools that read from local data files (`mcp-server/data/`) and the working tree. The txAdmin tools additionally talk to a running txAdmin panel over HTTP, using credentials from the `TXADMIN_URL` / `TXADMIN_USERNAME` / `TXADMIN_PASSWORD` environment variables.
 
 | Tool | Description |
 |------|-------------|
@@ -77,6 +78,10 @@ The companion MCP server is Python-based (FastMCP). It exposes CFX-aware tools t
 | `search_events_tool` | Search the indexed CFX events database for canonical net-event and exports usage patterns |
 | `detect_framework_tool` | Detect ESX / QBCore / Qbox / ox_core / VORP / RSG / standalone from a workspace path |
 | `search_docs_tool` | Search the indexed `docs.fivem.net` snapshot for parameters, gotchas, and code samples |
+| `txadmin_server_control_tool` | Start, stop, or restart the FXServer through a running txAdmin panel |
+| `txadmin_resource_control_tool` | Start, stop, restart, or ensure a single resource through txAdmin |
+| `txadmin_player_search_tool` | Search players known to the server by name, notes, or identifier through txAdmin |
+| `txadmin_kick_player_tool` | Kick an online player by netid through txAdmin |
 
 ## Development Workflow
 

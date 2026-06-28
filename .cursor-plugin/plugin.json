@@ -29,7 +29,8 @@
     "skills/performance-optimization/SKILL.md",
     "skills/nui-development/SKILL.md",
     "skills/database-integration/SKILL.md",
-    "skills/state-bags/SKILL.md"
+    "skills/state-bags/SKILL.md",
+    "skills/txadmin-integration/SKILL.md"
   ],
   "rules": [
     "rules/cfx-lua-conventions.mdc",

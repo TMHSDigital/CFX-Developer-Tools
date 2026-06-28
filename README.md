@@ -21,7 +21,7 @@
   <a href="#features">Features</a> &bull;
   <a href="#quick-start">Quick Start</a> &bull;
   <a href="#mcp-server">MCP Server</a> &bull;
-  <a href="#skills-9">Skills</a> &bull;
+  <a href="#skills-10">Skills</a> &bull;
   <a href="#rules-6">Rules</a> &bull;
   <a href="#roadmap">Roadmap</a>
 </p>
@@ -29,7 +29,7 @@
 ---
 
 <p align="center">
-  9 skills &nbsp;&bull;&nbsp; 6 rules &nbsp;&bull;&nbsp; 6 MCP tools &nbsp;&bull;&nbsp; 12,000+ natives &nbsp;&bull;&nbsp; 101 events &nbsp;&bull;&nbsp; 24 snippets &nbsp;&bull;&nbsp; 11 templates
+  10 skills &nbsp;&bull;&nbsp; 6 rules &nbsp;&bull;&nbsp; 10 MCP tools &nbsp;&bull;&nbsp; 12,000+ natives &nbsp;&bull;&nbsp; 101 events &nbsp;&bull;&nbsp; 24 snippets &nbsp;&bull;&nbsp; 11 templates
 </p>
 
 Scaffold complete FiveM/RedM resources, look up native functions, generate manifests, detect frameworks, search documentation, and write optimized scripts in Lua, JavaScript, and C# -- all from within Cursor's AI chat. Covers the full CFX development lifecycle from project setup to database integration.
@@ -46,7 +46,7 @@ Scaffold complete FiveM/RedM resources, look up native functions, generate manif
 flowchart LR
     A["You ask Cursor\na CFX question"] --> B["Cursor loads\na Skill"]
     B -->     C{"MCP server\navailable?"}
-    C -- Yes --> D["CFX MCP Server\n(6 tools)"]
+    C -- Yes --> D["CFX MCP Server\n(10 tools)"]
     C -- No --> E["Skill guidance\nonly"]
     D --> F["Scaffold, lookup,\ngenerate, search,\ndetect, docs"]
     E --> G["AI-assisted answer\nin Cursor chat"]
@@ -124,7 +124,7 @@ Then ask the AI agent to scaffold a resource, look up a native, or generate a ma
 
 </details>
 
-## Skills (9)
+## Skills (10)
 
 | Skill | What it does |
 |:------|:-------------|
@@ -137,6 +137,7 @@ Then ask the AI agent to scaffold a resource, look up a native, or generate a ma
 | **NUI Development** | Build in-game web UIs with proper message passing and devtools setup |
 | **Database Integration** | oxmysql queries, schema design, migrations, and connection pooling |
 | **State Bags** | Modern data sync with Entity/Player/Global state bags, change handlers, and security |
+| **txAdmin Integration** | Control a running server, manage resources, search players, and kick players through the txAdmin API |
 
 ## Rules (6)
 
@@ -235,7 +236,7 @@ pip install -r requirements.txt
 The server starts automatically when Cursor invokes an MCP tool.
 
 <details>
-<summary><strong>Available Tools (6)</strong></summary>
+<summary><strong>Available Tools (10)</strong></summary>
 
 &nbsp;
 
@@ -247,6 +248,10 @@ The server starts automatically when Cursor invokes an MCP tool.
 | `search_events_tool` | Search 101 events by name, side, game, or framework (cfx, esx, qbcore, qbox, oxcore, vorp, rsg, baseevents, chat) |
 | `detect_framework_tool` | Scan workspace files to detect ESX, QBCore, Qbox, ox_core, VORP, RSG, or standalone with confidence score |
 | `search_docs_tool` | Search the FiveM/RedM documentation index by keyword or section |
+| `txadmin_server_control_tool` | Start, stop, or restart the FXServer through txAdmin (requires txAdmin credentials) |
+| `txadmin_resource_control_tool` | Start, stop, restart, or ensure a single resource through txAdmin |
+| `txadmin_player_search_tool` | Search players by name, notes, or identifier through txAdmin |
+| `txadmin_kick_player_tool` | Kick an online player by netid through txAdmin |
 
 </details>
 
@@ -293,11 +298,11 @@ What framework does this resource use?
 CFX-Developer-Tools/
   .cursor-plugin/      Plugin manifest
   .cursor/             MCP server configuration
-  skills/              AI skill files (9 skills)
+  skills/              AI skill files (10 skills)
   rules/               Coding convention rules (6 rules)
   snippets/            Code snippets -- Lua, JS, C# (24 files)
   templates/           Resource starter templates (11 sets)
-  mcp-server/          Python MCP server (6 tools) and data files
+  mcp-server/          Python MCP server (10 tools) and data files
   docs/                Architecture, roadmap, contributing guide, docs site landing page
   assets/              Logo and images
   .github/             CI/CD workflows (validate, release, update-natives, update-docs-index, stale, deploy-docs)

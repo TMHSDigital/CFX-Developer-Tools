@@ -2,7 +2,7 @@
 
 **AI-powered development toolkit for FiveM and RedM resource development in Cursor IDE.**
 
-9 skills -- 6 rules -- 6 MCP tools -- 12,000+ natives -- 101 events -- 24 snippets -- 11 templates
+10 skills -- 6 rules -- 10 MCP tools -- 12,000+ natives -- 101 events -- 24 snippets -- 11 templates
 
 ---
 
@@ -15,6 +15,7 @@ CFX Developer Tools is a plugin for [Cursor](https://www.cursor.com/) that teach
 - Generate a correct `fxmanifest.lua` with all the right directives
 - Detect which framework your project uses (ESX, QBCore, Qbox, ox_core, VORP, RSG)
 - Search the FiveM/RedM documentation index
+- Control a running server through txAdmin (start/stop/restart, manage resources, search and kick players)
 - Write code that follows FiveM/RedM best practices automatically
 
 ## Quick start
@@ -35,6 +36,7 @@ For a detailed walkthrough, see the [Getting Started guide](GETTING-STARTED.md).
 - **Native function lookup** -- Search 12,000+ GTA5/RDR3 native functions by name, hash, or description
 - **Event reference** -- Searchable database of 101 events across CFX, ESX, QBCore, Qbox, ox_core, VORP, and RSG
 - **Documentation search** -- Query the FiveM/RedM docs index by keyword or section
+- **txAdmin integration** -- Control the FXServer, manage resources, and search or kick players through a running txAdmin panel
 - **Performance-aware coding rules** -- Catch common mistakes like `Wait(0)` in loops, runtime hashing, and more
 - **Snippet library** -- 24 copy-paste-ready code patterns across Lua, JavaScript, and C#
 - **NUI development** -- Skills and templates for building in-game web UIs with React or Svelte 5
@@ -58,9 +60,9 @@ For a detailed walkthrough, see the [Getting Started guide](GETTING-STARTED.md).
 flowchart LR
     A["You ask Cursor\na CFX question"] --> B["Cursor loads\na Skill"]
     B --> C{"MCP server\navailable?"}
-    C -- Yes --> D["CFX MCP Server\n(6 tools)"]
+    C -- Yes --> D["CFX MCP Server\n(10 tools)"]
     C -- No --> E["Skill guidance\nonly"]
-    D --> F["Scaffold, lookup,\ngenerate, search,\ndetect, docs"]
+    D --> F["Scaffold, lookup,\ngenerate, search,\ndetect, docs, txAdmin"]
     E --> G["AI-assisted answer\nin Cursor chat"]
     F --> G
 ```

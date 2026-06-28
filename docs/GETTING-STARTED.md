@@ -26,7 +26,7 @@ This guide takes you from zero to building FiveM/RedM resources with AI assistan
 - Generate a correct `fxmanifest.lua` with all the right directives
 - Write code that follows FiveM/RedM best practices automatically
 
-The plugin includes **9 skills**, **6 rules**, **24 code snippets**, **11 starter templates**, and **6 MCP tools** (including a searchable database of 12,000+ native functions, 101 events, and documentation search).
+The plugin includes **10 skills**, **6 rules**, **24 code snippets**, **11 starter templates**, and **10 MCP tools** (including a searchable database of 12,000+ native functions, 101 events, documentation search, and txAdmin server control).
 
 <details>
 <summary><strong>What is Cursor?</strong></summary>
@@ -203,7 +203,7 @@ You may see a prompt asking you to **trust the workspace**. Click **Yes, I trust
 When you open the folder, Cursor:
 
 - Reads `.cursor-plugin/plugin.json` and registers the plugin
-- Makes the 9 skills available to the AI assistant
+- Makes the 10 skills available to the AI assistant
 - Activates the 6 coding rules based on file types you open
 - Loads the MCP server configuration from `.cursor/mcp.json`
 

@@ -16,6 +16,12 @@ from tools.manifest_gen import generate_manifest
 from tools.event_search import search_events
 from tools.docs_search import search_docs
 from tools.detect_framework import detect_framework
+from tools.txadmin import (
+    txadmin_server_control,
+    txadmin_resource_control,
+    txadmin_player_search,
+    txadmin_kick_player,
+)
 
 mcp = FastMCP("cfx-dev-tools")
 
@@ -128,6 +134,70 @@ def search_docs_tool(
         section: Filter by section - scripting-manual, scripting-reference, game-references, server-manual, stock-resources, getting-started, developer-docs, or support (optional)
     """
     return search_docs(query, section, NATIVES_PATH)
+
+
+@mcp.tool()
+def txadmin_server_control_tool(action: str) -> str:
+    """Start, stop, or restart the FXServer through txAdmin.
+
+    Requires the TXADMIN_USERNAME, TXADMIN_PASSWORD, and optionally TXADMIN_URL
+    environment variables to be set. See the txadmin-integration skill.
+
+    Args:
+        action: One of start, stop, or restart.
+    """
+    return txadmin_server_control(action)
+
+
+@mcp.tool()
+def txadmin_resource_control_tool(action: str, resource: str) -> str:
+    """Start, stop, restart, or ensure a single server resource through txAdmin.
+
+    Requires txAdmin credentials in the environment (see txadmin-integration skill).
+
+    Args:
+        action: One of start, stop, restart, or ensure.
+        resource: The resource name (folder name) to act on.
+    """
+    return txadmin_resource_control(action, resource)
+
+
+@mcp.tool()
+def txadmin_player_search_tool(
+    search_value: str = "",
+    search_type: str = "playerName",
+    filters: str | None = None,
+    limit: int = 25,
+) -> str:
+    """Search players known to the server by name, notes, or identifier.
+
+    Requires txAdmin credentials in the environment (see txadmin-integration skill).
+
+    Args:
+        search_value: Text to search for.
+        search_type: Search mode - playerName, playerNotes, or playerIds.
+        filters: Comma-separated filters - isAdmin, isOnline, isWhitelisted, hasNote (optional).
+        limit: Maximum number of players to display (server caps at 100).
+    """
+    return txadmin_player_search(search_value, search_type, filters, limit)
+
+
+@mcp.tool()
+def txadmin_kick_player_tool(
+    netid: int,
+    reason: str = "",
+    mutex: str = "current",
+) -> str:
+    """Kick an online player by their server network id (netid) through txAdmin.
+
+    Requires txAdmin credentials in the environment (see txadmin-integration skill).
+
+    Args:
+        netid: The player's server id (netid) from the player list.
+        reason: Optional kick reason shown to the player.
+        mutex: Server instance mutex; 'current' (default) targets the running server.
+    """
+    return txadmin_kick_player(netid, reason, mutex)
 
 
 if __name__ == "__main__":
