@@ -122,6 +122,8 @@ Then ask the AI agent to scaffold a resource, look up a native, or generate a ma
 | GTA5 | FiveM |
 | RDR3 | RedM |
 
+`RDR3` is the Cfx.re game identifier for RedM, which targets Red Dead Redemption 2. It is the required value in `fxmanifest.lua` (`game 'rdr3'`) and is used by the native databases and tooling, so it is kept verbatim.
+
 </details>
 
 ## Skills (10)

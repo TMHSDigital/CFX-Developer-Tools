@@ -19,7 +19,7 @@ games { 'gta5', 'rdr3' }
 ```
 
 - `fx_version` must always be `'cerulean'` -- this is the current and only supported version
-- `games` accepts `'gta5'` (FiveM), `'rdr3'` (RedM), or both: `{ 'gta5', 'rdr3' }`
+- `games` accepts `'gta5'` (FiveM), `'rdr3'` (RedM), or both: `{ 'gta5', 'rdr3' }`. `'rdr3'` is the CFX game identifier for RedM, which targets Red Dead Redemption 2; it is the required value and must not be changed to `'rdr2'`
 - Use both when your resource works on either platform; use one if it depends on game-specific natives
 
 ## Metadata fields

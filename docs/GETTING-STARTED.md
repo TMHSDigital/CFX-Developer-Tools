@@ -44,6 +44,8 @@ The plugin includes **10 skills**, **6 rules**, **24 code snippets**, **11 start
 
 [FiveM](https://docs.fivem.net/docs/) is a modification framework for GTA V that lets you run custom multiplayer servers. [RedM](https://redm.net/) is the equivalent for Red Dead Redemption 2. Both use "resources" -- packages of scripts and assets that add features to your server. This plugin helps you build those resources.
 
+> **A note on `rdr3`:** Throughout CFX tooling, RedM's game identifier is `rdr3` (used in `fxmanifest.lua` as `game 'rdr3'`, in the native database `natives_rdr3.json`, and on `rdr3natives.com`). This is the official Cfx.re identifier for the Red Dead Redemption 2 platform -- it does not refer to a game called "Red Dead Redemption 3," and it must be used verbatim or resources will fail to load.
+
 </details>
 
 ---

@@ -137,6 +137,7 @@ Do not hand-edit `plugin.json` `version`, the README badge, or the `**Version:**
 - **Snippets:** must compile or load cleanly inside a CFX resource (Lua / JS / C#), no placeholder credentials.
 - **Templates:** every `fxmanifest.lua` must declare `fx_version`, `games`, and `'cerulean'`. Avoid `lua54 'yes'` (deprecated; use `lua54 true`).
 - **MCP tool naming:** snake_case Python functions decorated with `@mcp.tool()`, suffix `_tool` for clarity in agent prompts.
+- **`rdr3` is the RedM identifier, not a game.** Cfx.re uses `rdr3` for the RedM platform, which targets Red Dead Redemption 2. There is no "Red Dead Redemption 3." Keep `rdr3` verbatim in manifests (`game 'rdr3'`), native database filenames/URLs, the MCP `game` enum, and framework detection. Do not rename it to `rdr2`; doing so breaks resource loading and the native data references.
 
 ## CFX Native Reference Quick Links
 

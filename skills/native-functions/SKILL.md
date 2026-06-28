@@ -9,6 +9,8 @@ standards-version: 1.10.0
 
 Natives are built-in functions provided by the GTA5/RDR3 game engine and the CFX platform. They expose game functionality like entity management, player data, vehicle spawning, UI rendering, and more.
 
+`RDR3` is the CFX platform identifier for RedM, which targets Red Dead Redemption 2 (there is no game called "Red Dead Redemption 3"). The `rdr3` token is used by Cfx.re for manifests, native databases, and tooling, so it is kept as-is throughout this plugin.
+
 ## Reference
 
 - GTA5 (FiveM) natives: https://docs.fivem.net/natives/
