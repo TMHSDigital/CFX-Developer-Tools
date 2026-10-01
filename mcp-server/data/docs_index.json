@@ -3,492 +3,492 @@
     "title": "Scripting Introduction - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-manual/introduction/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Introduction to Resources - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-manual/introduction/introduction-to-resources/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Creating Your First Script in Lua - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-manual/introduction/creating-your-first-script/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Creating your first script in JavaScript - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-manual/introduction/creating-your-first-script-javascript/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Creating Your First Script in C# - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-manual/introduction/creating-your-first-script-csharp/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Understanding and Using Native Functions - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-manual/introduction/about-native-functions/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Fact Sheet - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-manual/introduction/fact-sheet/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Scripting in Lua - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-manual/runtimes/lua/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Scripting in JavaScript - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-manual/runtimes/javascript/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Scripting in C# - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-manual/runtimes/csharp/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Network and Local IDs - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-manual/networking/ids/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "State Bags - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-manual/networking/state-bags/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Listening for Events - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-manual/working-with-events/listening-for-events/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Triggering Events - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-manual/working-with-events/triggering-events/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Canceling Events - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-manual/working-with-events/canceling-events/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Fullscreen NUI - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-manual/nui-development/full-screen-nui/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "NUI Callbacks - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-manual/nui-development/nui-callbacks/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Loading Screens - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-manual/nui-development/loading-screens/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Direct-Rendered UI - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-manual/nui-development/dui/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Using the Profiler - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-manual/debugging/using-profiler/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Voice - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-manual/voice/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Using Scaleform - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-manual/using-scaleform/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Creating Chat Messages - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-manual/migrating-from-deprecated/chat-messages/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Creating Commands - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-manual/migrating-from-deprecated/creating-commands/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Fuel Consumption - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-manual/using-new-game-features/fuel-consumption/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Resource Manifest - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-reference/resource-manifest/resource-manifest/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "gameEventTriggered - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-reference/events/list/gameEventTriggered/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "onClientResourceStart - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-reference/events/list/onClientResourceStart/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "onResourceStart - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-reference/events/list/onResourceStart/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "playerConnecting - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-reference/events/list/playerConnecting/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "playerDropped - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-reference/events/list/playerDropped/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "populationPedCreating - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-reference/events/list/populationPedCreating/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "rconCommand - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-reference/events/list/rconCommand/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "respawnPlayerPedEvent - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-reference/events/list/respawnPlayerPedEvent/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Convars - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-reference/convars/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "OneSync - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-reference/onesync/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Client-Side Functions in Lua - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-reference/runtimes/lua/client-functions/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Server-Side Functions in Lua - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-reference/runtimes/lua/server-functions/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Client-side functions in JavaScript - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-reference/runtimes/javascript/client-functions/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Server-side functions in JavaScript - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-reference/runtimes/javascript/server-functions/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Client-Side Functions in C# - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-reference/runtimes/csharp/client-functions/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Server-Side Functions in C# - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/scripting-reference/runtimes/csharp/server-functions/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Blips - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/game-references/blips/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Checkpoints - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/game-references/checkpoints/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Controls - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/game-references/controls/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Data Files - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/game-references/data-files/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Game Events - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/game-references/game-events/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Gamer Tags - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/game-references/gamer-tags/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "HUD Colors - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/game-references/hud-colors/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Markers - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/game-references/markers/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Net Game Events - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/game-references/net-game-events/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Ped Models - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/game-references/ped-models/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Text Formatting - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/game-references/text-formatting/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Vehicle Models - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/game-references/vehicle-references/vehicle-models/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Vehicle Colors - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/game-references/vehicle-references/vehicle-colors/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Weapon Models - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/game-references/weapon-models/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Zones - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/game-references/zones/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Instructional Buttons - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/game-references/instructional-buttons/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Setting Up a Server - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/server-manual/setting-up-a-server/",
     "section": "server-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Setting up a server using txAdmin - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/server-manual/setting-up-a-server-txadmin/",
     "section": "server-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Server Commands - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/server-manual/server-commands/",
     "section": "server-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Proxy Setup - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/server-manual/proxy-setup/",
     "section": "server-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Frameworks - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/server-manual/frameworks/",
     "section": "server-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Finding Resources - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/server-manual/finding-resources/",
     "section": "server-manual",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "baseevents - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/resources/baseevents/",
     "section": "stock-resources",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "chat - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/resources/chat/",
     "section": "stock-resources",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "chatMessage - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/resources/chat/events/chatMessage/",
     "section": "stock-resources",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "mapmanager - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/resources/mapmanager/",
     "section": "stock-resources",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "sessionmanager - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/resources/sessionmanager/",
     "section": "stock-resources",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "spawnmanager - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/resources/spawnmanager/",
     "section": "stock-resources",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "txAdmin - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/resources/txAdmin/",
     "section": "stock-resources",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Getting Started - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/getting-started/",
     "section": "getting-started",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Prerequisites - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/getting-started/prerequisites/",
     "section": "getting-started",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Installing FiveM - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/getting-started/installing-fivem/",
     "section": "getting-started",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Creating Scripts - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/getting-started/create-first-script/",
     "section": "getting-started",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Sandbox - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/developers/sandbox/",
     "section": "developer-docs",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Script Runtimes - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/developers/script-runtimes/",
     "section": "developer-docs",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Secure Your Events - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/developers/server-security/",
     "section": "developer-docs",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Client Issues - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/support/client-issues/",
     "section": "support",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Server Issues - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/support/server-issues/",
     "section": "support",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Resource FAQ - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/support/resource-faq/",
     "section": "support",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   },
   {
     "title": "Server Debugging - Cfx Documentation",
     "url": "https://docs.fivem.net/docs/support/server-debug/",
     "section": "support",
-    "snippet": "<a class=\"active\" href=\"/do"
+    "snippet": "<a class=\"active\" href"
   }
 ]
