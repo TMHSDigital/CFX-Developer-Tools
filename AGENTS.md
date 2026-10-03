@@ -13,7 +13,7 @@ This is a Cursor IDE plugin for FiveM/RedM (CFX) resource development. It contai
 - **`.cursor-plugin/plugin.json`** -- plugin manifest (version, skills, rules)
 - **`skills/`** -- 9 SKILL.md files teaching the AI domain-specific CFX knowledge
 - **`rules/`** -- 6 .mdc rule files enforcing coding conventions
-- **`snippets/`** -- 24 code snippet files (Lua, JS, C#)
+- **`snippets/`** -- 25 code snippet files (Lua, JS, C#)
 - **`templates/`** -- 11 resource starter templates (standalone, ESX, QBCore, Qbox, ox_core, VORP, RSG, JS, C#, NUI Vite, NUI Svelte)
 - **`mcp-server/`** -- Python MCP server with 6 tools and JSON data files
 - **`docs/`** -- ARCHITECTURE.md, ROADMAP.md, CONTRIBUTING.md, GETTING-STARTED.md, index.md (docs site landing page)

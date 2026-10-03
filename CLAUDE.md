@@ -6,7 +6,7 @@ Project documentation for Claude Code and AI assistants working on this reposito
 
 ## Project Overview
 
-CFX Developer Tools is a Cursor IDE plugin for FiveM and RedM (CFX) resource development. It includes 10 skills, 6 rules, 24 code snippets, 11 starter templates, and a companion Python MCP server with 10 tools for resource scaffolding, native lookup, manifest generation, framework detection, live doc and event search, and txAdmin server control.
+CFX Developer Tools is a Cursor IDE plugin for FiveM and RedM (CFX) resource development. It includes 10 skills, 6 rules, 25 code snippets, 11 starter templates, and a companion Python MCP server with 10 tools for resource scaffolding, native lookup, manifest generation, framework detection, live doc and event search, and txAdmin server control.
 
 **Works with:** Cursor (plugin), Claude Code (terminal and in-editor), and any MCP-compatible client.
 

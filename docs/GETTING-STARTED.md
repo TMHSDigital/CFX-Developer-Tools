@@ -26,7 +26,7 @@ This guide takes you from zero to building FiveM/RedM resources with AI assistan
 - Generate a correct `fxmanifest.lua` with all the right directives
 - Write code that follows FiveM/RedM best practices automatically
 
-The plugin includes **10 skills**, **6 rules**, **24 code snippets**, **11 starter templates**, and **10 MCP tools** (including a searchable database of 12,000+ native functions, 101 events, documentation search, and txAdmin server control).
+The plugin includes **10 skills**, **6 rules**, **25 code snippets**, **11 starter templates**, and **10 MCP tools** (including a searchable database of 12,000+ native functions, 101 events, documentation search, and txAdmin server control).
 
 <details>
 <summary><strong>What is Cursor?</strong></summary>

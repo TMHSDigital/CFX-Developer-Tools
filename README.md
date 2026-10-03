@@ -29,7 +29,7 @@
 ---
 
 <p align="center">
-  10 skills &nbsp;&bull;&nbsp; 6 rules &nbsp;&bull;&nbsp; 10 MCP tools &nbsp;&bull;&nbsp; 12,000+ natives &nbsp;&bull;&nbsp; 101 events &nbsp;&bull;&nbsp; 24 snippets &nbsp;&bull;&nbsp; 11 templates
+  10 skills &nbsp;&bull;&nbsp; 6 rules &nbsp;&bull;&nbsp; 10 MCP tools &nbsp;&bull;&nbsp; 12,000+ natives &nbsp;&bull;&nbsp; 101 events &nbsp;&bull;&nbsp; 25 snippets &nbsp;&bull;&nbsp; 11 templates
 </p>
 
 Scaffold complete FiveM/RedM resources, look up native functions, generate manifests, detect frameworks, search documentation, and write optimized scripts in Lua, JavaScript, and C# -- all from within Cursor's AI chat. Covers the full CFX development lifecycle from project setup to database integration.
@@ -155,7 +155,7 @@ Then ask the AI agent to scaffold a resource, look up a native, or generate a ma
 ## Snippets (24)
 
 <details>
-<summary><strong>Lua (14)</strong></summary>
+<summary><strong>Lua (15)</strong></summary>
 
 &nbsp;
 
@@ -175,6 +175,7 @@ Then ask the AI agent to scaffold a resource, look up a native, or generate a ma
 | `routing-bucket.lua` | Routing bucket (instance) management |
 | `variable-attributes.lua` | Lua 5.4 `<const>` and `<close>` attributes |
 | `ace-permissions.lua` | ACE permission checks and config |
+| `verified-payment-callback.lua` | HMAC-verified, idempotent payment callback that grants items safely |
 
 </details>
 
@@ -302,7 +303,7 @@ CFX-Developer-Tools/
   .cursor/             MCP server configuration
   skills/              AI skill files (10 skills)
   rules/               Coding convention rules (6 rules)
-  snippets/            Code snippets -- Lua, JS, C# (24 files)
+  snippets/            Code snippets -- Lua, JS, C# (25 files)
   templates/           Resource starter templates (11 sets)
   mcp-server/          Python MCP server (10 tools) and data files
   docs/                Architecture, roadmap, contributing guide, docs site landing page

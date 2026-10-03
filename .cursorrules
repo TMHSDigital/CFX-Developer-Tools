@@ -5,7 +5,7 @@ You are working on CFX Developer Tools, a Cursor IDE plugin for FiveM and RedM r
 - `.cursor-plugin/plugin.json` -- plugin manifest (version is auto-managed by CI)
 - `skills/` -- 9 SKILL.md files (resource scaffolding, natives, fxmanifest, client-server, framework detection, performance, NUI, database, state bags)
 - `rules/` -- 6 .mdc rule files (Lua, JS, C# conventions, fxmanifest standards, security, performance)
-- `snippets/` -- 24 code snippets organized by language (lua, javascript, csharp)
+- `snippets/` -- 25 code snippets organized by language (lua, javascript, csharp)
 - `templates/` -- 11 resource templates (standalone, esx, qbcore, qbox, oxcore, vorp, rsg, javascript, csharp, nui-vite, nui-svelte)
 - `mcp-server/` -- Python FastAPI MCP server with 6 tools and JSON data files
 - `docs/` -- architecture, roadmap, contributing, getting started

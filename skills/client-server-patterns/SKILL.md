@@ -265,6 +265,17 @@ SetPlayerRoutingBucket(source, 0)
 
 Bucket 0 is the default world where all players start.
 
+## External payment callbacks
+
+When a payment provider (Tebex or any service that signs its callbacks) notifies your resource over HTTP, treat the request like any other untrusted input. `SetHttpHandler` receives it on the server, and the same rules apply:
+
+1. **Verify the HMAC signature** with a secret from a convar, never from the resource files
+2. **Reject stale timestamps** so captured requests cannot be replayed later
+3. **Make grants idempotent** -- store each event id with a unique key and grant only on first insert
+4. **Validate against a server-side catalog** -- the item and expected amount come from your config, not the payload
+
+See `snippets/lua/verified-payment-callback.lua` for a complete, provider-neutral implementation.
+
 ## Key rules
 
 1. **Never trust the client** -- always validate `source` and all parameters on the server

@@ -2,7 +2,7 @@
 
 **AI-powered development toolkit for FiveM and RedM resource development in Cursor IDE.**
 
-10 skills -- 6 rules -- 10 MCP tools -- 12,000+ natives -- 101 events -- 24 snippets -- 11 templates
+10 skills -- 6 rules -- 10 MCP tools -- 12,000+ natives -- 101 events -- 25 snippets -- 11 templates
 
 ---
 
