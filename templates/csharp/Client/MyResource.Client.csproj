@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <!-- FXServer only loads assemblies whose file name ends in .net.dll -->
+    <AssemblyName>MyResource.Client.net</AssemblyName>
+    <OutputPath>..\dist\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Provided by FXServer at runtime, so it is not copied to the output. -->
+    <PackageReference Include="CitizenFX.Core.Client" Version="1.0.*" ExcludeAssets="runtime" />
+  </ItemGroup>
+
+</Project>

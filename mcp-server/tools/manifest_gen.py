@@ -12,6 +12,7 @@ import posixpath
 from tools.manifest_common import (
     FRAMEWORK_DEPS,
     FRAMEWORK_LUA_EXTRAS,
+    csharp_dll_paths,
     find_nui_page,
     lua_string,
     validate_inputs,
@@ -109,10 +110,11 @@ def generate_manifest(
     # scripts; an explicit file list already names its scripts, so adding the
     # glob as well would list the same files twice.
     if not scanned_any:
+        cs_client, cs_server = csharp_dll_paths(name)
         defaults = {
             "lua": (["config.lua"], ["client/*.lua"], ["server/*.lua"]),
             "javascript": ([], ["client/*.js"], ["server/*.js"]),
-            "csharp": ([], ["Client/ClientMain.net.dll"], ["Server/ServerMain.net.dll"]),
+            "csharp": ([], [cs_client], [cs_server]),
         }[language]
         shared = shared or list(defaults[0])
         client = client or list(defaults[1])

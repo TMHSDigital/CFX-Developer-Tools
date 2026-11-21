@@ -14,6 +14,8 @@ from tools.manifest_common import (
     FRAMEWORK_DEPS,
     FRAMEWORK_LUA_EXTRAS,
     RESOURCE_NAME_RE,
+    csharp_csproj,
+    csharp_dll_paths,
     games_block,
     lua_string,
     validate_inputs,
@@ -179,12 +181,13 @@ def _build_manifest(
         lines.append("    'server/*.js'")
         lines.append("}")
     elif language == "csharp":
+        client_dll, server_dll = csharp_dll_paths(name)
         lines.append("client_scripts {")
-        lines.append("    'Client/ClientMain.net.dll'")
+        lines.append(f"    '{client_dll}'")
         lines.append("}")
         lines.append("")
         lines.append("server_scripts {")
-        lines.append("    'Server/ServerMain.net.dll'")
+        lines.append(f"    '{server_dll}'")
         lines.append("}")
 
     return "\n".join(lines) + "\n"
@@ -262,21 +265,11 @@ def _scaffold_js(base: str, files_created: list[str], mode: str = "w") -> None:
 
 
 def _scaffold_csharp(base: str, name: str, files_created: list[str], mode: str = "w") -> None:
-    csproj = """<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <LangVersion>latest</LangVersion>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="CitizenFX.Core">
-      <Private>false</Private>
-    </Reference>
-  </ItemGroup>
-</Project>
-"""
-    _write(base, f"{name}.csproj", csproj, files_created, mode)
-
+    # One project per side: the client and server CitizenFX.Core assemblies
+    # differ, and each project builds dist/<name>.<Side>.net.dll, which is
+    # what the manifest lists (see manifest_common.csharp_dll_paths).
     os.makedirs(os.path.join(base, "Client"), exist_ok=True)
+    _write(base, f"Client/{name}.Client.csproj", csharp_csproj(name, "Client"), files_created, mode)
     client_cs = """using System.Threading.Tasks;
 using CitizenFX.Core;
 using static CitizenFX.Core.Native.API;
@@ -295,8 +288,10 @@ public class ClientMain : BaseScript
     _write(base, "Client/ClientMain.cs", client_cs, files_created, mode)
 
     os.makedirs(os.path.join(base, "Server"), exist_ok=True)
+    _write(base, f"Server/{name}.Server.csproj", csharp_csproj(name, "Server"), files_created, mode)
     server_cs = """using System;
 using CitizenFX.Core;
+using static CitizenFX.Core.Native.API;
 
 public class ServerMain : BaseScript
 {

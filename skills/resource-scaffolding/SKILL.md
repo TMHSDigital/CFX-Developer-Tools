@@ -54,11 +54,13 @@ resource-name/
 ```
 resource-name/
   fxmanifest.lua
-  MyResource.csproj
   Client/
+    resource-name.Client.csproj   (references CitizenFX.Core.Client)
     ClientMain.cs
   Server/
+    resource-name.Server.csproj   (references CitizenFX.Core.Server)
     ServerMain.cs
+  dist/                           (build output: *.Client.net.dll, *.Server.net.dll)
   README.md
 ```
 
@@ -108,11 +110,11 @@ server_scripts {
 **C#:**
 ```lua
 client_scripts {
-    'Client/ClientMain.net.dll'
+    'dist/resource-name.Client.net.dll'
 }
 
 server_scripts {
-    'Server/ServerMain.net.dll'
+    'dist/resource-name.Server.net.dll'
 }
 ```
 

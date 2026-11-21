@@ -131,11 +131,11 @@ node_version '22'
 
 ## C#
 
-C# resources reference compiled DLLs:
+C# resources reference compiled DLLs. FXServer only loads assemblies whose file name ends in `.net.dll`, and the client and server use different CitizenFX.Core assemblies, so use one project per side, each with `<AssemblyName>resource-name.Client.net</AssemblyName>` (or `.Server.net`) and its output in `dist/`:
 
 ```lua
-client_scripts { 'Client/ClientMain.net.dll' }
-server_scripts { 'Server/ServerMain.net.dll' }
+client_scripts { 'dist/resource-name.Client.net.dll' }
+server_scripts { 'dist/resource-name.Server.net.dll' }
 ```
 
 ## Asset escrow

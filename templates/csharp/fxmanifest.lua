@@ -5,10 +5,12 @@ author 'YourName'
 description 'C# resource'
 version '1.0.0'
 
+-- Build with `dotnet build Client` and `dotnet build Server`; each project
+-- writes its .net.dll into dist/.
 client_scripts {
-    'MyResource.net.dll'
+    'dist/MyResource.Client.net.dll'
 }
 
 server_scripts {
-    'MyResource.net.dll'
+    'dist/MyResource.Server.net.dll'
 }

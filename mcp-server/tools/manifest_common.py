@@ -24,6 +24,38 @@ FRAMEWORK_LUA_EXTRAS: dict[str, dict[str, list[str]]] = {
     "oxcore": {"dependencies": ["ox_lib"], "shared_scripts": ["@ox_lib/init.lua"]},
 }
 
+def csharp_dll_paths(name: str) -> tuple[str, str]:
+    """Return the (client, server) DLL paths a C# resource's projects build.
+
+    C# resources use one project per side (Client/<name>.Client.csproj and
+    Server/<name>.Server.csproj), each building ``<name>.<Side>.net.dll``
+    into ``dist/``, matching templates/csharp.
+    """
+    return f"dist/{name}.Client.net.dll", f"dist/{name}.Server.net.dll"
+
+
+def csharp_csproj(name: str, side: str) -> str:
+    """Return a csproj for one side ("Client" or "Server") of a C# resource."""
+    return f"""<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <!-- FXServer only loads assemblies whose file name ends in .net.dll -->
+    <AssemblyName>{name}.{side}.net</AssemblyName>
+    <OutputPath>..\\dist\\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Provided by FXServer at runtime, so it is not copied to the output. -->
+    <PackageReference Include="CitizenFX.Core.{side}" Version="1.0.*" ExcludeAssets="runtime" />
+  </ItemGroup>
+
+</Project>
+"""
+
+
 VALID_GAMES = {"gta5", "rdr3", "both"}
 VALID_LANGUAGES = {"lua", "javascript", "csharp"}
 VALID_FRAMEWORKS = {"standalone", "esx", "qbcore", "qbox", "oxcore", "vorp", "rsg"}

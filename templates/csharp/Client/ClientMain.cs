@@ -7,11 +7,11 @@ public class ClientMain : BaseScript
 {
     public ClientMain()
     {
-        EventHandlers["myResource:clientEvent"] += new Action<dynamic>(OnClientEvent);
+        EventHandlers["myResource:clientEvent"] += new Action<object>(OnClientEvent);
         Tick += OnTick;
     }
 
-    private void OnClientEvent(dynamic data)
+    private void OnClientEvent(object data)
     {
         Debug.WriteLine($"Client received: {data}");
     }
