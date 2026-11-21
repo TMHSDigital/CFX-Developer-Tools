@@ -85,17 +85,21 @@ The companion MCP server is Python-based (FastMCP). It exposes CFX-aware tools t
 
 ## Development Workflow
 
-### Plugin development (symlink)
+### Plugin development
+
+Cursor loads local plugins from `~/.cursor/plugins/local/<name>` and skips symlinks that point outside that folder, so clone the repo (or your fork) directly into it:
 
 **macOS / Linux:**
 ```bash
-ln -s "$(pwd)" ~/.cursor/plugins/cfx-developer-tools
+git clone https://github.com/TMHSDigital/CFX-Developer-Tools.git ~/.cursor/plugins/local/cfx-developer-tools
 ```
 
-**Windows (PowerShell as Admin):**
+**Windows (PowerShell):**
 ```powershell
-New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.cursor\plugins\cfx-developer-tools" -Target (Get-Location)
+git clone https://github.com/TMHSDigital/CFX-Developer-Tools.git "$env:USERPROFILE\.cursor\plugins\local\cfx-developer-tools"
 ```
+
+See CONTRIBUTING.md for the full contributor setup.
 
 ### MCP server development
 
@@ -135,7 +139,7 @@ Do not hand-edit `plugin.json` `version`, the README badge, or the `**Version:**
 
 - **No em dashes.** Use regular dashes (`-`) or rewrite the sentence. CI flags em and en dashes in markdown.
 - **No hardcoded credentials.** Use environment variables, server-side `convar`s, or secrets stores. CI flags suspicious patterns.
-- **Skill frontmatter:** `title`, `description`, and `standards-version`, plus `globs` when the skill applies to specific files. The directory name is the skill id.
+- **Skill frontmatter:** the existing skills use `title`, `description`, and `standards-version`, plus `globs` when the skill applies to specific files; the directory name is the skill id. The Developer-Tools-Directory skills standard specifies `name`, `description` and `triggers` instead; until the skills are migrated, match the existing files.
 - **Rule frontmatter:** `title`, `description`, `alwaysApply`, `standards-version`, and `globs` (when path-scoped).
 - **Snippets:** must compile or load cleanly inside a CFX resource (Lua / JS / C#), no placeholder credentials.
 - **Templates:** every `fxmanifest.lua` must declare `fx_version`, `games`, and `'cerulean'`. Do not include any `lua54` directive: Lua 5.4 is the only runtime, `lua54 'yes'` is deprecated and ignored, and `lua54 true` is not valid Lua (a bare call needs a string or table argument), so the manifest fails to parse.

@@ -20,27 +20,23 @@ Thanks for helping improve this plugin. This document describes how to set up lo
 
 ## Local Development
 
-Install the plugin from your working copy so Cursor loads your changes.
-
-Symlink the repo into the local plugins directory: `~/.cursor/plugins/local/cfx-developer-tools/` (create parent folders if needed).
-
-**Windows (PowerShell):**
-
-```powershell
-New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.cursor\plugins\local\cfx-developer-tools" | Out-Null
-cmd /c mklink /J "$env:USERPROFILE\.cursor\plugins\local\cfx-developer-tools\CFX-Developer-Tools" (Get-Location)
-```
-
-Adjust the final path if your clone lives elsewhere.
+Install the plugin from your working copy so Cursor loads your changes. Cursor loads local plugins from `~/.cursor/plugins/local/<name>` and skips symlinks that point outside that folder, so the simplest setup is to clone your fork straight into it:
 
 **macOS / Linux:**
 
 ```bash
-mkdir -p ~/.cursor/plugins/local/cfx-developer-tools
-ln -s "$(pwd)" ~/.cursor/plugins/local/cfx-developer-tools/CFX-Developer-Tools
+git clone https://github.com/<your-username>/CFX-Developer-Tools.git ~/.cursor/plugins/local/cfx-developer-tools
+cd ~/.cursor/plugins/local/cfx-developer-tools
 ```
 
-Restart Cursor after linking so it picks up the plugin.
+**Windows (PowerShell):**
+
+```powershell
+git clone https://github.com/<your-username>/CFX-Developer-Tools.git "$env:USERPROFILE\.cursor\plugins\local\cfx-developer-tools"
+Set-Location "$env:USERPROFILE\.cursor\plugins\local\cfx-developer-tools"
+```
+
+Restart Cursor after cloning so it picks up the plugin.
 
 ### Running the MCP server tests
 
@@ -82,21 +78,15 @@ docs/
 - **`rules/`** - Cursor rules as `.mdc` files with YAML frontmatter.
 - **`snippets/`** - Lua / JS / C# code snippets for FiveM and RedM scripting patterns.
 - **`templates/`** - resource starter templates (standalone, ESX, QBCore, Qbox, ox_core, VORP, RSG, JS, C#, NUI Vite, NUI Svelte).
-- **`mcp-server/`** - Python MCP server exposing CFX-aware tools (resource scaffolding, native lookup, manifest generation, framework detection, doc and event search).
+- **`examples/`** - complete, runnable reference resources.
+- **`mcp-server/`** - Python MCP server exposing CFX-aware tools (resource scaffolding, native lookup, manifest generation, framework detection, doc and event search, txAdmin server control), with tests in `mcp-server/tests/`.
 
 ## Adding a Skill
 
 1. Add a **kebab-case** directory under `skills/`, e.g. `skills/cfx-example-flow/`.
-2. Create **`SKILL.md`** with YAML frontmatter including at least `name` and `description`.
-3. In the body, include these sections (use `##` headings with these titles):
-   - **Trigger** - when the skill should load.
-   - **Required Inputs** - what the agent or user must provide.
-   - **Workflow** - step-by-step guidance.
-   - **Key References** - docs, native names, or repo paths.
-   - **Example Interaction** - short example prompt/response pattern.
-   - **MCP Usage** - when to use the companion MCP server, if relevant.
-   - **Common Pitfalls** - mistakes to avoid (deprecated natives, framework-specific gotchas, NUI message routing, etc.).
-   - **See Also** - links to related skills or rules.
+2. Create **`SKILL.md`** with the same YAML frontmatter as the existing skills: `title`, `description`, `standards-version`, and `globs` when the skill applies to specific files. (The Developer-Tools-Directory skills standard specifies `name`, `description` and `triggers`; the existing skills have not been migrated to it yet, so match the existing files.)
+3. Structure the body like the existing skills: an overview, then focused `##` sections with working code examples, common pitfalls, and links to related skills or rules.
+4. Register the path in `.cursor-plugin/plugin.json` under `"skills"` and update the counts (CI checks them with `.github/scripts/counts.py`).
 
 Match tone, formatting, and frontmatter style of existing skills in this repo.
 
@@ -104,7 +94,9 @@ Match tone, formatting, and frontmatter style of existing skills in this repo.
 
 1. Add a **`.mdc`** file under `rules/`, e.g. `rules/cfx-example.mdc`.
 2. Start with YAML **frontmatter**:
+   - `title` - short human-readable name.
    - `description` - one-line summary for humans and tooling.
+   - `standards-version` - copy the value used by the existing rules.
    - `alwaysApply` - `true` or `false` depending on whether the rule should apply globally.
    - `globs` - optional glob patterns (e.g. `**/*.lua`, `**/fxmanifest.lua`) when the rule is path-scoped.
 
@@ -116,12 +108,12 @@ Keep rules focused; prefer linking to a skill for long workflows.
 
 1. Snippets live under `snippets/` grouped by language (Lua, JS, C#). Each file should be self-contained, runnable in a CFX resource, and free of hardcoded credentials.
 2. Templates live under `templates/`. A new template needs at least an `fxmanifest.lua` (with `fx_version`, `games`, and `'cerulean'`), the canonical client/server entry files, and any framework-specific config the template targets.
-3. Run the validator before opening a PR; the workflow checks `fxmanifest.lua` required keys and rejects deprecated directives like `lua54 'yes'`.
+3. There is no separate validator script: `.github/workflows/validate.yml` checks `fxmanifest.lua` required keys, rejects any `lua54` directive, syntax-checks Lua (`luac -p`) and JS (`node --check`) in snippets, templates and examples, and verifies documented counts with `python .github/scripts/counts.py --require README.md --check README.md`.
 
 ## Pull Request Process
 
 1. **Update docs** if you change behavior, skill lists, snippet counts, or versioning (`README.md`, `CLAUDE.md`, `CHANGELOG.md`, `docs/ROADMAP.md` as appropriate).
-2. **Run validation** locally where possible. CI runs JSON schema checks, kebab-case enforcement, em/en dash detection, deprecated-directive scans, and Python syntax checks for `mcp-server/`.
+2. **Run checks** locally where possible: the MCP server tests (`cd mcp-server && python -m pytest`), the counts check above, and `node --check` / `luac -p` on changed snippets. CI also runs JSON schema checks, kebab-case enforcement, em/en dash detection, credential scans and deprecated-directive scans.
 3. **Open a PR** against `main` with a clear title and summary of changes. Use a conventional commit prefix (`feat:`, `fix:`, `docs:`, `chore:`).
 4. **Respond to review** feedback; CI must pass before merge.
 
@@ -151,6 +143,6 @@ The GitHub DCO App enforces this on every PR.
 
 For the full inbound/outbound model and rationale, see [`standards/licensing.md`](https://github.com/TMHSDigital/Developer-Tools-Directory/blob/main/standards/licensing.md) in the Developer-Tools-Directory meta-repo.
 
-## Code of Conduct
+## Conduct
 
-This project follows the guidelines in [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md). By participating, you agree to uphold them.
+Be respectful and constructive in issues, pull requests and reviews.

@@ -369,7 +369,7 @@ See [docs/ROADMAP.md](docs/ROADMAP.md) for the full project roadmap.
 
 ## Contributing
 
-See [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) for guidelines on adding skills, rules, and improvements.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on adding skills, rules, and improvements, including the required DCO sign-off.
 
 ## Support
 
