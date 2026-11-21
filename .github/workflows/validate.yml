@@ -165,7 +165,7 @@ jobs:
         run: |
           # Lua 5.4 is the only runtime: lua54 'yes' is ignored and lua54 true
           # is not valid Lua, so no manifest should contain the directive.
-          if grep -rnE "^\s*lua54" --include=fxmanifest.lua templates/ examples/; then
+          if grep -rnE "^\s*lua54\b" --include=fxmanifest.lua templates/ examples/; then
             echo "::error::lua54 directive found. Remove it; Lua 5.4 is the only runtime."
             exit 1
           fi
