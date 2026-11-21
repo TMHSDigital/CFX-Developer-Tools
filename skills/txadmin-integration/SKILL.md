@@ -31,7 +31,25 @@ Credentials are read from environment variables and are never passed as tool arg
 
 ### Setting the variables
 
-Set these in the environment that launches the MCP server. For Cursor, add them to the `env` block of the server entry in `.cursor/mcp.json`, referencing your own values rather than hardcoding secrets where possible:
+Set these in the environment that launches the MCP server: your user-level OS environment, or the shell you start the editor or agent from.
+
+**Never put the username or password in a project file such as `.cursor/mcp.json` or `.mcp.json`.** Those files are usually committed, and a txAdmin admin login can stop the server, run console commands, and manage players.
+
+PowerShell (current session; use `[Environment]::SetEnvironmentVariable('TXADMIN_PASSWORD', '...', 'User')` to persist for your user):
+
+```powershell
+$env:TXADMIN_USERNAME = "<admin-name>"
+$env:TXADMIN_PASSWORD = "<admin-password>"
+```
+
+bash / zsh (add to a shell profile that is not in any repository):
+
+```bash
+export TXADMIN_USERNAME="<admin-name>"
+export TXADMIN_PASSWORD="<admin-password>"
+```
+
+If you need the values in an MCP config, reference the environment instead of writing them in: Cursor's `mcp.json` supports `${env:NAME}` interpolation, so the file only names the variables:
 
 ```json
 {
@@ -40,22 +58,16 @@ Set these in the environment that launches the MCP server. For Cursor, add them 
       "command": "python",
       "args": ["mcp-server/server.py"],
       "env": {
-        "CFX_NATIVES_PATH": "./mcp-server/data",
-        "TXADMIN_URL": "http://127.0.0.1:40120",
-        "TXADMIN_USERNAME": "your-admin-name",
-        "TXADMIN_PASSWORD": "your-admin-password"
+        "TXADMIN_URL": "${env:TXADMIN_URL}",
+        "TXADMIN_USERNAME": "${env:TXADMIN_USERNAME}",
+        "TXADMIN_PASSWORD": "${env:TXADMIN_PASSWORD}"
       }
     }
   }
 }
 ```
 
-For a terminal session you can export them instead (PowerShell shown):
-
-```powershell
-$env:TXADMIN_USERNAME = "your-admin-name"
-$env:TXADMIN_PASSWORD = "your-admin-password"
-```
+A user-level config (for example `~/.cursor/mcp.json`) is also outside your repositories, but prefer the environment so the password is never stored in a JSON file.
 
 Prefer a dedicated admin account with only the permissions you need. The control and player tools require the matching txAdmin permissions (`control.server`, `commands.resources`, `players.kick`); if the account lacks one, txAdmin returns a permission error and the tool reports it.
 

@@ -236,6 +236,18 @@ cd mcp-server
 pip install -r requirements.txt
 ```
 
+**Environment variables:**
+
+| Variable | Required | Default | Description |
+|:---------|:---------|:--------|:------------|
+| `TXADMIN_URL` | No | `http://127.0.0.1:40120` | Base URL of the txAdmin panel |
+| `TXADMIN_USERNAME` | For txAdmin tools | - | Admin username used to log into the panel |
+| `TXADMIN_PASSWORD` | For txAdmin tools | - | Admin password |
+| `CFX_DATA_PATH` | No | `mcp-server/data` | Directory with the native, event and docs data (`CFX_NATIVES_PATH` is an accepted alias) |
+| `CFX_SCAFFOLD_ROOT` | No | working directory | Where `scaffold_resource_tool` creates resources when no `output_path`/`workspace_path` is given |
+
+Set the txAdmin credentials in your OS or shell environment, never in a committed config file. See the `txadmin-integration` skill for details.
+
 **Cursor (plugin install):** the plugin manifest registers the server from `mcp.json` (`${CURSOR_PLUGIN_ROOT}/mcp-server/server.py`), so it starts automatically when Cursor invokes an MCP tool. When working inside this repository, `.cursor/mcp.json` is used instead.
 
 **Claude Code:** inside this repository, the root `.mcp.json` registers the server. From any other project, register it once with an absolute path:

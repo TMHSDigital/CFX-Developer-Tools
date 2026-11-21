@@ -33,6 +33,16 @@ The server is configured to run automatically via Cursor's MCP integration (see 
 python server.py
 ```
 
+## Configuration
+
+| Variable | Required | Default | Description |
+|----------|----------|---------|-------------|
+| `TXADMIN_URL` | No | `http://127.0.0.1:40120` | Base URL of the txAdmin panel |
+| `TXADMIN_USERNAME` | For txAdmin tools | - | Admin username used to log into the panel |
+| `TXADMIN_PASSWORD` | For txAdmin tools | - | Admin password |
+
+Set the txAdmin credentials in your OS or shell environment, never in a committed file such as `.cursor/mcp.json` (see `skills/txadmin-integration/SKILL.md`).
+
 ## Data files
 
 The `data/` directory contains JSON databases:
