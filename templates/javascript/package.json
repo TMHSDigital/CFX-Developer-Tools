@@ -4,7 +4,7 @@
   "description": "FiveM/RedM JavaScript resource",
   "private": true,
   "devDependencies": {
-    "@citizenfx/client": "latest",
-    "@citizenfx/server": "latest"
+    "@citizenfx/client": "^2.0.38781-1",
+    "@citizenfx/server": "^2.0.38781-1"
   }
 }

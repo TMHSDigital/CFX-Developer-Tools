@@ -26,7 +26,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install MkDocs Material
-        run: pip install mkdocs-material
+        run: pip install "mkdocs-material>=9.8.2,<10"
 
       - name: Copy non-docs content into docs/ for MkDocs
         run: |

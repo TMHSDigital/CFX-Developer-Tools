@@ -232,8 +232,8 @@ def _scaffold_js(base: str, files_created: list[str], mode: str = "w") -> None:
             "description": "FiveM/RedM JavaScript resource",
             "private": True,
             "devDependencies": {
-                "@citizenfx/client": "latest",
-                "@citizenfx/server": "latest",
+                "@citizenfx/client": "^2.0.38781-1",
+                "@citizenfx/server": "^2.0.38781-1",
             },
         },
         indent=2,
