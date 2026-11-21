@@ -260,7 +260,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: pip install -r mcp-server/requirements.txt
+        run: pip install -r mcp-server/requirements-dev.txt
 
       - name: Check Python syntax
         run: python3 -m py_compile mcp-server/server.py
@@ -276,3 +276,7 @@ jobs:
           python3 -m py_compile mcp-server/tools/detect_framework.py
           python3 -m py_compile mcp-server/tools/txadmin_client.py
           python3 -m py_compile mcp-server/tools/txadmin.py
+
+      - name: Run MCP server tests
+        working-directory: mcp-server
+        run: python3 -m pytest -q

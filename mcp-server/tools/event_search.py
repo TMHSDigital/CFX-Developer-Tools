@@ -30,8 +30,11 @@ def search_events(
     if not os.path.exists(filepath):
         return f"Error: events database not found at {filepath}"
 
-    with open(filepath, "r", encoding="utf-8") as f:
-        events = json.load(f)
+    try:
+        with open(filepath, "r", encoding="utf-8") as f:
+            events = json.load(f)
+    except (OSError, ValueError) as exc:
+        return f"Error: could not read events database at {filepath}: {exc}"
 
     if not query and not side and not game and not framework:
         return _list_summary(events)

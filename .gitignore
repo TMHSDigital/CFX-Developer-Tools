@@ -3,6 +3,7 @@ CFX-Developer-Tools-Cursor-Prompt.md
 
 # Python
 __pycache__/
+.pytest_cache/
 *.py[cod]
 *$py.class
 *.egg-info/

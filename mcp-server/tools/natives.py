@@ -54,8 +54,11 @@ def lookup_native(
     if not os.path.exists(filepath):
         return f"Error: native database not found at {filepath}"
 
-    with open(filepath, "r", encoding="utf-8") as f:
-        natives = json.load(f)
+    try:
+        with open(filepath, "r", encoding="utf-8") as f:
+            natives = json.load(f)
+    except (OSError, ValueError) as exc:
+        return f"Error: could not read native database at {filepath}: {exc}"
 
     if not query and not category:
         return _list_categories(natives, game, side)

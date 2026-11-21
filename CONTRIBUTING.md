@@ -42,6 +42,18 @@ ln -s "$(pwd)" ~/.cursor/plugins/local/cfx-developer-tools/CFX-Developer-Tools
 
 Restart Cursor after linking so it picks up the plugin.
 
+### Running the MCP server tests
+
+The MCP server has a pytest suite in `mcp-server/tests/`. It needs no network access (txAdmin is tested against a local fake panel) and runs in CI on every pull request and push to `main`.
+
+```bash
+cd mcp-server
+pip install -r requirements-dev.txt
+python -m pytest
+```
+
+Add or update a test in `mcp-server/tests/` with every change to `mcp-server/tools/`.
+
 ## Plugin Structure
 
 The repo is organized as a Cursor plugin with **9 skills** and **6 rules**, plus snippets, templates, and a companion MCP server.

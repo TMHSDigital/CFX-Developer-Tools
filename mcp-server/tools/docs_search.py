@@ -40,8 +40,11 @@ def search_docs(
     if not os.path.exists(filepath):
         return f"Error: documentation index not found at {filepath}"
 
-    with open(filepath, "r", encoding="utf-8") as f:
-        pages = json.load(f)
+    try:
+        with open(filepath, "r", encoding="utf-8") as f:
+            pages = json.load(f)
+    except (OSError, ValueError) as exc:
+        return f"Error: could not read documentation index at {filepath}: {exc}"
 
     if not query and not section:
         return _list_summary(pages)
