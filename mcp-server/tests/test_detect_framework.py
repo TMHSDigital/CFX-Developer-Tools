@@ -51,3 +51,32 @@ def test_vendored_dirs_ignored(tmp_path):
 def test_large_files_read_up_to_limit(tmp_path):
     write_files(tmp_path, {"client/big.lua": " " * (MAX_FILE_SIZE + 10) + "ESX = exports"})
     assert detect_framework(str(tmp_path)).startswith("Detected framework: standalone")
+
+
+def test_dot_github_and_git_substring_paths_are_scanned(tmp_path):
+    ws = tmp_path / "my.github.io"
+    write_files(ws, {".github/res/fxmanifest.lua": "dependency 'es_extended'\n"})
+    assert detect_framework(str(ws)).startswith("Detected framework: esx")
+
+
+def test_walks_tree_once_and_prunes(tmp_path, monkeypatch):
+    import os as _os
+    from tools import manifest_common
+
+    write_files(tmp_path, {
+        "fxmanifest.lua": "dependency 'qb-core'\n",
+        "node_modules/a/b.lua": "", "dist/x.lua": "", "client/main.lua": "",
+    })
+    calls, visited = [], []
+    real_walk = _os.walk
+
+    def counting_walk(top, *a, **k):
+        calls.append(top)
+        for dirpath, dirs, files in real_walk(top, *a, **k):
+            visited.append(_os.path.relpath(dirpath, tmp_path))
+            yield dirpath, dirs, files
+
+    monkeypatch.setattr(manifest_common.os, "walk", counting_walk)
+    assert detect_framework(str(tmp_path)).startswith("Detected framework: qbcore")
+    assert len(calls) == 1
+    assert not any(v.startswith(("node_modules", "dist")) for v in visited)

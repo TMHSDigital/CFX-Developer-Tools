@@ -10,6 +10,8 @@ from __future__ import annotations
 import os
 import re
 
+from tools.manifest_common import walk_workspace
+
 
 # Manifest signals match a quoted dependency or script token such as
 # 'es_extended', '@qbx_core/...' or "rsg-core", not bare substrings, so
@@ -76,8 +78,7 @@ def detect_framework(workspace_path: str = ".") -> str:
     }
 
     libraries: set[str] = set()
-    _scan_manifests(workspace_path, scores, evidence, libraries)
-    _scan_code(workspace_path, scores, evidence)
+    _scan_workspace(workspace_path, scores, evidence, libraries)
 
     if all(v == 0 for v in scores.values()):
         scores["standalone"] = 1
@@ -136,65 +137,46 @@ def detect_framework(workspace_path: str = ".") -> str:
     return "\n".join(lines)
 
 
-def _scan_manifests(
+def _read(fpath: str) -> str | None:
+    try:
+        with open(fpath, "r", encoding="utf-8", errors="replace") as f:
+            return f.read(MAX_FILE_SIZE)
+    except OSError:
+        return None
+
+
+def _scan_workspace(
     workspace_path: str,
     scores: dict[str, int],
     evidence: dict[str, list[str]],
     libraries: set[str],
 ) -> None:
-    """Scan fxmanifest.lua files for dependency/shared_script signals."""
-    for root, _dirs, files in os.walk(workspace_path):
-        if "node_modules" in root or ".git" in root:
-            continue
-
-        for fname in files:
-            if fname != "fxmanifest.lua":
-                continue
-
-            fpath = os.path.join(root, fname)
-            relpath = os.path.relpath(fpath, workspace_path)
-
-            try:
-                with open(fpath, "r", encoding="utf-8", errors="replace") as f:
-                    content = f.read(MAX_FILE_SIZE)
-            except OSError:
-                continue
-
-            content = LUA_COMMENT_RE.sub("", content)
-            for pattern, signal, framework in MANIFEST_SIGNALS:
-                if pattern.search(content):
-                    scores[framework] += 3
-                    evidence[framework].append(f"{relpath}: manifest references '{signal}'")
-            for pattern, library in LIBRARY_SIGNALS:
-                if pattern.search(content):
-                    libraries.add(library)
-
-
-def _scan_code(
-    workspace_path: str,
-    scores: dict[str, int],
-    evidence: dict[str, list[str]],
-) -> None:
-    """Scan .lua/.js/.ts files for framework-specific code patterns."""
-    for root, _dirs, files in os.walk(workspace_path):
-        if "node_modules" in root or ".git" in root:
-            continue
-
+    """Walk the workspace once, scoring fxmanifest.lua signals and code patterns."""
+    for root, files in walk_workspace(workspace_path):
         for fname in files:
             ext = os.path.splitext(fname)[1].lower()
-            if ext not in SCANNABLE_EXTENSIONS:
+            is_manifest = fname == "fxmanifest.lua"
+            if not is_manifest and ext not in SCANNABLE_EXTENSIONS:
                 continue
 
             fpath = os.path.join(root, fname)
             relpath = os.path.relpath(fpath, workspace_path)
-
-            try:
-                with open(fpath, "r", encoding="utf-8", errors="replace") as f:
-                    content = f.read(MAX_FILE_SIZE)
-            except OSError:
+            content = _read(fpath)
+            if content is None:
                 continue
 
-            for pattern, framework in CODE_SIGNALS:
-                if pattern.search(content):
-                    scores[framework] += 1
-                    evidence[framework].append(f"{relpath}: matches pattern for {framework}")
+            if is_manifest:
+                manifest = LUA_COMMENT_RE.sub("", content)
+                for pattern, signal, framework in MANIFEST_SIGNALS:
+                    if pattern.search(manifest):
+                        scores[framework] += 3
+                        evidence[framework].append(f"{relpath}: manifest references '{signal}'")
+                for pattern, library in LIBRARY_SIGNALS:
+                    if pattern.search(manifest):
+                        libraries.add(library)
+
+            if ext in SCANNABLE_EXTENSIONS:
+                for pattern, framework in CODE_SIGNALS:
+                    if pattern.search(content):
+                        scores[framework] += 1
+                        evidence[framework].append(f"{relpath}: matches pattern for {framework}")

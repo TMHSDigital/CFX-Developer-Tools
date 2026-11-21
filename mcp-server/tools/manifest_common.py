@@ -104,6 +104,19 @@ def substitute_variables(template: str, variables: dict[str, str]) -> str:
     return template
 
 
+# Directory names never scanned in a workspace: dependencies, VCS data and
+# build output. Matched by exact name, so .github or a path that merely
+# contains ".git" is still scanned.
+PRUNED_DIRS = frozenset({"node_modules", ".git", "dist", "build", ".venv", "venv", "__pycache__"})
+
+
+def walk_workspace(root: str):
+    """os.walk that prunes PRUNED_DIRS in place. Yields (dirpath, filenames)."""
+    for dirpath, dirs, files in os.walk(root):
+        dirs[:] = sorted(d for d in dirs if d not in PRUNED_DIRS)
+        yield dirpath, files
+
+
 def read_workspace_context(workspace_path: str) -> dict[str, str]:
     """Scan a workspace directory for author/description from an existing fxmanifest.lua.
 
@@ -111,10 +124,7 @@ def read_workspace_context(workspace_path: str) -> dict[str, str]:
     """
     context: dict[str, str] = {}
 
-    for root, _dirs, files in os.walk(workspace_path):
-        if "node_modules" in root or ".git" in root:
-            continue
-
+    for root, files in walk_workspace(workspace_path):
         for fname in files:
             if fname != "fxmanifest.lua":
                 continue
