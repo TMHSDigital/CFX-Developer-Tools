@@ -143,8 +143,20 @@ jobs:
       - name: Check for hardcoded credentials
         run: |
           patterns='password\s*=\s*["\x27][^"\x27]+|api_key\s*=\s*["\x27][^"\x27]+|token\s*=\s*["\x27][A-Za-z0-9]+'
-          if grep -rPi "$patterns" --include='*.lua' --include='*.js' --include='*.py' --include='*.json' . 2>/dev/null | grep -v 'YOUR_SESSION_COOKIE\|example\|placeholder\|mock'; then
-            echo "::error::Possible hardcoded credentials found."
+          # Filter on the matched text only (not the whole line or path), so
+          # files under examples/ are still checked. Placeholder values are
+          # allowed. Only path:line is printed, never the matched value.
+          matches=$(grep -rPion "$patterns" --include='*.lua' --include='*.js' --include='*.py' --include='*.json' --exclude-dir=.git --exclude-dir=node_modules . 2>/dev/null || true)
+          hits=$(printf '%s\n' "$matches" | awk '{
+            if (!match($0, /:[0-9]+:/)) next
+            loc = substr($0, 1, RSTART + RLENGTH - 2)
+            value = tolower(substr($0, RSTART + RLENGTH))
+            if (value ~ /your[_-]|example|placeholder|mock|changeme|<[a-z_-]+>|\$\{/) next
+            print loc
+          }')
+          if [ -n "$hits" ]; then
+            echo "::error::Possible hardcoded credentials found:"
+            echo "$hits"
             exit 1
           fi
           echo "No hardcoded credentials found"
