@@ -22,7 +22,8 @@ CFX Developer Tools is a plugin for [Cursor](https://www.cursor.com/) that teach
 
 ```bash
 git clone https://github.com/TMHSDigital/CFX-Developer-Tools.git
-cd mcp-server && pip install -r requirements.txt
+cd CFX-Developer-Tools
+pip install -r mcp-server/requirements.txt
 ```
 
 Open the `CFX-Developer-Tools` folder in Cursor, then ask the AI to scaffold a resource, look up a native, or generate a manifest.
@@ -38,7 +39,7 @@ For a detailed walkthrough, see the [Getting Started guide](GETTING-STARTED.md).
 - **Documentation search** -- Query the FiveM/RedM docs index by keyword or section
 - **txAdmin integration** -- Control the FXServer, manage resources, and search or kick players through a running txAdmin panel
 - **Performance-aware coding rules** -- Catch common mistakes like `Wait(0)` in loops, runtime hashing, and more
-- **Snippet library** -- 24 copy-paste-ready code patterns across Lua, JavaScript, and C#
+- **Snippet library** -- 25 copy-paste-ready code patterns across Lua, JavaScript, and C#
 - **NUI development** -- Skills and templates for building in-game web UIs with React or Svelte 5
 - **Database integration** -- oxmysql query patterns, schema templates, and migration guidance
 

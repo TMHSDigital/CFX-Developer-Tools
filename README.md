@@ -61,8 +61,9 @@ Already have Git, Python 3.10+, and Cursor installed? Here's the short version:
 
 ```bash
 git clone https://github.com/TMHSDigital/CFX-Developer-Tools.git
-# Open CFX-Developer-Tools folder in Cursor (File > Open Folder)
-cd mcp-server && pip install -r requirements.txt
+cd CFX-Developer-Tools
+pip install -r mcp-server/requirements.txt
+# Then open the CFX-Developer-Tools folder in Cursor (File > Open Folder)
 ```
 
 Then ask the AI agent to scaffold a resource, look up a native, or generate a manifest.
@@ -75,7 +76,7 @@ Then ask the AI agent to scaffold a resource, look up a native, or generate a ma
 - **Framework detection** -- Automatically detect and adapt to ESX, QBCore, Qbox, ox_core, VORP, RSG, or standalone
 - **Native function lookup** -- Search GTA5/RDR3 native functions by name or description via MCP tools
 - **Performance-aware coding rules** -- Catch common mistakes (`Wait(0)` in loops, runtime hashing, etc.)
-- **Snippet library** -- 24 copy-paste-ready code patterns across all three runtimes
+- **Snippet library** -- 25 copy-paste-ready code patterns across all three runtimes
 - **NUI development support** -- Skills and patterns for building in-game web UIs
 - **Database integration** -- oxmysql query patterns, schema templates, and migration guidance
 - **Event reference** -- Searchable database of 101 FiveM/RedM events across CFX, ESX, QBCore, Qbox, ox_core, VORP, and RSG
@@ -152,7 +153,7 @@ Then ask the AI agent to scaffold a resource, look up a native, or generate a ma
 | **Security Best Practices** | Flags server-side validation gaps, exposed endpoints, insecure patterns |
 | **Performance Rules** | Catches `Wait(0)`, runtime hashing, unnecessary tick handlers, memory leaks |
 
-## Snippets (24)
+## Snippets (25)
 
 <details>
 <summary><strong>Lua (15)</strong></summary>
@@ -336,10 +337,11 @@ CFX-Developer-Tools/
   rules/               Coding convention rules (6 rules)
   snippets/            Code snippets -- Lua, JS, C# (25 files)
   templates/           Resource starter templates (11 sets)
-  mcp-server/          Python MCP server (10 tools) and data files
+  examples/            Complete, runnable reference resources (5)
+  mcp-server/          Python MCP server (10 tools), data files and tests
   docs/                Architecture, roadmap, contributing guide, docs site landing page
   assets/              Logo and images
-  .github/             CI/CD workflows (validate, release, update-natives, update-docs-index, stale, deploy-docs)
+  .github/             CI/CD workflows (validate, release, drift-check, update-natives, update-docs-index, stale, deploy-docs)
   mkdocs.yml           Documentation site configuration
 ```
 
@@ -360,6 +362,7 @@ See [docs/ROADMAP.md](docs/ROADMAP.md) for the full project roadmap.
 | **v0.4.x** | Content expansion -- State Bags skill, NUI Vite template, vector docs, FiveM/RedM balance | Done |
 | **v0.5.0** | M3 Expansion -- docs search, 82 events, framework detection, smart code gen | Done |
 | **v0.6.0** | M3.5 Research Alignment -- Qbox/VORP/RSG, Svelte NUI, 101 events, 24 snippets, 11 templates | Done |
+| **v0.7.x - v0.13.x** | Live docs index, txAdmin tools, runnable examples, verified payment callback snippet; see the [CHANGELOG](CHANGELOG.md) and [releases](https://github.com/TMHSDigital/CFX-Developer-Tools/releases) | Done |
 | **v1.0.0** | Stable release -- marketplace listing, full documentation | Planned |
 
 </details>
