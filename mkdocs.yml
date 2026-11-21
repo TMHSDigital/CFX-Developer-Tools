@@ -23,6 +23,14 @@ nav:
       - Performance Optimization: skills/performance-optimization/SKILL.md
       - Resource Scaffolding: skills/resource-scaffolding/SKILL.md
       - State Bags: skills/state-bags/SKILL.md
+      - txAdmin Integration: skills/txadmin-integration/SKILL.md
+  - Examples:
+      - Overview: examples/README.md
+      - doorlock: examples/doorlock/README.md
+      - drug-sell: examples/drug-sell/README.md
+      - playtime-tracker: examples/playtime-tracker/README.md
+      - secure-shop: examples/secure-shop/README.md
+      - speedometer-hud: examples/speedometer-hud/README.md
   - MCP Server: mcp-server/README.md
 
 theme:

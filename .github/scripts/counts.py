@@ -78,7 +78,7 @@ def description(c: dict[str, int]) -> str:
 CLAIM_RE = re.compile(
     r"\b(?P<num>\d[\d,]*)(?P<plus>\+)?\s+"
     r"(?:code\s+|starter\s+|MCP\s+|runnable\s+)?"
-    r"(?P<noun>skills|rules|snippets|templates|tools|examples|events|natives)\b",
+    r"(?P<noun>skills|rules|snippets|templates|tools|examples|events|natives|native functions)\b",
     re.IGNORECASE,
 )
 
@@ -93,7 +93,7 @@ def check_files(paths: list[str], c: dict[str, int]) -> list[str]:
                 continue
             for m in CLAIM_RE.finditer(line):
                 num = int(m.group("num").replace(",", ""))
-                noun = m.group("noun").lower()
+                noun = "natives" if m.group("noun").lower().startswith("native") else m.group("noun").lower()
                 if noun == "natives":
                     if m.group("plus") and num > c["natives"]:
                         errors.append(f"{rel}:{lineno}: claims {m.group(0)!r} but there are {c['natives']} natives")

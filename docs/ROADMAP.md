@@ -121,7 +121,7 @@ Aligned the toolkit with 2026 platform realities based on comprehensive research
 
 ---
 
-## Milestone 4 - Integration (planned)
+## Milestone 4 - Integration (in progress: txAdmin tools shipped in 0.9-0.13)
 
 Connect the plugin to live FiveM/RedM server infrastructure for real-time development workflows.
 
@@ -193,4 +193,4 @@ Harden the plugin for public release and community adoption.
 - [ ] Video walkthrough or GIF demos for Getting Started
 - [ ] Expanded architecture docs with MCP tool flow diagrams
 - [ ] FAQ and troubleshooting guide
-- [ ] Example resources built entirely with the plugin (showcase)
+- [x] Example resources built entirely with the plugin (showcase): `examples/` ships doorlock, drug-sell, playtime-tracker, secure-shop and speedometer-hud

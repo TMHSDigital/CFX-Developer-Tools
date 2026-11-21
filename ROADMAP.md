@@ -28,7 +28,7 @@ Inspired by the HighwayTrooper workflow video, where AI token consumption spiked
 - [ ] Correctly identifies framework, inventory, target, and DB wrapper on at least Qbox, QB-Core, and ESX test fixtures.
 - [ ] JSON payload validated against a documented schema and measured under a stated token budget (target: < 500 tokens for a typical server).
 - [ ] Unit tests covering `server.cfg` parsing edge cases (comments, `ensure [category]`, missing resources).
-- [ ] `validate_plugin.py` passes and docs page added under `docs/`.
+- [ ] `validate.yml` checks pass (counts via `.github/scripts/counts.py`) and docs page added under `docs/`.
 
 ---
 
@@ -78,7 +78,7 @@ Modernizing development boundaries for clean, modular FiveM/CFX resource generat
 
 - [ ] Generated resource loads cleanly on a Qbox test server with `ox_lib` and `oxmysql` present.
 - [ ] Manifest passes the `fxmanifest-standards.mdc` rule and existing manifest validation.
-- [ ] Template added to `templates/` and counted by `validate_plugin.py`.
+- [ ] Template added to `templates/` and counted by `.github/scripts/counts.py`.
 - [ ] Tool/template documented in CLAUDE.md, README, and the docs site.
 
 ---
@@ -103,5 +103,5 @@ In the reference video test, the human developer won by using a live admin coord
 
 - [ ] `/grabpos` returns correctly formatted vector and JSON output on a live FiveM test client, and the value lands on the OS clipboard.
 - [ ] Convar guard verified: command inert when the convar is unset.
-- [ ] Snippet loads cleanly inside a CFX resource per snippet conventions and is counted by `validate_plugin.py`.
+- [ ] Snippet loads cleanly inside a CFX resource per snippet conventions (CI runs `luac -p` / `node --check`) and is counted by `.github/scripts/counts.py`.
 - [ ] Documented in the snippets/templates listings in CLAUDE.md, README, and the docs site.

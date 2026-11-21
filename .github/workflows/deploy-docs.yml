@@ -32,6 +32,9 @@ jobs:
         run: |
           cp CHANGELOG.md docs/CHANGELOG.md
           cp -r skills docs/skills
+          mkdir -p docs/examples
+          for d in examples/*/; do mkdir -p "docs/$d"; cp "$d"README.md "docs/$d" 2>/dev/null || true; done
+          cp examples/README.md docs/examples/README.md
           mkdir -p docs/mcp-server
           cp mcp-server/README.md docs/mcp-server/README.md
           mkdir -p docs/assets

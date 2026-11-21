@@ -34,6 +34,7 @@ Each skill is a `SKILL.md` file with YAML frontmatter. Skills teach the AI agent
 - **NUI development** - How to build in-game web UIs
 - **Database integration** - How to use oxmysql for database queries
 - **State Bags** - Modern data synchronization using Entity/Player/Global state bags
+- **txAdmin integration** - Control a running server, resources and players through the txAdmin MCP tools
 
 Skills are activated based on context (file type, user request) and provide the agent with the technical knowledge to generate correct code.
 
@@ -116,13 +117,13 @@ The `templates/` directory contains starter resource structures for:
 - **nui-vite** - Modern NUI with Vite + React, postMessage bridge
 - **nui-svelte** - Modern NUI with Vite + Svelte 5, Runes, postMessage bridge
 
-Templates are used by the scaffolding tool and can also be copied manually.
+Templates are standalone starter kits to copy into a server's `resources/` folder. The `scaffold_resource_tool` generates its files itself and does not read `templates/`.
 
 ## Snippets
 
 The `snippets/` directory contains individual code patterns organized by language:
 
-- `lua/` - Thread loops, events, commands, exports, NUI callbacks, configs, state bags, backtick hashing, routing buckets, variable attributes, ACE permissions
+- `lua/` - Thread loops, events, commands, exports, NUI callbacks, configs, state bags, backtick hashing, routing buckets, variable attributes, ACE permissions, verified payment callback (HMAC-signed webhook)
 - `javascript/` - Tick loops, events, commands, NUI callbacks, state bags
 - `csharp/` - Base scripts, commands, tick handlers
 
@@ -132,4 +133,4 @@ Snippets serve as quick-reference patterns that the AI agent can insert into gen
 
 The project is published as a static documentation site at https://tmhsdigital.github.io/CFX-Developer-Tools/ using [MkDocs Material](https://squidfunk.github.io/mkdocs-material/). Configuration is in `mkdocs.yml` at the repo root.
 
-The site is built and deployed automatically on every push to `main` by the `deploy-docs.yml` GitHub Actions workflow. It reads existing Markdown files directly from the repo -- no content duplication required.
+The site is built and deployed automatically on every push to `main` by the `deploy-docs.yml` GitHub Actions workflow. Before building, the workflow copies `CHANGELOG.md`, `skills/`, `mcp-server/README.md` and the logos into `docs/`, so those files are edited in their repo locations and appear on the site without being duplicated in the repo.

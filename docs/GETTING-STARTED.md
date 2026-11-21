@@ -26,7 +26,7 @@ This guide takes you from zero to building FiveM/RedM resources with AI assistan
 - Generate a correct `fxmanifest.lua` with all the right directives
 - Write code that follows FiveM/RedM best practices automatically
 
-The plugin includes **10 skills**, **6 rules**, **25 code snippets**, **11 starter templates**, and **10 MCP tools** (including a searchable database of 12,000+ native functions, 101 events, documentation search, and txAdmin server control).
+The plugin includes **10 skills**, **6 rules**, **25 code snippets**, **11 starter templates**, and **10 MCP tools** (including a searchable database of 11,500+ native functions, 101 events, documentation search, and txAdmin server control).
 
 <details>
 <summary><strong>What is Cursor?</strong></summary>
@@ -52,7 +52,7 @@ The plugin includes **10 skills**, **6 rules**, **25 code snippets**, **11 start
 
 ## 2. Install the prerequisites
 
-You need three things installed before you can use the plugin. All steps below are for **Windows**.
+You need three things installed before you can use the plugin. The steps below are written for **Windows**. On macOS, install Git and Python with Homebrew (`brew install git python`) or the python.org installer; on Linux, use your package manager (for example `sudo apt install git python3 python3-pip`). Use `python3`/`pip3` where the guide says `python`/`pip` if your system only provides those names.
 
 <details>
 <summary><strong>2a. Install Git</strong></summary>
@@ -172,7 +172,7 @@ git clone https://github.com/TMHSDigital/CFX-Developer-Tools.git
 </details>
 
 <details>
-<summary><strong>Method B -- ZIP download</strong></summary>
+<summary><strong><a id="method-b-zip-download"></a>Method B -- ZIP download</strong></summary>
 
 &nbsp;
 
@@ -245,6 +245,18 @@ pip install -r requirements.txt
 The first command moves into the `mcp-server` folder. The second installs the `mcp` Python package (the MCP SDK) and its dependencies. You will see some download progress and then a success message.
 
 You do **not** need to manually start the MCP server. Cursor starts it automatically the first time the AI calls one of its tools. The configuration lives in `.cursor/mcp.json`.
+
+### Optional: connect txAdmin
+
+The four txAdmin tools (server control, resource control, player search, kick) need a running txAdmin panel. Set these environment variables in Windows (Settings > System > About > Advanced system settings > Environment Variables, as user variables) or in your shell profile on macOS/Linux, then restart Cursor:
+
+| Variable | Value |
+|----------|-------|
+| `TXADMIN_URL` | Panel address, default `http://127.0.0.1:40120` |
+| `TXADMIN_USERNAME` | A txAdmin admin account name |
+| `TXADMIN_PASSWORD` | That account's password |
+
+Never put these values in `.cursor/mcp.json` or any other file in a repository. For a panel on another machine, use an `https://` address or an SSH tunnel. See the `txadmin-integration` skill for details.
 
 ---
 
@@ -366,7 +378,7 @@ Here are example prompts to explore the plugin's capabilities. Paste them into t
 &nbsp;
 
 - "Create a new QBCore resource called qb-shops in Lua with database support"
-- "Scaffold a JavaScript resource called my-hud with NUI support for FiveM and RedM"
+- "Scaffold a JavaScript resource called my-hud for FiveM and RedM" (for a NUI page, start from the `templates/nui-vite` or `templates/nui-svelte` template)
 - "Generate a C# resource for RedM called rdr-horses"
 
 </details>
@@ -441,7 +453,7 @@ Here are example prompts to explore the plugin's capabilities. Paste them into t
 ## 9. Troubleshooting
 
 <details>
-<summary><strong>Python or pip not recognized</strong></summary>
+<summary><strong><a id="python-or-pip-not-recognized"></a>Python or pip not recognized</strong></summary>
 
 &nbsp;
 
@@ -544,7 +556,7 @@ pip install -r requirements.txt
 
 1. Make sure you have an internet connection
 2. Try the URL in your browser to confirm the repo is accessible: [github.com/TMHSDigital/CFX-Developer-Tools](https://github.com/TMHSDigital/CFX-Developer-Tools)
-3. If you're behind a corporate firewall or VPN, try the [ZIP download method](#method-b----zip-download) instead
+3. If you're behind a corporate firewall or VPN, try the [ZIP download method](#method-b-zip-download) instead
 
 </details>
 

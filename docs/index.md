@@ -34,7 +34,7 @@ For a detailed walkthrough, see the [Getting Started guide](GETTING-STARTED.md).
 
 - **Resource scaffolding** -- Generate complete resources in Lua, JavaScript, or C# with proper `fxmanifest.lua`
 - **Framework detection** -- Automatically detect and adapt to ESX, QBCore, Qbox, ox_core, VORP, RSG, or standalone
-- **Native function lookup** -- Search 12,000+ GTA5/RDR3 native functions by name, hash, or description
+- **Native function lookup** -- Search 11,500+ GTA5/RDR3 native functions by name, hash, or description
 - **Event reference** -- Searchable database of 101 events across CFX, ESX, QBCore, Qbox, ox_core, VORP, and RSG
 - **Documentation search** -- Query the FiveM/RedM docs index by keyword or section
 - **txAdmin integration** -- Control the FXServer, manage resources, and search or kick players through a running txAdmin panel
