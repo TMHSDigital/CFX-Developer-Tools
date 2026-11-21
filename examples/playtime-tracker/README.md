@@ -64,8 +64,9 @@ oxmysql exposes parameterised exports. The rule is: put `?` where each value
 goes, and pass the values as the array argument.
 
 ```lua
--- Read a single value (scalar) with a parameter.
-exports.oxmysql:scalar_async(
+-- Read a single value (scalar) with a parameter. Use the callback-style
+-- export here: the `*_async` variants return a promise and take no callback.
+exports.oxmysql:scalar(
     'SELECT seconds FROM player_playtime WHERE identifier = ?',
     { identifier },
     function(existing) --[[ ... ]] end

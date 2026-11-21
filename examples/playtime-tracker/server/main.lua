@@ -81,17 +81,22 @@ end
 -- Begin tracking once the player's character is loaded. We read any existing
 -- total with a parameterised scalar query (single column, single row) so a
 -- returning player's lifetime keeps accumulating instead of resetting.
+-- oxmysql's callback-style `scalar` export is used here; the `*_async`
+-- exports return a promise and do not take a callback argument.
 local function startSession(src)
+    if sessions[src] then return end -- already tracking this player
     local identifier = getIdentifier(src)
     if not identifier then return end
 
-    exports.oxmysql:scalar_async(
+    exports.oxmysql:scalar(
         'SELECT seconds FROM player_playtime WHERE identifier = ?',
         { identifier },
         function(existing)
+            -- The player may have dropped (or loaded twice) while the query ran.
+            if sessions[src] or not GetPlayerName(src) then return end
             sessions[src] = {
                 identifier  = identifier,
-                baseSeconds = existing or 0,
+                baseSeconds = tonumber(existing) or 0,
                 startTimer  = GetGameTimer(),
             }
         end
@@ -108,11 +113,22 @@ elseif Framework == 'qb' then
         startSession(Player.PlayerData.source)
     end)
 else
-    -- Standalone: no character system, so begin as soon as the player spawns.
-    AddEventHandler('playerSpawned', function()
+    -- Standalone: no character system, so begin when the player joins.
+    -- (playerSpawned is a client-only event and never reaches the server.)
+    AddEventHandler('playerJoining', function()
         startSession(source)
     end)
 end
+
+-- Resource (re)start: pick up players who are already online. Players whose
+-- framework character is not loaded yet are skipped by getIdentifier and are
+-- picked up by the load hook instead.
+AddEventHandler('onResourceStart', function(resourceName)
+    if resourceName ~= GetCurrentResourceName() then return end
+    for _, playerId in ipairs(GetPlayers()) do
+        startSession(tonumber(playerId))
+    end
+end)
 
 -- Periodic flush. Saving on an interval bounds how much playtime is lost if the
 -- server stops without a clean drop. Each pass writes only loaded sessions.
