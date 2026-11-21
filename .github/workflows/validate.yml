@@ -35,6 +35,9 @@ jobs:
               assert 'category' in n, f'Missing category in {n.get("name", "unknown")}'
               assert isinstance(n.get('deprecated'), bool), f'deprecated must be bool in {n.get("name", "unknown")}'
               assert n.get('examples') is None or isinstance(n.get('examples'), str), f'examples must be string or null in {n.get("name", "unknown")}'
+              assert isinstance(n.get('hash'), str), f'hash must be a string in {n.get("name", "unknown")}'
+              assert isinstance(n.get('description'), str), f'description must be a string in {n.get("name", "unknown")}'
+              assert all(isinstance(p, dict) and 'type' in p and 'name' in p for p in (n.get('params') or [])), f'params need type and name in {n.get("name", "unknown")}'
           print(f'GTA5 natives: {len(data)} entries validated')
           EOF
 
@@ -51,6 +54,9 @@ jobs:
               assert 'category' in n, f'Missing category in {n.get("name", "unknown")}'
               assert isinstance(n.get('deprecated'), bool), f'deprecated must be bool in {n.get("name", "unknown")}'
               assert n.get('examples') is None or isinstance(n.get('examples'), str), f'examples must be string or null in {n.get("name", "unknown")}'
+              assert isinstance(n.get('hash'), str), f'hash must be a string in {n.get("name", "unknown")}'
+              assert isinstance(n.get('description'), str), f'description must be a string in {n.get("name", "unknown")}'
+              assert all(isinstance(p, dict) and 'type' in p and 'name' in p for p in (n.get('params') or [])), f'params need type and name in {n.get("name", "unknown")}'
           print(f'RDR3 natives: {len(data)} entries validated')
           EOF
 
