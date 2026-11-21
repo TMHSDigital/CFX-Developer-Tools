@@ -110,6 +110,12 @@ end)
 local Ox = require '@ox_core.lib.init'
 ```
 
+`require` here is provided by ox_lib, so the manifest must load ox_lib first:
+```lua
+dependencies { 'ox_lib', 'ox_core' }
+shared_scripts { '@ox_lib/init.lua', 'config.lua' }
+```
+
 ox_core uses a module system with `require`:
 ```lua
 local player = Ox.GetPlayer(source)         -- server

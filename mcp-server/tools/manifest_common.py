@@ -18,6 +18,12 @@ FRAMEWORK_DEPS = {
     "rsg": "rsg-core",
 }
 
+# Extra libraries a framework's init line needs for Lua resources.
+# ox_core's `require '@ox_core.lib.init'` relies on ox_lib's require.
+FRAMEWORK_LUA_EXTRAS: dict[str, dict[str, list[str]]] = {
+    "oxcore": {"dependencies": ["ox_lib"], "shared_scripts": ["@ox_lib/init.lua"]},
+}
+
 VALID_GAMES = {"gta5", "rdr3", "both"}
 VALID_LANGUAGES = {"lua", "javascript", "csharp"}
 VALID_FRAMEWORKS = {"standalone", "esx", "qbcore", "qbox", "oxcore", "vorp", "rsg"}

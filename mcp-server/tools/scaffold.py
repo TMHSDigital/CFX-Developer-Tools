@@ -12,6 +12,7 @@ import json
 
 from tools.manifest_common import (
     FRAMEWORK_DEPS,
+    FRAMEWORK_LUA_EXTRAS,
     RESOURCE_NAME_RE,
     games_block,
     lua_string,
@@ -143,13 +144,20 @@ def _build_manifest(
         "",
     ]
 
+    extras = FRAMEWORK_LUA_EXTRAS.get(framework, {}) if language == "lua" else {}
+    deps = list(extras.get("dependencies", []))
     dep = FRAMEWORK_DEPS.get(framework)
     if dep:
-        lines.append(f"dependency '{dep}'")
+        deps.append(dep)
+    for d in deps:
+        lines.append(f"dependency '{d}'")
+    if deps:
         lines.append("")
 
     if language == "lua":
         lines.append("shared_scripts {")
+        for script in extras.get("shared_scripts", []):
+            lines.append(f"    '{script}',")
         lines.append("    'config.lua'")
         lines.append("}")
         lines.append("")

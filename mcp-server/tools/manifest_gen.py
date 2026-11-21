@@ -11,6 +11,7 @@ import posixpath
 
 from tools.manifest_common import (
     FRAMEWORK_DEPS,
+    FRAMEWORK_LUA_EXTRAS,
     find_nui_page,
     lua_string,
     validate_inputs,
@@ -117,6 +118,9 @@ def generate_manifest(
         client = client or list(defaults[1])
         server = server or list(defaults[2])
 
+    extras = FRAMEWORK_LUA_EXTRAS.get(framework, {}) if language == "lua" else {}
+    shared = list(extras.get("shared_scripts", [])) + shared
+
     lines: list[str] = [
         "fx_version 'cerulean'",
         "games { 'gta5', 'rdr3' }" if game == "both" else f"games {{ '{game}' }}",
@@ -127,7 +131,7 @@ def generate_manifest(
         "",
     ]
 
-    all_deps: list[str] = []
+    all_deps: list[str] = list(extras.get("dependencies", []))
     fw_dep = FRAMEWORK_DEPS.get(framework)
     if fw_dep:
         all_deps.append(fw_dep)
