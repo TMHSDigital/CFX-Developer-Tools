@@ -9,6 +9,7 @@ event search, documentation search, and framework detection.
 import os
 
 from mcp.server.fastmcp import FastMCP
+from mcp.types import ToolAnnotations
 
 from tools.scaffold import scaffold_resource
 from tools.natives import lookup_native
@@ -25,6 +26,11 @@ from tools.txadmin import (
 
 mcp = FastMCP("cfx-dev-tools")
 
+# Tool hints let MCP clients apply approval policies: lookups only read
+# local data; the txAdmin control and kick tools change a live server.
+READ_ONLY = ToolAnnotations(readOnlyHint=True, openWorldHint=False)
+DESTRUCTIVE = ToolAnnotations(readOnlyHint=False, destructiveHint=True, idempotentHint=False, openWorldHint=True)
+
 # Data directory for natives, events and the docs index. Defaults to the
 # data/ folder next to this file so the server works from any working
 # directory. CFX_DATA_PATH overrides it; CFX_NATIVES_PATH is kept as an alias
@@ -36,7 +42,7 @@ NATIVES_PATH = (
 )
 
 
-@mcp.tool()
+@mcp.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=False, idempotentHint=False, openWorldHint=False))
 def scaffold_resource_tool(
     name: str,
     game: str,
@@ -66,7 +72,7 @@ def scaffold_resource_tool(
     )
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def lookup_native_tool(
     query: str = "",
     game: str = "gta5",
@@ -92,7 +98,7 @@ def lookup_native_tool(
     return lookup_native(query, game, side, NATIVES_PATH, category, limit, offset, format)
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def generate_manifest_tool(
     name: str,
     game: str,
@@ -118,7 +124,7 @@ def generate_manifest_tool(
     return generate_manifest(name, game, language, framework, scripts, dependencies, has_nui, workspace_path)
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def search_events_tool(
     query: str = "",
     side: str | None = None,
@@ -136,7 +142,7 @@ def search_events_tool(
     return search_events(query, side, game, framework, NATIVES_PATH)
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def detect_framework_tool(
     workspace_path: str = ".",
 ) -> str:
@@ -148,7 +154,7 @@ def detect_framework_tool(
     return detect_framework(workspace_path)
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def search_docs_tool(
     query: str = "",
     section: str | None = None,
@@ -162,7 +168,7 @@ def search_docs_tool(
     return search_docs(query, section, NATIVES_PATH)
 
 
-@mcp.tool()
+@mcp.tool(annotations=DESTRUCTIVE)
 def txadmin_server_control_tool(action: str) -> str:
     """Start, stop, or restart the FXServer through txAdmin.
 
@@ -175,7 +181,7 @@ def txadmin_server_control_tool(action: str) -> str:
     return txadmin_server_control(action)
 
 
-@mcp.tool()
+@mcp.tool(annotations=DESTRUCTIVE)
 def txadmin_resource_control_tool(action: str, resource: str) -> str:
     """Start, stop, restart, or ensure a single server resource through txAdmin.
 
@@ -188,7 +194,7 @@ def txadmin_resource_control_tool(action: str, resource: str) -> str:
     return txadmin_resource_control(action, resource)
 
 
-@mcp.tool()
+@mcp.tool(annotations=ToolAnnotations(readOnlyHint=True, openWorldHint=True))
 def txadmin_player_search_tool(
     search_value: str = "",
     search_type: str = "playerName",
@@ -208,7 +214,7 @@ def txadmin_player_search_tool(
     return txadmin_player_search(search_value, search_type, filters, limit)
 
 
-@mcp.tool()
+@mcp.tool(annotations=DESTRUCTIVE)
 def txadmin_kick_player_tool(
     netid: int,
     reason: str = "",

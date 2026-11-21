@@ -12,7 +12,7 @@ TxAdminConfig. See the txadmin-integration skill for setup.
 
 from __future__ import annotations
 
-from tools.txadmin_client import TxAdminClient, TxAdminConfig, TxAdminError
+from tools.txadmin_client import TxAdminError, get_client
 
 
 SERVER_ACTIONS = {"start", "stop", "restart"}
@@ -55,7 +55,7 @@ def txadmin_server_control(action: str) -> str:
         )
 
     try:
-        client = TxAdminClient()
+        client = get_client()
         result = client.request(
             "POST", "/fxserver/controls", body={"action": action}
         )
@@ -83,7 +83,7 @@ def txadmin_resource_control(action: str, resource: str) -> str:
         return "Error: a resource name is required."
 
     try:
-        client = TxAdminClient()
+        client = get_client()
         result = client.request(
             "POST",
             "/fxserver/commands",
@@ -119,7 +119,7 @@ def txadmin_player_search(
     }
 
     try:
-        client = TxAdminClient()
+        client = get_client()
         result = client.request("GET", "/player/search", query=query)
     except TxAdminError as exc:
         return f"Error: {exc}"
@@ -178,7 +178,7 @@ def txadmin_kick_player(netid: int, reason: str = "", mutex: str = "current") ->
     reason = (reason or "").strip()
 
     try:
-        client = TxAdminClient()
+        client = get_client()
         result = client.request(
             "POST",
             "/player/kick",

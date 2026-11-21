@@ -34,8 +34,15 @@ CSRF_HEADER = "x-txadmin-csrftoken"
 REQUEST_TIMEOUT = 15  # seconds
 
 
+LOOPBACK_HOSTS = {"127.0.0.1", "::1", "localhost"}
+
+
 class TxAdminError(Exception):
     """Raised when a txAdmin request cannot be completed."""
+
+    def __init__(self, message: str, status: int | None = None) -> None:
+        super().__init__(message)
+        self.status = status
 
 
 class TxAdminConfig:
@@ -49,6 +56,23 @@ class TxAdminConfig:
     @property
     def is_configured(self) -> bool:
         return bool(self.username and self.password)
+
+    @property
+    def key(self) -> tuple[str, str, str]:
+        return (self.url, self.username, self.password)
+
+    def insecure_transport_error(self) -> str | None:
+        """Refuse to send credentials over plain HTTP to a non-loopback host."""
+        parsed = urllib.parse.urlparse(self.url)
+        if parsed.scheme != "http" or (parsed.hostname or "") in LOOPBACK_HOSTS:
+            return None
+        if os.environ.get("TXADMIN_ALLOW_INSECURE", "").strip().lower() in ("1", "true", "yes"):
+            return None
+        return (
+            f"Refusing to send txAdmin credentials over plain HTTP to {parsed.hostname}. "
+            "Use an https:// TXADMIN_URL or an SSH tunnel to 127.0.0.1, or set "
+            "TXADMIN_ALLOW_INSECURE=1 to accept the risk."
+        )
 
     def missing_message(self) -> str:
         missing = []
@@ -117,7 +141,8 @@ class TxAdminClient:
                 if parsed.get("logout"):
                     detail = detail or "session rejected (logged out)"
             raise TxAdminError(
-                f"HTTP {exc.code} from {path}: {detail or raw[:200] or exc.reason}"
+                f"HTTP {exc.code} from {path}: {detail or raw[:200] or exc.reason}",
+                status=exc.code,
             ) from exc
         except urllib.error.URLError as exc:
             raise TxAdminError(
@@ -136,6 +161,9 @@ class TxAdminClient:
         """Authenticate and capture the session cookie and CSRF token."""
         if not self.config.is_configured:
             raise TxAdminError(self.config.missing_message())
+        insecure = self.config.insecure_transport_error()
+        if insecure:
+            raise TxAdminError(insecure)
 
         result = self._send(
             "POST",
@@ -165,10 +193,34 @@ class TxAdminClient:
         body: dict | None = None,
         query: dict | None = None,
     ) -> dict:
-        """Run an authenticated request, logging in first if needed."""
-        if self.csrf_token is None:
+        """Run an authenticated request, logging in first if needed.
+
+        A reused session that has expired (HTTP 401/403) is renewed once.
+        """
+        fresh_login = self.csrf_token is None
+        if fresh_login:
             self.login()
-        return self._send(method, path, body=body, query=query)
+        try:
+            return self._send(method, path, body=body, query=query)
+        except TxAdminError as exc:
+            if fresh_login or exc.status not in (401, 403):
+                raise
+            self.csrf_token = None
+            self._cookies.clear()
+            self.login()
+            return self._send(method, path, body=body, query=query)
+
+
+_CLIENT: TxAdminClient | None = None
+
+
+def get_client() -> TxAdminClient:
+    """Return a process-wide client, reusing its session while the config is unchanged."""
+    global _CLIENT
+    config = TxAdminConfig()
+    if _CLIENT is None or _CLIENT.config.key != config.key:
+        _CLIENT = TxAdminClient(config)
+    return _CLIENT
 
 
 def _safe_json(raw: str) -> dict | None:

@@ -24,3 +24,11 @@ def test_registers_documented_tools():
 def test_data_path_independent_of_cwd(tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
     assert "GetPlayerPed" in server.lookup_native_tool("GetPlayerPed")
+
+
+def test_tool_annotations():
+    tools = {tool.name: tool for tool in asyncio.run(server.mcp.list_tools())}
+    for name in ("txadmin_server_control_tool", "txadmin_resource_control_tool", "txadmin_kick_player_tool"):
+        assert tools[name].annotations.destructiveHint is True
+    for name in ("lookup_native_tool", "search_docs_tool", "search_events_tool", "txadmin_player_search_tool"):
+        assert tools[name].annotations.readOnlyHint is True

@@ -28,6 +28,11 @@ Credentials are read from environment variables and are never passed as tool arg
 | `TXADMIN_URL` | No | `http://127.0.0.1:40120` | Base URL of the txAdmin panel |
 | `TXADMIN_USERNAME` | Yes | - | Admin username used to log into the panel |
 | `TXADMIN_PASSWORD` | Yes | - | Admin password |
+| `TXADMIN_ALLOW_INSECURE` | No | - | Set to `1` to allow a plain `http://` URL on a non-local host (not recommended) |
+
+For a panel on another machine, use an `https://` URL or an SSH tunnel (`ssh -L 40120:127.0.0.1:40120 user@server`, then keep `TXADMIN_URL` at `http://127.0.0.1:40120`). The tools refuse to send the admin password over plain HTTP to a non-local host unless `TXADMIN_ALLOW_INSECURE=1` is set. One login session is reused across tool calls and renewed automatically when it expires.
+
+The stop/restart, resource control and kick tools are marked as destructive for MCP clients (the search tools as read-only), so clients that honour tool annotations can ask for confirmation before running them.
 
 ### Setting the variables
 

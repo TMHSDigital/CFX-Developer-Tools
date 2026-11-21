@@ -130,3 +130,29 @@ def test_kick(panel):
 def test_kick_rejects_bad_netid(panel, netid):
     assert t.txadmin_kick_player(netid).startswith("Error")
     assert panel.requests == []
+
+
+def test_session_is_reused_across_calls(panel):
+    t.txadmin_server_control("restart")
+    t.txadmin_resource_control("restart", "x")
+    assert panel.paths().count("/auth/password") == 1
+
+
+def test_expired_session_logs_in_again(panel):
+    t.txadmin_server_control("restart")
+    panel.routes["/fxserver/commands"] = (401, {"logout": True})
+    t.txadmin_resource_control("restart", "x")  # 401 on the reused session
+    assert panel.paths().count("/auth/password") == 2
+
+
+def test_refuses_plain_http_to_remote_host(monkeypatch, panel):
+    monkeypatch.setenv("TXADMIN_URL", "http://203.0.113.10:40120")
+    out = t.txadmin_server_control("restart")
+    assert out.startswith("Error") and "plain HTTP" in out
+    assert panel.requests == []
+    from tools.txadmin_client import TxAdminConfig
+    monkeypatch.setenv("TXADMIN_ALLOW_INSECURE", "1")
+    assert TxAdminConfig().insecure_transport_error() is None
+    monkeypatch.setenv("TXADMIN_URL", "https://panel.example.com")
+    monkeypatch.delenv("TXADMIN_ALLOW_INSECURE")
+    assert TxAdminConfig().insecure_transport_error() is None
