@@ -2,7 +2,7 @@
 title: Performance rules
 description: Performance optimization rules for CFX resources
 globs: ["**/*.lua", "**/*.js", "**/*.cs"]
-alwaysApply: true
+alwaysApply: false
 standards-version: 1.10.0
 ---
 

@@ -11,7 +11,7 @@ standards-version: 1.10.0
 - Always validate `source` on the server side; never trust client-sent data
 - Never expose server-only logic to the client
 - Use ACE permissions for admin commands: `RegisterCommand('adminCmd', handler, true)`
-- Prefix server events intended only for internal use to prevent remote triggering
+- Events meant only for server-internal use must be registered with `AddEventHandler` only, never `RegisterNetEvent`; an event name or prefix does not stop clients from triggering a net event. Net event handlers must validate `source` and every argument
 - Never store passwords, tokens, or API keys in resource files; use server convars
 - Rate-limit expensive server events to prevent abuse
 - Validate all parameters in server event handlers (type checks, range checks)

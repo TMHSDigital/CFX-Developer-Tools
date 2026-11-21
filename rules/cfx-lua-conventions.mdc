@@ -12,7 +12,7 @@ standards-version: 1.10.0
 - Prefix all custom events with the resource name: `resourceName:eventName`
 - Always capture `source` as a local in server event handlers: `local source = source`
 - Use `RegisterNetEvent` before adding a handler for net events
-- Use compile-time hashing with backticks for model names: `adder`
+- Use compile-time hashing with backticks for model names: ``` `adder` ``` (CfxLua turns it into `GetHashKey("adder")` at compile time)
 - Localize frequently accessed functions: `local Wait = Wait`
 - Use `config.lua` for all configurable values; never hardcode coordinates, item names, job names, or prices
 - Every resource must clean up on stop: blips, markers, entities, NUI focus
@@ -63,16 +63,16 @@ local pos = GetEntityCoords(PlayerPedId())  -- returns vector3
 local dist = #(pos - targetPos)             -- distance calculation
 
 -- vector4 for position + heading
-local v4 = GetEntityCoords(ped) -- returns vector3
+local coords = GetEntityCoords(ped) -- returns vector3
 local heading = GetEntityHeading(ped)
-local spawn = vector4(v4.x, v4.y, v4.z, heading)
+local spawn = vector4(coords.x, coords.y, coords.z, heading)
 ```
 
 ### Guidelines
 
 - Prefer `vector3` over `{x = ..., y = ..., z = ...}` tables
 - Use `#(a - b)` for distance checks instead of `GetDistanceBetweenCoords`
-- Use `quat` when working with `GetEntityRotation` / `SetEntityRotation` that use quaternion overloads
+- `GetEntityRotation` / `SetEntityRotation` use Euler angles (`vector3`); use `quat` with `GetEntityQuaternion` / `SetEntityQuaternion` when you need quaternions
 - `vector3` values are immutable -- arithmetic creates new vectors
 
 ## Lua 5.4 variable attributes

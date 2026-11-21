@@ -57,14 +57,16 @@ CFX-Developer-Tools/
 
 ## Rules (6)
 
+Every rule is path-scoped (`alwaysApply: false`) and applies to the files matched by its globs.
+
 | Rule | Scope | Description |
 |------|-------|-------------|
 | `cfx-lua-conventions.mdc` | `**/*.lua` | Flag CFX-specific Lua antipatterns (string concat in tight loops, missing `local`, deprecated natives) |
 | `cfx-javascript-conventions.mdc` | `**/*.js`, `**/*.ts` | Flag JS/TS antipatterns in CFX context (NUI message routing, async event handlers) |
 | `cfx-csharp-conventions.mdc` | `**/*.cs`, `**/*.csproj` | Flag C# patterns specific to FiveM (BaseScript, Tick handlers, async exports) |
-| `fxmanifest-standards.mdc` | `**/fxmanifest.lua` | Flag missing `fx_version`, `games`, `'cerulean'` declarations and deprecated directives like `lua54 'yes'` |
+| `fxmanifest-standards.mdc` | `**/fxmanifest.lua` | Flag missing `fx_version`, `games`, `'cerulean'` declarations and any `lua54` directive |
 | `security-best-practices.mdc` | `**/*.lua`, `**/*.js`, `**/*.cs` | Flag hardcoded API keys, server-trust violations, unsafe NUI callbacks, missing input validation |
-| `performance-rules.mdc` | CFX resource files | Flag thread blockers, unbounded loops, missing `Wait()` in `CreateThread`, expensive natives in tight loops |
+| `performance-rules.mdc` | `**/*.lua`, `**/*.js`, `**/*.cs` | Flag thread blockers, unbounded loops, missing `Wait()` in `CreateThread`, expensive natives in tight loops |
 
 ## MCP Server (10 tools)
 
