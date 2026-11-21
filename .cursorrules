@@ -8,7 +8,7 @@ You are working on CFX Developer Tools, a Cursor IDE plugin for FiveM and RedM r
 - `snippets/` -- 25 code snippets organized by language (lua, javascript, csharp)
 - `templates/` -- 11 resource templates (standalone, esx, qbcore, qbox, oxcore, vorp, rsg, javascript, csharp, nui-vite, nui-svelte)
 - `examples/` -- 5 complete, runnable reference resources
-- `mcp-server/` -- Python MCP server (FastMCP over stdio) with 10 tools, JSON data files and a pytest suite
+- `mcp-server/` -- Python MCP server (FastMCP over stdio) with 11 tools, JSON data files and a pytest suite
 - `docs/` -- architecture, roadmap, contributing, getting started
 - `.github/workflows/` -- validate, release, drift-check, update-natives, update-docs-index, stale, deploy-docs
 - `mkdocs.yml` -- MkDocs Material config; docs site auto-deploys on push to main

@@ -16,7 +16,7 @@ This is a Cursor IDE plugin for FiveM/RedM (CFX) resource development. It contai
 - **`snippets/`** -- 25 code snippet files (Lua, JS, C#)
 - **`templates/`** -- 11 resource starter templates (standalone, ESX, QBCore, Qbox, ox_core, VORP, RSG, JS, C#, NUI Vite, NUI Svelte)
 - **`examples/`** -- 5 complete, runnable reference resources
-- **`mcp-server/`** -- Python MCP server (FastMCP, stdio) with 10 tools, JSON data files and a pytest suite
+- **`mcp-server/`** -- Python MCP server (FastMCP, stdio) with 11 tools, JSON data files and a pytest suite
 - **`docs/`** -- ARCHITECTURE.md, ROADMAP.md, CONTRIBUTING.md, GETTING-STARTED.md, index.md (docs site landing page)
 - **`CHANGELOG.md`** -- release history; the release workflow's `release-doc-sync` step prepends each release entry
 - **`mkdocs.yml`** -- MkDocs Material configuration for the documentation site

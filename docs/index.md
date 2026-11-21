@@ -2,7 +2,7 @@
 
 **AI-powered development toolkit for FiveM and RedM resource development in Cursor IDE.**
 
-10 skills -- 6 rules -- 10 MCP tools -- 11,500+ natives -- 101 events -- 25 snippets -- 11 templates
+10 skills -- 6 rules -- 11 MCP tools -- 11,500+ natives -- 101 events -- 25 snippets -- 11 templates
 
 ---
 
@@ -61,7 +61,7 @@ For a detailed walkthrough, see the [Getting Started guide](GETTING-STARTED.md).
 flowchart LR
     A["You ask Cursor\na CFX question"] --> B["Cursor loads\na Skill"]
     B --> C{"MCP server\navailable?"}
-    C -- Yes --> D["CFX MCP Server\n(10 tools)"]
+    C -- Yes --> D["CFX MCP Server\n(11 tools)"]
     C -- No --> E["Skill guidance\nonly"]
     D --> F["Scaffold, lookup,\ngenerate, search,\ndetect, docs, txAdmin"]
     E --> G["AI-assisted answer\nin Cursor chat"]

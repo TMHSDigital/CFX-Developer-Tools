@@ -14,6 +14,7 @@ from mcp.types import ToolAnnotations
 from tools.scaffold import scaffold_resource
 from tools.natives import lookup_native
 from tools.manifest_gen import generate_manifest
+from tools.manifest_validate import validate_manifest_report
 from tools.event_search import search_events
 from tools.docs_search import search_docs
 from tools.detect_framework import detect_framework
@@ -122,6 +123,22 @@ def generate_manifest_tool(
         workspace_path: Path to existing resource directory to auto-detect scripts, author, and NUI (optional)
     """
     return generate_manifest(name, game, language, framework, scripts, dependencies, has_nui, workspace_path)
+
+
+@mcp.tool(annotations=READ_ONLY)
+def validate_manifest_tool(path: str, format: str = "text") -> str:
+    """Validate a resource's fxmanifest.lua (the same checks CI runs).
+
+    Checks fx_version 'cerulean', valid games, no lua54/__resource.lua, that
+    every script, files and ui_page entry matches a file (missing build output
+    such as dist/ is a warning), that ui_page is covered by files, and that
+    framework dependencies match the games.
+
+    Args:
+        path: Resource directory or path to its fxmanifest.lua
+        format: "text" (default) or "json" for {"manifest", "errors", "warnings"}
+    """
+    return validate_manifest_report(path, format)
 
 
 @mcp.tool(annotations=READ_ONLY)

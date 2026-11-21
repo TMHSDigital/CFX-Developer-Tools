@@ -6,6 +6,7 @@ EXPECTED_TOOLS = {
     "scaffold_resource_tool",
     "lookup_native_tool",
     "generate_manifest_tool",
+    "validate_manifest_tool",
     "search_events_tool",
     "detect_framework_tool",
     "search_docs_tool",

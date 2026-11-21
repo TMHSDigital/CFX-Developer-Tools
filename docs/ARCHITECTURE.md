@@ -64,6 +64,7 @@ Cursor AI Agent  --(MCP protocol)-->  MCP Server  --(reads)-->  Data Files
 | `scaffold_resource_tool` | Creates a new resource directory with boilerplate. Inherits author from workspace. |
 | `lookup_native_tool` | Searches natives by name, hash, description, or category. Supports namespace browsing. |
 | `generate_manifest_tool` | Generates fxmanifest.lua content. Auto-detects scripts and NUI from workspace. |
+| `validate_manifest_tool` | Validates an existing fxmanifest.lua with the same module CI uses. |
 | `search_events_tool` | Searches 101 events by name, side, game, or framework |
 | `detect_framework_tool` | Scans workspace files to detect ESX, QBCore, Qbox, ox_core, VORP, RSG, or standalone |
 | `search_docs_tool` | Searches the FiveM/RedM documentation index by keyword or section |

@@ -192,29 +192,9 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
-      - name: Check fxmanifest.lua files have required fields
-        run: |
-          python3 << 'EOF'
-          import re, subprocess, sys
-
-          files = subprocess.check_output(
-              ["git", "ls-files", "templates/*/fxmanifest.lua", "examples/*/fxmanifest.lua"], text=True
-          ).split()
-          errors = []
-          for path in files:
-              content = open(path, encoding="utf-8").read()
-              if not re.search(r"^fx_version 'cerulean'", content, re.M):
-                  errors.append(f"{path}: missing fx_version 'cerulean'")
-              if not re.search(r"^games? [{']", content, re.M):
-                  errors.append(f"{path}: missing games declaration")
-
-          if errors:
-              for e in errors:
-                  print(f"::error::{e}", file=sys.stderr)
-              sys.exit(1)
-
-          print(f"All {len(files)} fxmanifest.lua files valid")
-          EOF
+      - name: Validate fxmanifest.lua files (templates and examples)
+        # Same validator as the validate_manifest_tool MCP tool.
+        run: python3 mcp-server/tools/manifest_validate.py templates examples
 
       - name: Validate template package.json files
         run: |
@@ -274,7 +254,7 @@ jobs:
 
       - name: Import server and check tool registration
         working-directory: mcp-server
-        run: python -c "import asyncio, server; tools = asyncio.run(server.mcp.list_tools()); assert len(tools) == 10, [t.name for t in tools]; print(len(tools), 'tools registered')"
+        run: python -c "import asyncio, server; tools = asyncio.run(server.mcp.list_tools()); assert len(tools) == 11, [t.name for t in tools]; print(len(tools), 'tools registered')"
 
       - name: Smoke-call data tools
         working-directory: mcp-server

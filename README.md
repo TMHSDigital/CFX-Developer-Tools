@@ -29,7 +29,7 @@
 ---
 
 <p align="center">
-  10 skills &nbsp;&bull;&nbsp; 6 rules &nbsp;&bull;&nbsp; 10 MCP tools &nbsp;&bull;&nbsp; 11,500+ natives &nbsp;&bull;&nbsp; 101 events &nbsp;&bull;&nbsp; 25 snippets &nbsp;&bull;&nbsp; 11 templates
+  10 skills &nbsp;&bull;&nbsp; 6 rules &nbsp;&bull;&nbsp; 11 MCP tools &nbsp;&bull;&nbsp; 11,500+ natives &nbsp;&bull;&nbsp; 101 events &nbsp;&bull;&nbsp; 25 snippets &nbsp;&bull;&nbsp; 11 templates
 </p>
 
 Scaffold complete FiveM/RedM resources, look up native functions, generate manifests, detect frameworks, search documentation, and write optimized scripts in Lua, JavaScript, and C# -- all from within Cursor's AI chat. Covers the full CFX development lifecycle from project setup to database integration.
@@ -46,7 +46,7 @@ Scaffold complete FiveM/RedM resources, look up native functions, generate manif
 flowchart LR
     A["You ask Cursor\na CFX question"] --> B["Cursor loads\na Skill"]
     B -->     C{"MCP server\navailable?"}
-    C -- Yes --> D["CFX MCP Server\n(10 tools)"]
+    C -- Yes --> D["CFX MCP Server\n(11 tools)"]
     C -- No --> E["Skill guidance\nonly"]
     D --> F["Scaffold, lookup,\ngenerate, search,\ndetect, docs"]
     E --> G["AI-assisted answer\nin Cursor chat"]
@@ -271,7 +271,7 @@ claude mcp add cfx-dev-tools -- python /absolute/path/to/CFX-Developer-Tools/mcp
 ```
 
 <details>
-<summary><strong>Available Tools (10)</strong></summary>
+<summary><strong>Available Tools (11)</strong></summary>
 
 &nbsp;
 
@@ -280,6 +280,7 @@ claude mcp add cfx-dev-tools -- python /absolute/path/to/CFX-Developer-Tools/mcp
 | `scaffold_resource_tool` | Create a new resource with boilerplate files for any framework/language combo. Inherits author from workspace. |
 | `lookup_native_tool` | Search natives by name, hash, description, or category. Browse namespaces. |
 | `generate_manifest_tool` | Generate a complete `fxmanifest.lua` with correct directives. Auto-detects scripts and NUI from workspace. |
+| `validate_manifest_tool` | Validate an existing `fxmanifest.lua`: fx_version, games, lua54, unresolved script/files/ui_page entries, ui_page coverage, framework/game mismatch. Same checks as CI. |
 | `search_events_tool` | Search 101 events by name, side, game, or framework (cfx, esx, qbcore, qbox, oxcore, vorp, rsg, baseevents, chat) |
 | `detect_framework_tool` | Scan workspace files to detect ESX, QBCore, Qbox, ox_core, VORP, RSG, or standalone with confidence score |
 | `search_docs_tool` | Search the FiveM/RedM documentation index by keyword or section |
@@ -338,7 +339,7 @@ CFX-Developer-Tools/
   snippets/            Code snippets -- Lua, JS, C# (25 files)
   templates/           Resource starter templates (11 sets)
   examples/            Complete, runnable reference resources (5)
-  mcp-server/          Python MCP server (10 tools), data files and tests
+  mcp-server/          Python MCP server (11 tools), data files and tests
   docs/                Architecture, roadmap, contributing guide, docs site landing page
   assets/              Logo and images
   .github/             CI/CD workflows (validate, release, drift-check, update-natives, update-docs-index, stale, deploy-docs)

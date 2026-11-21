@@ -6,7 +6,7 @@ Project documentation for Claude Code and AI assistants working on this reposito
 
 ## Project Overview
 
-CFX Developer Tools is a Cursor IDE plugin for FiveM and RedM (CFX) resource development. It includes 10 skills, 6 rules, 25 code snippets, 11 starter templates, and a companion Python MCP server with 10 tools for resource scaffolding, native lookup, manifest generation, framework detection, live doc and event search, and txAdmin server control.
+CFX Developer Tools is a Cursor IDE plugin for FiveM and RedM (CFX) resource development. It includes 10 skills, 6 rules, 25 code snippets, 11 starter templates, and a companion Python MCP server with 11 tools for resource scaffolding, native lookup, manifest generation, framework detection, live doc and event search, and txAdmin server control.
 
 **Works with:** Cursor (plugin), Claude Code (terminal and in-editor), and any MCP-compatible client. The plugin registers the MCP server via `mcp.json`; Claude Code uses the root `.mcp.json` inside this repo, or `claude mcp add cfx-dev-tools -- python /absolute/path/to/mcp-server/server.py` elsewhere (see the README's MCP Server section).
 
@@ -68,7 +68,7 @@ Every rule is path-scoped (`alwaysApply: false`) and applies to the files matche
 | `security-best-practices.mdc` | `**/*.lua`, `**/*.js`, `**/*.cs` | Flag hardcoded API keys, server-trust violations, unsafe NUI callbacks, missing input validation |
 | `performance-rules.mdc` | `**/*.lua`, `**/*.js`, `**/*.cs` | Flag thread blockers, unbounded loops, missing `Wait()` in `CreateThread`, expensive natives in tight loops |
 
-## MCP Server (10 tools)
+## MCP Server (11 tools)
 
 The companion MCP server is Python-based (FastMCP). It exposes CFX-aware tools that read from local data files (`mcp-server/data/`) and the working tree. The txAdmin tools additionally talk to a running txAdmin panel over HTTP, using credentials from the `TXADMIN_URL` / `TXADMIN_USERNAME` / `TXADMIN_PASSWORD` environment variables.
 
@@ -77,6 +77,7 @@ The companion MCP server is Python-based (FastMCP). It exposes CFX-aware tools t
 | `scaffold_resource_tool` | Generate a CFX resource (fxmanifest, config, client/server entries; C# projects for csharp) from a name, game, language and framework; refuses to overwrite existing files unless `overwrite` is set |
 | `lookup_native_tool` | Search GTA5, RDR3, and CFX-platform natives by name, hash, or namespace; returns parameters, return type, and usage notes |
 | `generate_manifest_tool` | Return `fxmanifest.lua` content with required keys, dependencies, scripts and NUI declarations, optionally detected from an existing resource folder (it does not edit files) |
+| `validate_manifest_tool` | Validate a resource's `fxmanifest.lua` with the same checks CI runs (fx_version, games, lua54, unresolved entries, ui_page coverage, framework/game mismatch) |
 | `search_events_tool` | Search the indexed CFX events database for canonical net-event and exports usage patterns |
 | `detect_framework_tool` | Detect ESX / QBCore / Qbox / ox_core / VORP / RSG / standalone from a workspace path |
 | `search_docs_tool` | Search the indexed `docs.fivem.net` snapshot for parameters, gotchas, and code samples |
