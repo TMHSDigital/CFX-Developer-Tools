@@ -7,9 +7,10 @@ Supports filtering by side, game, and framework.
 
 from __future__ import annotations
 
-import json
 import os
 from collections import Counter
+
+from tools.data import load_dataset
 
 
 def search_events(
@@ -27,14 +28,9 @@ def search_events(
 
     filepath = os.path.join(data_path, "events.json")
 
-    if not os.path.exists(filepath):
-        return f"Error: events database not found at {filepath}"
-
-    try:
-        with open(filepath, "r", encoding="utf-8") as f:
-            events = json.load(f)
-    except (OSError, ValueError) as exc:
-        return f"Error: could not read events database at {filepath}: {exc}"
+    events = load_dataset(filepath, "events database")
+    if isinstance(events, str):
+        return events
 
     if not query and not side and not game and not framework:
         return _list_summary(events)

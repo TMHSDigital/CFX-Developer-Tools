@@ -8,9 +8,10 @@ in mcp-server/data/docs_index.json.
 
 from __future__ import annotations
 
-import json
 import os
 from collections import Counter
+
+from tools.data import load_dataset
 
 
 VALID_SECTIONS = {
@@ -37,14 +38,9 @@ def search_docs(
 
     filepath = os.path.join(data_path, "docs_index.json")
 
-    if not os.path.exists(filepath):
-        return f"Error: documentation index not found at {filepath}"
-
-    try:
-        with open(filepath, "r", encoding="utf-8") as f:
-            pages = json.load(f)
-    except (OSError, ValueError) as exc:
-        return f"Error: could not read documentation index at {filepath}: {exc}"
+    pages = load_dataset(filepath, "documentation index")
+    if isinstance(pages, str):
+        return pages
 
     if not query and not section:
         return _list_summary(pages)

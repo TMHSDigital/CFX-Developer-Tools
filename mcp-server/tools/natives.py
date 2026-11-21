@@ -11,6 +11,8 @@ import json
 import os
 from collections import Counter
 
+from tools.data import load_dataset
+
 VALID_GAMES = ("gta5", "rdr3")
 
 
@@ -58,14 +60,9 @@ def lookup_native(
     filename = f"natives_{game}.json"
     filepath = os.path.join(data_path, filename)
 
-    if not os.path.exists(filepath):
-        return f"Error: native database not found at {filepath}"
-
-    try:
-        with open(filepath, "r", encoding="utf-8") as f:
-            natives = json.load(f)
-    except (OSError, ValueError) as exc:
-        return f"Error: could not read native database at {filepath}: {exc}"
+    natives = load_dataset(filepath, "native database")
+    if isinstance(natives, str):
+        return natives
 
     if not query and not category:
         return _list_categories(natives, game, side)
