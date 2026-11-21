@@ -41,7 +41,7 @@ Checks:
 - Content counts in README match actual files on disk (skills, rules, snippets, templates)
 - Em dash and en dash detection (use hyphens, not em/en dashes)
 - Hardcoded credential patterns
-- Deprecated `lua54 'yes'` directive in templates
+- Any `lua54` directive in templates or examples
 - fxmanifest.lua templates have `fx_version`, `games`, `'cerulean'`
 - Python syntax for all MCP server modules
 
@@ -97,7 +97,7 @@ Marks issues/PRs as stale after inactivity and closes them after further inactiv
 ## Code conventions
 
 - **No em dashes or en dashes** -- use hyphens or rewrite. CI will reject them.
-- **No `lua54 'yes'`** -- it is deprecated. Lua 5.4 is the only CFX runtime. CI will reject this in templates.
+- **No `lua54` directive** -- `lua54 'yes'` is deprecated and `lua54 true` is invalid Lua. Lua 5.4 is the only CFX runtime. CI rejects any `lua54` line in templates and examples.
 - **No hardcoded credentials** -- CI scans for password/token/api_key patterns.
 - fxmanifest.lua must use `fx_version 'cerulean'` and include `games`.
 - Python code in `mcp-server/` must pass `py_compile`.

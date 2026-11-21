@@ -12,7 +12,7 @@ A minimal FiveM example resource that demonstrates **NUI development** with a pa
 
 ```
 speedometer-hud/
-  fxmanifest.lua      # fx_version 'cerulean', games { 'gta5' }, lua54 true, ui_page + files
+  fxmanifest.lua      # fx_version 'cerulean', games { 'gta5' }, ui_page + files
   config.lua          # shared_script: Config.Unit ('mph' or 'kmh')
   client/main.lua     # speed loop + rate-limited SendNUIMessage
   html/index.html     # ui_page, links style.css and app.js

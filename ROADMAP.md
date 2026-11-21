@@ -67,7 +67,7 @@ Modernizing development boundaries for clean, modular FiveM/CFX resource generat
 
 - Extend `scaffold_resource_tool` (or add a dedicated `scaffold_qbox_resource_tool`) in `mcp-server/tools/`, plus a matching starter template under `templates/`.
 - Generated `fxmanifest.lua` must include:
-  - `fx_version 'cerulean'`, `games`, and `lua54 true` (never `lua54 'yes'`).
+  - `fx_version 'cerulean'` and `games`, with no `lua54` directive (Lua 5.4 is the only runtime).
   - Native Qbox metadata tags and `ox_lib` / `oxmysql` dependency declarations.
   - `shared_scripts { '@ox_lib/init.lua', ... }` import hooks.
 - Pre-configured directory boundaries: `client/`, `server/`, `shared/` with entry files wired into the manifest.

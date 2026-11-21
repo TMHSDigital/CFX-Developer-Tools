@@ -43,7 +43,7 @@ If the client were trusted to send a price, an attacker would send `price = 0`
 
 | File | Role |
 |------|------|
-| `fxmanifest.lua` | Resource manifest (cerulean, gta5, lua54) |
+| `fxmanifest.lua` | Resource manifest (cerulean, gta5) |
 | `config.lua` | Shared config - the catalogue and the authoritative prices |
 | `server/main.lua` | NetEvent handler, validation, funds, cooldown |
 | `client/main.lua` | Keybind, proximity gate, result notifications |

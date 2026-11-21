@@ -161,13 +161,15 @@ jobs:
           fi
           echo "No hardcoded credentials found"
 
-      - name: Check deprecated lua54 directive in templates
+      - name: Check for lua54 directives in templates and examples
         run: |
-          if grep -r "lua54" templates/ 2>/dev/null; then
-            echo "::error::lua54 directive found in templates. It is deprecated and should be removed."
+          # Lua 5.4 is the only runtime: lua54 'yes' is ignored and lua54 true
+          # is not valid Lua, so no manifest should contain the directive.
+          if grep -rnE "^\s*lua54" --include=fxmanifest.lua templates/ examples/; then
+            echo "::error::lua54 directive found. Remove it; Lua 5.4 is the only runtime."
             exit 1
           fi
-          echo "No deprecated lua54 in templates"
+          echo "No lua54 directives in templates or examples"
 
   validate-counts:
     name: Validate content counts

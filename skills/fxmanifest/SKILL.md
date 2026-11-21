@@ -57,7 +57,7 @@ shared_scripts {
 
 Lua 5.4 is the only runtime as of June 2025. Lua 5.3 has been fully removed from FiveM/RedM.
 
-The `lua54 'yes'` directive is **deprecated and ignored**. Do not include it in new manifests. All Lua scripts automatically run on Lua 5.4 (v5.4.8) regardless of manifest settings.
+The `lua54 'yes'` directive is **deprecated and ignored**. Do not include any `lua54` directive in new manifests (`lua54 true` is not valid Lua and breaks the manifest). All Lua scripts automatically run on Lua 5.4 (v5.4.8) regardless of manifest settings.
 
 Key Lua 5.4 features available by default: integers, bitwise operators, `<const>`, `<close>`, and the updated `math.random` algorithm.
 

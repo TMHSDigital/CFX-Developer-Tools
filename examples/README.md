@@ -2,7 +2,7 @@
 
 Complete, ready-to-use CFX resources that demonstrate the skills and rules in this repo. Unlike `templates/` (blank per-framework skeletons), each folder here is a finished resource you can drop into a server and run.
 
-Every example follows the repo conventions: `fxmanifest.lua` declares `fx_version 'cerulean'`, `games { 'gta5' }`, and `lua54 true`; logic is server-authoritative; and no credentials are hardcoded.
+Every example follows the repo conventions: `fxmanifest.lua` declares `fx_version 'cerulean'`, and `games { 'gta5' }` with no `lua54` directive (Lua 5.4 is the only runtime); logic is server-authoritative; and no credentials are hardcoded.
 
 | Example | Demonstrates | Notes |
 |---------|--------------|-------|
