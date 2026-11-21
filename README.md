@@ -29,7 +29,7 @@
 ---
 
 <p align="center">
-  10 skills &nbsp;&bull;&nbsp; 6 rules &nbsp;&bull;&nbsp; 10 MCP tools &nbsp;&bull;&nbsp; 12,000+ natives &nbsp;&bull;&nbsp; 101 events &nbsp;&bull;&nbsp; 25 snippets &nbsp;&bull;&nbsp; 11 templates
+  10 skills &nbsp;&bull;&nbsp; 6 rules &nbsp;&bull;&nbsp; 10 MCP tools &nbsp;&bull;&nbsp; 11,500+ natives &nbsp;&bull;&nbsp; 101 events &nbsp;&bull;&nbsp; 25 snippets &nbsp;&bull;&nbsp; 11 templates
 </p>
 
 Scaffold complete FiveM/RedM resources, look up native functions, generate manifests, detect frameworks, search documentation, and write optimized scripts in Lua, JavaScript, and C# -- all from within Cursor's AI chat. Covers the full CFX development lifecycle from project setup to database integration.
@@ -360,8 +360,8 @@ See [docs/ROADMAP.md](docs/ROADMAP.md) for the full project roadmap.
 | **v0.2.0** | AGENTS.md and .cursorrules for AI agent guidance | Done |
 | **v0.3.0** | Native DB expansion -- 6300+ GTA5, 5800+ RDR3, category browsing, deprecation flags | Done |
 | **v0.4.x** | Content expansion -- State Bags skill, NUI Vite template, vector docs, FiveM/RedM balance | Done |
-| **v0.5.0** | M3 Expansion -- docs search, 82 events, framework detection, smart code gen | Done |
-| **v0.6.0** | M3.5 Research Alignment -- Qbox/VORP/RSG, Svelte NUI, 101 events, 24 snippets, 11 templates | Done |
+| **v0.5.0** | M3 Expansion -- docs search, 82 events, framework detection, smart code gen | Done | <!-- counts:ignore -->
+| **v0.6.0** | M3.5 Research Alignment -- Qbox/VORP/RSG, Svelte NUI, 101 events, 24 snippets, 11 templates | Done | <!-- counts:ignore -->
 | **v0.7.x - v0.13.x** | Live docs index, txAdmin tools, runnable examples, verified payment callback snippet; see the [CHANGELOG](CHANGELOG.md) and [releases](https://github.com/TMHSDigital/CFX-Developer-Tools/releases) | Done |
 | **v1.0.0** | Stable release -- marketplace listing, full documentation | Planned |
 

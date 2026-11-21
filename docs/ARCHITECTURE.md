@@ -78,7 +78,7 @@ The four txAdmin tools talk to a running txAdmin panel over HTTP, authenticating
 The `mcp-server/data/` directory contains JSON databases updated by CI:
 
 - `natives_gta5.json` - GTA5 native functions (~6000+ natives, 44 categories) -- updated weekly
-- `natives_rdr3.json` - RDR3 native functions (~5800+ natives, 84 categories) -- updated weekly
+- `natives_rdr3.json` - RDR3 native functions (~5400+ natives, 84 categories) -- updated weekly
 - `events.json` - 101 FiveM/RedM events across CFX, ESX, QBCore, Qbox, ox_core, VORP, RSG, baseevents, and chat
 - `docs_index.json` - ~80 documentation pages from docs.fivem.net -- updated monthly
 

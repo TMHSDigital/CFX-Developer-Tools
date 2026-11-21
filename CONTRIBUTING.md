@@ -56,7 +56,7 @@ Add or update a test in `mcp-server/tests/` with every change to `mcp-server/too
 
 ## Plugin Structure
 
-The repo is organized as a Cursor plugin with **9 skills** and **6 rules**, plus snippets, templates, and a companion MCP server.
+The repo is organized as a Cursor plugin with **10 skills** and **6 rules**, plus snippets, templates, and a companion MCP server.
 
 ```text
 .cursor-plugin/

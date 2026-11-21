@@ -177,46 +177,14 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
-      - name: Check skill and snippet counts match plugin.json
-        run: |
-          python3 << 'EOF'
-          import json, os, sys
-
-          m = json.load(open('.cursor-plugin/plugin.json'))
-          errors = []
-
-          skill_count = len(m.get('skills', []))
-          rule_count = len(m.get('rules', []))
-
-          snippet_count = sum(
-              len(files)
-              for root, dirs, files in os.walk('snippets')
-              if files
-          )
-
-          template_count = sum(
-              1 for d in os.listdir('templates')
-              if os.path.isdir(os.path.join('templates', d))
-              and os.path.exists(os.path.join('templates', d, 'fxmanifest.lua'))
-          )
-
-          readme = open('README.md').read()
-          if f'{skill_count} skills' not in readme:
-              errors.append(f'README skill count mismatch (expected {skill_count})')
-          if f'{snippet_count} snippets' not in readme:
-              errors.append(f'README snippet count mismatch (expected {snippet_count})')
-          if f'{template_count} templates' not in readme:
-              errors.append(f'README template count mismatch (expected {template_count})')
-          if f'{rule_count} rules' not in readme:
-              errors.append(f'README rule count mismatch (expected {rule_count})')
-
-          if errors:
-              for e in errors:
-                  print(f'::error::{e}', file=sys.stderr)
-              sys.exit(1)
-
-          print(f'Counts verified: {skill_count} skills, {rule_count} rules, {snippet_count} snippets, {template_count} templates')
-          EOF
+      - name: Check that documented counts match the tree
+        # Counts come from .github/scripts/counts.py (also used by release.yml).
+        # Add <!-- counts:ignore --> to a line that states a historical count.
+        run: >-
+          python3 .github/scripts/counts.py --require README.md --check
+          README.md CLAUDE.md AGENTS.md .cursorrules CONTRIBUTING.md
+          docs/index.md docs/GETTING-STARTED.md docs/ARCHITECTURE.md
+          docs/CONTRIBUTING.md mcp-server/README.md
 
   validate-templates:
     name: Validate templates, examples and snippets
