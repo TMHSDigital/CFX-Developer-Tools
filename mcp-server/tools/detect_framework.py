@@ -11,17 +11,30 @@ import os
 import re
 
 
-MANIFEST_SIGNALS: dict[str, str] = {
-    "es_extended": "esx",
-    "esx_": "esx",
-    "qbx_core": "qbox",
-    "qb-core": "qbcore",
-    "qb-": "qbcore",
-    "ox_core": "oxcore",
-    "ox_lib": "oxcore",
-    "vorp_core": "vorp",
-    "rsg-core": "rsg",
-}
+# Manifest signals match a quoted dependency or script token such as
+# 'es_extended', '@qbx_core/...' or "rsg-core", not bare substrings, so
+# unrelated names (for example qb-target or esx_menu) do not count.
+def _manifest_token(name: str) -> re.Pattern[str]:
+    return re.compile(r"""['"]@?""" + re.escape(name) + r"""[/'"]""")
+
+
+MANIFEST_SIGNALS: list[tuple[re.Pattern[str], str, str]] = [
+    (_manifest_token("es_extended"), "es_extended", "esx"),
+    (_manifest_token("qbx_core"), "qbx_core", "qbox"),
+    (_manifest_token("qb-core"), "qb-core", "qbcore"),
+    (_manifest_token("ox_core"), "ox_core", "oxcore"),
+    (_manifest_token("vorp_core"), "vorp_core", "vorp"),
+    (_manifest_token("rsg-core"), "rsg-core", "rsg"),
+]
+
+# Libraries are reported but do not decide the framework: ox_lib is used by
+# ESX, QBCore, Qbox and standalone resources alike.
+LIBRARY_SIGNALS: list[tuple[re.Pattern[str], str]] = [
+    (_manifest_token("ox_lib"), "ox_lib"),
+    (_manifest_token("oxmysql"), "oxmysql"),
+]
+
+LUA_COMMENT_RE = re.compile(r"--.*")
 
 CODE_SIGNALS: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"""exports\s*\[\s*['"]es_extended['"]\s*\]"""), "esx"),
@@ -34,8 +47,6 @@ CODE_SIGNALS: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"""QBCore\s*=\s*exports"""), "qbcore"),
     (re.compile(r"""GetCoreObject"""), "qbcore"),
     (re.compile(r"""require\s+['"]@ox_core"""), "oxcore"),
-    (re.compile(r"""require\s+['"]@ox_lib"""), "oxcore"),
-    (re.compile(r"""exports\s*\[\s*['"]ox_lib['"]\s*\]"""), "oxcore"),
     (re.compile(r"""exports\.vorp_core"""), "vorp"),
     (re.compile(r"""VORPcore\s*="""), "vorp"),
     (re.compile(r"""exports\s*\[\s*['"]rsg-core['"]\s*\]"""), "rsg"),
@@ -64,7 +75,8 @@ def detect_framework(workspace_path: str = ".") -> str:
         "vorp": [], "rsg": [], "standalone": [],
     }
 
-    _scan_manifests(workspace_path, scores, evidence)
+    libraries: set[str] = set()
+    _scan_manifests(workspace_path, scores, evidence, libraries)
     _scan_code(workspace_path, scores, evidence)
 
     if all(v == 0 for v in scores.values()):
@@ -72,6 +84,7 @@ def detect_framework(workspace_path: str = ".") -> str:
         evidence["standalone"].append("No framework signals detected")
 
     best = max(scores, key=lambda k: scores[k])
+    tied = [k for k, v in scores.items() if v == scores[best]]
     total = sum(scores.values())
     confidence = scores[best] / total if total > 0 else 0
 
@@ -82,19 +95,37 @@ def detect_framework(workspace_path: str = ".") -> str:
     else:
         confidence_label = "high"
 
-    lines = [
-        f"Detected framework: {best}",
-        f"Confidence: {confidence_label} ({scores[best]} signals, {confidence:.0%} of total)",
-        "",
-    ]
+    if len(tied) > 1:
+        lines = [
+            f"Detected framework: multiple frameworks / bridge ({', '.join(tied)})",
+            f"Confidence: tie ({scores[best]} signals each). The resource supports "
+            "several frameworks or bridges between them.",
+            "",
+        ]
+        for k in tied:
+            if evidence[k]:
+                lines.append(f"Evidence for {k}:")
+                for e in evidence[k][:5]:
+                    lines.append(f"  - {e}")
+        lines.append("")
+    else:
+        lines = [
+            f"Detected framework: {best}",
+            f"Confidence: {confidence_label} ({scores[best]} signals, {confidence:.0%} of total)",
+            "",
+        ]
 
-    if evidence[best]:
-        lines.append("Evidence:")
-        for e in evidence[best][:10]:
-            lines.append(f"  - {e}")
+        if evidence[best]:
+            lines.append("Evidence:")
+            for e in evidence[best][:10]:
+                lines.append(f"  - {e}")
+            lines.append("")
+
+    if libraries:
+        lines.append(f"Libraries: {', '.join(sorted(libraries))}")
         lines.append("")
 
-    others = {k: v for k, v in scores.items() if k != best and v > 0}
+    others = {k: v for k, v in scores.items() if k not in tied and v > 0}
     if others:
         lines.append("Other signals found:")
         for k, v in sorted(others.items(), key=lambda x: -x[1]):
@@ -109,6 +140,7 @@ def _scan_manifests(
     workspace_path: str,
     scores: dict[str, int],
     evidence: dict[str, list[str]],
+    libraries: set[str],
 ) -> None:
     """Scan fxmanifest.lua files for dependency/shared_script signals."""
     for root, _dirs, files in os.walk(workspace_path):
@@ -128,10 +160,14 @@ def _scan_manifests(
             except OSError:
                 continue
 
-            for signal, framework in MANIFEST_SIGNALS.items():
-                if signal in content:
+            content = LUA_COMMENT_RE.sub("", content)
+            for pattern, signal, framework in MANIFEST_SIGNALS:
+                if pattern.search(content):
                     scores[framework] += 3
                     evidence[framework].append(f"{relpath}: manifest references '{signal}'")
+            for pattern, library in LIBRARY_SIGNALS:
+                if pattern.search(content):
+                    libraries.add(library)
 
 
 def _scan_code(
