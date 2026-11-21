@@ -78,7 +78,14 @@ SHARED_PATTERNS = re.compile(
 
 CODE_BLOCK_RE = re.compile(r"```[\s\S]*?```")
 HTML_TAG_RE = re.compile(r"<[^>]+>")
-DEPRECATED_RE = re.compile(r"\b(deprecated|obsolete)\b", re.IGNORECASE)
+# Matched against the cleaned description (code samples removed) and only
+# when the text says the native itself is deprecated, so phrases such as
+# "replaces the deprecated X" do not flag a native.
+DEPRECATED_RE = re.compile(
+    r"\b(?:is|are|was|were|been|now|marked as)\s+(?:deprecated|obsolete)\b"
+    r"|^\W*(?:deprecated|obsolete)\b",
+    re.IGNORECASE | re.MULTILINE,
+)
 
 
 def classify_side(name: str, category: str, apiset: str | None = None) -> str:
@@ -88,6 +95,13 @@ def classify_side(name: str, category: str, apiset: str | None = None) -> str:
 
     if category.upper() in SERVER_ONLY_NAMESPACES:
         return "server"
+
+    # Game (RAGE) natives run on the client. The name heuristics below are
+    # for CFX platform natives only; game natives that share a name with a
+    # CFX server native (GetPlayerPed, DeleteEntity, ...) are separate
+    # client entries.
+    if category.upper() != "CFX":
+        return "client"
 
     if SERVER_SIDE_PATTERNS.match(name):
         return "server"
@@ -131,10 +145,26 @@ def clean_description(raw: str) -> tuple[str, str | None]:
     return (desc, examples)
 
 
-def transform_file(input_path: str, output_path: str, cfx_data: dict | None = None) -> int:
+def cfx_native_applies(native: dict, game: str | None) -> bool:
+    """Return True if a CFX platform native belongs in the given game's DB.
+
+    Upstream natives_cfx.json marks game-specific natives with "game"
+    ("gta5", "rdr3", "ny"); natives without the field apply to every game.
+    """
+    native_game = native.get("game") if isinstance(native, dict) else None
+    return game is None or not native_game or native_game == game
+
+
+def transform_file(
+    input_path: str,
+    output_path: str,
+    cfx_data: dict | None = None,
+    game: str | None = None,
+) -> int:
     """Transform upstream natives JSON to our flat schema.
 
-    If cfx_data is provided, CFX natives are merged into the output.
+    If cfx_data is provided, the CFX natives that apply to ``game`` are
+    merged into the output.
     """
     with open(input_path, "r", encoding="utf-8") as f:
         raw = json.load(f)
@@ -143,7 +173,9 @@ def transform_file(input_path: str, output_path: str, cfx_data: dict | None = No
         for ns, entries in cfx_data.items():
             if ns not in raw:
                 raw[ns] = {}
-            raw[ns].update(entries)
+            raw[ns].update({
+                h: n for h, n in entries.items() if cfx_native_applies(n, game)
+            })
 
     natives: list[dict] = []
 
@@ -194,7 +226,7 @@ def transform_file(input_path: str, output_path: str, cfx_data: dict | None = No
             if return_type is None:
                 return_type = "void"
 
-            deprecated = bool(DEPRECATED_RE.search(raw_desc))
+            deprecated = bool(DEPRECATED_RE.search(description))
 
             entry = {
                 "name": name,
@@ -234,13 +266,13 @@ def main() -> None:
         print(f"CFX: loaded {cfx_total} platform natives")
 
     if os.path.exists(gta5_in):
-        count = transform_file(gta5_in, gta5_out, cfx_data)
+        count = transform_file(gta5_in, gta5_out, cfx_data, game="gta5")
         print(f"GTA5: transformed {count} natives")
     else:
         print("GTA5 raw file not found, skipping")
 
     if os.path.exists(rdr3_in):
-        count = transform_file(rdr3_in, rdr3_out, cfx_data)
+        count = transform_file(rdr3_in, rdr3_out, cfx_data, game="rdr3")
         print(f"RDR3: transformed {count} natives")
     else:
         print("RDR3 raw file not found, skipping")

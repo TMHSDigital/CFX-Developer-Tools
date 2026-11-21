@@ -1220,7 +1220,7 @@
     "description": "This native is marked as a deprecated native internally, use [HINT_SCRIPT_AUDIO_BANK](#\\_0xFB380A29641EC31A) instead",
     "side": "client",
     "category": "AUDIO",
-    "deprecated": true,
+    "deprecated": false,
     "examples": null
   },
   {
@@ -1244,7 +1244,7 @@
     "description": "This is marked as a deprecated function internally, please use [HINT_SCRIPT_AUDIO_BANK](#\\_0xFB380A29641EC31A) instead.",
     "side": "client",
     "category": "AUDIO",
-    "deprecated": true,
+    "deprecated": false,
     "examples": null
   },
   {
@@ -9687,17 +9687,6 @@
     "examples": null
   },
   {
-    "name": "ClearDrawOrigin",
-    "hash": "0xDD76B263",
-    "params": [],
-    "return_type": "void",
-    "description": "Resets the screen's draw-origin which was changed by the function [`SET_DRAW_ORIGIN`](#\\_0xE10198D5) back to `x=0, y=0`. See [`SET_DRAW_ORIGIN`](#\\_0xE10198D5) for further information.",
-    "side": "client",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": null
-  },
-  {
     "name": "ClearPedProp",
     "hash": "0x2D23D743",
     "params": [
@@ -10513,22 +10502,6 @@
     "examples": null
   },
   {
-    "name": "DoesTextureExist",
-    "hash": "0x8B25BC20",
-    "params": [
-      {
-        "name": "textureId",
-        "type": "int"
-      }
-    ],
-    "return_type": "bool",
-    "description": "In compare to `0x31DC8D3F216D8509` return true if texture its created when `0x31DC8D3F216D8509` return true if you put there any id in valid range",
-    "side": "client",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": null
-  },
-  {
     "name": "DoesTimecycleModifierHasVar",
     "hash": "0xC53BB6D3",
     "params": [
@@ -10596,58 +10569,6 @@
     "hash": "0x237613B3",
     "params": [],
     "return_type": "int",
-    "description": "",
-    "side": "client",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": null
-  },
-  {
-    "name": "DrawBox",
-    "hash": "0xCD4D9DD5",
-    "params": [
-      {
-        "name": "x1",
-        "type": "float"
-      },
-      {
-        "name": "y1",
-        "type": "float"
-      },
-      {
-        "name": "z1",
-        "type": "float"
-      },
-      {
-        "name": "x2",
-        "type": "float"
-      },
-      {
-        "name": "y2",
-        "type": "float"
-      },
-      {
-        "name": "z2",
-        "type": "float"
-      },
-      {
-        "name": "red",
-        "type": "int"
-      },
-      {
-        "name": "green",
-        "type": "int"
-      },
-      {
-        "name": "blue",
-        "type": "int"
-      },
-      {
-        "name": "alpha",
-        "type": "int"
-      }
-    ],
-    "return_type": "void",
     "description": "",
     "side": "client",
     "category": "CFX",
@@ -10818,58 +10739,6 @@
     "examples": null
   },
   {
-    "name": "DrawLine",
-    "hash": "0xB3426BCC",
-    "params": [
-      {
-        "name": "x1",
-        "type": "float"
-      },
-      {
-        "name": "y1",
-        "type": "float"
-      },
-      {
-        "name": "z1",
-        "type": "float"
-      },
-      {
-        "name": "x2",
-        "type": "float"
-      },
-      {
-        "name": "y2",
-        "type": "float"
-      },
-      {
-        "name": "z2",
-        "type": "float"
-      },
-      {
-        "name": "red",
-        "type": "int"
-      },
-      {
-        "name": "green",
-        "type": "int"
-      },
-      {
-        "name": "blue",
-        "type": "int"
-      },
-      {
-        "name": "alpha",
-        "type": "int"
-      }
-    ],
-    "return_type": "void",
-    "description": "",
-    "side": "client",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": null
-  },
-  {
     "name": "DrawLine2d",
     "hash": "0xB856A90",
     "params": [
@@ -10912,70 +10781,6 @@
     ],
     "return_type": "void",
     "description": "Like DRAW_RECT, but it's a line.",
-    "side": "client",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": null
-  },
-  {
-    "name": "DrawPoly",
-    "hash": "0xABD19253",
-    "params": [
-      {
-        "name": "x1",
-        "type": "float"
-      },
-      {
-        "name": "y1",
-        "type": "float"
-      },
-      {
-        "name": "z1",
-        "type": "float"
-      },
-      {
-        "name": "x2",
-        "type": "float"
-      },
-      {
-        "name": "y2",
-        "type": "float"
-      },
-      {
-        "name": "z2",
-        "type": "float"
-      },
-      {
-        "name": "x3",
-        "type": "float"
-      },
-      {
-        "name": "y3",
-        "type": "float"
-      },
-      {
-        "name": "z3",
-        "type": "float"
-      },
-      {
-        "name": "red",
-        "type": "int"
-      },
-      {
-        "name": "green",
-        "type": "int"
-      },
-      {
-        "name": "blue",
-        "type": "int"
-      },
-      {
-        "name": "alpha",
-        "type": "int"
-      }
-    ],
-    "return_type": "void",
-    "description": "",
     "side": "client",
     "category": "CFX",
     "deprecated": false,
@@ -11646,17 +11451,6 @@
     "examples": null
   },
   {
-    "name": "GetAspectRatio",
-    "hash": "0x2CA8F641",
-    "params": [],
-    "return_type": "float",
-    "description": "Gets the current aspect ratio",
-    "side": "client",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": "```lua\nlocal ratio = GetAspectRatio()\r\nprint(string.format(\"%.2f\", ratio))\n```"
-  },
-  {
     "name": "GetCalmingQuadAtCoords",
     "hash": "0x870E8B40",
     "params": [
@@ -11766,22 +11560,6 @@
     ],
     "return_type": "void",
     "description": "Returns the world matrix of the specified camera. To turn this into a view matrix, calculate the inverse.",
-    "side": "client",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": null
-  },
-  {
-    "name": "GetClientConfigBool",
-    "hash": "0xADA7DB9D",
-    "params": [
-      {
-        "name": "flagIndex",
-        "type": "int"
-      }
-    ],
-    "return_type": "BOOL",
-    "description": "Returns whether a specific client configuration flag is currently enabled.\r\nYou can find a list of configuration flags in [`SET_CLIENT_CONFIG_BOOL`](#\\_0xD174EF7E).",
     "side": "client",
     "category": "CFX",
     "deprecated": false,
@@ -11935,26 +11713,6 @@
     "category": "CFX",
     "deprecated": false,
     "examples": null
-  },
-  {
-    "name": "GetCurrentScreenResolution",
-    "hash": "0x337F0116",
-    "params": [
-      {
-        "name": "width",
-        "type": "int*"
-      },
-      {
-        "name": "height",
-        "type": "int*"
-      }
-    ],
-    "return_type": "void",
-    "description": "Gets the current screen resolution.",
-    "side": "client",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": "```lua\nlocal  width, height = GetCurrentScreenResolution()\r\nprint(string.format(\"Current screen resolution: %dx%d\", width, height))\r\n\n```"
   },
   {
     "name": "GetCurrentServerEndpoint",
@@ -13588,33 +13346,6 @@
     "examples": null
   },
   {
-    "name": "GetMinimapType",
-    "hash": "0xA6FF71C9",
-    "params": [],
-    "return_type": "int",
-    "description": "Get the minimap type:",
-    "side": "client",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": "```\n0 = Off,\r\n1 = Regular,\r\n2 = Expanded,\r\n3 = Simple,\n```"
-  },
-  {
-    "name": "GetMount",
-    "hash": "0xDD31EC4E",
-    "params": [
-      {
-        "name": "ped",
-        "type": "Ped"
-      }
-    ],
-    "return_type": "Ped",
-    "description": "",
-    "side": "server",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": null
-  },
-  {
     "name": "GetNetTypeFromEntity",
     "hash": "0x23B2A641",
     "params": [
@@ -13629,17 +13360,6 @@
     "category": "CFX",
     "deprecated": false,
     "examples": "```cpp\nenum eNetObjEntityType\r\n{\r\n    Automobile = 0,\r\n    Bike = 1,\r\n    Boat = 2,\r\n    Door = 3,\r\n    Heli = 4,\r\n    Object = 5,\r\n    Ped = 6,\r\n    Pickup = 7,\r\n    PickupPlacement = 8,\r\n    Plane = 9,\r\n    Submarine = 10,\r\n    Player = 11,\r\n    Trailer = 12,\r\n    Train = 13\r\n};\n```\n\n```cpp\nenum eNetObjEntityType\r\n{\r\n    Animal = 0,\r\n    Automobile = 1,\r\n    Bike = 2,\r\n    Boat = 3,\r\n    Door = 4,\r\n    Heli = 5,\r\n    Object = 6,\r\n    Ped = 7,\r\n    Pickup = 8,\r\n    PickupPlacement = 9,\r\n    Plane = 10,\r\n    Submarine = 11,\r\n    Player = 12,\r\n    Trailer = 13,\r\n    Train = 14,\r\n    DraftVeh = 15,\r\n    StatsTracker = 16,\r\n    PropSet = 17,\r\n    AnimScene = 18,\r\n    GroupScenario = 19,\r\n    Herd = 20,\r\n    Horse = 21,\r\n    WorldState = 22,\r\n    WorldProjectile = 23,\r\n    Incident = 24,\r\n    Guardzone = 25,\r\n    PedGroup = 26,\r\n    CombatDirector = 27,\r\n    PedSharedTargeting = 28,\r\n    Persistent = 29\r\n};\n```"
-  },
-  {
-    "name": "GetNetworkWalkMode",
-    "hash": "0x2CAFD5E9",
-    "params": [],
-    "return_type": "bool",
-    "description": "",
-    "side": "client",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": null
   },
   {
     "name": "GetNuiCursorPosition",
@@ -13892,42 +13612,6 @@
     "category": "CFX",
     "deprecated": false,
     "examples": null
-  },
-  {
-    "name": "GetPedBoneMatrix",
-    "hash": "0x9C5E7C9C",
-    "params": [
-      {
-        "name": "ped",
-        "type": "Ped"
-      },
-      {
-        "name": "boneId",
-        "type": "int"
-      },
-      {
-        "name": "forwardVector",
-        "type": "Vector3*"
-      },
-      {
-        "name": "rightVector",
-        "type": "Vector3*"
-      },
-      {
-        "name": "upVector",
-        "type": "Vector3*"
-      },
-      {
-        "name": "position",
-        "type": "Vector3*"
-      }
-    ],
-    "return_type": "void",
-    "description": "Returns the bone matrix of the specified bone id. usefull for entity attachment",
-    "side": "client",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": "```lua\nlocal fowardVector, rightVector, upVector, position = GetPedBoneMatrix(PlayerPedId(),boneId)\n```"
   },
   {
     "name": "GetPedCauseOfDeath",
@@ -14465,22 +14149,6 @@
     "examples": null
   },
   {
-    "name": "GetPedScale",
-    "hash": "0xA0F3B420",
-    "params": [
-      {
-        "name": "ped",
-        "type": "Ped"
-      }
-    ],
-    "return_type": "float",
-    "description": "",
-    "side": "client",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": null
-  },
-  {
     "name": "GetPedScriptTaskCommand",
     "hash": "0x84FE084",
     "params": [
@@ -14595,38 +14263,6 @@
     "category": "CFX",
     "deprecated": false,
     "examples": "```lua\nlocal sweat = GetPedSweat(PlayerPedId())\n```"
-  },
-  {
-    "name": "GetPedWetness",
-    "hash": "0xF402C171",
-    "params": [
-      {
-        "name": "ped",
-        "type": "Ped"
-      }
-    ],
-    "return_type": "float",
-    "description": "",
-    "side": "client",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": null
-  },
-  {
-    "name": "GetPedWetnessHeight",
-    "hash": "0x2545ADE0",
-    "params": [
-      {
-        "name": "ped",
-        "type": "Ped"
-      }
-    ],
-    "return_type": "float",
-    "description": "",
-    "side": "client",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": null
   },
   {
     "name": "GetPlayerCameraRotation",
@@ -15544,42 +15180,6 @@
     "return_type": "Hash",
     "description": "An alias of [GET_CURRENT_PED_WEAPON](#\\_0xB0237302).\n\nNote, the client-side [GET_SELECTED_PED_WEAPON](#\\_0x0A6DB4965674D243) native returns the weapon selected via the HUD (weapon wheel). This data is not available to FXServer.",
     "side": "server",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": null
-  },
-  {
-    "name": "GetShapeTestResultIncludingMaterial",
-    "hash": "0x4301E10C",
-    "params": [
-      {
-        "name": "shapeTestHandle",
-        "type": "int"
-      },
-      {
-        "name": "hit",
-        "type": "BOOL*"
-      },
-      {
-        "name": "endCoords",
-        "type": "Vector3*"
-      },
-      {
-        "name": "surfaceNormal",
-        "type": "Vector3*"
-      },
-      {
-        "name": "materialHash",
-        "type": "Hash*"
-      },
-      {
-        "name": "entityHit",
-        "type": "Entity*"
-      }
-    ],
-    "return_type": "int",
-    "description": "Returns the result of a shape test, also returning the material of any touched surface.\n\nWhen used with an asynchronous shape test, this native should be looped until returning 0 or 2, after which the handle is invalidated.\n\nUnless the return value is 2, the other return values are undefined.",
-    "side": "client",
     "category": "CFX",
     "deprecated": false,
     "examples": null
@@ -18775,22 +18375,6 @@
     "examples": null
   },
   {
-    "name": "IsPedOnMount",
-    "hash": "0x43103006",
-    "params": [
-      {
-        "name": "ped",
-        "type": "Ped"
-      }
-    ],
-    "return_type": "BOOL",
-    "description": "",
-    "side": "server",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": null
-  },
-  {
     "name": "IsPedRagdoll",
     "hash": "0xC833BBE1",
     "params": [
@@ -19902,22 +19486,6 @@
     "examples": null
   },
   {
-    "name": "NetworkDoesEntityExistWithNetworkId",
-    "hash": "0x1E2E3177",
-    "params": [
-      {
-        "name": "netId",
-        "type": "int"
-      }
-    ],
-    "return_type": "BOOL",
-    "description": "",
-    "side": "client",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": null
-  },
-  {
     "name": "NetworkGetEntityFromNetworkId",
     "hash": "0x5B912C3F",
     "params": [
@@ -20392,38 +19960,6 @@
     "examples": null
   },
   {
-    "name": "RegisterRawKeymap",
-    "hash": "0x49C1F6DC",
-    "params": [
-      {
-        "name": "keymapName",
-        "type": "char*"
-      },
-      {
-        "name": "onKeyDown",
-        "type": "func"
-      },
-      {
-        "name": "onKeyUp",
-        "type": "func"
-      },
-      {
-        "name": "rawKeyIndex",
-        "type": "int"
-      },
-      {
-        "name": "canBeDisabled",
-        "type": "BOOL"
-      }
-    ],
-    "return_type": "void",
-    "description": "Registers a keymap that will be triggered whenever `rawKeyIndex` is pressed or released.\n\n`onKeyUp` and `onKeyDown` will not provide any arguments.",
-    "side": "client",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": "```lua\nfunction on_key_up()\r\n\tprint(\"key no longer pressed\")\r\nend\r\n\r\nfunction on_key_down()\r\n\tprint(\"key is pressed\")\r\nend\r\n\r\nlocal KEY_E = 69\r\nlocal canBeDisabled = false\r\n\r\n\r\nRegisterRawKeymap(\"our_keymap\", on_key_up, on_key_down, KEY_E, canBeDisabled)\n```"
-  },
-  {
     "name": "RegisterRawNuiCallback",
     "hash": "0xA8AE9C2F",
     "params": [
@@ -20652,26 +20188,6 @@
     "examples": null
   },
   {
-    "name": "RemapRawKeymap",
-    "hash": "0x6E38C1B9",
-    "params": [
-      {
-        "name": "keymapName",
-        "type": "char*"
-      },
-      {
-        "name": "newRawKeyIndex",
-        "type": "int"
-      }
-    ],
-    "return_type": "void",
-    "description": "Remaps the keymap bound to `keymapName` to `newRawKeyIndex`\n\nVirtual key codes can be found [here](https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes)",
-    "side": "client",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": "```lua\n\r\nfunction on_key_up()\r\n\tprint(\"key no longer pressed\")\r\nend\r\n\r\nfunction on_key_down()\r\n\tprint(\"key is pressed\")\r\nend\r\n\r\nlocal KEY_SPACE = 32\r\nlocal canBeDisabled = false\r\n\r\nlocal KEY_E = 69\r\n\r\nRegisterRawKeymap(\"our_keymap\", on_key_up, on_key_down, KEY_SPACE, canBeDisabled)\r\n\r\nRemapRawKeymap(\"our_keymap\", KEY_E)\n```"
-  },
-  {
     "name": "RemoveAllPedWeapons",
     "hash": "0xA44CE817",
     "params": [
@@ -20790,22 +20306,6 @@
     "category": "CFX",
     "deprecated": false,
     "examples": null
-  },
-  {
-    "name": "RemoveTexture",
-    "hash": "0x1582C7F2",
-    "params": [
-      {
-        "name": "textureId",
-        "type": "int"
-      }
-    ],
-    "return_type": "void",
-    "description": "Removes the specified texture and remove it from the ped.\r\nUnlike `0x6BEFAA907B076859` which only marks the texture as \"can be reused\" (and keeps it until will be reused), this function deletes it right away. Can fix some sync issues. `DOES_TEXTURE_EXIST` can be use to wait until fully unloaded by game",
-    "side": "client",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": "```lua\nRemoveTexture(textureId)\r\nwhile DoesTextureExist(textureId) do \r\n    Wait(0)\r\nend\n```"
   },
   {
     "name": "RemoveTimecycleModifier",
@@ -21429,22 +20929,6 @@
     "examples": null
   },
   {
-    "name": "SetBackfaceculling",
-    "hash": "0xC44C2F44",
-    "params": [
-      {
-        "name": "toggle",
-        "type": "BOOL"
-      }
-    ],
-    "return_type": "void",
-    "description": "",
-    "side": "client",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": null
-  },
-  {
     "name": "SetBlipSprite",
     "hash": "0x8DBBB0B9",
     "params": [
@@ -21515,26 +20999,6 @@
     "category": "CFX",
     "deprecated": false,
     "examples": "```lua\nlocal success = SetCalmingQuadDampening(0, 1.0)\n```"
-  },
-  {
-    "name": "SetClientConfigBool",
-    "hash": "0xD174EF7E",
-    "params": [
-      {
-        "name": "flagIndex",
-        "type": "int"
-      },
-      {
-        "name": "enabled",
-        "type": "BOOL"
-      }
-    ],
-    "return_type": "void",
-    "description": "Sets the value of a client configuration flag.\r\nThis native allows enabling or disabling specific one-time client-side features.",
-    "side": "client",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": "```cpp\nenum ClientConfigFlag\r\n{\r\n    WeaponsNoAutoReload = 0,\r\n\tUIVisibleWhenDead = 1,\r\n\tDisableDeathAudioScene = 2,\r\n\tDisableRemoteAttachments = 3\r\n}\n```"
   },
   {
     "name": "SetConvar",
@@ -21616,26 +21080,6 @@
     "return_type": "void",
     "description": "SET_CURRENT_PED_WEAPON\n\n**This is the server-side RPC native equivalent of the client native [SET_CURRENT_PED_WEAPON](?\\_0xADF692B254977C0C).**",
     "side": "server",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": null
-  },
-  {
-    "name": "SetCursorLocation",
-    "hash": "0x8A7A8DAC",
-    "params": [
-      {
-        "name": "x",
-        "type": "float"
-      },
-      {
-        "name": "y",
-        "type": "float"
-      }
-    ],
-    "return_type": "BOOL",
-    "description": "",
-    "side": "client",
     "category": "CFX",
     "deprecated": false,
     "examples": null
@@ -21759,34 +21203,6 @@
     ],
     "return_type": "void",
     "description": "This native sets the hover text of the image asset for the discord rich presence implementation.",
-    "side": "client",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": null
-  },
-  {
-    "name": "SetDrawOrigin",
-    "hash": "0xE10198D5",
-    "params": [
-      {
-        "name": "x",
-        "type": "float"
-      },
-      {
-        "name": "y",
-        "type": "float"
-      },
-      {
-        "name": "z",
-        "type": "float"
-      },
-      {
-        "name": "is2d",
-        "type": "BOOL"
-      }
-    ],
-    "return_type": "void",
-    "description": "Sets the on-screen drawing origin for draw-functions in world coordinates.\n\nThe effect can be reset by calling [`CLEAR_DRAW_ORIGIN`](#\\_0xDD76B263) and is limited to 32 different origins each frame.",
     "side": "client",
     "category": "CFX",
     "deprecated": false,
@@ -22747,22 +22163,6 @@
     ],
     "return_type": "void",
     "description": "",
-    "side": "client",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": null
-  },
-  {
-    "name": "SetIgnoreVehicleOwnershipForStowing",
-    "hash": "0x85A10FFD",
-    "params": [
-      {
-        "name": "ignore",
-        "type": "BOOL"
-      }
-    ],
-    "return_type": "void",
-    "description": "Sets whether or not ownership checks should be performed while trying to stow a carriable on a hunting wagon.",
     "side": "client",
     "category": "CFX",
     "deprecated": false,
@@ -23733,22 +23133,6 @@
     "examples": null
   },
   {
-    "name": "SetMinimapType",
-    "hash": "0x5FB53015",
-    "params": [
-      {
-        "name": "type",
-        "type": "int"
-      }
-    ],
-    "return_type": "void",
-    "description": "Possible Types:",
-    "side": "client",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": "```\n0 = Off,\r\n1 = Regular,\r\n2 = Expanded,\r\n3 = Simple,\n```"
-  },
-  {
     "name": "SetModelHeadlightConfiguration",
     "hash": "0x7F6B8D75",
     "params": [
@@ -23803,22 +23187,6 @@
     ],
     "return_type": "void",
     "description": "Sets the maximum distance at which all tags will be visible and which beyond will not be displayed. Distance is measured from the camera position.",
-    "side": "client",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": null
-  },
-  {
-    "name": "SetNetworkWalkMode",
-    "hash": "0x55188D2D",
-    "params": [
-      {
-        "name": "enabled",
-        "type": "bool"
-      }
-    ],
-    "return_type": "void",
-    "description": "",
     "side": "client",
     "category": "CFX",
     "deprecated": false,
@@ -25222,58 +24590,6 @@
       }
     ],
     "return_type": "BOOL",
-    "description": "",
-    "side": "client",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": null
-  },
-  {
-    "name": "SetTextFontForCurrentCommand",
-    "hash": "0xADA9255D",
-    "params": [
-      {
-        "name": "fontId",
-        "type": "int"
-      }
-    ],
-    "return_type": "void",
-    "description": "Sets the text font for the current text drawing command.",
-    "side": "client",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": null
-  },
-  {
-    "name": "SetTextJustification",
-    "hash": "0x68CDFA60",
-    "params": [
-      {
-        "name": "justifyType",
-        "type": "int"
-      }
-    ],
-    "return_type": "void",
-    "description": "",
-    "side": "client",
-    "category": "CFX",
-    "deprecated": false,
-    "examples": null
-  },
-  {
-    "name": "SetTextWrap",
-    "hash": "0x6F60AB54",
-    "params": [
-      {
-        "name": "start",
-        "type": "float"
-      },
-      {
-        "name": "end",
-        "type": "float"
-      }
-    ],
-    "return_type": "void",
     "description": "",
     "side": "client",
     "category": "CFX",
@@ -30906,7 +30222,7 @@
     ],
     "return_type": "void",
     "description": "Delete the specified entity, and invalidate the passed handle (i.e., the in/out argument).\nYou might want to check if the entity exists before with [DOES_ENTITY_EXIST](#\\_0x7239B21A38F536BA).",
-    "side": "shared",
+    "side": "client",
     "category": "ENTITY",
     "deprecated": false,
     "examples": "```lua\n-- Retrieve the vehicle the player is currently in. \nlocal vehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n\n-- Check if the vehicle exists in the game world.\nif not DoesEntityExist(vehicle) then \n    -- If the vehicle does not exist, end the execution of the code here.\n    return \nend\n\n-- If the vehicle does exist, delete the vehicle entity from the game world.\nDeleteEntity(vehicle)\n```\n\n```js\n// Retrieve the vehicle the player is currently in.\nconst vehicle = GetVehiclePedIsIn(PlayerPedId(), false);\n\n// Check if the vehicle exists in the game world.\nif (!DoesEntityExist(vehicle)) {\n  // If the vehicle does not exist, end the execution of the code here.\n  return;\n}\n\n// If the vehicle does exist, delete the vehicle entity from the game world.\nDeleteEntity(vehicle);\n```\n\n```cs\nusing static CitizenFX.Core.Native.API;\n\n// Retrieve the vehicle the player is currently in.\nint vehicleHandle = GetVehiclePedIsIn(PlayerPedId(), false);\n\n// Check if the vehicle exists in the game world.\nif (!DoesEntityExist(vehicleHandle))\n{\n    // If the vehicle does not exist, end the execution of the code here.\n    return;\n}\n\n// If the vehicle does exist, delete the vehicle entity from the game world.\nDeleteEntity(ref vehicleHandle);\n```"
@@ -30966,7 +30282,7 @@
     ],
     "return_type": "BOOL",
     "description": "Checks whether an entity exists in the game world.",
-    "side": "shared",
+    "side": "client",
     "category": "ENTITY",
     "deprecated": false,
     "examples": "```lua\nlocal currentVehicle = GetVehiclePedIsIn(PlayerPedId(), false)\n\nif DoesEntityExist(currentVehicle) then\n    DeleteEntity(currentVehicle)\nend\n```\n\n```js\nconst currentVehicle = GetVehiclePedIsIn(PlayerPedId(), false);\n\nif (DoesEntityExist(currentVehicle)) {\n  DeleteEntity(currentVehicle);\n}\n```\n\n```cs\nusing static CitizenFX.Core.Native.API\n// ...\n\nint currentVehicle = GetVehiclePedIsIn(PlayerPedId(), false);\n\nif(DoesEntityExist(currentVehicle))\n{\n    DeleteEntity(currentVehicle);\n}\n\n// or the preferred use of C# wrapper\nVehicle currentVehicle = Game.PlayerPed.CurrentVehicle;\n\n// DoesEntityExist already invoked using Game.PlayerPed.CurrentVehicle\nif(currentVehicle != null)\n{\n    currentVehicle.Delete();\n}\n```"
@@ -31442,7 +30758,7 @@
     ],
     "return_type": "float",
     "description": "",
-    "side": "shared",
+    "side": "client",
     "category": "ENTITY",
     "deprecated": false,
     "examples": "```lua\nlocal heading = GetEntityHeading(PlayerPedId())\nprint(heading)\n```\n\n```js\nconst heading = GetEntityHeading(PlayerPedId());\nconsole.log(`${heading}`);\n```\n\n```cs\nusing static CitizenFX.Core.Native.API;\n// ...\nfloat heading = GetEntityHeading(PlayerPedId());\n\n// or the preferred use of C# wrapper\nfloat heading = Game.PlayerPed.Heading;\n\nDebug.WriteLine($\"{heading}\");\n```"
@@ -31474,7 +30790,7 @@
     ],
     "return_type": "int",
     "description": "",
-    "side": "shared",
+    "side": "client",
     "category": "ENTITY",
     "deprecated": false,
     "examples": "```lua\nlocal health = GetEntityHealth(PlayerPedId())\nprint(health)\n```\n\n```js\nconst health = GetEntityHealth(PlayerPedId());\nconsole.log(`${health}`);\n```\n\n```cs\nusing static CitizenFX.Core.Native.API;\n// ...\nint health = GetEntityHealth(PlayerPedId());\n\n// or the preferred use of C# wrapper\n// Note: Returns 0-100 using this property.\nint health = Game.PlayerPed.Health;\n\nDebug.WriteLine($\"{health}\");\n```"
@@ -31606,7 +30922,7 @@
     ],
     "return_type": "Hash",
     "description": "Returns the model hash from an entity.",
-    "side": "shared",
+    "side": "client",
     "category": "ENTITY",
     "deprecated": false,
     "examples": "```lua\nlocal hash = GetEntityModel(PlayerPedId())\n\nif hash == `mp_m_freemode_01` then\n    print(\"This player is using the male freemode model.\")\nend\n```\n\n```js\nconst hash = GetEntityModel(PlayerPedId());\n\nif (hash === GetHashKey('mp_m_freemode_01')) {\n  console.log('This player is using the male freemode model.');\n}\n```\n\n```cs\nusing static CitizenFX.Core.Native.API;\n// ...\n\nuint hash = GetEntityModel(PlayerPedId());\n\nif(hash == GetHashKey(\"mp_m_freemode_01\"))\n{\n    Debug.WriteLine(\"This player is using the male freemode model.\");\n}\n\n// or the preferred use of C# wrapper\nif(Game.PlayerPed.Model.Hash == Game.GenerateHash(\"mp_m_freemode_01\"))\n{\n    Debug.WriteLine(\"This player is using the male freemode model.\");\n}\n```"
@@ -55042,7 +54358,7 @@
     "params": [],
     "return_type": "int",
     "description": "",
-    "side": "shared",
+    "side": "client",
     "category": "MISC",
     "deprecated": false,
     "examples": null
@@ -55165,7 +54481,7 @@
     ],
     "return_type": "Hash",
     "description": "This native converts its past string to hash. It is hashed using jenkins one at a time method.",
-    "side": "shared",
+    "side": "client",
     "category": "MISC",
     "deprecated": false,
     "examples": "```lua\nlocal zentorno = GetHashKey('zentorno')\n\nif GetEntityModel(car) == zentorno then\n    print('Car is a zentorno!')\nend\n```"
@@ -90131,7 +89447,7 @@
     "description": "These combat attributes seem to be the same as the BehaviourFlags from combatbehaviour.meta.\n\nSo far, these are the equivalents found:",
     "side": "client",
     "category": "PED",
-    "deprecated": true,
+    "deprecated": false,
     "examples": "```cpp\nenum eCombatAttribute\n{\n  CA_INVALID = -1,\t\n  // AI will only use cover if this is set\n  CA_USE_COVER = 0,\n  // AI will only use vehicles if this is set\n  CA_USE_VEHICLE = 1,\n  // AI will only driveby from a vehicle if this is set\n  CA_DO_DRIVEBYS = 2,\n  // Will be forced to stay in a ny vehicel if this isn't set\n  CA_LEAVE_VEHICLES = 3,\n  // This ped can make decisions on whether to strafe or not based on distance to destination, recent bullet events, etc.\n  CA_CAN_USE_DYNAMIC_STRAFE_DECISIONS\t= 4,\n  // Ped will always fight upon getting threat response task\n  CA_ALWAYS_FIGHT = 5,\n  // If in combat and in a vehicle, the ped will flee rather than attacking\n  CA_FLEE_WHILST_IN_VEHICLE = 6,\n  // If in combat and chasing in a vehicle, the ped will keep a distance behind rather than ramming\n  CA_JUST_FOLLOW_VEHICLE = 7,\n  // Deprecated\n  CA_PLAY_REACTION_ANIMS = 8,\n  // Peds will scan for and react to dead peds found\n  CA_WILL_SCAN_FOR_DEAD_PEDS = 9,\n  // Deprecated\n  CA_IS_A_GUARD = 10,\n  // The ped will seek cover only \n  CA_JUST_SEEK_COVER = 11,\n  // Ped will only blind fire when in cover\n  CA_BLIND_FIRE_IN_COVER = 12,\n  // Ped may advance\n  CA_AGGRESSIVE = 13,\n  // Ped can investigate events such as distant gunfire, footsteps, explosions etc\n  CA_CAN_INVESTIGATE = 14,\n  // Ped can use a radio to call for backup (happens after a reaction)\n  CA_CAN_USE_RADIO = 15,\n  // Deprecated\n  CA_CAN_CAPTURE_ENEMY_PEDS = 16,\n  // Ped will always flee upon getting threat response task\n  CA_ALWAYS_FLEE = 17,\n  // Ped can do unarmed taunts in vehicle\n  CA_CAN_TAUNT_IN_VEHICLE = 20,\n  // Ped will be able to chase their targets if both are on foot and the target is running away\n  CA_CAN_CHASE_TARGET_ON_FOOT = 21,\n  // Ped can drag injured peds to safety\n  CA_WILL_DRAG_INJURED_PEDS_TO_SAFETY = 22,\n  // Ped will require LOS to the target it is aiming at before shooting\n  CA_REQUIRES_LOS_TO_SHOOT = 23,\n  // Ped is allowed to use proximity based fire rate (increasing fire rate at closer distances)\n  CA_USE_PROXIMITY_FIRING_RATE = 24,\n  // Normally peds can switch briefly to a secondary target in combat, setting this will prevent that\n  CA_DISABLE_SECONDARY_TARGET = 25,\n  // This will disable the flinching combat entry reactions for peds, instead only playing the turn and aim anims\n  CA_DISABLE_ENTRY_REACTIONS = 26,\n  // Force ped to be 100% accurate in all situations (added by Jay Reinebold)\n  CA_PERFECT_ACCURACY = 27,\n  // If we don't have cover and can't see our target it's possible we will advance, even if the target is in cover\n  CA_CAN_USE_FRUSTRATED_ADVANCE\t= 28,\n  // This will have the ped move to defensive areas and within attack windows before performing the cover search\n  CA_MOVE_TO_LOCATION_BEFORE_COVER_SEARCH = 29,\n  // Allow shooting of our weapon even if we don't have LOS (this isn't X-ray vision as it only affects weapon firing)\n  CA_CAN_SHOOT_WITHOUT_LOS = 30,\n  // Ped will try to maintain a min distance to the target, even if using defensive areas (currently only for cover finding + usage) \n  CA_MAINTAIN_MIN_DISTANCE_TO_TARGET = 31,\n  // Allows ped to use steamed variations of peeking anims\n  CA_CAN_USE_PEEKING_VARIATIONS\t= 34,\n  // Disables pinned down behaviors\n  CA_DISABLE_PINNED_DOWN = 35,\n  // Disables pinning down others\n  CA_DISABLE_PIN_DOWN_OTHERS = 36,\n  // When defensive area is reached the area is cleared and the ped is set to use defensive combat movement\n  CA_OPEN_COMBAT_WHEN_DEFENSIVE_AREA_IS_REACHED = 37,\n  // Disables bullet reactions\n  CA_DISABLE_BULLET_REACTIONS = 38,\n  // Allows ped to bust the player\n  CA_CAN_BUST = 39,\n  // This ped is ignored by other peds when wanted\n  CA_IGNORED_BY_OTHER_PEDS_WHEN_WANTED = 40,\n  // Ped is allowed to \"jack\" vehicles when needing to chase a target in combat\n  CA_CAN_COMMANDEER_VEHICLES = 41,\n  // Ped is allowed to flank\n  CA_CAN_FLANK = 42,\n  // Ped will switch to advance if they can't find cover\n  CA_SWITCH_TO_ADVANCE_IF_CANT_FIND_COVER = 43,\n  // Ped will switch to defensive if they are in cover\n  CA_SWITCH_TO_DEFENSIVE_IF_IN_COVER = 44,\n  // Ped will clear their primary defensive area when it is reached\n  CA_CLEAR_PRIMARY_DEFENSIVE_AREA_WHEN_REACHED = 45,\n  // Ped is allowed to fight armed peds when not armed\n  CA_CAN_FIGHT_ARMED_PEDS_WHEN_NOT_ARMED = 46,\n  // Ped is not allowed to use tactical points if set to use defensive movement (will only use cover)\n  CA_ENABLE_TACTICAL_POINTS_WHEN_DEFENSIVE = 47,\n  // Ped cannot adjust cover arcs when testing cover safety (atm done on corner cover points when  ped usingdefensive area + no LOS)\n  CA_DISABLE_COVER_ARC_ADJUSTMENTS = 48,\n  // Ped may use reduced accuracy with large number of enemies attacking the same local player target\n  CA_USE_ENEMY_ACCURACY_SCALING\t= 49,\n  // Ped is allowed to charge the enemy position\n  CA_CAN_CHARGE = 50,\n  // When defensive area is reached the area is cleared and the ped is set to use will advance movement\n  CA_REMOVE_AREA_SET_WILL_ADVANCE_WHEN_DEFENSIVE_AREA_REACHED = 51,\n  // Use the vehicle attack mission during combat (only works on driver)\n  CA_USE_VEHICLE_ATTACK = 52,\n  // Use the vehicle attack mission during combat if the vehicle has mounted guns (only works on driver)\n  CA_USE_VEHICLE_ATTACK_IF_VEHICLE_HAS_MOUNTED_GUNS = 53,\n  // Always equip best weapon in combat\n  CA_ALWAYS_EQUIP_BEST_WEAPON = 54,\n  // Ignores in water at depth visibility check\n  CA_CAN_SEE_UNDERWATER_PEDS = 55,\n  // Will prevent this ped from aiming at any AI targets that are in helicopters\n  CA_DISABLE_AIM_AT_AI_TARGETS_IN_HELIS = 56,\n  // Disables peds seeking due to no clear line of sight\n  CA_DISABLE_SEEK_DUE_TO_LINE_OF_SIGHT = 57,\n  // To be used when releasing missions peds if we don't want them fleeing from combat (mission peds already prevent flee)\n  CA_DISABLE_FLEE_FROM_COMBAT = 58,\n  // Disables target changes during vehicle pursuit\n  CA_DISABLE_TARGET_CHANGES_DURING_VEHICLE_PURSUIT = 59,\n  // Ped may throw a smoke grenade at player loitering in combat\n  CA_CAN_THROW_SMOKE_GRENADE = 60,\n  // Will clear a set defensive area if that area cannot be reached\n  CA_CLEAR_AREA_SET_DEFENSIVE_IF_DEFENSIVE_CANNOT_BE_REACHED = 62,\n  // Disable block from pursue during vehicle chases\n  CA_DISABLE_BLOCK_FROM_PURSUE_DURING_VEHICLE_CHASE = 64,\n  // Disable spin out during vehicle chases\n  CA_DISABLE_SPIN_OUT_DURING_VEHICLE_CHASE = 65,\n  // Disable cruise in front during block during vehicle chases\n  CA_DISABLE_CRUISE_IN_FRONT_DURING_BLOCK_DURING_VEHICLE_CHASE = 66,\n  // Makes it more likely that the ped will continue targeting a target with blocked los for a few seconds\n  CA_CAN_IGNORE_BLOCKED_LOS_WEIGHTING = 67,\n  // Disables the react to buddy shot behaviour.\n  CA_DISABLE_REACT_TO_BUDDY_SHOT = 68,\n  // Prefer pathing using navmesh over road nodes\n  CA_PREFER_NAVMESH_DURING_VEHICLE_CHASE = 69,\n  // Ignore road edges when avoiding\n  CA_ALLOWED_TO_AVOID_OFFROAD_DURING_VEHICLE_CHASE = 70,\n  // Permits ped to charge a target outside the assigned defensive area.\n  CA_PERMIT_CHARGE_BEYOND_DEFENSIVE_AREA = 71,\n  // This ped will switch to an RPG if target is in a vehicle, otherwise will use alternate weapon.\n  CA_USE_ROCKETS_AGAINST_VEHICLES_ONLY = 72,\n  // Disables peds moving to a tactical point without clear los\n  CA_DISABLE_TACTICAL_POINTS_WITHOUT_CLEAR_LOS = 73,\n  // Disables pull alongside during vehicle chase\n  CA_DISABLE_PULL_ALONGSIDE_DURING_VEHICLE_CHASE = 74,\n  // If set on a ped, they will not flee when all random peds flee is set to TRUE (they are still able to flee due to other reasons)\n  CA_DISABLE_ALL_RANDOMS_FLEE = 78,\n  // This ped will send out a script DeadPedSeenEvent when they see a dead ped\n  CA_WILL_GENERATE_DEAD_PED_SEEN_SCRIPT_EVENTS = 79,\n  // This will use the receiving peds sense range rather than the range supplied to the communicate event\n  CA_USE_MAX_SENSE_RANGE_WHEN_RECEIVING_EVENTS = 80,\n  // When aiming from a vehicle the ped will only aim at targets on his side of the vehicle\n  CA_RESTRICT_IN_VEHICLE_AIMING_TO_CURRENT_SIDE = 81,\n  // LOS to the target is blocked we return to our default position and direction until we have LOS (no aiming)\n  CA_USE_DEFAULT_BLOCKED_LOS_POSITION_AND_DIRECTION = 82,\n  // LOS to the target is blocked we return to our default position and direction until we have LOS (no aiming)\n  CA_REQUIRES_LOS_TO_AIM = 83,\n  // Allow vehicles spawned infront of target facing away to enter cruise and wait to block approaching target\n  CA_CAN_CRUISE_AND_BLOCK_IN_VEHICLE = 84,\n  // Peds flying aircraft will prefer to target other aircraft over entities on the ground\n  CA_PREFER_AIR_COMBAT_WHEN_IN_AIRCRAFT = 85,\n  //Allow peds flying aircraft to use dog fighting behaviours\n  CA_ALLOW_DOG_FIGHTING = 86,\n  // This will make the weight of targets who aircraft vehicles be reduced greatly compared to targets on foot or in ground based vehicles\n  CA_PREFER_NON_AIRCRAFT_TARGETS = 87,\n  //When peds are tasked to go to combat, they keep searching for a known target for a while before forcing an unknown one\n  CA_PREFER_KNOWN_TARGETS_WHEN_COMBAT_CLOSEST_TARGET = 88,\n  // Only allow mounted weapons to fire if within the correct attack angle (default 25-degree cone). On a flag in order to keep exiting behaviour and only fix in specific cases.\n  CA_FORCE_CHECK_ATTACK_ANGLE_FOR_MOUNTED_GUNS = 89,\n  // Blocks the firing state for passenger-controlled mounted weapons. Existing flags CA_USE_VEHICLE_ATTACK and CA_USE_VEHICLE_ATTACK_IF_VEHICLE_HAS_MOUNTED_GUNS only work for drivers.\n  CA_BLOCK_FIRE_FOR_VEHICLE_PASSENGER_MOUNTED_GUNS = 90 \n};\n```"
   },
   {
@@ -95114,7 +94430,7 @@
     ],
     "return_type": "int",
     "description": "",
-    "side": "server",
+    "side": "client",
     "category": "PLAYER",
     "deprecated": false,
     "examples": null
@@ -95130,7 +94446,7 @@
     ],
     "return_type": "char*",
     "description": "Returns the players name from a specified player index",
-    "side": "shared",
+    "side": "client",
     "category": "PLAYER",
     "deprecated": false,
     "examples": null
@@ -95230,7 +94546,7 @@
     ],
     "return_type": "Ped",
     "description": "Gets the ped for a specified player index.",
-    "side": "shared",
+    "side": "client",
     "category": "PLAYER",
     "deprecated": false,
     "examples": "```lua\nlocal playerIdx = GetPlayerFromServerId(source)\nlocal ped = GetPlayerPed(playerIdx)\n\n-- act on the ped\n```"
@@ -95975,7 +95291,7 @@
     ],
     "return_type": "BOOL",
     "description": "",
-    "side": "shared",
+    "side": "client",
     "category": "PLAYER",
     "deprecated": false,
     "examples": "```\nChecks whether the specified player has a Ped, the Ped is not dead, is not injured and is not arrested.  \n```"
@@ -106121,7 +105437,7 @@
     ],
     "return_type": "void",
     "description": "",
-    "side": "shared",
+    "side": "client",
     "category": "SYSTEM",
     "deprecated": false,
     "examples": "```\nPauses execution of the current script, please note this behavior is only seen when called from one of the game script files(ysc). In order to wait an asi script use \"static void WAIT(DWORD time);\" found in main.h\n```"
@@ -111276,7 +110592,7 @@
     "description": "",
     "side": "client",
     "category": "TASK",
-    "deprecated": true,
+    "deprecated": false,
     "examples": "```\nEDITED (7/13/2017)  \nNOTE: If you want air combat, AI::TASK_COMBAT_PED (while your pilot is in an aircraft) also does the same thing as this native.  \nDESCRIPTION:  \nEver wish your buddy could shoot down one of your enemies for you? Ever wanted an auto-pilot? Well look no further! This is the native for you! (Ped intelligence may vary)  \nUSAGE:  \n-- REQUIRED --  \n• pilot = The ped flying the aircraft.  \n• aircraft = The aircraft the pilot is flying  \n-- OPTIONAL -- [atleast 1 must be assigned]  \n• targetVehicle = The vehicle the pilot will target.  \n• targetPed = The ped the pilot will target.  \n• destinationX, destinationY, destinationZ = The location the pilot will target.  \n-- LOGIC --  \n• missionFlag = The type of mission. pastebin.com/R8x73dbv  \n• angularDrag = The higher the value, the slower the plane will rotate. Value ranges from 0 - Infinity.  \n• unk = Set to 0, and you'll be fine.  \n• targetHeading = The target angle (from world space north) that the pilot will try to acheive before executing an attack/landing.  \n• maxZ = Maximum Z coordinate height for flying.  \n• minZ = Minimum Z coordinate height for flying.  \nZ: 2,700 is the default max height a pilot will be able to fly. Anything greater and he will fly downward until reaching 2,700 again.  \nMission Types (incase you don't like links..):  \n0 = None  \n1 = Unk  \n2 = CTaskVehicleRam  \n3 = CTaskVehicleBlock  \n4 = CTaskVehicleGoToPlane  \n5 = CTaskVehicleStop  \n6 = CTaskVehicleAttack  \n7 = CTaskVehicleFollow  \n8 = CTaskVehicleFleeAirborne  \n9 = CTaskVehicleCircle  \n10 = CTaskVehicleEscort  \n15 = CTaskVehicleFollowRecording  \n16 = CTaskVehiclePoliceBehaviour  \n17 = CTaskVehicleCrash  \nExample C#:  \nFunction.Call(Hash.TASK_PLANE_MISSION, pilot, vehicle, 0, Game.Player.Character, 0, 0, 0, 6, 0f, 0f, 0f, 2500.0f, -1500f);  \nExample C++  \nAI::TASK_PLANE_MISSION(pilot, vehicle, 0, PLAYER::GET_PLAYER_PED(PLAYER::GET_PLAYER_INDEX()), 0, 0, 0, 6, 0.0, 0.0, 0.0, 2500.0, -1500.0);  \n[DEPRECATED] EXAMPLE USAGE:  \npastebin.com/gx7Finsk  \n```\n\n```\nNativeDB Added Parameter 14: Any p13\n```"
   },
   {
