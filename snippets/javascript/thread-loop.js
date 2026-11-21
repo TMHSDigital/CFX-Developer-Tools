@@ -1,6 +1,9 @@
 // CFX Thread Loop Pattern (JavaScript)
 // Use setTick for recurring logic. Always await Delay() to yield.
 // NEVER use Delay(0) unless you need per-frame execution.
+// Delay is not a FiveM global in JS: define the helper below in each file.
+
+const Delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 setTick(async () => {
     await Delay(1000); // Check every 1 second (adjust as needed)

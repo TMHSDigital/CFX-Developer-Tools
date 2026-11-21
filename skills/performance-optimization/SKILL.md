@@ -165,7 +165,7 @@ This shows per-resource CPU time. Target under **0.2ms idle** for a well-optimiz
 
 ## JavaScript-specific tips
 
-- Use `await Delay(ms)` instead of `Delay(0)` in `setTick`
+- Use `await Delay(ms)` instead of `Delay(0)` in `setTick`. `Delay` is not a JS global in FiveM: define `const Delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));` in each file
 - Client-side JS does not have access to Node.js APIs -- keep it lightweight
 - Avoid heavy npm packages on the client side
 

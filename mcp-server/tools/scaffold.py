@@ -233,6 +233,8 @@ def _scaffold_js(base: str, files_created: list[str], mode: str = "w") -> None:
     _write(
         base,
         "client/main.js",
+        "// FiveM's JS runtime has no built-in Delay; define it once per file.\n"
+        "const Delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));\n\n"
         "setTick(async () => {\n    await Delay(1000);\n    // Main client loop\n});\n",
         files_created,
         mode,

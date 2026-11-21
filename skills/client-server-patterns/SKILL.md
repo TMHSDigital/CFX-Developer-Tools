@@ -85,6 +85,9 @@ end)
 ### Thread equivalent
 
 ```javascript
+// Delay is not built into FiveM's JS runtime; define it once per file.
+const Delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 setTick(async () => {
     await Delay(1000);
     // your logic

@@ -12,7 +12,7 @@ standards-version: 1.10.0
 - Use `onNet` / `emitNet` for network events, `on` / `emit` for local events
 - Prefix all event names with the resource name
 - Access player source via `global.source` in server net event handlers
-- Use `setTick` with `await Delay(ms)` for tick loops; avoid Delay(0) unless necessary
+- Use `setTick` with `await Delay(ms)` for tick loops; avoid Delay(0) unless necessary. `Delay` is not a FiveM JS global: flag any file that calls it without defining `const Delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));`
 - Server-side scripts can use Node.js built-ins and npm packages via `require`
 - Client-side scripts do NOT have access to Node.js APIs
 - Node.js 22 is available by adding `node_version '22'` in fxmanifest.lua (recommended)
