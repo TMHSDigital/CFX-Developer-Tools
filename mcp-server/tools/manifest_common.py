@@ -26,6 +26,20 @@ AUTHOR_RE = re.compile(r"""author\s+['"]([^'"]+)['"]""")
 DESC_RE = re.compile(r"""description\s+['"]([^'"]+)['"]""")
 
 
+RESOURCE_NAME_RE = re.compile(r"^[a-z0-9][a-z0-9_-]{0,63}$")
+
+
+def lua_string(value: str) -> str:
+    """Escape a value for use inside a single-quoted Lua string literal."""
+    return (
+        str(value)
+        .replace("\\", "\\\\")
+        .replace("'", "\\'")
+        .replace("\n", "\\n")
+        .replace("\r", "\\r")
+    )
+
+
 def games_block(game: str) -> str:
     """Return the Lua games directive string."""
     if game == "both":

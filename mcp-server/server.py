@@ -35,17 +35,27 @@ def scaffold_resource_tool(
     language: str,
     framework: str,
     workspace_path: str | None = None,
+    output_path: str | None = None,
+    overwrite: bool = False,
 ) -> str:
     """Create a new FiveM/RedM resource with boilerplate files.
 
+    The resource is created at <output_path>/<name> (default: workspace_path,
+    then the CFX_SCAFFOLD_ROOT env var, then the server's working directory).
+    The summary reports the absolute path.
+
     Args:
-        name: Resource name (lowercase, hyphens allowed)
+        name: Resource name (1-64 chars: lowercase letters, digits, '-' or '_')
         game: Target game - gta5, rdr3, or both
         language: Scripting language - lua, javascript, or csharp
         framework: Framework - standalone, esx, qbcore, qbox, oxcore, vorp, or rsg
-        workspace_path: Path to existing workspace to inherit author from (optional)
+        workspace_path: Directory to create the resource in and to inherit the author from an existing fxmanifest.lua (optional)
+        output_path: Directory to create the resource in, overriding workspace_path (optional)
+        overwrite: Replace generated files in an existing non-empty resource directory (default false)
     """
-    return scaffold_resource(name, game, language, framework, workspace_path)
+    return scaffold_resource(
+        name, game, language, framework, workspace_path, output_path, overwrite
+    )
 
 
 @mcp.tool()
