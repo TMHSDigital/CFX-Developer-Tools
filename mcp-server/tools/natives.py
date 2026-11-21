@@ -36,8 +36,15 @@ def lookup_native(
     side: str | None = None,
     data_path: str = "./data",
     category: str | None = None,
+    limit: int = 25,
+    offset: int = 0,
+    format: str = "text",
 ) -> str:
     """Search natives by name, description, or category.
+
+    Results are ranked: exact name, name prefix, name substring, hash,
+    category, then description matches. ``limit`` (1-100) and ``offset``
+    page through them; ``format="json"`` returns the raw records.
 
     If query is empty and category is None, returns a list of all categories
     with counts. If category is set but query is empty, lists all natives in
@@ -87,6 +94,23 @@ def lookup_native(
 
         results.append(native)
 
+    if query:
+        results.sort(key=lambda n: (_rank(n, query), _text(n.get("name"))))
+
+    try:
+        limit = min(100, max(1, int(limit)))
+        offset = max(0, int(offset))
+    except (TypeError, ValueError):
+        return "Error: limit and offset must be integers."
+
+    if (format or "text").lower() == "json":
+        return json.dumps({
+            "total": len(results),
+            "offset": offset,
+            "limit": limit,
+            "results": results[offset:offset + limit],
+        }, ensure_ascii=False)
+
     if not results:
         parts = [f"No natives found"]
         if query:
@@ -96,7 +120,24 @@ def lookup_native(
         parts.append(f"for {game}.")
         return " ".join(parts)
 
-    return _format_results(results, query, category)
+    return _format_results(results, query, category, limit, offset)
+
+
+def _rank(native: dict, query: str) -> int:
+    """Lower is better: exact name, prefix, substring, hash, category, description."""
+    name = _name_key(_text(native.get("name")))
+    q = _name_key(query)
+    if name == q:
+        return 0
+    if name.startswith(q):
+        return 1
+    if q in name:
+        return 2
+    if _hash_key(query) and _hash_key(query) in _hash_key(_text(native.get("hash"))):
+        return 3
+    if query.lower() in _text(native.get("category")).lower():
+        return 4
+    return 5
 
 
 def _list_categories(natives: list[dict], game: str, side: str | None) -> str:
@@ -118,7 +159,13 @@ def _list_categories(natives: list[dict], game: str, side: str | None) -> str:
     return "\n".join(lines)
 
 
-def _format_results(results: list[dict], query: str | None, category: str | None) -> str:
+def _format_results(
+    results: list[dict],
+    query: str | None,
+    category: str | None,
+    limit: int = 25,
+    offset: int = 0,
+) -> str:
     """Format native search results for display."""
     header_parts = [f"Found {len(results)} native(s)"]
     if query:
@@ -127,10 +174,12 @@ def _format_results(results: list[dict], query: str | None, category: str | None
         header_parts.append(f"in {category}")
     header = " ".join(header_parts)
 
-    show_limit = 25
+    page = results[offset:offset + limit]
+    if offset:
+        header += f" (showing {offset + 1}-{offset + len(page)})"
     lines: list[str] = [f"{header}:\n"]
 
-    for n in results[:show_limit]:
+    for n in page:
         dep_marker = " [DEPRECATED]" if n.get("deprecated") else ""
         lines.append(f"  {_text(n.get('name')) or '(unnamed)'}{dep_marker}")
 
@@ -165,8 +214,12 @@ def _format_results(results: list[dict], query: str | None, category: str | None
 
         lines.append("")
 
-    if len(results) > show_limit:
-        lines.append(f"  ... and {len(results) - show_limit} more. Narrow your search for more specific results.")
+    remaining = len(results) - offset - len(page)
+    if remaining > 0:
+        lines.append(
+            f"  ... and {remaining} more. Use offset={offset + len(page)} for the next page, "
+            "or narrow your search."
+        )
 
     return "\n".join(lines)
 

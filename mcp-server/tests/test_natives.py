@@ -80,3 +80,20 @@ def test_missing_and_malformed_database(tmp_path):
 def test_real_data_smoke(data_dir):
     out = lookup_native("GET_PLAYER_PED", "gta5", None, data_dir)
     assert "GetPlayerPed" in out
+
+
+def test_exact_name_ranks_first(data_dir):
+    out = lookup_native("GetPlayerPed", "gta5", None, data_dir)
+    first = out.splitlines()[2].strip()
+    assert first.startswith("GetPlayerPed")
+
+
+def test_offset_pages(fixture_dir):
+    page2 = lookup_native("Native", "rdr3", None, fixture_dir, limit=25, offset=25)
+    assert "(showing 26-30)" in page2
+    assert "... and" not in page2
+
+
+def test_json_format(fixture_dir):
+    data = json.loads(lookup_native("Native", "rdr3", None, fixture_dir, limit=10, offset=5, format="json"))
+    assert data["total"] == 30 and data["offset"] == 5 and len(data["results"]) == 10

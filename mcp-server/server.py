@@ -72,16 +72,24 @@ def lookup_native_tool(
     game: str = "gta5",
     side: str | None = None,
     category: str | None = None,
+    limit: int = 25,
+    offset: int = 0,
+    format: str = "text",
 ) -> str:
     """Search for a FiveM/RedM native function by name, description, hash, or category.
 
+    Results are ranked with exact and prefix name matches first.
+
     Args:
-        query: Search term (name, keyword, hash, or description fragment). Leave empty to browse.
+        query: Search term (name in any case with or without underscores, keyword, hash, or description fragment). Leave empty to browse.
         game: Target game - gta5 or rdr3
         side: Filter by side - client, server, or shared (optional)
         category: Filter by namespace/category - e.g. VEHICLE, PED, PLAYER (optional). Leave both query and category empty to list all categories.
+        limit: Results per page, 1-100 (default 25)
+        offset: Number of results to skip, for paging (default 0)
+        format: "text" (default) or "json" for raw records
     """
-    return lookup_native(query, game, side, NATIVES_PATH, category)
+    return lookup_native(query, game, side, NATIVES_PATH, category, limit, offset, format)
 
 
 @mcp.tool()
