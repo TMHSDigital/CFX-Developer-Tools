@@ -14,8 +14,11 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v7
-      - uses: TMHSDigital/Developer-Tools-Directory/.github/actions/drift-check@v1.9
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      # First-party meta-repo action: pinned to the floating vMAJOR.MINOR tag
+      # per the Developer-Tools-Directory ci-cd standard; third-party actions
+      # are SHA-pinned.
+      - uses: TMHSDigital/Developer-Tools-Directory/.github/actions/drift-check@v1.20
         with:
           mode: self
           format: gh-summary
