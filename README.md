@@ -227,7 +227,7 @@ Then ask the AI agent to scaffold a resource, look up a native, or generate a ma
 
 ## MCP Server
 
-The companion MCP server provides programmatic tools that Cursor's AI agent can call directly. Configuration lives in `.cursor/mcp.json`.
+The companion MCP server provides programmatic tools that your AI agent can call directly. It finds its data files next to `server.py`, so it can be launched from any working directory (set `CFX_DATA_PATH` to use a different data folder; `CFX_NATIVES_PATH` is still accepted).
 
 **Prerequisites:** Python 3.10+
 
@@ -236,7 +236,26 @@ cd mcp-server
 pip install -r requirements.txt
 ```
 
-The server starts automatically when Cursor invokes an MCP tool.
+**Cursor (plugin install):** the plugin manifest registers the server from `mcp.json` (`${CURSOR_PLUGIN_ROOT}/mcp-server/server.py`), so it starts automatically when Cursor invokes an MCP tool. When working inside this repository, `.cursor/mcp.json` is used instead.
+
+**Claude Code:** inside this repository, the root `.mcp.json` registers the server. From any other project, register it once with an absolute path:
+
+```bash
+claude mcp add cfx-dev-tools -- python /absolute/path/to/CFX-Developer-Tools/mcp-server/server.py
+```
+
+**Other MCP clients (stdio):**
+
+```json
+{
+  "mcpServers": {
+    "cfx-dev-tools": {
+      "command": "python",
+      "args": ["/absolute/path/to/CFX-Developer-Tools/mcp-server/server.py"]
+    }
+  }
+}
+```
 
 <details>
 <summary><strong>Available Tools (10)</strong></summary>

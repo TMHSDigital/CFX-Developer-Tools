@@ -39,5 +39,6 @@
     "rules/fxmanifest-standards.mdc",
     "rules/security-best-practices.mdc",
     "rules/performance-rules.mdc"
-  ]
+  ],
+  "mcpServers": "mcp.json"
 }

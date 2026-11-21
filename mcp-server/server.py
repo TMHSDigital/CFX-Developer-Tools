@@ -25,7 +25,15 @@ from tools.txadmin import (
 
 mcp = FastMCP("cfx-dev-tools")
 
-NATIVES_PATH = os.environ.get("CFX_NATIVES_PATH", "./data")
+# Data directory for natives, events and the docs index. Defaults to the
+# data/ folder next to this file so the server works from any working
+# directory. CFX_DATA_PATH overrides it; CFX_NATIVES_PATH is kept as an alias
+# for existing configs.
+NATIVES_PATH = (
+    os.environ.get("CFX_DATA_PATH")
+    or os.environ.get("CFX_NATIVES_PATH")
+    or os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
+)
 
 
 @mcp.tool()

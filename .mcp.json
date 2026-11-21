@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "cfx-dev-tools": {
+      "command": "python",
+      "args": ["mcp-server/server.py"]
+    }
+  }
+}
