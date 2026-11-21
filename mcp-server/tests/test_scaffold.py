@@ -27,7 +27,8 @@ def test_default_lua_resource(tmp_path):
 
 @pytest.mark.parametrize("framework", sorted(VALID_FRAMEWORKS))
 def test_each_framework_dependency_and_init(tmp_path, framework):
-    scaffold_resource("res", "gta5", "lua", framework, output_path=str(tmp_path))
+    game = "rdr3" if framework in ("vorp", "rsg") else "gta5"
+    assert scaffold_resource("res", game, "lua", framework, output_path=str(tmp_path)).startswith("Scaffolded")
     manifest = read(tmp_path / "res" / "fxmanifest.lua")
     client = read(tmp_path / "res" / "client" / "main.lua")
     dep = FRAMEWORK_DEPS.get(framework)

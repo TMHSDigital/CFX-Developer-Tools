@@ -37,7 +37,21 @@ def test_read_workspace_context_skips_vendored_dirs(tmp_path):
 
 @pytest.mark.parametrize("framework", sorted(VALID_FRAMEWORKS))
 def test_validate_inputs_accepts_every_framework(framework):
-    assert validate_inputs("gta5", "lua", framework) is None
+    game = "rdr3" if framework in ("vorp", "rsg") else "gta5"
+    assert validate_inputs(game, "lua", framework) is None
+
+
+@pytest.mark.parametrize("game,framework", [
+    ("gta5", "vorp"), ("gta5", "rsg"), ("rdr3", "qbox"), ("rdr3", "esx"), ("both", "qbcore"), ("both", "vorp"),
+])
+def test_validate_inputs_rejects_wrong_game(game, framework):
+    out = validate_inputs(game, "lua", framework)
+    assert out.startswith("Error") and framework in out
+
+
+@pytest.mark.parametrize("game", ["gta5", "rdr3", "both"])
+def test_standalone_runs_anywhere(game):
+    assert validate_inputs(game, "javascript", "standalone") is None
 
 
 def test_validate_inputs_rejects():

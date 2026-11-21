@@ -57,6 +57,17 @@ def csharp_csproj(name: str, side: str) -> str:
 
 
 VALID_GAMES = {"gta5", "rdr3", "both"}
+
+# Games each framework runs on. Standalone resources can target either.
+FRAMEWORK_GAMES: dict[str, set[str]] = {
+    "esx": {"gta5"},
+    "qbcore": {"gta5"},
+    "qbox": {"gta5"},
+    "oxcore": {"gta5"},
+    "vorp": {"rdr3"},
+    "rsg": {"rdr3"},
+    "standalone": {"gta5", "rdr3"},
+}
 VALID_LANGUAGES = {"lua", "javascript", "csharp"}
 VALID_FRAMEWORKS = {"standalone", "esx", "qbcore", "qbox", "oxcore", "vorp", "rsg"}
 
@@ -94,6 +105,14 @@ def validate_inputs(game: str, language: str, framework: str) -> str | None:
         return f"Error: invalid language '{language}'. Use lua, javascript, or csharp."
     if framework not in VALID_FRAMEWORKS:
         return f"Error: invalid framework '{framework}'. Use standalone, esx, qbcore, qbox, oxcore, vorp, or rsg."
+    supported = FRAMEWORK_GAMES.get(framework, VALID_GAMES)
+    requested = {"gta5", "rdr3"} if game == "both" else {game}
+    if not requested <= supported:
+        names = " or ".join(sorted(supported))
+        return (
+            f"Error: framework '{framework}' only runs on {names}, not '{game}'. "
+            "Use framework 'standalone' for a resource that targets other games."
+        )
     return None
 
 
