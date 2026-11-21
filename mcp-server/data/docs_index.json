@@ -1,494 +1,494 @@
 [
   {
-    "title": "Scripting Introduction - Cfx Documentation",
+    "title": "Scripting Introduction",
     "url": "https://docs.fivem.net/docs/scripting-manual/introduction/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Introduction to resources Creating your first script in Lua Creating your first script in JavaScript Creating your first script in C# About native functions Fact sheet"
   },
   {
-    "title": "Introduction to Resources - Cfx Documentation",
+    "title": "Introduction to Resources",
     "url": "https://docs.fivem.net/docs/scripting-manual/introduction/introduction-to-resources/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Servers run on a collection of resources. A resource is a collection of files - such as client scripts, server scripts, and streaming assets - that can be started, stopped and restarted at any time. Resource directories In the server, resources are loaded from a folder called resources/ in the server data directory. Any folder in the resources/ folder is parsed as a resource, except folders between [brackets] which are categories, which can contain multiple resource folders. Here's an example: server └── resources └── [category] └── resource-1 └── resource-2 └── resource-3 This tree shows that the folder [category] will contain resource-1 - resource-2 - resource-3 which can all be started directly in the server.cfg file with the following: start [category] Please note that you are free to name the folder and the resources as you wish. Each resource folder also has to contain a resource manifest reference called fxmanifest.lua (or previously, __resource.lua ) to be correctly parsed as a resource. See this example directory tree: server └── resources ├── [category] │ ├── [another] │ │ └── thing │ │ └── fxmanifest.lua │ └── resource-1 │ └── fxmanifest.lua └── main └── fxmanifest.lua In this tree, the following resources exist: main resource-1 thing Please note that a warning will be shown: Warning resourcename does not have a resource manifest ( fxmanifest.lua ) This message can be ignored if you intentionally not have any resource manifest. Otherwise, you need to verify that..."
   },
   {
-    "title": "Creating Your First Script in Lua - Cfx Documentation",
+    "title": "Creating Your First Script in Lua",
     "url": "https://docs.fivem.net/docs/scripting-manual/introduction/creating-your-first-script/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Getting started with scripting for FiveM might be a tad overwhelming, given the wide range of possibilities and the sparsely spread documentation. In this quick and simple guide, we'll try to show you how to get started with a quick resource in Lua. If you’re not familiar with Lua, you can refer to the Lua 5.4 reference manual . As of June 2025, Lua 5.3 has been deprecated and all Lua scripts now use the 5.4 version. For more information, read our announcement . For older Lua versions, visit the manual archive . Resources A resource is, simply said, a collection of files that can be individually started, stopped and restarted. Your server-data folder (assuming you already installed a server) should have a resources folder already, with a few resources in them already. If you're working on your own resources, you'll probably want to make a resources/[local] directory - this one will be ignored by Git when updating the server-data root. In there, we'll make a resources/[local]/mymode folder, since we're making, well, a gametype using the mapmanager system. That means you'll need to have a folder like this by now, assuming a Windows development system: C:\\your\\path\\to\\cfx-server-data\\resources\\[local]\\mymode . We'll call this folder mymode from now on. Manifest files A resource folder (you know, this mymode you made above) will need a manifest to be detected by FiveM. Since this is a game type, it'll need some extra information as well to teach mapmanager about the fact that..."
   },
   {
-    "title": "Creating your first script in JavaScript - Cfx Documentation",
+    "title": "Creating your first script in JavaScript",
     "url": "https://docs.fivem.net/docs/scripting-manual/introduction/creating-your-first-script-javascript/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Getting started with scripting for FiveM might be a tad overwhelming, given the wide range of possibilities and the sparsely spread documentation. In this quick and simple guide, we'll try to show you how to get started with a quick resource in JavaScript. Prerequisites Before creating your first script with JavaScript, there are a couple of things you will need to set up and understand. Understanding the JavaScript programming language (Getting Started) Understanding the JavaScript runtime Understanding of resources and manifest files We will be using Visual Studio Code, hereby VSCode, a popular code editor by Microsoft. However, you can use any code editor you'd like. Resources A resource is, simply said, a collection of files that can be individually started, stopped and restarted. Your server-data folder (assuming you already installed a server) should have a resources folder already, with a few resources in them already. If you're working on your own resources, you'll probably want to make a resources/[local] directory - this one will be ignored by Git when updating the server-data root. In there, we'll make a resources/[local]/mymode folder, since we're making, well, a gametype using the mapmanager system. That means you'll need to have a folder like this by now, assuming a Windows development system: C:\\your\\path\\to\\cfx-server-data\\resources\\[local]\\mymode . We'll call this folder mymode from now on. Manifest files A resource folder (you know, this mymode you made..."
   },
   {
-    "title": "Creating Your First Script in C# - Cfx Documentation",
+    "title": "Creating Your First Script in C#",
     "url": "https://docs.fivem.net/docs/scripting-manual/introduction/creating-your-first-script-csharp/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Getting started with scripting for FiveM might be a tad overwhelming, given the wide range of possibilities and the sparsely spread documentation. In this quick and simple guide, we'll try to show you how to get started with a quick resource in C#. We will be implementing a car spawner through a command. Prerequisites Before creating your first script with C#, there are a couple of things you will need to set up and understand. A basic understanding of C# Creating a C# project and setup your environment Understanding of resources and manifest files Writing code Now that you have set up your C# project and environment, you will have two projects; MyResourceNameClient and MyResourceNameServer . Any C# class that handles FiveM scripting-related events must inherit from the BaseScript class. Let's do this by going to Class1.cs in your client project. At the same time, we will also define a constructor, which we will use further on. Make sure you have a using directive to CitizenFX.Core . using CitizenFX.Core; namespace MyResourceNameClient { public class Class1 : BaseScript { public Class1 ( ) { } } } Easy right? But what about adding functionality? We will start by adding a command using various FiveM scripting concepts. using System; using System.Collections.Generic; using CitizenFX.Core; using static CitizenFX.Core.Native.API; namespace MyResourceNameClient { public class Class1 : BaseScript { public Class1 ( ) { EventHandlers[ \"onClientResourceStart\" ] += new Action< string..."
   },
   {
-    "title": "Understanding and Using Native Functions - Cfx Documentation",
+    "title": "Understanding and Using Native Functions",
     "url": "https://docs.fivem.net/docs/scripting-manual/introduction/about-native-functions/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "In FiveM, you have access to what are called \"native functions\" or simply \"natives\". These functions are provided by the game itself, using them will allow you to perform a wide variety of actions within the game environment. This guide will explain what natives are, where you can find them, and how to use them in your scripts. What Are Native Functions? Native functions in FiveM are predefined functions that enable interaction with the game. They are essential for creating and managing game mechanics, player interactions, and various other functionalities within your server. Natives are used in both client-side and server-side. Some of them are created by Cfx like DROP_PLAYER . Where Can You Find Native Functions? FiveM provides comprehensive documentation for native functions. This documentation is essential for understanding what each native function does, how to use it, and what parameters it requires. FiveM Natives : All documented natives can be found on our official website . Community Forums : The Cfx Forums are another valuable resource. Here, you can find discussions, tutorials, and examples from other developers who share their experiences and solutions related to using native functions. Native Docs Repo : Users can contribute to the repository by adding descriptions, names, and new native functions. Difference Between Client and Server-Side Natives Client Natives Client natives are functions that run on the player's game client. These functions are primarily used..."
   },
   {
-    "title": "Fact Sheet - Cfx Documentation",
+    "title": "Fact Sheet",
     "url": "https://docs.fivem.net/docs/scripting-manual/introduction/fact-sheet/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Here's a quick informative sheet to get you up to speed with FiveM development. What does ScRT mean? ScRT means Scripting Runtime or Script Runtime . FiveM has three different scripting runtimes available (Lua, C# and JavaScript), and they are mentioned down below. How do I get started with scripting? The scripting manual can be found here and it features the following articles: Introduction to resources Creating your first script Scripting runtimes Scripting in Lua Scripting in JavaScript Scripting in C# Migrating from deprecated methods Chat Messages Working with events Listening for events Triggering events NUI Using Scaleform Voice Using new game features You can refer to the page mentioned above to see the scripting manual in full detail. Natives What's a Native? Simply put, a Native, is a function exposed by the game in order to be called from scripts and either perform a given action in the game itself or request data from it. For example, one would type the following, to get the local player's ped from a Lua script and then give a weapon to that ped. ped = GetPlayerPed( -1 ) GiveWeaponToPed(ped, GetHashKey( \"WEAPON_PISTOL\" ), 100 , false , false ) -- We got a gun now! Where are all the natives? Natives are located here . Developer Commands & Game References Where are all the developer commands? Developer commands can be found here . Where are all the blips, ped models and others? These are named Game references , and they can be found over here . Performance What are..."
   },
   {
-    "title": "Scripting in Lua - Cfx Documentation",
+    "title": "Scripting in Lua",
     "url": "https://docs.fivem.net/docs/scripting-manual/runtimes/lua/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "FiveM supports the general purpose programming language Lua as one of its scripting languages. Lua is a very easy language to learn, simple to use and fast to write. To use Lua, just use .lua in your scripts file extensions. A modified version of Lua 5.4 is used in FiveM, called CfxLua . This version includes some of the modifications the Grit game engine introduced: Support for relative path literals Support for vectors & quaternions To learn more about Lua, read their official documentation . Using Lua To use Lua in your scripts, simply use the .lua file extension. No additional configuration is required. Compile-time hashes Because you might often have to deal with 'Jenkins one-at-a-time' hashes in GTA/RAGE, the Lua runtime has been extended to have support for compile-time generation of hash keys, similar to GET_HASH_KEY , however with zero runtime overhead. For example: -- getting RequestModel(`adder`) -- comparing if GetEntityModel(vehicle) == `buzzard` then print ( \"Indeed, it's a Buzzard.\" ) end -- printing print (`a_m_y_skater_01`) Vectors & quaternions FiveM supports first-class vectors and quaternions in Lua. Vectors and quaternions are incredibly useful to represent things like positions, rotations or even colors. For performance reasons, vectors and quaternions are real data types in CfxLua, just like booleans, numbers and strings are. Many native functions return and accept vectors too. They're commonly used for world positions and standard euler rotations, so..."
   },
   {
-    "title": "Scripting in JavaScript - Cfx Documentation",
+    "title": "Scripting in JavaScript",
     "url": "https://docs.fivem.net/docs/scripting-manual/runtimes/javascript/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "FiveM supports JavaScript as scripting language. To use JavaScript, just use .js in your script filename. FiveM has the ES2017 standard library built in. FiveM also implements a WHATWG compliant console API (some rarely-used methods are not yet implemented). Note that FiveM (on the client) doesn't include any browser or Node.js-specific API's, such as DOM, localStorage, IndexedDB, WebGL, etc. Using natives Native commands are mapped to global JavaScript functions with names similar to the Lua natives mapping. Definitions for them are located at path\\to\\fivem\\FiveM.app\\citizen\\scripting\\v8\\natives_universal.d.ts . For automatic completion of the FiveM API methods and mapped native functions we recommend using the official NPM packages @citizenfx/client and @citizenfx/server , respectively. Example: // The native command PLAYER_PED_ID translates to the following: PlayerPedId(); Using Node.js APIs By default, FiveM includes a customized version of Node.js 16.x on the server . You can simply use require in server scripts, and it'll resolve the package either from Node.js built-ins, or the node_modules/ folder in your resource directory. NodeJS 22 is optionally available for server scripts by adding node_version '22' inside your resource manifest. To automatically install and update a package.json with Yarn on launch, make sure the yarn resource is running before starting your resource, or preferably add it as a dependency in your resource manifest . Using exports A proxy object..."
   },
   {
-    "title": "Scripting in C# - Cfx Documentation",
+    "title": "Scripting in C#",
     "url": "https://docs.fivem.net/docs/scripting-manual/runtimes/csharp/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Setting up our environment Before you can create your first C# resource, you'll need to install Visual Studio 2022 (the community/free version will work just fine). This guide covers the Mono-based C# workflow. FiveM for GTAV Enhanced replaces Mono with .NET , where the only requirement is a .NET 10 SDK (and optionally an IDE). See What’s Changed in FiveM for GTAV Enhanced . Creating your project Open a command window by pressing Win + R , type in cmd and then press Enter . Now you should have a console like the one below: Once that window shows up we're going to be following the FiveM's Cookbook modern guide to setup our scripting environment, so make sure you enter the following commands in the console window: dotnet new -i CitizenFX.Templates mkdir MyResource cd MyResource dotnet new cfx-resource If everything went right, you should get a folder named MyResource with a solution file named MyResource.sln . This is the solution file to manage your projects. To build the project, you can click on build.cmd , which will build a release server and client dll for you, both targeting the correct .NET Framework needed for FiveM and FXServer. Setting up and running the project If you built the resource, you should now have a dist folder available, so you should be able to run the following commands: Change directory to the resource path named MyResource : cd /d [ PATH TO THIS RESOURCE] Make a symbolic link. For more information about mklink , visit the following article by..."
   },
   {
-    "title": "Network and Local IDs - Cfx Documentation",
+    "title": "Network and Local IDs",
     "url": "https://docs.fivem.net/docs/scripting-manual/networking/ids/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "There are various kinds of identifiers and handles used across FiveM. A few of them need special attention and are mentioned below. Players Server ID Client-side: Server ID Server-side: 'NetID', player source , Player The server ID, canonically known as the NetID, is a transient handle that is usually seen in server scripts as source . To convert between a player index on the client and a server index, use GET_PLAYER_FROM_SERVER_ID and GET_PLAYER_SERVER_ID on the client . Player index Client-side: Player Server-side: Non-existent. Use server IDs. Does not round-trip. The player index is used on the client to refer to a player. It is usually a number from 0 to 128 (inclusive), and is used for game natives as well as some CFX natives on the client. With state awareness enabled, player indices are local to a specific client, as with entity handles. Note that a player existent on the server does not necessarily exist on the client as well: GET_PLAYER_FROM_SERVER_ID can return -1 if this is the case. Ped Client-side: Ped Server-side: Ped A player will usually have a ped representing the physical entity making up the player's character. This is a standard network object with a network ID. To get a player's ped, use GET_PLAYER_PED , and to get the player belonging to a ped handle, use NETWORK_GET_PLAYER_INDEX_FROM_PED . Entities Entity handle Both sides: Entity, subclasses such as Ped, Object, Vehicle Server-side: Only available if state awareness is not disabled. An entity handle..."
   },
   {
-    "title": "State Bags - Cfx Documentation",
+    "title": "State Bags",
     "url": "https://docs.fivem.net/docs/scripting-manual/networking/state-bags/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "In state awareness mode, entities can have an associated set of arbitrary key/value pairs associated with them known as 'state bags'. Use State bags are exposed to scripting runtimes using runtime-specific APIs, which are detailed below. General guidelines Shallow limitations State getters and setters are naive: every get will return the full serialized state from the game, and only a direct set operation will serialize the entire state back into the game. That means you can not do the following: -- will *not* replicate Entity(x).state.x.y = 'b' -- slow! will deserialize `x` twice local y = Entity(x).state.x.y local z = Entity(x).state.x.z -- more granular use is recommended instead Entity(x).state[ 'x:y' ] = 'b' Lua Getting state local vehicle = GetVehiclePedIsIn(ped, false ) local state = Entity(vehicle).state local mollis = state.mollis print (mollis) Setting state -- you can only do this on the entity's owner, or the server Entity(vehicle).state.mollis = 'vesuvius citrate' Player state Players also have state. LocalPlayer.state.soviet = 'connection' local bullshark = Player(source).state.testosterone Global state State global across the entire server, server-set, client-read. GlobalState.moneyEnabled = true Setting local state By default, state set from the server is replicated, and state set from clients is not replicated. This can be overridden on a case-by-case basis by using set : -- on the server, we want to keep track of 'clone' being 600 only..."
   },
   {
-    "title": "Listening for Events - Cfx Documentation",
+    "title": "Listening for Events",
     "url": "https://docs.fivem.net/docs/scripting-manual/working-with-events/listening-for-events/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "To use existing events in your resources, you need to listen for them. This is the same for client/server side scripts. In Lua/JS, the source variable (global) will contain the player ID that triggered the event. You must save the source to a local variable if you plan on using it after the event returns, or inside of an asynchronous scope, as the source is only guaranteed to be valid for the initial event call. Calling Wait in Lua or awaiting something in JS will cause the global source to be set back to default. In C#, you use the [FromSource] attribute, as seen in the example below. Example Lua AddEventHandler( \"eventName\" , function (eventParam1, eventParam2) -- Code here will be executed once the event is triggered. end ) C# // Usually in the constructor of a class that inherits BaseScript, but can be done anywhere in a BaseScript. EventHandlers[ \"eventName\" ] += new Action< string , bool >(TargetFunction); // Create a function to handle the event somewhere else in your code, or use a lambda. private void TargetFunction ( string param1, bool param2 ) { // Code that gets executed once the event is triggered goes here. } // ----------------------------------------------------------------------------- // Or using EventHandler Attribute [ EventHandler( \"eventName\" ) ] private void TargetFunction ( string param1, bool param2 ) { // Code that gets executed once the event is triggered goes here. } Using source (on the server) works as follows: // constructor code..."
   },
   {
-    "title": "Triggering Events - Cfx Documentation",
+    "title": "Triggering Events",
     "url": "https://docs.fivem.net/docs/scripting-manual/working-with-events/triggering-events/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Triggering local events To trigger a server event from inside a server-side script, or trigger a client event from inside a client-side script, use the TriggerEvent() (or for JS, emit() ) function. Example Lua TriggerEvent( \"eventName\" , eventParam1, eventParam2) C# TriggerEvent( \"eventName\" , eventParam1, eventParam2); JS emit( \"eventName\" , eventParam1, eventParam2); Triggering server events There are currently two different ways to trigger a server event from inside a client script. For smaller transactions you should use TriggerServerEvent , while for larger transactions (which contain more data, multiple KBs and above) TriggerLatentServerEvent would be more optimal. Example Lua TriggerServerEvent( \"eventName\" , eventParam1, eventParam2) C# TriggerServerEvent( \"eventName\" , eventParam1, eventParam2); JS emitNet( \"eventName\" , eventParam1, eventParam2); Triggering latent server events Latent events should be used when needing to transfer a large amount of data from client -> server, as latent events do not block the entire network channel, unlike TriggerServerEvent . Latent events take an extra parameter 'bps' which stands for 'bytes per second', this defines how fast it should send data to the server. If 'bps' is set to -1 or 0 - default bps of 25000 will be applied. Lua TriggerLatentServerEvent( \"eventName\" , bps, eventParam1, eventParam2) C# TriggerLatentServerEvent( \"eventName\" , bps, eventParam1, eventParam2); JS TriggerLatentServerEvent( \"eventName\" , bps,..."
   },
   {
-    "title": "Canceling Events - Cfx Documentation",
+    "title": "Canceling Events",
     "url": "https://docs.fivem.net/docs/scripting-manual/working-with-events/canceling-events/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Canceling Events To cancel an event, use the CANCEL_EVENT native from within an event handler. This does not stop other event handlers from running. Example Lua AddEventHandler( \"eventName\" , function (eventParam1, eventParam2) -- Canceling this event! CancelEvent() end ) C# EventHandlers[ \"eventName\" ] += new Action< string , bool >(TargetFunction); private void TargetFunction ( string param1, bool param2 ) { // Canceling this event! CancelEvent(); } JS on( 'eventName' , ( eventParam1, eventParam2 ) => { // Canceling this event! CancelEvent(); }); Checking for canceled events To check if the last event you triggered was canceled, use the WAS_EVENT_CANCELED native. This only works for local events. Example Lua TriggerEvent( \"eventName\" , eventParam1, eventParam2) if WasEventCanceled() then -- Code that runs if the event was canceled. end In Lua, the TriggerEvent() function returns true if the event was canceled, allowing you to also use the following syntax: Lua if TriggerEvent( \"eventName\" , eventParam1, eventParam2) then -- Code that runs if the event was canceled. end C# TriggerEvent( \"eventName\" , eventParam1, eventParam2); if (WasEventCanceled()) { // Code that runs if the event was canceled. } JS emit( \"eventName\" , eventParam1, eventParam2); if (WasEventCanceled()) { // Code that runs if the event was canceled. }"
   },
   {
-    "title": "Fullscreen NUI - Cfx Documentation",
+    "title": "Fullscreen NUI",
     "url": "https://docs.fivem.net/docs/scripting-manual/nui-development/full-screen-nui/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "The most common use case of NUI is a full-screen 'UI page', which is overlaid on top of the game and may or may not have input focus. These are supported on both FiveM and RedM at this time, and are part of basic Citizen framework level support. The following natives are related to using full-screen NUI: SEND_NUI_MESSAGE SET_NUI_FOCUS Setting up a fullscreen NUI page To assign a full-screen NUI page to a resource, currently you need to specify a single ui_page in the resource manifest for the resource containing an UI page, like shown below: -- specify the root page, relative to the resource ui_page 'main.html' -- every client-side file still needs to be added to the resource packfile! files { 'main.html' , 'build/main.js' , } -- a page can also be hosted externally ui_page 'https://ui-frontend.cfx.example.com/b20210501/index.html' Referencing other assets The NUI system registers a https://cfx-nui- protocol scope for resource files. Therefore, you can reference a file in a resource as follows: < script type = \"text/javascript\" src = \"https://cfx-nui-my-resource/production.js\" async > </ script > This formerly was known as nui:// , but this is no longer a secure context in newer browser versions. Developer tools CEF remote debugging tools are exposed on http://localhost:13172/ as long as the game is running. You can use any Chromium-based browser to easily access these tools. Alternately, it can be opened using the nui_devTools command in the game's F8 console, assuming the..."
   },
   {
-    "title": "NUI Callbacks - Cfx Documentation",
+    "title": "NUI Callbacks",
     "url": "https://docs.fivem.net/docs/scripting-manual/nui-development/nui-callbacks/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "NUI is the way we send data to/from the User Interface (CEF) to the Game. The data sent or received here MUST be JSON encodable. Data returned in the cb will be sent back to the UI. It is expected that you always return data via the callback, if you fail to do so, the request will timeout and fail causing an error to bubble up in to the calling fetch code in the UI. You register NUI callbacks using REGISTER_NUI_CALLBACK . Registering a NUI callback in Lua RegisterNuiCallback( 'getItemInfo' , function (data, cb) -- POST data gets parsed as JSON automatically local itemId = data.itemId if not itemCache[itemId] then cb({ error = 'No such item!' }) return end -- and so does callback response data cb(itemCache[itemId]) end ) Registering a NUI callback in JS RegisterNuiCallback( 'getItemInfo' , ( data, cb ) => { // POST data gets parsed as JSON automatically const itemId = data.itemId; if (!itemCache[itemId]) { cb({ error : 'No such item!' }); return ; } // and so does callback response data cb(itemCache[itemId]); }); Registering a NUI callback in C# // register the event handler with manual marshaling RegisterNuiCallback( \"getItemInfo\" , new Action<IDictionary< string , object >, CallbackDelegate>((data, cb) => { // get itemId from the object // alternately you could use `dynamic` and rely on the DLR if (!data.TryGetValue( \"itemId\" , out var itemIdObj)) { cb( new { error = \"Item ID not specified!\" }); return ; } // cast away var itemId = (itemIdObj as string ) ?? \"\" ; // same as..."
   },
   {
-    "title": "Loading Screens - Cfx Documentation",
+    "title": "Loading Screens",
     "url": "https://docs.fivem.net/docs/scripting-manual/nui-development/loading-screens/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "A special NUI frame is the frame called loadingScreen , which is shown during loading of FiveM, instead of the default client-side loading screen or the game loading screen, after joining into a server. It is specified similarly to ui_page using loadscreen in the resource manifest : loadscreen 'load.html' file 'load.html' loadscreen 'https://my-server.example.com/loadscreen/' Cursor/input The loading screen will always be focused for both mouse and keyboard input, however the cursor is not shown by default for legacy reasons. The NUI cursor can be enabled by adding a loadscreen_cursor entry to the resource manifest that contains the loading screen: loadscreen_cursor 'yes' Busy spinner You can hide the default busy spinner in the bottom right corner of the screen by adding the following command to your server.cfg : setr sv_showBusySpinnerOnLoadingScreen false Handover data Server scripts can specify data pairs to send to the client loading screen using the handover function in the playerConnecting event. This data will be passed to the loading screen in the window.nuiHandoverData property. In addition to data specified by the server, a field named serverAddress is also added with the current IP/port used for the client->server connection. Example -- Server script AddEventHandler( 'playerConnecting' , function (_, _, deferrals) local source = source deferrals.handover({ name = GetPlayerName(source) }) end ) <!-- loading screen page --> < h1 id = \"namePlaceholder\" > Welcome, <..."
   },
   {
-    "title": "Direct-Rendered UI - Cfx Documentation",
+    "title": "Direct-Rendered UI",
     "url": "https://docs.fivem.net/docs/scripting-manual/nui-development/dui/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "In FiveM, you can also render NUI to a runtime texture, which is called DUI for 'direct NUI'. The following natives help with this: CREATE_DUI CREATE_RUNTIME_TEXTURE_FROM_DUI_HANDLE DESTROY_DUI GET_DUI_HANDLE IS_DUI_AVAILABLE SEND_DUI_MESSAGE SEND_DUI_MOUSE_DOWN SEND_DUI_MOUSE_MOVE SEND_DUI_MOUSE_UP SEND_DUI_MOUSE_WHEEL SET_DUI_URL The native documentation contains information for each of these, but here are some creative use cases for this: Rendering in 2D space using DRAW_SPRITE Rendering to a game render target object using similar natives. Rendering arbitrarily in world space using a specialized Scaleform, like in this forum topic . This can be used to make cinema screens, asynchronous in-game hint overlays, etc. fairly trivially."
   },
   {
-    "title": "Using the Profiler - Cfx Documentation",
+    "title": "Using the Profiler",
     "url": "https://docs.fivem.net/docs/scripting-manual/debugging/using-profiler/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "A community post by kn0pee , last updated on February 1, 2023 Introduction In a recent update to FiveM, we have a very easy and in game tool which we can use to identify the exact lines of code and threads causing issues within your server! This can be used both server side, to help find hitch warnings, or client side to improve FPS. This guide will not explain how to fix these issues, simply how to identify where they are so you can tweak and research to fix them Prerequisites To ensure profiler works, make sure your client is up to date, and you are using the latest server artifacts. You also need google chrome installed to properly view the profile. If you are viewing the profile without saving first make sure you keep your game / the server open and running! Usage of the Profiler Capturing a Profile To begin the profiling, open your console (F8 on client, or the server console), and type the following command profiler record (frames to record) A good starting point is 500 frames, as this captures things over a substantial period of time. All going well you should see a message which says start To check the status of the profiler, such as whether the capture is active, and how many frame it has captured, use profiler status . It will display something like this Once the profile is complete, it will display that it is no longer recording Viewing the Profiles You can immediately view the capture using profiler view , which will open google chrome and begin loading the..."
   },
   {
-    "title": "Voice - Cfx Documentation",
+    "title": "Voice",
     "url": "https://docs.fivem.net/docs/scripting-manual/voice/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "FiveM has been using the mumble client to handle in-game voice communication for a while now, below we will explain how you can use certain mumble natives, including a couple guides to handle submixes and NativeAudio. Mumble is deprecated in FiveM for GTAV Enhanced and will be removed in a future version. Use the new server Voice API instead . For backwards compatibility only, Mumble can be enabled with sv_mumble . See What’s Changed in FiveM for GTAV Enhanced . Console Variables These variables can be enabled/disabled on the client by pressing F8 while FiveM is running. voice_inBitrate [bitrate] Allows you to set the voice bitrate , ranges from 16000 to 128000 . Default is 48000 . The greater the bitrate, the better the audio quality. voice_use2dAudio [true/false] Uses 2D Audio exclusively. This is set to false by default. voice_use3dAudio [true/false] Considered deprecated on FiveM, but available on RedM. Uses 3D (directional) Audio exclusively. This is set to false by default. Currently, directional audio's position is relative to the game camera, a solution is being worked on so directional audio is relative to the player's ped entity instead. voice_useSendingRangeOnly [true/false] A convar that can be used to only hear other clients within their range. This is set to false by default. voice_useNativeAudio [true/false] Enables the game's native audio including filter support. This should be enabled if you plan to use submixes. This is set to false by default. Talker..."
   },
   {
-    "title": "Using Scaleform - Cfx Documentation",
+    "title": "Using Scaleform",
     "url": "https://docs.fivem.net/docs/scripting-manual/using-scaleform/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Scaleform GFx is the native GUI for GTAV, based on Flash technology using ActionScript 2, which is a superset of ECMAScript (JavaScript) - read more on Wikipedia . Development environment In order to develop custom .gfx assets (optimized SWF) you need to have Adobe Flash Pro CS6, use ActionScript 2 (version 3 has a different virtual machine which is not supported by the version GFx GTA uses) and target Flash Player 8.0. To convert a .swf file produced by Adobe Flash into .gfx, you need the gfxexport.exe tool from the Scaleform GFx SDK (version 4.0 is fine). Limitations Scaleform doesn't implement some features from Flash: No filters for shapes. At all . No blur filter for text either. Can be faked with a glow filter . No masking. Will be discussed later on this page . No embedded raster graphics. Will be discussed later on this page . Interfacing You can interface with scaleforms by performing native calls from the GRAPHICS namespace with scaleform in their name. The game expects a .gfx to have a TIMELINE variable in the global scope. This variable serves as a kind of public API of the .gfx. Boilerplate It'd be pretty time-consuming to explain in detail how to bootstrap your first gfx thing, so instead please use the boilerplate: Related files: boilerplate.zip Loading Use REQUEST_SCALEFORM_MOVIE with the name of the desired gfx (without file extension), for example mp_car_stats . Use HAS_SCALEFORM_MOVIE_LOADED in a loop, to prevent using a non-loaded Scaleform asset...."
   },
   {
-    "title": "Creating Chat Messages - Cfx Documentation",
+    "title": "Creating Chat Messages",
     "url": "https://docs.fivem.net/docs/scripting-manual/migrating-from-deprecated/chat-messages/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Commonly found in tutorials and older resources, the chatMessage event is used to create a chat message. This method is now deprecated and people are encouraged to use the chat:addMessage event. chatMessage (The deprecated method) The old chatMessage event had 3 parameters ( author [string], color [array] and text [string]) Example TriggerEvent( \"chatMessage\" , GetPlayerName(PlayerId()), { 255 , 255 , 255 }, \"Hello, this is the message that will show in chat.\" ) chat:addMessage (The recommended method) This event has an object parameter which consists of 3 properties ( color [array], multiline [boolean] and args [array]) Example TriggerEvent( \"chat:addMessage\" , { color = { 255 , 255 , 255 }, multiline = true , args = { GetPlayerName(PlayerId()), \"Hello, this is the message that will show in chat\" } }) For further documentation of this event, see the chat:addMessage section ."
   },
   {
-    "title": "Creating Commands - Cfx Documentation",
+    "title": "Creating Commands",
     "url": "https://docs.fivem.net/docs/scripting-manual/migrating-from-deprecated/creating-commands/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "RegisterCommand It is recommended to always use this (and not chatMessage !) as it allows for the use of the integrated ACL system, and other core functionality (automatic completion, console usage, ...). This native consists of 3 parameters ( commandName [string], handler [func] and restricted [boolean]). Example RegisterCommand( \"commandName\" , function (source --[[ this is the player ID (on the server): a number ]] , args --[[ this is a table of the arguments provided ]] , rawCommand --[[ this is what the user entered ]] ) if source > 0 then print ( \"You are not console.\" ) else print ( \"This is console!\" ) end end , true ) -- this true bool means that the user cannot execute the command unless they have the 'command.commandName' ACL object allowed to one of their identifiers. Further examples can be found at the respective Lua and C# introductions."
   },
   {
-    "title": "Fuel Consumption - Cfx Documentation",
+    "title": "Fuel Consumption",
     "url": "https://docs.fivem.net/docs/scripting-manual/using-new-game-features/fuel-consumption/",
     "section": "scripting-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "By default in GTAV and FiveM vehicles do not consume fuel. This feature allows you to turn the fuel consumption on and customize it for your needs. Turn on/off To set/check the fuel consumption use SET_FUEL_CONSUMPTION_STATE / GET_FUEL_CONSUMPTION_STATE natives. Set true to turn it on, false - to turn it off. How it works Fuel consumption speed When turned on, fuel consumption is calculated by the formula: time_step * revolutions_per_minute * vehicle_fuel_consumption_rate_multiplier * global_fuel_consumption_rate_multiplier I.e. fuel is consumed faster the more revolutions engine does. This approximates how fuel consumption works in real world. Fuel is not consumed when the engine is turned off. By default, 65 liter gas tank car with average fuel consumption can stay idle for ~16.67 hours or run with max RPM for ~2.5 hours . Customize consumption speed To customize/check global (across all vehicles) fuel consumption rate ( global_fuel_consumption_rate_multiplier in the formula above) use SET_FUEL_CONSUMPTION_RATE_MULTIPLIER / GET_FUEL_CONSUMPTION_RATE_MULTIPLIER natives. By default it is set to 1. If set to negative - 0 will be used instead. To customize fuel consumption per vehicle ( vehicle_fuel_consumption_rate_multiplier in the formula above) use SET_HANDLING_FLOAT (for all vehicles with given class) or SET_VEHICLE_HANDLING_FLOAT (for a specific vehicle) native with fieldName equal to fPetrolConsumptionRate . By default it is set to 0.5 for all vehicles. You can also use..."
   },
   {
-    "title": "Resource Manifest - Cfx Documentation",
+    "title": "Resource Manifest",
     "url": "https://docs.fivem.net/docs/scripting-reference/resource-manifest/resource-manifest/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "The resource manifest is a file named fxmanifest.lua (or previously, __resource.lua ), placed in a resource folder on the server. It is a Lua file, ran in a separate runtime from any Lua scripts in the resource, set up with a semi-declarative syntax to be used for defining metadata. Example An example resource manifest for a hypothetical resource looks as follows: -- Resource Metadata fx_version 'cerulean' games { 'rdr3' , 'gta5' } author 'John Doe <j.doe@example.com>' description 'Example resource' version '1.0.0' -- What to run client_scripts { 'client.lua' , 'client_two.lua' } server_script 'server.lua' -- Extra data can be used as well my_data 'one' { two = 42 } my_data 'three' { four = 69 } -- due to Lua syntax, the following works too: my_data( 'nine' )({ninety = \"nein\" }) -- metadata keys can be arbitrary pizza_topping 'pineapple' Internally, this creates the following metadata entries: fx_version : cerulean game : gta5 game : rdr3 author : John Doe < j.doe@example.com > description : Example resource version : 1.0.0 client_script : client.lua client_script : client_two.lua (note the s table being expanded) server_script : server.lua my_data : one my_data : three my_data : nine my_data_extra : {\"two\":42} (as JSON) my_data_extra : {\"four\":69} my_data_extra : {\"ninety\":\"nein\"} pizza_topping : pineapple You can also obtain this metadata from scripts using GET_NUM_RESOURCE_METADATA and GET_RESOURCE_METADATA . Globbing Some entry types may support 'globbing' for multiple..."
   },
   {
-    "title": "gameEventTriggered - Cfx Documentation",
+    "title": "gameEventTriggered",
     "url": "https://docs.fivem.net/docs/scripting-reference/events/list/gameEventTriggered/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "This event is fired after low-level game events take place, such as CEventNetworkEntityDamage . A full list of available game events can be found here . Parameters string name, int args[] name : The game event name that was triggered. A full list can be found here . args : An array of integers that were passed along with the event. Examples This example outputs all event triggers to the console, making it easier to discover what you need: Lua Example: AddEventHandler( 'gameEventTriggered' , function (name, args) print ( 'game event ' .. name .. ' (' .. json.encode(args) .. ')' ) end ) C# Example: // In class constructor EventHandlers[ \"gameEventTriggered\" ] += new Action< string , List< dynamic >>(OnGameEventTriggered); // Delegate method private void OnGameEventTriggered ( string name, List< dynamic > args ) { Debug.WriteLine( $\"game event {name} ( {String.Join( \", \" , args.ToArray())} )\" ); } JavaScript Example: on( \"gameEventTriggered\" , ( name, args ) => { console .log( `Game event ${name} ${args.join( ', ' )} ` ) });"
   },
   {
-    "title": "onClientResourceStart - Cfx Documentation",
+    "title": "onClientResourceStart",
     "url": "https://docs.fivem.net/docs/scripting-reference/events/list/onClientResourceStart/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Called after a resource starts. Parameters string resourceName resourceName: The name of the resource that started. Examples This example prints the name of the resource it was in, upon start. Lua Example: AddEventHandler( 'onClientResourceStart' , function (resourceName) if (GetCurrentResourceName() ~= resourceName) then return end print ( 'The resource ' .. resourceName .. ' has been started on the client.' ) end ) C# Example: // In class constructor EventHandlers[ \"onClientResourceStart\" ] += new Action< string >(OnClientResourceStart); // Delegate method // - assuming `using static CitizenFX.Core.Native.API` private void OnClientResourceStart ( string resourceName ) { if (GetCurrentResourceName() != resourceName) return ; Debug.WriteLine( $\"The resource {resourceName} has been started on the client.\" ); } JavaScript Example: on( \"onClientResourceStart\" , ( resourceName ) => { if (GetCurrentResourceName() != resourceName) { return ; } console .log( `The resource ${resourceName} has been started on the client.` ) });"
   },
   {
-    "title": "onResourceStart - Cfx Documentation",
+    "title": "onResourceStart",
     "url": "https://docs.fivem.net/docs/scripting-reference/events/list/onResourceStart/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Called while a resource starts. Parameters string resourceName resourceName: The name of the resource that started. Examples This example prints the name of the current resource, upon start. Lua Example: AddEventHandler( 'onResourceStart' , function (resourceName) if (GetCurrentResourceName() ~= resourceName) then return end print ( 'The resource ' .. resourceName .. ' has been started.' ) end ) C# Example: // in the class constructor EventHandlers[ \"onResourceStart\" ] += new Action< string >(OnResourceStart); // delegate method private void OnResourceStart ( string resourceName ) { if (GetCurrentResourceName() != resourceName) return ; Debug.WriteLine( $\"The resource {resourceName} has been started.\" ); } JavaScript Example: on( \"onResourceStart\" , ( resourceName ) => { if (GetCurrentResourceName() != resourceName) { return ; } console .log( `The resource ${resourceName} has been started.` ) });"
   },
   {
-    "title": "playerConnecting - Cfx Documentation",
+    "title": "playerConnecting",
     "url": "https://docs.fivem.net/docs/scripting-reference/events/list/playerConnecting/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Called when a player is connecting to the server. Parameters string playerName, function setKickReason, object deferrals playerName : The player name of the player connecting. setKickReason : A function used to set a reason message for when the event is canceled. deferrals : An object used to 'defer' accepting connections to a later tick. source : The source object is a temporary player ID, that can be used with a limited set of functions only. Deferring connections Using deferrals allows you to make a connection request complete at a later time, for example when you have to wait for an asynchronous task to complete beforehand, such as a database or web API query. The deferrals object contains the following members to achieve such: defer(): void deferrals.defer will initialize deferrals for the current resource. It is required to wait for at least a tick after calling defer before calling update , presentCard or done . update(message: string): void deferrals.update will send a progress message to the connecting client. presentCard(card: object | string, cb?: (data: object, rawData: string) => void): void deferrals.presentCard will send an Adaptive Card to the client. card can be an object containing card data, or a serialized JSON string with the card information. cb , if present, will be invoked on an Action.Submit event from the Adaptive Card. done(failureReason?: string): void deferrals.done finalizes a deferral. It is required to wait for at least a tick before calling..."
   },
   {
-    "title": "playerDropped - Cfx Documentation",
+    "title": "playerDropped",
     "url": "https://docs.fivem.net/docs/scripting-reference/events/list/playerDropped/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Called when a player drops from the server. Parameters string reason, string resourceName, uint clientDropReason source : The player that has disconnected. reason : The reason why the player has disconnected. resourceName : The resource this event was dispatched from. clientDropReason : An unsigned integer representing the internal reason for the event dispatch (see ClientDropReasons.h for the enum, originally declared as uint32_t ). Examples This example prints the name of the player, the reason why the player has disconnected, the resource from which the event was dispatched, and the internal client drop reason to the server console. Lua Example: -- source is global here, don't add to function AddEventHandler( 'playerDropped' , function (reason, resourceName, clientDropReason) print ( 'Player ' .. GetPlayerName(source) .. ' dropped (Reason: ' .. reason .. ', Resource: ' .. resourceName .. ', Client Drop Reason: ' .. clientDropReason .. ')' ) end ) C# Example: // In class constructor EventHandlers[ \"playerDropped\" ] += new Action<Player, string , string , uint >(OnPlayerDropped); // Delegate method private void OnPlayerDropped ( [FromSource]Player player, string reason, string resourceName, uint clientDropReason ) { Debug.WriteLine( $\"Player {player.Name} dropped (Reason: {reason} , Resource: {resourceName} , Client Drop Reason: {clientDropReason} ).\" ); } JavaScript Example: on( \"playerDropped\" , ( reason, resourceName, clientDropReason ) => { console .log( `Player..."
   },
   {
-    "title": "populationPedCreating - Cfx Documentation",
+    "title": "populationPedCreating",
     "url": "https://docs.fivem.net/docs/scripting-reference/events/list/populationPedCreating/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "This event is fired before creating a population ped and allows manipulating population from script. You can also cancel this event with CancelEvent(). The setters parameter contains two functions: setPosition to set the position where the ped is going to spawn at. setModel to set the model that the ped is going to spawn as. Parameters float posX, float posY, float posZ, uint model, object setters posX : The X position the ped is going to spawn at. posY : The Y position the ped is going to spawn at. posZ : The Z position the ped is going to spawn at. model : The model the ped is going to spawn as. setters : Object to override what the ped spawns as. setModel(string model) - Sets the model of the ped created. setPosition(float x, float y, float z) - Adjusts the position of the ped. Examples This example illustrates how you can intercept population: Lua Example: CreateThread( function () RequestModel( 's_m_y_cop_01' ) end ) AddEventHandler( 'populationPedCreating' , function (x, y, z, model, setters) Citizen.Trace(( 'making cop at %s %s %s plus a bit (was %s)\\n' ): format ( tostring (x), tostring (y), tostring (z), tostring (model))) setters.setModel( 's_m_y_cop_01' ) -- you can use a hash as well setters.setPosition(x, y, z + 5.5 ) -- you can also CancelEvent() to skip creating the ped end ) JavaScript Example: setImmediate( () => { RequestModel( 's_m_y_cop_01' ) }) on( 'populationPedCreating' , ( x, y, z, model, setters ) => { console .log( `Making cop at ${x} ${y} ${z} plus..."
   },
   {
-    "title": "rconCommand - Cfx Documentation",
+    "title": "rconCommand",
     "url": "https://docs.fivem.net/docs/scripting-reference/events/list/rconCommand/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Parameters This event is deprecated. Please use REGISTER_COMMAND instead, and use the restricted flag. string command, table/array arguments command : A string containing the command name that was executed. arguments : A list containing all arguments passed to the command. Examples JavaScript Example: on( 'rconCommand' , ( command, args ) => { console .log( ` ${command} called over RCON with ${args} ` ) });"
   },
   {
-    "title": "respawnPlayerPedEvent - Cfx Documentation",
+    "title": "respawnPlayerPedEvent",
     "url": "https://docs.fivem.net/docs/scripting-reference/events/list/respawnPlayerPedEvent/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "This native is a server side native which requires OneSync enabled to run it. It gets triggered when a player respawns. Parameters string player, table content player : The player that has respawned. table : A table which contains information regarding the player's respawn. Examples This example prints the name of the player and his coordinates on respawn. Lua Example: AddEventHandler( \"respawnPlayerPedEvent\" , function (player, content) print (GetPlayerName(player).. \" has spawned at \" .. tostring (content.posX).. \", \" .. tostring (content.posY).. \", \" .. tostring (content.posZ)) end )"
   },
   {
-    "title": "Convars - Cfx Documentation",
+    "title": "Convars",
     "url": "https://docs.fivem.net/docs/scripting-reference/convars/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Convars can be very powerful for defining configuration variables on the server. A convar is basically a configuration variable that you can set and get from any resource. You don't have to use a resource to get or set these values, you can also use commands in the (server) console or through a RCON client. There are a couple of different convar types, we'll cover all of them on this page. Standard convars The most common of them all is just the 'standard' convar type. Using commands You can set such convar by executing the following command: set convar_name convar_value If you want to set the value to a string that contains spaces, you can surround the convar_value argument with quotation marks, like this: set convar_name \"This is a convar value that contains spaces!\" To get the value, simply type the convar name into the console, the value will then be printed to the console and will look something like this: cfx> convar_name \"convar_name\" is \"This is a convar value that contains spaces!\" default: \"\" type: string If the convar has not been setup yet, typing convar_name into the console will return the following message: No such command convar_name. Using resources You can also set and get convars using CFX API Set natives. To set a basic convar value, you can either run ExecuteCommand() with the command from the section above as the argument, this will require that the resource has the command.set ace (permission) allowed. Alternatively you can use the CFX API Set natives..."
   },
   {
-    "title": "OneSync - Cfx Documentation",
+    "title": "OneSync",
     "url": "https://docs.fivem.net/docs/scripting-reference/onesync/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "OneSync is a custom sync system that is built on top of GTA: Online's codebase, it increases server slot count so more players can play on a server and at the same time it introduces better development standards including server-sided synchronization states for entities, which we'll cover in this article. It's worth mentioning that OneSync is free up to 48 slots, after such, you should get one of the following tiers from the Cfx Portal starting from FiveM Element Club Argentum 💿 . FiveM for GTAV Enhanced no longer uses P2P synchronization and has instead switched to a client-server model. OneSync big mode is now the only mode; non-big mode no longer exists. See What’s Changed in FiveM for GTAV Enhanced . What is OneSync: Infinity? A mode allowing (up to) 2048 players since the recent commit . There are servers handling 1000+ concurrent players. To accomplish this, it uses the following technological changes: Extension of object id length from 8192 ( 1 << 13 ) to 65535 ( (1 << 16) - 1 ), from the following commit . Player ped/vehicle culling. No entities will be created on clients outside a 'focus zone', which currently is hardcoded to 424 units around a player. Player culling. No players will be created/deleted locally outside of the focus zone too. This means that all player iteration will have to happen server-side. It also has a bit better performance than 'plain' OneSync at this time due to player ped culling, and works around the so-called 'head blend bug'. How is..."
   },
   {
-    "title": "Client-Side Functions in Lua - Cfx Documentation",
+    "title": "Client-Side Functions in Lua",
     "url": "https://docs.fivem.net/docs/scripting-reference/runtimes/lua/client-functions/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Runtime-specific functions AddEventHandler Citizen.Await Citizen.CreateThread Citizen.SetTimeout Citizen.Trace Citizen.Wait cross dot inv norm quat RegisterNetEvent RegisterNUICallback RemoveEventHandler SendNUIMessage slerp TriggerEvent TriggerServerEvent vector vector2 vector3 vector4 Native functions Refer to the FiveM Native Reference for game functions."
   },
   {
-    "title": "Server-Side Functions in Lua - Cfx Documentation",
+    "title": "Server-Side Functions in Lua",
     "url": "https://docs.fivem.net/docs/scripting-reference/runtimes/lua/server-functions/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Runtime-specific functions AddEventHandler Citizen.Await Citizen.CreateThread Citizen.SetTimeout Citizen.Trace Citizen.Wait cross dot GetPlayerIdentifiers GetPlayers inv norm PerformHttpRequest PerformHttpRequestAwait quat RegisterNetEvent RemoveEventHandler slerp TriggerClientEvent TriggerEvent vector vector2 vector3 vector4 Native functions Refer to the FiveM Native Reference for game functions."
   },
   {
-    "title": "Client-side functions in JavaScript - Cfx Documentation",
+    "title": "Client-side functions in JavaScript",
     "url": "https://docs.fivem.net/docs/scripting-reference/runtimes/javascript/client-functions/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Runtime-specific functions emit emitNet onNet on setTick clearTick Native functions Refer to the FiveM Native Reference for game functions."
   },
   {
-    "title": "Server-side functions in JavaScript - Cfx Documentation",
+    "title": "Server-side functions in JavaScript",
     "url": "https://docs.fivem.net/docs/scripting-reference/runtimes/javascript/server-functions/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Runtime-specific functions exports emit emitNet onNet on setTick clearTick getPlayers Native functions Refer to the FiveM Native Reference for game functions."
   },
   {
-    "title": "Client-Side Functions in C# - Cfx Documentation",
+    "title": "Client-Side Functions in C#",
     "url": "https://docs.fivem.net/docs/scripting-reference/runtimes/csharp/client-functions/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "There's a few ways to easily tell what functions exist in C# pending manual documentation: You can use Visual Studio's IntelliSense functionality to view most functions, or use the 'class browser' feature to view the public-exposed API. On the client, many APIs are similar to GTAV's ScriptHookV.NET API. Natives exist in CitizenFX.Core.Native.API , check the native reference to find out more."
   },
   {
-    "title": "Server-Side Functions in C# - Cfx Documentation",
+    "title": "Server-Side Functions in C#",
     "url": "https://docs.fivem.net/docs/scripting-reference/runtimes/csharp/server-functions/",
     "section": "scripting-reference",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "There's a few ways to easily tell what functions exist in C# pending manual documentation: You can use Visual Studio's IntelliSense functionality to view most functions, or use the 'class browser' feature to view the public-exposed API. Natives exist in CitizenFX.Core.Native.API , check the native reference to find out more. (do make sure to filter by server)"
   },
   {
-    "title": "Blips - Cfx Documentation",
+    "title": "Blips",
     "url": "https://docs.fivem.net/docs/game-references/blips/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Blips A list of all game blips as of build 3258 are shown below. 0 radar_higher 1 radar_level 2 radar_lower 3 radar_police_ped 4 radar_wanted_radius 5 radar_area_blip 6 radar_centre 7 radar_north 8 radar_waypoint 9 radar_radius_blip 10 radar_radius_outline_blip 11 radar_weapon_higher 12 radar_weapon_lower 13 radar_higher_ai 14 radar_lower_ai 15 radar_police_heli_spin 16 radar_police_plane_move 27 radar_mp_crew 28 radar_mp_friendlies 36 radar_cable_car 37 radar_activities 38 radar_raceflag 40 radar_safehouse 41 radar_police 42 radar_police_chase 43 radar_police_heli 44 radar_bomb_a 47 radar_snitch 48 radar_planning_locations 50 radar_crim_carsteal 51 radar_crim_drugs 52 radar_crim_holdups 54 radar_crim_player 56 radar_cop_patrol 57 radar_cop_player 58 radar_crim_wanted 59 radar_heist 60 radar_police_station 61 radar_hospital 62 radar_assassins_mark 63 radar_elevator 64 radar_helicopter 66 radar_random_character 67 radar_security_van 68 radar_tow_truck 70 radar_illegal_parking 71 radar_barber 72 radar_car_mod_shop 73 radar_clothes_store 75 radar_tattoo 76 radar_armenian_family 77 radar_lester_family 78 radar_michael_family 79 radar_trevor_family 80 radar_jewelry_heist 82 radar_drag_race_finish 84 radar_rampage 85 radar_vinewood_tours 86 radar_lamar_family 88 radar_franklin_family 89 radar_chinese_strand 90 radar_flight_school 91 radar_eye_sky 92 radar_air_hockey 93 radar_bar 94 radar_base_jump 95 radar_basketball 96 radar_biolab_heist 99 radar_cabaret_club 100 radar_car_wash..."
   },
   {
-    "title": "Checkpoints - Cfx Documentation",
+    "title": "Checkpoints",
     "url": "https://docs.fivem.net/docs/game-references/checkpoints/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Note This checkpoint ID order is valid as of game build 2189. Any game build before that the order slightly differs. You can generally take 3 away from IDs to get an ID that matches older game builds, or you could check the old table on the native reference . Standard Checkpoints 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44-46 47 48 49 Checkpoint Type 44-46 If using checkpoint type 44-46 the reserved parameter in the CREATE_CHECKPOINT native sets the number/number and shape to display. IDs 100 and higher include a marker next to it, marker IDs are included below. 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 Marker ID 20 101 Marker ID 20 102 Marker ID 20 103 Marker ID 20 104 Marker ID 20 105 Marker ID 20 106 Marker ID 20 107 Marker ID 20 108 Marker ID 20 109 Marker ID 20 110 Marker ID 21 111 Marker ID 21 112 Marker ID 21 113 Marker ID 21 114 Marker ID 21 115 Marker ID 21 116 Marker ID 21 117 Marker ID 21 118 Marker ID 21 119 Marker ID 21 120 Marker ID 22 121 Marker ID 22 122 Marker ID 22 123 Marker ID 22 124 Marker ID 22 125 Marker ID 22 126 Marker ID 22 127 Marker ID 22 128 Marker ID 22 129 Marker ID 22 130 Marker ID 23 131 Marker ID 23 132 Marker ID..."
   },
   {
-    "title": "Controls - Cfx Documentation",
+    "title": "Controls",
     "url": "https://docs.fivem.net/docs/game-references/controls/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Example Lua -- checks if INPUT_CONTEXT has just been released if IsControlJustReleased( 0 --[[control type]] , 51 --[[control index]] ) then -- run code here end C# // checks if INPUT_CONTEXT has just been released // assumes `using static CitizenFX.Core.API;` if (IsControlJustReleased( 0 , 51 )) { // run code here } Control types Index Name 0 PLAYER_CONTROL 2 FRONTEND_CONTROL Controls Index Name Default QWERTY Xbox Controller 0 INPUT_NEXT_CAMERA V BACK 1 INPUT_LOOK_LR MOUSE RIGHT RIGHT STICK 2 INPUT_LOOK_UD MOUSE DOWN RIGHT STICK 3 INPUT_LOOK_UP_ONLY (NONE) RIGHT STICK 4 INPUT_LOOK_DOWN_ONLY MOUSE DOWN RIGHT STICK 5 INPUT_LOOK_LEFT_ONLY (NONE) RIGHT STICK 6 INPUT_LOOK_RIGHT_ONLY MOUSE RIGHT RIGHT STICK 7 INPUT_CINEMATIC_SLOWMO (NONE) R3 8 INPUT_SCRIPTED_FLY_UD S LEFT STICK 9 INPUT_SCRIPTED_FLY_LR D LEFT STICK 10 INPUT_SCRIPTED_FLY_ZUP PAGEUP LT 11 INPUT_SCRIPTED_FLY_ZDOWN PAGEDOWN RT 12 INPUT_WEAPON_WHEEL_UD MOUSE DOWN RIGHT STICK 13 INPUT_WEAPON_WHEEL_LR MOUSE RIGHT RIGHT STICK 14 INPUT_WEAPON_WHEEL_NEXT SCROLLWHEEL DOWN DPAD RIGHT 15 INPUT_WEAPON_WHEEL_PREV SCROLLWHEEL UP DPAD LEFT 16 INPUT_SELECT_NEXT_WEAPON SCROLLWHEEL DOWN (NONE) 17 INPUT_SELECT_PREV_WEAPON SCROLLWHEEL UP (NONE) 18 INPUT_SKIP_CUTSCENE ENTER / LEFT MOUSE BUTTON / SPACEBAR A 19 INPUT_CHARACTER_WHEEL LEFT ALT DPAD DOWN 20 INPUT_MULTIPLAYER_INFO Z DPAD DOWN 21 INPUT_SPRINT LEFT SHIFT A 22 INPUT_JUMP SPACEBAR X 23 INPUT_ENTER F Y 24 INPUT_ATTACK LEFT MOUSE BUTTON RT 25 INPUT_AIM RIGHT MOUSE BUTTON LT 26..."
   },
   {
-    "title": "Data Files - Cfx Documentation",
+    "title": "Data Files",
     "url": "https://docs.fivem.net/docs/game-references/data-files/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "A data file is an entry in the resource manifest that references a file to load in the game extra content mounting system. Data file types Key File type Root element Mounter Example ACTION_TABLE_DEFINITIONS CActionInfoDataFileMounter ALTERNATE_VARIATIONS_FILE CPedVariationStreamFileMounter dlc_mpbattlecrc:/common/data/pedalternatevariations.meta AMB_PROCEDURAL_BLOOD_FILE CVFXBloodFileMounter AMBIENT_PED_MODEL_SET_FILE AmbientModelSetMounter AMBIENT_PROP_MODEL_SET_FILE AmbientModelSetMounter AMBIENT_VEHICLE_MODEL_SET_FILE AmbientModelSetMounter AUDIO_CURVEDATA audMetadataDataFileMounter AUDIO_DYNAMIXDATA audMetadataDataFileMounter AUDIO_GAMEDATA audMetadataDataFileMounter x64:/audio/audio_rel/config/game.dat151.rel AUDIO_SOUNDDATA audMetadataDataFileMounter x64:/audio/audio_rel/config/sounds.dat54.rel AUDIO_SPEECHDATA audSpeechDataFileMounter x64:/audio/audio_rel/config/dlc_gtao_speech.dat4.rel AUDIO_SYNTHDATA audMetadataDataFileMounter AUDIO_WAVEPACK Folder containing wave packs N/A audWavePackDataFileMounter dlcmpheist:/x64/audio/sfx/ CARCOLS_FILE Vehicle model variation data CVehicleModelInfoVarGlobal CVehicleColorsDataFileMounter dlcmpheist:/common/data/carcols.meta CLIP_SETS_FILE CExtraContentFileMounter dlc_mpbattle:/common/data/anim/clip_sets/clip_sets.xml COMBAT_BEHAVIOUR_OVERRIDE_FILE CCombatInfoDataFileMounter common:/data/ai/combatbehaviour.meta CONDITIONAL_ANIMS_FILE ConditionalAnimationsMounter dlcmpheist:/common/data/ai/conditionalanims.meta..."
   },
   {
-    "title": "Game Events - Cfx Documentation",
+    "title": "Game Events",
     "url": "https://docs.fivem.net/docs/game-references/game-events/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "This is a list of low-level game events. That means, these are the events that come straight from GTAV's core mechanics. Using these events can be useful when you need fine control over what happens in your scripts. See gameEventTriggered for more information on how to use these events. Note that this list is largely undocumented and you probably won't need most of the events listed here. If you have useful information to share, please add it to this doc . Any help is greatly appreciated! Event name Description CEventAcquaintancePed CEventAcquaintancePedDead CEventAcquaintancePedDislike CEventAcquaintancePedHate CEventAcquaintancePedLike CEventAcquaintancePedWanted CEventAgitated CEventAgitatedAction CEventCallForCover CEventCarUndriveable CEventClimbLadderOnRoute CEventClimbNavMeshOnRoute CEventCombatTaunt CEventCommunicateEvent CEventCopCarBeingStolen CEventCrimeCryForHelp CEventCrimeReported CEventDamage CEventDataDecisionMaker CEventDataFileMounter CEventDataResponseAggressiveRubberneck CEventDataResponseDeferToScenarioPointFlags CEventDataResponseFriendlyAimedAt CEventDataResponseFriendlyNearMiss CEventDataResponsePlayerDeath CEventDataResponsePoliceTaskWanted CEventDataResponseSwatTaskWanted CEventDataResponseTask CEventDataResponseTaskAgitated CEventDataResponseTaskCombat CEventDataResponseTaskCower CEventDataResponseTaskCrouch CEventDataResponseTaskDuckAndCover CEventDataResponseTaskEscapeBlast CEventDataResponseTaskEvasiveStep CEventDataResponseTaskExhaustedFlee..."
   },
   {
-    "title": "Gamer Tags - Cfx Documentation",
+    "title": "Gamer Tags",
     "url": "https://docs.fivem.net/docs/game-references/gamer-tags/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Gamer tag (also known as head display ) - is an UI element above player character, which can display text and various icons. The control is carried out by enabling components. Usually used to display player's name. For each component you can: show/hide, change opacity, change color. Components list ID Name 0 GAMER_NAME 1 CREW_TAG 2 healthArmour 3 BIG_TEXT 4 AUDIO_ICON 5 MP_USING_MENU 6 MP_PASSIVE_MODE 7 WANTED_STARS 8 MP_DRIVER 9 MP_CO_DRIVER 10 MP_TAGGED 11 GAMER_NAME_NEARBY 12 ARROW 13 MP_PACKAGES 14 INV_IF_PED_FOLLOWING 15 RANK_TEXT 16 MP_TYPING 17 MP_BAG_LARGE 18 MP_TAG_ARROW 19 MP_GANG_CEO 20 MP_GANG_BIKER 21 BIKER_ARROW 22 MC_ROLE_PRESIDENT 23 MC_ROLE_VICE_PRESIDENT 24 MC_ROLE_ROAD_CAPTAIN 25 MC_ROLE_SARGEANT 26 MC_ROLE_ENFORCER 27 MC_ROLE_PROSPECT 28 MP_TRANSMITTER 29 MP_BOMB Simple usage Lua For a more complete example, see the stock playernames resource included in the server package, or the documentation for the resource. local mpGamerTags = {} for i = 0 , 255 do if NetworkIsPlayerActive(i) and i ~= PlayerId() then local ped = GetPlayerPed(i) -- change the ped, because changing player models may recreate the ped if not mpGamerTags[i] or mpGamerTags[i].ped ~= ped then local nameTag = ( '%s [%d]' ): format (GetPlayerName(i), GetPlayerServerId(i)) if mpGamerTags[i] then RemoveMpGamerTag(mpGamerTags[i].tag) end mpGamerTags[i] = { tag = CreateMpGamerTagWithCrewColor(i, nameTag, false , false , '' , 0 , 0 , 0 , 0 ), ped = ped } end..."
   },
   {
-    "title": "HUD Colors - Cfx Documentation",
+    "title": "HUD Colors",
     "url": "https://docs.fivem.net/docs/game-references/hud-colors/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "This page lists the default HUD colors as defined in common:/data/ui/hudcolor.dat , which can be overridden or obtained using the following native commands: GET_HUD_COLOUR REPLACE_HUD_COLOUR REPLACE_HUD_COLOUR_WITH_RGBA List of default colors Color Index Name RGBA 0 HUD_COLOUR_PURE_WHITE rgba(255, 255, 255, 255) 1 HUD_COLOUR_WHITE rgba(240, 240, 240, 255) 2 HUD_COLOUR_BLACK rgba(0, 0, 0, 255) 3 HUD_COLOUR_GREY rgba(155, 155, 155, 255) 4 HUD_COLOUR_GREYLIGHT rgba(205, 205, 205, 255) 5 HUD_COLOUR_GREYDARK rgba(77, 77, 77, 255) 6 HUD_COLOUR_RED rgba(224, 50, 50, 255) 7 HUD_COLOUR_REDLIGHT rgba(240, 153, 153, 255) 8 HUD_COLOUR_REDDARK rgba(112, 25, 25, 255) 9 HUD_COLOUR_BLUE rgba(93, 182, 229, 255) 10 HUD_COLOUR_BLUELIGHT rgba(174, 219, 242, 255) 11 HUD_COLOUR_BLUEDARK rgba(47, 92, 115, 255) 12 HUD_COLOUR_YELLOW rgba(240, 200, 80, 255) 13 HUD_COLOUR_YELLOWLIGHT rgba(254, 235, 169, 255) 14 HUD_COLOUR_YELLOWDARK rgba(126, 107, 41, 255) 15 HUD_COLOUR_ORANGE rgba(255, 133, 85, 255) 16 HUD_COLOUR_ORANGELIGHT rgba(255, 194, 170, 255) 17 HUD_COLOUR_ORANGEDARK rgba(127, 66, 42, 255) 18 HUD_COLOUR_GREEN rgba(114, 204, 114, 255) 19 HUD_COLOUR_GREENLIGHT rgba(185, 230, 185, 255) 20 HUD_COLOUR_GREENDARK rgba(57, 102, 57, 255) 21 HUD_COLOUR_PURPLE rgba(132, 102, 226, 255) 22 HUD_COLOUR_PURPLELIGHT rgba(192, 179, 239, 255) 23 HUD_COLOUR_PURPLEDARK rgba(67, 57, 111, 255) 24 HUD_COLOUR_PINK rgba(203, 54, 148, 255) 25 HUD_COLOUR_RADAR_HEALTH rgba(53, 154, 71, 255) 26 HUD_COLOUR_RADAR_ARMOUR..."
   },
   {
-    "title": "Markers - Cfx Documentation",
+    "title": "Markers",
     "url": "https://docs.fivem.net/docs/game-references/markers/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Markers 0 MarkerTypeUpsideDownCone 1 MarkerTypeVerticalCylinder 2 MarkerTypeThickChevronUp 3 MarkerTypeThinChevronUp 4 MarkerTypeCheckeredFlagRect 5 MarkerTypeCheckeredFlagCircle 6 MarkerTypeVerticleCircle 7 MarkerTypePlaneModel 8 MarkerTypeLostMCTransparent 9 MarkerTypeLostMC 10 MarkerTypeNumber0 11 MarkerTypeNumber1 12 MarkerTypeNumber2 13 MarkerTypeNumber3 14 MarkerTypeNumber4 15 MarkerTypeNumber5 16 MarkerTypeNumber6 17 MarkerTypeNumber7 18 MarkerTypeNumber8 19 MarkerTypeNumber9 20 MarkerTypeChevronUpx1 21 MarkerTypeChevronUpx2 22 MarkerTypeChevronUpx3 23 MarkerTypeHorizontalCircleFat 24 MarkerTypeReplayIcon 25 MarkerTypeHorizontalCircleSkinny 26 MarkerTypeHorizontalCircleSkinny_Arrow 27 MarkerTypeHorizontalSplitArrowCircle 28 MarkerTypeDebugSphere 29 MarkerTypeDollarSign 30 MarkerTypeHorizontalBars 31 MarkerTypeWolfHead 32 MarkerTypeQuestionMark 33 MarkerTypePlaneSymbol 34 MarkerTypeHelicopterSymbol 35 MarkerTypeBoatSymbol 36 MarkerTypeCarSymbol 37 MarkerTypeMotorcycleSymbol 38 MarkerTypeBikeSymbol 39 MarkerTypeTruckSymbol 40 MarkerTypeParachuteSymbol 41 ? 42 MarkerTypeSawbladeSymbol 43 ?"
   },
   {
-    "title": "Net Game Events - Cfx Documentation",
+    "title": "Net Game Events",
     "url": "https://docs.fivem.net/docs/game-references/net-game-events/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "List of game events used by the game to synchronize certain types of actions. enum GTA_EVENT_IDS { OBJECT_ID_FREED_EVENT, OBJECT_ID_REQUEST_EVENT, ARRAY_DATA_VERIFY_EVENT, SCRIPT_ARRAY_DATA_VERIFY_EVENT, REQUEST_CONTROL_EVENT, GIVE_CONTROL_EVENT, WEAPON_DAMAGE_EVENT, REQUEST_PICKUP_EVENT, REQUEST_MAP_PICKUP_EVENT, GAME_CLOCK_EVENT, GAME_WEATHER_EVENT, RESPAWN_PLAYER_PED_EVENT, GIVE_WEAPON_EVENT, REMOVE_WEAPON_EVENT, REMOVE_ALL_WEAPONS_EVENT, VEHICLE_COMPONENT_CONTROL_EVENT, FIRE_EVENT, EXPLOSION_EVENT, START_PROJECTILE_EVENT, UPDATE_PROJECTILE_TARGET_EVENT, REMOVE_PROJECTILE_ENTITY_EVENT, BREAK_PROJECTILE_TARGET_LOCK_EVENT, ALTER_WANTED_LEVEL_EVENT, CHANGE_RADIO_STATION_EVENT, RAGDOLL_REQUEST_EVENT, PLAYER_TAUNT_EVENT, PLAYER_CARD_STAT_EVENT, DOOR_BREAK_EVENT, SCRIPTED_GAME_EVENT, REMOTE_SCRIPT_INFO_EVENT, REMOTE_SCRIPT_LEAVE_EVENT, MARK_AS_NO_LONGER_NEEDED_EVENT, CONVERT_TO_SCRIPT_ENTITY_EVENT, SCRIPT_WORLD_STATE_EVENT, CLEAR_AREA_EVENT, CLEAR_RECTANGLE_AREA_EVENT, NETWORK_REQUEST_SYNCED_SCENE_EVENT, NETWORK_START_SYNCED_SCENE_EVENT, NETWORK_STOP_SYNCED_SCENE_EVENT, NETWORK_UPDATE_SYNCED_SCENE_EVENT, INCIDENT_ENTITY_EVENT, GIVE_PED_SCRIPTED_TASK_EVENT, GIVE_PED_SEQUENCE_TASK_EVENT, NETWORK_CLEAR_PED_TASKS_EVENT, NETWORK_START_PED_ARREST_EVENT, NETWORK_START_PED_UNCUFF_EVENT, NETWORK_SOUND_CAR_HORN_EVENT, NETWORK_ENTITY_AREA_STATUS_EVENT, NETWORK_GARAGE_OCCUPIED_STATUS_EVENT, PED_CONVERSATION_LINE_EVENT, SCRIPT_ENTITY_STATE_CHANGE_EVENT, NETWORK_PLAY_SOUND_EVENT,..."
   },
   {
-    "title": "Ped Models - Cfx Documentation",
+    "title": "Ped Models",
     "url": "https://docs.fivem.net/docs/game-references/ped-models/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "List of all working ped models in GTAV as of July 23, 2019. Ambient female Ambient male Animals Cutscene Gang female Gang male Multiplayer Scenario female Scenario male Story Story scenario female Story scenario male Ambient female a_f_m_beach_01 1 prop 6 components a_f_m_bevhills_01 1 prop 5 components a_f_m_bevhills_02 1 prop 4 components a_f_m_bodybuild_01 1 prop 5 components a_f_m_business_02 1 prop 4 components a_f_m_downtown_01 1 prop 5 components a_f_m_eastsa_01 2 props 4 components a_f_m_eastsa_02 3 props 5 components a_f_m_fatbla_01 3 props 5 components a_f_m_fatcult_01 1 prop 5 components a_f_m_fatwhite_01 1 prop 4 components a_f_m_ktown_01 2 props 5 components a_f_m_ktown_02 1 prop 5 components a_f_m_prolhost_01 0 prop 8 components a_f_m_salton_01 2 props 5 components a_f_m_skidrow_01 0 prop 5 components a_f_m_soucent_01 2 props 4 components a_f_m_soucent_02 1 prop 5 components a_f_m_soucentmc_01 2 props 4 components a_f_m_tourist_01 1 prop 4 components a_f_m_tramp_01 0 prop 4 components a_f_m_trampbeac_01 1 prop 4 components a_f_o_genstreet_01 1 prop 5 components a_f_o_indian_01 0 prop 5 components a_f_o_ktown_01 1 prop 4 components a_f_o_salton_01 1 prop 5 components a_f_o_soucent_01 1 prop 6 components a_f_o_soucent_02 2 props 5 components a_f_y_beach_01 2 props 5 components a_f_y_bevhills_01 1 prop 6 components a_f_y_bevhills_02 1 prop 5 components a_f_y_bevhills_03 1 prop 6 components a_f_y_bevhills_04 1 prop 4 components a_f_y_business_01 1 prop 4 components..."
   },
   {
-    "title": "Text Formatting - Cfx Documentation",
+    "title": "Text Formatting",
     "url": "https://docs.fivem.net/docs/game-references/text-formatting/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Text labels displayed in the game UI can be formatted using classical Rockstar North-style ~ formatting tags, which are detailed below. Rockstar formatting codes Rockstar formatting codes are typically found between two tildes ( ~ ), such as in the following examples: [MY_LABEL] Demolish the ~r~enemy. [MY_HELP_LABEL] Press ~INPUT_CONTEXT~ when near the ~r~enemies. Color codes Special Label Description Example ~HUD_COLOUR_...~ References an existing HUD color . Find the ~HUD_COLOUR_FREEMODE~freemode ped! ~HC_...~ An alias for ~HUD_COLOUR Find the ~HC_FREEMODE~freemode ped! ~HC_[number]~ Specifies a HUD color by index. Get to ~HC_13~Davis. ~s~ Resets the color to the default for the current context. After killing the ~r~enemies~s~, you win! ~v~ HUD_COLOUR_SCRIPT_VARIABLE This is a placeholder for the color set with SET_SCRIPT_VARIABLE_HUD_COLOUR . Wait for your ~v~team~s~ to lose the Cops. ~u~ HUD_COLOUR_SCRIPT_VARIABLE_2 This is a placeholder for the color set with _SET_SCRIPT_VARIABLE_2_HUD_COLOUR . Take out ~v~~a~~s~ & defend ~u~~a~~s~. ~w~ HUD_COLOUR_WHITE Used together with ~s~ to reset text color. Swoop on over to ~b~foreclosures.maze-bank.com~w~~s~ today Color Label Description Example ~r~ HUD_COLOUR_RED Used for enemy characters or vehicles. Kill all the ~r~Vagos. ~g~ HUD_COLOUR_GREEN Used for pickup-type objectives. Pick up the ~g~flash drive. ~b~ HUD_COLOUR_BLUE Used for friendly characters or vehicles. Defend ~b~Lamar. ~f~ HUD_COLOUR_FRIENDLY An alternate (rare)..."
   },
   {
-    "title": "Vehicle Models - Cfx Documentation",
+    "title": "Vehicle Models",
     "url": "https://docs.fivem.net/docs/game-references/vehicle-references/vehicle-models/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Compacts Display Name: Asbo Hash: 1118611807 Model Name: asbo Display Name: Blista Hash: 3950024287 Model Name: blista Display Name: Brioso R/A Hash: 1549126457 Model Name: brioso Display Name: Brioso 300 Hash: 1429622905 Model Name: brioso2 Display Name: Brioso 300 Widebody Hash: 15214558 Model Name: brioso3 Display Name: Club Hash: 2196012677 Model Name: club Display Name: Dilettante Hash: 3164157193 Model Name: dilettante Display Name: Dilettante Hash: 1682114128 Model Name: dilettante2 Display Name: Issi Hash: 3117103977 Model Name: issi2 Display Name: Issi Classic Hash: 931280609 Model Name: issi3 Display Name: Apocalypse Issi Hash: 628003514 Model Name: issi4 Display Name: Future Shock Issi Hash: 1537277726 Model Name: issi5 Display Name: Nightmare Issi Hash: 1239571361 Model Name: issi6 Display Name: Blista Kanjo Hash: 409049982 Model Name: kanjo Display Name: Panto Hash: 3863274624 Model Name: panto Display Name: Prairie Hash: 2844316578 Model Name: prairie Display Name: Rhapsody Hash: 841808271 Model Name: rhapsody Display Name: Weevil Hash: 1644055914 Model Name: weevil Sedans Display Name: Asea Hash: 2485144969 Model Name: asea Display Name: Asea Hash: 2487343317 Model Name: asea2 Display Name: Asterope Hash: 2391954683 Model Name: asterope Display Name: Asterope GZ Hash: 3553846961 Model Name: asterope2 Display Name: Cinquemila Hash: 2767531027 Model Name: cinquemila Display Name: Cognoscenti 55 Hash: 906642318 Model Name: cog55 Display Name: Cognoscenti 55..."
   },
   {
-    "title": "Vehicle Colors - Cfx Documentation",
+    "title": "Vehicle Colors",
     "url": "https://docs.fivem.net/docs/game-references/vehicle-references/vehicle-colors/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "List of vehicle colors Metallic Matte Metals Unnamed Colors Metallic Index: 0 Black Index: 1 Graphite Index: 2 Black Steel Index: 3 Dark Steel Index: 4 Silver Index: 5 Bluish Silver Index: 6 Rolled Steel Index: 7 Shadow Silver Index: 8 Stone Silver Index: 9 Midnight Silver Index: 10 Cast Iron Silver Index: 11 Anthracite Black Index: 27 Red Index: 28 Torino Red Index: 29 Formula Red Index: 30 Blaze Red Index: 31 Grace Red Index: 32 Garnet Red Index: 33 Sunset Red Index: 34 Cabernet Red Index: 35 Candy Red Index: 36 Sunrise Orange Index: 38 Orange Index: 49 Dark Green Index: 50 Racing Green Index: 51 Sea Green Index: 52 Olive Green Index: 53 Bright Green Index: 54 Gasoline Green Index: 61 Galaxy Blue Index: 62 Dark Blue Index: 63 Saxon Blue Index: 64 Blue Index: 65 Mariner Blue Index: 66 Harbor Blue Index: 67 Diamond Blue Index: 68 Surf Blue Index: 69 Nautical Blue Index: 70 Ultra Blue Index: 71 Schafter Purple Index: 72 Spinnaker Purple Index: 73 Racing Blue Index: 74 Light Blue Index: 88 Yellow Index: 89 Race Yellow Index: 90 Bronze Index: 91 Dew Yellow Index: 92 Lime Green Index: 94 Feltzer Brown Index: 95 Creeen Brown Index: 96 Chocolate Brown Index: 97 Maple Brown Index: 98 Saddle Brown Index: 99 Straw Brown Index: 100 Moss Brown Index: 101 Bison Brown Index: 102 Woodbeech Brown Index: 103 Beechwood Brown Index: 104 Sienna Brown Index: 105 Sandy Brown Index: 106 Bleached Brown Index: 107 Cream Index: 111 Ice White Index: 112 Frost White Index: 135 Hot Pink Index: 136..."
   },
   {
-    "title": "Weapon Models - Cfx Documentation",
+    "title": "Weapon Models",
     "url": "https://docs.fivem.net/docs/game-references/weapon-models/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Heavy group Name: Snowball Launcher Hash: WEAPON_SNOWLAUNCHER Model Hash Key: W_LR_CompactSL_M32 DLC: mp2023_02 Description: There's no greater gift than pummeling someone with rounds of festive cheer. With automatic reload, there's no time for anyone to disagree. Part of The Chop Shop. Tints Black tint Green tint Gold tint Pink tint Army tint LSPD tint Orange tint Platinum tint Name: Compact Grenade Launcher Hash: WEAPON_COMPACTLAUNCHER Model Hash Key: w_lr_compactgl DLC: mpbiker Description: Focus groups using the regular model suggested it was too accurate and found it awkward to use with one hand on the throttle. Easy fix. Part of Bikers. Components COMPONENT_COMPACTLAUNCHER_CLIP_01 Tints Black tint Green tint Gold tint Pink tint Army tint LSPD tint Orange tint Platinum tint Name: Minigun Hash: WEAPON_MINIGUN Model Hash Key: w_mg_minigun DLC: core Description: A devastating 6-barrel machine gun that features Gatling-style rotating barrels. Very high rate of fire (2000 to 6000 rounds per minute). Components COMPONENT_MINIGUN_CLIP_01 Tints Black tint Green tint Gold tint Pink tint Army tint LSPD tint Orange tint Platinum tint Name: Tear Gas Launcher Hash: WEAPON_GRENADELAUNCHER_SMOKE Model Hash Key: w_lr_grenadelauncher DLC: core Components COMPONENT_AT_AR_AFGRIP COMPONENT_AT_AR_FLSH COMPONENT_AT_SCOPE_SMALL Tints Black tint Green tint Gold tint Pink tint Army tint LSPD tint Orange tint Platinum tint Name: Homing Launcher Hash: WEAPON_HOMINGLAUNCHER Model Hash Key:..."
   },
   {
-    "title": "Zones - Cfx Documentation",
+    "title": "Zones",
     "url": "https://docs.fivem.net/docs/game-references/zones/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "A list of all zones in GTAV including their integer ID, string ID, short name used by natives and full name, based on update\\update.rpf\\common\\data\\levels\\gta5\\popzone.ipl . The column Zone Name ID is what is used by GET_ZONE_FROM_NAME_ID , while Zone Name is what is returned by GET_NAME_OF_ZONE . Zones ID Zone Name ID Zone Name Zone Description 1 Z_RMAN2 RICHM Richman 2 Z_GOLF1 GOLF GWC and Golfing Society 3 Z_GOLF3 GOLF GWC and Golfing Society 4 Z_RHL1 ROCKF Rockford Hills 5 Z_RHL3 ROCKF Rockford Hills 6 Z_RHL4 ROCKF Rockford Hills 7 Z_MWOD1 MORN Morningwood 8 Z_MWOD2 MORN Morningwood 9 Z_RHL0 ROCKF Rockford Hills 10 Z_RHL9 ROCKF Rockford Hills 11 Z_MVS2 MOVIE Richards Majestic 12 Z_MVS3 MOVIE Richards Majestic 13 Z_MVS4 MOVIE Richards Majestic 14 Z_RHL11 ROCKF Rockford Hills 15 Z_RHL7 ROCKF Rockford Hills 16 Z_RHL10 ROCKF Rockford Hills 17 Z_RHL6 ROCKF Rockford Hills 18 Z_RHL2 ROCKF Rockford Hills 19 Z_RHL5 ROCKF Rockford Hills 20 Z_RHL13 ROCKF Rockford Hills 21 Z_KORT5 KOREAT Little Seoul 22 Z_KORT4 KOREAT Little Seoul 23 Z_KORT6 KOREAT Little Seoul 24 Z_KORT7 KOREAT Little Seoul 25 Z_KORT8 KOREAT Little Seoul 26 Z_KORT1 KOREAT Little Seoul 27 Z_KORT2 KOREAT Little Seoul 28 Z_MVS5 MOVIE Richards Majestic 29 Z_MVS1 MOVIE Richards Majestic 30 Z_KORT9 KOREAT Little Seoul 31 Z_LP2 LOSPUER La Puerta 32 Z_LP4 LOSPUER La Puerta 33 Z_MIRR MIRR Mirror Park 34 Z_EVi3 EAST_V East Vinewood 35 Z_EVi2 EAST_V East Vinewood 36 Z_LP1 LOSPUER La Puerta 37 Z_DELPa DELPE Del Perro 38..."
   },
   {
-    "title": "Instructional Buttons - Cfx Documentation",
+    "title": "Instructional Buttons",
     "url": "https://docs.fivem.net/docs/game-references/instructional-buttons/",
     "section": "game-references",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Instructional Buttons , also known as Prompts are UI elements that are displayed at the bottom-right corner of the screen, which show what actions certain keys and controls can do. You can make them clickable with your cursor, add multiple buttons, icons and much more. Simple non-clickable buttons example Lua CreateThread( function () -- Request the buttons GFX to be loaded local ButtonsHandle = RequestScaleformMovie( 'INSTRUCTIONAL_BUTTONS' ) -- Wait for the buttons GFX to be fully loaded while not HasScaleformMovieLoaded(ButtonsHandle) do Wait( 0 ) end -- Clear previous buttons CallScaleformMovieMethod(ButtonsHandle, 'CLEAR_ALL' ) -- Disable mouse buttons CallScaleformMovieMethodWithNumber(ButtonsHandle, 'TOGGLE_MOUSE_BUTTONS' , 0 ) -- Begin setting a button slot BeginScaleformMovieMethod(ButtonsHandle, 'SET_DATA_SLOT' ) -- Position of the button ScaleformMovieMethodAddParamInt( 0 ) -- Add the Enter keyboard icon ScaleformMovieMethodAddParamPlayerNameString( '~INPUT_FRONTEND_ACCEPT~' ) -- Add the text before icon ScaleformMovieMethodAddParamPlayerNameString( 'Select' ) -- End the function EndScaleformMovieMethod() -- Sets buttons ready to be drawn CallScaleformMovieMethod(ButtonsHandle, 'DRAW_INSTRUCTIONAL_BUTTONS' ) local selectPressed = false -- Display instructional buttons while enter hasn't been pressed while not selectPressed do Wait( 0 ) -- Draw the instructional buttons this frame DrawScaleformMovieFullscreen(ButtonsHandle, 255 , 255 , 255 , 255 , 1 ) -- Is Enter..."
   },
   {
-    "title": "Setting Up a Server - Cfx Documentation",
+    "title": "Setting Up a Server",
     "url": "https://docs.fivem.net/docs/server-manual/setting-up-a-server/",
     "section": "server-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "This page shows you how to run the Cfx platform server (also often named 'FXServer') on Windows, Linux, txAdmin, or a game server hosting provider! They can all be found down below under Available guides . Having trouble running your server? Check the server issue FAQ or create a topic in the Server Discussion sub-category on the forum. Before you begin If you haven't done so yet, register a free license key on the Cfx Portal . Available guides Game server hosting providers Ultimate easy setup guide (txAdmin) Windows setup guide (Vanilla) Linux setup guide (Vanilla) What's next? Using server commands Start scripting"
   },
   {
-    "title": "Setting up a server using txAdmin - Cfx Documentation",
+    "title": "Setting up a server using txAdmin",
     "url": "https://docs.fivem.net/docs/server-manual/setting-up-a-server-txadmin/",
     "section": "server-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Ultimate easy setup guide Windows Download the server Note that if you are setting up a FiveM for GTAV Enhanced server, server.7z is named cfx-server_win_x64 instead. If you are setting up a FiveM for GTAV Enhanced server, the Microsoft Visual C++ 2017 Redistributable must be installed. Download and install it before running the server. Open the Server Download page. Download the recommended build. Open the server.7z you just downloaded. Use any third-party archiving tool (such as 7-Zip or WinRAR ) to open the .7z file. Extract it somewhere you want to store it. We'll pick C:\\FXServer\\server . Open the folder you just extracted it to. It should look a little like this: Start the server Note that if you are setting up FiveM for GTAV Enhanced server, FXServer.exe is named cfx-server.exe instead. Double click FXServer.exe . This site should open in your browser. Make sure a PIN is filled, and click Link Account . Log in to your Cfx account in this tab and then click Yes, Allow . Create a password to sign up to your server's admin page. Click 'Next'. Type a name for your server and click 'Next'. Select 'Popular Recipes'. Pick the 'CFX Default FiveM' template for now. Other templates may exist, but some will require a database server. Click 'Save' or select another path. Go to the 'Recipe Deployer'.\\ 11. Click 'Next' once you're sure the recipe looks fine. It should be fine the way it comes. 12. Enter the key you just made on the Portal in the 'Before you begin' step and click..."
   },
   {
-    "title": "Server Commands - Cfx Documentation",
+    "title": "Server Commands",
     "url": "https://docs.fivem.net/docs/server-manual/server-commands/",
     "section": "server-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Console commands can be executed either using an RCon tool, directly from the server console interface, a server configuration file, the server command line, or (if a resource is permitted by the ACL) the EXECUTE_COMMAND function. Adding a custom RCon command can be done using the REGISTER_COMMAND function on the server, or the (legacy) rconCommand event. Resource commands start [resourceName] Starts the resource specified in the argument, if it was stopped. It is also possible to specify a category name, such as start [cars] . Example: start lambda-menu start [cars] stop [resourceName] Stops the resource specified in the argument, if it was started. As with start , you can also specify a category name. Example: stop mymode ensure [resourceName] Restarts the resource specified in the argument, if it was started. If it wasn't, starts the resource specified in the argument. As with start and stop , you can also specify a category name. Example: ensure my-testing-resource restart [resourceName] Restarts the resource specified in the argument, if it was started. Also supports category names. Example: restart lambda-menu refresh Rescans the resources folder and loads all resource manifests in them, also making new resources available to start using start . Example: refresh Global commands exec [filename] Runs the commands specified in the filename, relative to the server data directory, or any resource name specified with @ . Commonly seen as FXServer.exe +exec server.cfg ...."
   },
   {
-    "title": "Proxy Setup - Cfx Documentation",
+    "title": "Proxy Setup",
     "url": "https://docs.fivem.net/docs/server-manual/proxy-setup/",
     "section": "server-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "At times, it may be desirable to have a reverse proxy in front of your Cfx server instance. This guide will discuss the requirements for such a setup. Connection process The client->server connection process is as follows: Client resolves the connect endpoint from the join interaction. This can be any of the following: The connectEndPoints field in the server listing output, which can be configured using sv_listingHostOverride . The server address cached by the join URL subsystem, such as from history. An IP, host or URL entered in a connect command. These get processed as follows: Bare hosts/IPs: host.example will resolve to http://host.example:30120/ . Hosts with port: host.example:30121 resolve to http://host.example:30121/ . URLs with scheme: http://host.example/ and https://host.example/ will be resolved as-is, using the default ports for HTTP and HTTPS (80/443). Client retrieves general server metadata via a GET /info.json on the connect endpoint. Client attempts an initConnect request to the connect endpoint's POST /client . If server accepts client, it'll send a connection token to client. Client requests getEndpoints on the connect endpoint, receiving one or more IP/port combos. If multiple are specified, it will pick one to use as the server endpoint. Client requests getConfiguration on the server endpoint. This will then result in one or more requests to GET /files/* on either the server endpoint or a file server override. Client sends a UDP info request to the..."
   },
   {
-    "title": "Frameworks - Cfx Documentation",
+    "title": "Frameworks",
     "url": "https://docs.fivem.net/docs/server-manual/frameworks/",
     "section": "server-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "What is a Framework? A framework is a foundational structure that simplifies the creation of resources for your FiveM server. It offers a basic structure for your scripts, eliminating the need to build everything from scratch. Below, we've compiled a list of commonly used frameworks for informative purposes. It's essential to note that the choice of framework ultimately depends on your specific requirements. Additionally, you can explore the releases section for any new frameworks that may emerge. Running the Frameworks While each framework comes with its own documentation for setup, we recommend leveraging txAdmin recipes for streamlined deployment. A detailed guide on setting up a server using txAdmin can be found here . Open to New Framework Suggestions If there's a framework you believe should be included in this list, please submit a request by creating an issue in the documentation issues section . Frameworks (Lua) (Alphabetical Order) ESX ( Docs ) ND ( Docs ) Qbox ( Docs ) vRP ( Docs ) VORP ( Docs ) (RedM) Need Help? If you require assistance with any of these frameworks, refer to their respective documentation. Please note that we are not affiliated with any specific framework and do not provide support."
   },
   {
-    "title": "Finding Resources - Cfx Documentation",
+    "title": "Finding Resources",
     "url": "https://docs.fivem.net/docs/server-manual/finding-resources/",
     "section": "server-manual",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Resources can be used to add functionality to your server. You can find many of the available resources on the Cfx Marketplace or in the FiveM Releases / RedM Releases section. Some may be free, and others may not be. The forum and the Cfx Marketplace have filtering functionality, so you can sort through them. Dependencies Some resources may have dependencies, which means they might rely on other resources, so do your research before picking one or things may not work. Resources under the standalone tag typically do not have these dependencies. Responsibility Use resources at your own risk. Resources are community-driven, and you should choose them carefully. Cfx is not responsible for any issues resulting from their use and will not provide support for community-made resources. Make sure to follow each resource's terms and conditions. Resources generally provide a way to contact the creator for support. Use the available channels if an issue arises. Paid Resources Some resources may be paid. If you opt to pay for a resource, please contact the seller first and ask whether they are selling the resource via the Cfx Marketplace or Tebex to avoid scams. Cfx does not hold itself accountable for paid resources, so you should be diligent and careful before purchasing anything."
   },
   {
-    "title": "baseevents - Cfx Documentation",
+    "title": "baseevents",
     "url": "https://docs.fivem.net/docs/resources/baseevents/",
     "section": "stock-resources",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "About This resource adds basic events for developers to use in their scripts. Some third party resources may depend on this resource, if this is the case then you must start this resource before starting that third party resource. Exports This resource does not have any export functions. Events Client baseevents:onPlayerDied baseevents:onPlayerKilled baseevents:onPlayerWasted Server baseevents:onPlayerDied baseevents:onPlayerKilled baseevents:onPlayerWasted baseevents:enteringVehicle baseevents:enteringAborted baseevents:enteredVehicle baseevents:leftVehicle Note: Don't forget to add ensure baseevents in server.cfg."
   },
   {
-    "title": "chat - Cfx Documentation",
+    "title": "chat",
     "url": "https://docs.fivem.net/docs/resources/chat/",
     "section": "stock-resources",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "About The chat resource provides custom chat functionality for FiveM using a NUI-based interface. It is included and maintained at the cfx-server-data repository. Exports Client addMessage addSuggestion Server addMessage registerMessageHook registerMode Events Client chatMessage (deprecated, use chat:addMessage instead) chat:addMessage chat:addSuggestion chat:addSuggestions chat:removeSuggestion chat:addTemplate chat:clear Server chatMessage"
   },
   {
-    "title": "chatMessage - Cfx Documentation",
+    "title": "chatMessage",
     "url": "https://docs.fivem.net/docs/resources/chat/events/chatMessage/",
     "section": "stock-resources",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "About This event is available both in the client and in the server. In the client this event is deprecated ! Use chat:addMessage instead. Triggering this event in the client allows you to send a chat message to this client. Listening for this event in the server allows you to read/log/reply the message. Name chatMessage Parameters Client side: string author, array color, string text author : The name of the player that sent the message. color : The color array. Color syntax: {255, 255, 255} ( {r, g, b} ) text : The message Server side: source, string author, string text source : The source of the chat message author : The name of the player that sent the message. text : The message Examples Server-side JS Example: onNet( 'chatMessage' , ( src, author, text )=> { // Log the message let ts = new Date ().toLocaleString(); console .log( `[ ${ts} ] ${author} : ${text} ` ); //Check for '/ping' and reply with 'Pong!' if (src && text.startsWith( '/ping' )){ setImmediate( ()=> { emitNet( 'chat:addMessage' , src, { color : [ 255 , 20 , 147 ], args : [ \"Server\" , \"Pong!\" ] }); }) } }) Note: We are using setImmediate() otherwise the reply ( Pong! ) will show up in the chat before the command ( /ping )."
   },
   {
-    "title": "mapmanager - Cfx Documentation",
+    "title": "mapmanager",
     "url": "https://docs.fivem.net/docs/resources/mapmanager/",
     "section": "stock-resources",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Mapmanager Mapmanager is an included citizenfx resource that handles map changes, game types, and compatibility between gametypes and maps. Resource Structure Client Scripts mapmanager_client.lua Server Scripts mapmanager_server.lua Shared Scripts mapmanager_shared.lua Exports Exports are called using exports[\"mapmanger\"]:exportname(args) getCurrentGameType Returns the current game type. Arguments : None -- mapmanager_server.lua function getCurrentGameType () return currentGameType end getCurrentMap Returns the current map. Arguments : None -- mapmanager_server.lua function getCurrentMap () return currentMap end changeGameType Changes the current game type. Arguments : gameType -- mapmanager_server.lua function changeGameType (gameType) if currentMap and not doesMapSupportGameType(gameType, currentMap) then StopResource(currentMap) end if currentGameType then StopResource(currentGameType) end StartResource(gameType) end changeMap Changes the current map Arguments : map -- mapmanager_server.lua function changeMap (map) if currentMap then StopResource(currentMap) end StartResource(map) end doesMapSupportGameType Returns a bool variables as to whether or not a map supports a game type. Arguments : gameType map -- mapmanager_server.lua function doesMapSupportGameType (gameType, map) if not gametypes[gameType] then return false end if not maps[map] then return false end if not maps[map].gameTypes then return true end return maps[map].gameTypes[gameType] end getMaps Returns a..."
   },
   {
-    "title": "sessionmanager - Cfx Documentation",
+    "title": "sessionmanager",
     "url": "https://docs.fivem.net/docs/resources/sessionmanager/",
     "section": "stock-resources",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "TODO"
   },
   {
-    "title": "spawnmanager - Cfx Documentation",
+    "title": "spawnmanager",
     "url": "https://docs.fivem.net/docs/resources/spawnmanager/",
     "section": "stock-resources",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "About The spawnmanager is a base resource that handles the spawning of the player. It allows you to choose when and where to spawn the player and also control how they respawn. Spawnmanager is included and maintained at the cfx-server-data repository. Map resources for mapmanager will have their spawnpoints loaded and usable in spawnmanager, as long as they are started after spawnmanager. Exports Client spawnPlayer addSpawnPoint removeSpawnPoint loadSpawns setAutoSpawn setAutoSpawnCallback forceRespawn Events Client playerSpawned"
   },
   {
-    "title": "txAdmin - Cfx Documentation",
+    "title": "txAdmin",
     "url": "https://docs.fivem.net/docs/resources/txAdmin/",
     "section": "stock-resources",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "About txAdmin is a full-featured web panel to help you Manage & monitor your FiveM Server. Contrary to the other resources on this documentation (eg. chat, mapmanager etc), txAdmin already comes preinstalled with FXServer, so you do not need to download it separately. For more information, you can join the Discord Server . Main Features Recipe-based Server Deployer: create a server in under 60 seconds! Start/Stop/Restart your server instance or resources Full-featured in-game admin menu: Player Mode: NoClip, God, SuperJump Teleport: waypoint, coords and back Vehicle: Spawn, Fix, Delete, Boost Heal: yourself, everyone Send Announcements Reset World Area Show player IDs Player search/sort by distance, ID, name Player interactions: Go To, Bring, Spectate, Freeze Player troll: make drunk, set fire, wild attack Player ban/warn/dm Access control: Login via Password or CitizenFX Admin permission system Action logging Brute-force protection Discord Integration: Server configurable, persistent, auto-updated status embed Command to whitelist players Command to display player info Monitoring: Auto Restart FXServer on crash or hang Server's CPU/RAM consumption Live Console (with log file, command history and search) Server threads performance chart with player count Server Activity (Log connections/disconnections, kills, chat, explosions and custom commands) Player Manager: Warning system Ban (temporarily or permanently) system Whitelist system (Discord member, Discord Role, Approved..."
   },
   {
-    "title": "Getting Started - Cfx Documentation",
+    "title": "Getting Started",
     "url": "https://docs.fivem.net/docs/getting-started/",
     "section": "getting-started",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "In this guide, you'll learn everything you need to get started with FiveM, from installing the client to setting up your own server with txAdmin and finally creating your very first resource. This guide shows you how to: Install and set up FiveM on your PC. Create and run your own local FiveM server. Link your server with your Cfx account. Understand the basics of txAdmin (the built-in server manager). Join your server and test it in-game. Write a simple \"Hello World\" script and run it as a resource. Spawn a vehicle via your own script. If you ever get stuck, the Cfx Forum and our official Discord are great places to ask for help. Let's get started! Step 1 Prerequisites Prerequisites for getting started with FiveM. Read Now Step 2 Installing FiveM Install the FiveM client. Read Now Step 3 Setting up a FiveM Server Setup FiveM Server. Read Now Step 4 Creating Scripts Create your first script in FiveM. Read Now"
   },
   {
-    "title": "Prerequisites - Cfx Documentation",
+    "title": "Prerequisites",
     "url": "https://docs.fivem.net/docs/getting-started/prerequisites/",
     "section": "getting-started",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "We recommend installing Visual Studio Code (for creating and editing scripts) and 7-Zip (for unpacking server files), as these tools make the process much easier. While there are alternatives you can use, our video guides are based on this software. Furthermore, it is recommended to enable the option in Windows to always show file extensions . If you are setting up a FiveM for GTAV Enhanced server, the Microsoft Visual C++ 2017 Redistributable must be installed. Download and install it before running the server. Creating a Cfx account If you already have a Cfx account, you can skip this step. A Cfx account is needed in order to set up your server at a later point. Create a Cfx account Go to the Cfx Forum and click Sign up in the top-right corner. Enter your email, username, and password , then click Sign up . Check your email inbox for a confirmation message and follow the link to activate your Cfx account. Once confirmed, you'll be automatically signed in and ready to go. Your Cfx account is created. arrow_back Previous Getting Started Next arrow_forward Installing FiveM"
   },
   {
-    "title": "Installing FiveM - Cfx Documentation",
+    "title": "Installing FiveM",
     "url": "https://docs.fivem.net/docs/getting-started/installing-fivem/",
     "section": "getting-started",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "If you already have FiveM downloaded and installed, you can skip this step. 1. Download the FiveM client Go to FiveM.net and click Download Client . Review the Creator Platform License Agreement. If you agree, click Sure, I Agree! to download the client. 2. Install and set up FiveM client Go to your Downloads folder and run FiveM.exe . When prompted, navigate to your GTAV installation folder and select GTA5.exe. Click Open to confirm the path. 3. Update game data A message appears stating that local game data needs to be updated. Click Yes. FiveM prepares the launch of the data. This can take several minutes. 4. Sign in with your Cfx account Review the Terms of Service . If you agree, click I Accept to continue. A new window opens prompting you to sign in with your Cfx account. Don't skip this! Click Sign in with Cfx . Your browser opens. Click Authorize to grant access. Go back to FiveM and a Welcome Username appears. Click Continue . Great! FiveM is now installed and ready to use. Next, let's set up your own local server! arrow_back Previous Prerequisites Next arrow_forward Setting up a FiveM Server"
   },
   {
-    "title": "Creating Scripts - Cfx Documentation",
+    "title": "Creating Scripts",
     "url": "https://docs.fivem.net/docs/getting-started/create-first-script/",
     "section": "getting-started",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Creating a script with Visual Studio Code 1. Navigate to your server files Open File Explorer on your Desktop and navigate to the txData folder. Double-click the folder named FiveMBasicServerCFXDefault_AB1234.base or something similar. Double-click the resources folder located in the folder you opened. 2. Create script folder and files Create a new folder in resources named helloWorld . Open helloWorld and create two new text files: client.lua fxmanifest.lua If prompted about file extensions, click Yes to confirm. 3. Write the manifest file Open fxmanifest.lua in Visual Studio Code and paste the following code in the file: fx_version 'cerulean' game 'gta5' author 'YourName' description 'My first hello world script' version '1.0.0' client_script 'client.lua' Save the file. 4. Write the client script Open client.lua in Visual Studio Code. Paste this code: print ( 'helloWorld' ) Save the file. 5. Run the script in FiveM In FiveM, press F8 to open the console. Type tx and press Tab twice to open the txAdmin sub menu. Go to Resources > Reload & Refresh . Use the search bar to look for helloWorld . Click Start next to the helloWorld script. 6. Verify the script is working Press F8 . helloWorld prints in the console. You've successfully set up your server and run your first Lua script in FiveM. While simple, this script is the first step toward building more advanced resources for your server. Next Steps Guides Exploring the FiveM native reference A crucial part of the..."
   },
   {
-    "title": "Sandbox - Cfx Documentation",
+    "title": "Sandbox",
     "url": "https://docs.fivem.net/docs/developers/sandbox/",
     "section": "developer-docs",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "FiveM implements a security sandbox for resources to ensure stability and prevent malicious code execution. This document describes the restrictions and allowed APIs within this sandbox environment. File System Operations Path Types All file system operations support two types of paths: Resource mount paths (recommended): @resourceName/path Absolute paths: /absolute/path/to/resource Resource mount paths are recommended as they're cleaner and more portable. Directory Listing The io.readdir() function returns a directory handle: -- Using mount paths (recommended) local files1 = io .readdir( \"@myResource/\" ) local files2 = io .readdir( \"@myResource/assets\" ) -- Using absolute paths local files3 = io .readdir( \"/absolute/path/to/resource\" ) local files4 = io .readdir( \"/absolute/path/to/resource/assets\" ) Because io.readdir() returns a handle rather than a plain table, it cannot be iterated with ipairs or pairs . Use its lines() iterator to read each entry: local files = io .readdir( \"@myResource/\" ) for file in files: lines () do print (file) -- Process each file end files: close () -- Not required, but best to do so File Operations -- Using mount paths (recommended) local file1 = io . open ( \"@myResource/data.json\" , \"r\" ) -- Using absolute paths local file2 = io . open ( \"/absolute/path/to/resource/data.json\" , \"r\" ) -- Available modes \"r\" -- Read \"w\" -- Write \"a\" -- Append \"+\" -- Create Write Restrictions Writing files within the same resource is allowed Writing files to..."
   },
   {
-    "title": "Script Runtimes - Cfx Documentation",
+    "title": "Script Runtimes",
     "url": "https://docs.fivem.net/docs/developers/script-runtimes/",
     "section": "developer-docs",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "CitizenFX supports pluggable scripting runtimes. These runtimes are implemented as CitizenFX components ( code/components/ ) implementing fxOM (CitizenFX Object Model) interfaces defined in fxScripting.idl . The specific interfaces used at the time of this writing are: Interface Purpose IScriptRuntime Base interface for script runtimes. Exposes basic lifetime management functions. IScriptTickRuntime Allows exposing a Tick function for runtimes that need to run periodically. IScriptEventRuntime Allows exposing a TriggerEvent function to handle incoming script events. IScriptRefRuntime Allows exposing function references that can be called, duplicated and cloned. IScriptFileHandlingRuntime Allows to mark a script runtime as handling specific files. In addition, there is a host interface: IScriptHost , which will be passed to IScriptRuntime::Create . Interface reference IScriptRuntime Create void Create ( in IScriptHost scriptHost ) ; This method is called by the host when the script runtime is created. The script host passed should probably be saved. Destroy void Destroy ( ) ; This method is called by the host when the script runtime is about to be destroyed. GetParentObject void * GetParentObject(); // direct return value, not result_t This should return the object set by SetParentObject . SetParentObject void SetParentObject ( void * object ) ; // direct return value, not result_t This sets the parent object. This is typically a native fx::Resource* , which may be relevant..."
   },
   {
-    "title": "Secure Your Events - Cfx Documentation",
+    "title": "Secure Your Events",
     "url": "https://docs.fivem.net/docs/developers/server-security/",
     "section": "developer-docs",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "The anti-cheat team is always trying to improve the anti-cheat, but sometimes things slip through. In this guide we'll try to help cover some common-practice things you can do to make your server more secure. Events Cheats can allow the client to trigger events in any context When we say context we mean they can execute client->server (via TriggerServerEvent ) or client resource->client resource (via TriggerEvent ) Proper Use of Event Handlers in Lua When working with events in Lua, it's crucial to register them correctly based on whether they are called by the client or the server. A common mistake is registering server events that are not supposed to be called by the client, or vice-versa, which can lead to security vulnerabilities. AddEventHandler Use AddEventHandler when the event is intended to be triggered within the same context, either client-client or server-server. This ensures that the events are not networked and cannot be called by the opposing side. AddEventHandler( \"eventName\" , function (eventParam1, eventParam2) -- Code here will be executed once the event is triggered within the same context. end ) RegisterNetEvent Use RegisterNetEvent when the event needs to be triggered across different contexts, such as from client to server or server to client. NOTE : This doesn't block execution from the same context, under the hood RegisterNetEvent is a wrapper that is just the following RegisterNetEvent( \"eventName\" ) AddEventHandler( \"eventName\" , function () end )..."
   },
   {
-    "title": "Client Issues - Cfx Documentation",
+    "title": "Client Issues",
     "url": "https://docs.fivem.net/docs/support/client-issues/",
     "section": "support",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Getting game crashes? Can't launch FiveM? Or maybe running into some more obscure issue? Find the most common issues here. I crash when playing on a server Crashes are fairly often related to a server-specific issue. To make sure your crash isn't related to a specific server, it is advised to join the FiveM.net testing server . If that server works without your issue, we recommend that you contact the owners of the server where you're experiencing crashes. Otherwise, read on. I've been banned on a server FiveM is not responsible for what you do on servers, or what server admins do to you. If you believe you've been falsely banned from a server, contact the server owners. FiveM cannot and will not provide support for this matter. I've been globally banned from FiveM Please refer to the following support article . Could not find game executable Please refer to the following support article . FiveM is already installed After installing FiveM, you don't need to use the same FiveM.exe file anymore. Use the shortcut from your Windows start menu. Press the Start button on your taskbar and look for FiveM there. If you uninstalled FiveM by deleting the shortcut, you might have to uninstall FiveM properly. Game storage outdated Please refer to the following support article . Error generating ROS entitlement token Certain antivirus vendors are known to block FiveM for unknown reasons. Please submit a support ticket if this occurs. Error loading component xyz.dll Delete caches.xml from..."
   },
   {
-    "title": "Server Issues - Cfx Documentation",
+    "title": "Server Issues",
     "url": "https://docs.fivem.net/docs/support/server-issues/",
     "section": "support",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Server not showing in server list or marked as private This issue is usually caused by bad port forwarding or firewall configuration problems . Ensure that your network setup is correct and confirm that others can connect to your server using Direct Connect . Direct Connect Test To check whether others can connect directly: Press F8 in FiveM to open the game client console. Enter the command: connect IP:Port Replace IP:Port with your server's actual IP and port, e.g.: connect 127.0.0.1:30120 . Press Enter to attempt the connection. If a direct connection fails, the issue is likely related to incorrect port forwarding or a firewall blocking connections. Comment Out sv_master1 Check your server.cfg for the following line: #sv_master1 \"\" If the # is missing , your server might appear as private in the server list. This will disable the connect button for users trying to join through the server browser. To fix this , ensure the line is commented out. If this line is missing, you don't have to add it, as it is disabled by default. Make sure your server is running In your browser, go to http://ip:port/info.json (fill in your ip and port) - example http://127.0.0.1:30120/info.json Check whether it resolves, showing information about your server Ensure your server is running and accessible externally. In your browser, visit: http://ip:port/info.json Replace ip:port with your server's public IP and port number, e.g.: http://127.0.0.1:30120/info.json This page should return a JSON..."
   },
   {
-    "title": "Resource FAQ - Cfx Documentation",
+    "title": "Resource FAQ",
     "url": "https://docs.fivem.net/docs/support/resource-faq/",
     "section": "support",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "What does \"prohibited logic\" mean? The resource in question likely contains malicious code. Sometimes another resource \"infects\" other resources, so be sure to check the code of the mentioned resource. Prohibited logic usually includes code that can infect other resources, or that impacts your overall gameplay experience. What are disallowed resources? While FiveM rarely takes action, we do want to avoid: Paid resources outside of accepted methods as outlined by FiveM's Terms of Service Protection rackets, in other words, (former) authors of hacks extorting server owners to buy their anticheat. This is in violation of FiveM's Terms of Service. Global ban lists. We have no way to verify the quality of every anticheat, and it may very well be possible for a global ban list to ban players without good reason. With global ban lists, this impacts the overall gameplay experience of FiveM, as players are unable to join a large number of servers without sufficient reason. Are anticheat resources allowed? Of course! FiveM allows you to run any resource within the terms, and you are free to use anticheat resources. FiveM only takes action against the aforementioned items. What can I do against cheaters? Report cheats. If you have any form of hack or cheat (in usable form), do not hesitate to send it over to abuse@fivem.net . We will immediately look into the cheat and take the necessary measures. Use server-side code where possible. With OneSync's unique features, server owners are..."
   },
   {
-    "title": "Server Debugging - Cfx Documentation",
+    "title": "Server Debugging",
     "url": "https://docs.fivem.net/docs/support/server-debug/",
     "section": "support",
-    "snippet": "<a class=\"active\" href"
+    "snippet": "Creating Full Dumps This section will explain how to create useful debugging dumps (called .dmp files) in order to assist with troubleshooting. If you encounter a crash, set up your environment to capture the next time it happens. NOTE : Creating full dumps is for Windows servers only. This method is currently not supported on Linux. Prerequisites ProcDump v9.0 or newer. Usage Make sure your server is running. Open a command prompt where you extracted procdump to. Use an ELEVATED command prompt for this (should say \"Administrator\" in the title bar). Type in the following command: procdump64.exe -accepteula -i This registers procdump as a debugger to capture certain crashes. Open Task Manager, click \"Details\" . Locate the largest FXServer.exe . There should be a \"PID\" column. Note down the number. Go back to your command prompt and type in: procdump64.exe -accepteula -e -h -mp pidhere where pidhere is the number you noted down previously. If you get an error, make sure your PID is correct. Wait for the server to crash. When it does, it will write a large .dmp file to the procdump folder. Compress this file (e.g. .zip ) and upload it to DropMeFiles or equivalent. Run the following in your command prompt to unregister the debugger when you are done: procdump64.exe -accepteula -u You can now analyze the dump file (using VS2019+, click 'Debug with Native Only' and load symbols ) or supply it to whomever requested it. If you are certain you have found a bug, report it on our forum..."
   }
 ]

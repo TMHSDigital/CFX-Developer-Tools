@@ -7,18 +7,20 @@ a text snippet, and writes the result to mcp-server/data/docs_index.json.
 Run from the repository root:
     python .github/scripts/build_docs_index.py
 
-Requires: requests (included in mcp-server/requirements.txt)
+Requires: Python standard library only.
 """
 
 from __future__ import annotations
 
 import html
 import json
+import os
 import re
 import sys
 import time
 import urllib.request
 import urllib.error
+from html.parser import HTMLParser
 
 OUTPUT_PATH = "mcp-server/data/docs_index.json"
 
@@ -123,7 +125,6 @@ PAGES: list[dict[str, str]] = [
 ]
 
 TITLE_RE = re.compile(r"<title[^>]*>([^<]+)</title>", re.IGNORECASE)
-TAG_RE = re.compile(r"<[^>]+>")
 WHITESPACE_RE = re.compile(r"\s+")
 
 
@@ -133,27 +134,89 @@ def extract_title(raw_html: str) -> str:
     if not match:
         return ""
     title = html.unescape(match.group(1)).strip()
-    for suffix in [" | FiveM Documentation", " - Cfx.re Docs"]:
+    for suffix in [" | FiveM Documentation", " - Cfx.re Docs", " - Cfx Documentation"]:
         if title.endswith(suffix):
             title = title[: -len(suffix)].strip()
     return title
 
 
-def extract_snippet(raw_html: str, max_chars: int = 500) -> str:
-    """Extract a text snippet from the main content area."""
-    body_start = raw_html.find("<main")
-    if body_start == -1:
-        body_start = raw_html.find("<article")
-    if body_start == -1:
-        body_start = raw_html.find("<body")
-    if body_start == -1:
-        body_start = 0
+class _ContentTextParser(HTMLParser):
+    """Collect visible text from the docs content container.
 
-    chunk = raw_html[body_start : body_start + 10000]
-    text = TAG_RE.sub(" ", chunk)
-    text = html.unescape(text)
-    text = WHITESPACE_RE.sub(" ", text).strip()
-    return text[:max_chars]
+    docs.fivem.net renders the article body inside ``<div class="docContent">``.
+    Text outside that container (navigation, sidebars, footer) is ignored, as is
+    anything inside ``<script>``, ``<style>``, ``<nav>`` or the page ``<h1>``
+    (the title is stored separately). If no content container exists, text from
+    ``<main>``/``<article>`` is used instead.
+    """
+
+    SKIP_TAGS = {"script", "style", "nav", "noscript", "svg", "h1"}
+    VOID_TAGS = {
+        "area", "base", "br", "col", "embed", "hr", "img", "input",
+        "link", "meta", "source", "track", "wbr",
+    }
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self._stack: list[tuple[str, bool]] = []  # (tag, is_content_root)
+        self._content_depth = 0
+        self._fallback_depth = 0
+        self._skip_depth = 0
+        self.content: list[str] = []
+        self.fallback: list[str] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag in self.VOID_TAGS:
+            return
+        classes = (dict(attrs).get("class") or "").split()
+        is_root = tag == "div" and "docContent" in classes
+        self._stack.append((tag, is_root))
+        if is_root:
+            self._content_depth += 1
+        if tag in ("main", "article"):
+            self._fallback_depth += 1
+        if tag in self.SKIP_TAGS:
+            self._skip_depth += 1
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag in self.VOID_TAGS:
+            return
+        # Pop up to and including the matching start tag (tolerates unclosed tags).
+        while self._stack:
+            open_tag, is_root = self._stack.pop()
+            if is_root:
+                self._content_depth -= 1
+            if open_tag in ("main", "article"):
+                self._fallback_depth -= 1
+            if open_tag in self.SKIP_TAGS:
+                self._skip_depth -= 1
+            if open_tag == tag:
+                break
+
+    def handle_data(self, data: str) -> None:
+        if self._skip_depth > 0:
+            return
+        if self._content_depth > 0:
+            self.content.append(data)
+        elif self._fallback_depth > 0:
+            self.fallback.append(data)
+
+
+def extract_snippet(raw_html: str, max_chars: int = 1500) -> str:
+    """Extract a plain-text snippet from the page's main content area."""
+    parser = _ContentTextParser()
+    try:
+        parser.feed(raw_html)
+        parser.close()
+    except Exception:  # malformed markup: keep whatever was collected
+        pass
+    parts = parser.content or parser.fallback
+    text = WHITESPACE_RE.sub(" ", " ".join(parts)).strip()
+    if len(text) <= max_chars:
+        return text
+    cut = text[:max_chars]
+    space = cut.rfind(" ")
+    return (cut[:space] if space > max_chars // 2 else cut).rstrip() + "..."
 
 
 def fetch_page(url: str) -> str | None:
@@ -204,15 +267,20 @@ def main() -> None:
     print(f"Building docs index from {len(PAGES)} pages...")
     index = build_index()
 
-    with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
+    # Check before writing so a failed or partial run leaves the existing
+    # index untouched.
+    if len(index) < len(PAGES) * 0.8:
+        print(f"ERROR: only {len(index)}/{len(PAGES)} pages fetched successfully; "
+              f"leaving {OUTPUT_PATH} unchanged")
+        sys.exit(1)
+
+    tmp_path = OUTPUT_PATH + ".tmp"
+    with open(tmp_path, "w", encoding="utf-8") as f:
         json.dump(index, f, indent=2, ensure_ascii=False)
         f.write("\n")
+    os.replace(tmp_path, OUTPUT_PATH)
 
     print(f"\nWrote {len(index)} pages to {OUTPUT_PATH}")
-
-    if len(index) < len(PAGES) * 0.8:
-        print(f"WARNING: only {len(index)}/{len(PAGES)} pages fetched successfully")
-        sys.exit(1)
 
 
 if __name__ == "__main__":
