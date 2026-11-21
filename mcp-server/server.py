@@ -109,8 +109,13 @@ def generate_manifest_tool(
     dependencies: list[str] | None = None,
     has_nui: bool = False,
     workspace_path: str | None = None,
+    exports: list[str] | None = None,
+    server_exports: list[str] | None = None,
+    mode: str = "create",
 ) -> str:
-    """Generate a properly formatted fxmanifest.lua file.
+    """Generate fxmanifest.lua content, or propose additions to an existing one.
+
+    The tool returns text and never writes files.
 
     Args:
         name: Resource name
@@ -120,9 +125,15 @@ def generate_manifest_tool(
         scripts: Additional script paths to include
         dependencies: Additional resource dependencies
         has_nui: Whether the resource includes NUI (web UI)
-        workspace_path: Path to existing resource directory to auto-detect scripts, author, and NUI (optional)
+        workspace_path: Path to existing resource directory to auto-detect scripts, author, and NUI (optional; required for mode="update")
+        exports: Client export names to declare (optional)
+        server_exports: Server export names to declare (optional)
+        mode: "create" (default) for a new manifest, or "update" to add scripts, dependencies and exports to workspace_path/fxmanifest.lua while keeping every existing line; returns a diff and the full new content
     """
-    return generate_manifest(name, game, language, framework, scripts, dependencies, has_nui, workspace_path)
+    return generate_manifest(
+        name, game, language, framework, scripts, dependencies, has_nui,
+        workspace_path, exports, server_exports, mode,
+    )
 
 
 @mcp.tool(annotations=READ_ONLY)

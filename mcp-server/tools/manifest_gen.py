@@ -7,6 +7,8 @@ Can optionally scan a workspace directory to auto-populate scripts and NUI.
 
 from __future__ import annotations
 
+import difflib
+import os
 import posixpath
 
 from tools.manifest_common import (
@@ -64,8 +66,19 @@ def generate_manifest(
     dependencies: list[str] | None = None,
     has_nui: bool = False,
     workspace_path: str | None = None,
+    exports: list[str] | None = None,
+    server_exports: list[str] | None = None,
+    mode: str = "create",
 ) -> str:
-    """Generate fxmanifest.lua content and return it as a string."""
+    """Generate fxmanifest.lua content and return it as a string.
+
+    mode="update" reads ``workspace_path``/fxmanifest.lua instead, adds the
+    given scripts, dependencies and exports that are not already declared
+    (keeping every existing line and comment), and returns the new content
+    with a unified diff. The file is never written.
+    """
+    if (mode or "create").strip().lower() == "update":
+        return update_manifest(workspace_path, scripts, dependencies, exports, server_exports)
 
     game = (game or "").strip().lower()
     language = (language or "").strip().lower()
@@ -164,6 +177,12 @@ def generate_manifest(
             lines.append("")
         lines.extend(block)
 
+    for directive, entries in (("exports", exports or []), ("server_exports", server_exports or [])):
+        entries = _dedupe(list(entries))
+        if entries:
+            lines.append("")
+            lines.extend(_block(directive, entries))
+
     if has_nui:
         nui_root = posixpath.dirname(ui_page)
         lines.append("")
@@ -172,3 +191,59 @@ def generate_manifest(
         lines.extend(_block("files", [f"{nui_root}/**" if nui_root else ui_page]))
 
     return "\n".join(lines) + "\n"
+
+
+def update_manifest(
+    workspace_path: str | None,
+    scripts: list[str] | None = None,
+    dependencies: list[str] | None = None,
+    exports: list[str] | None = None,
+    server_exports: list[str] | None = None,
+) -> str:
+    """Add entries to an existing manifest without touching its other lines."""
+    from tools.manifest_validate import parse_manifest
+
+    if not workspace_path:
+        return "Error: mode='update' needs workspace_path (the resource folder or its fxmanifest.lua)."
+    path = workspace_path if workspace_path.endswith("fxmanifest.lua") else os.path.join(workspace_path, "fxmanifest.lua")
+    if not os.path.isfile(path):
+        return f"Error: fxmanifest.lua not found at {path}"
+    with open(path, encoding="utf-8") as f:
+        original = f.read()
+
+    declared = parse_manifest(original)
+
+    def existing(*names: str) -> set[str]:
+        return {v for n in names for v in declared.get(n, [])}
+
+    single = {"client": "client_script", "server": "server_script", "shared": "shared_script"}
+    plural = {k: v + "s" for k, v in single.items()}
+    additions: list[str] = []
+    for dep in _dedupe(list(dependencies or [])):
+        if dep not in existing("dependency", "dependencies"):
+            additions.append(f"dependency '{lua_string(dep)}'")
+    for script in _dedupe(list(scripts or [])):
+        side = _classify_script(script)
+        if script not in existing(single[side], plural[side]):
+            additions.append(f"{single[side]} '{lua_string(script)}'")
+    for name in _dedupe(list(exports or [])):
+        if name not in existing("export", "exports"):
+            additions.append(f"export '{lua_string(name)}'")
+    for name in _dedupe(list(server_exports or [])):
+        if name not in existing("server_export", "server_exports"):
+            additions.append(f"server_export '{lua_string(name)}'")
+
+    if not additions:
+        return f"No changes: everything requested is already declared in {path}."
+
+    nl = chr(10)
+    updated = original if original.endswith(nl) else original + nl
+    updated += nl + nl.join(additions) + nl
+    diff = "".join(difflib.unified_diff(
+        original.splitlines(keepends=True), updated.splitlines(keepends=True),
+        fromfile="fxmanifest.lua", tofile="fxmanifest.lua (updated)",
+    ))
+    return (
+        f"Updated manifest for {path} (not written; apply it yourself):{nl}{nl}"
+        f"```diff{nl}{diff}```{nl}{nl}Full content:{nl}{nl}```lua{nl}{updated}```{nl}"
+    )

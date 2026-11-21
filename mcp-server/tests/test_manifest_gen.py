@@ -89,3 +89,45 @@ def test_csharp_entries():
 
 def test_invalid_input_returns_error():
     assert generate_manifest("x", "gta5", "lua", "nope").startswith("Error")
+
+
+def test_exports_blocks():
+    b = blocks(generate_manifest("r", "gta5", "lua", "standalone", exports=["GetA"], server_exports=["GetB", "GetC"]))
+    assert b["exports"] == ["GetA"]
+    assert b["server_exports"] == ["GetB", "GetC"]
+
+
+EXISTING = """-- my resource
+fx_version 'cerulean'
+games { 'gta5' }
+
+client_scripts {
+    'client/main.lua' -- entry
+}
+dependency 'oxmysql'
+custom_data 'keep me'
+"""
+
+
+def test_update_mode_preserves_lines_and_returns_diff(tmp_path):
+    (tmp_path / "fxmanifest.lua").write_text(EXISTING, encoding="utf-8")
+    out = generate_manifest("r", "gta5", "lua", "standalone", mode="update", workspace_path=str(tmp_path),
+                            scripts=["client/extra.lua", "client/main.lua"], dependencies=["ox_lib", "oxmysql"],
+                            server_exports=["GetThing"])
+    assert "+client_script 'client/extra.lua'" in out
+    assert "+dependency 'ox_lib'" in out
+    assert "+server_export 'GetThing'" in out
+    assert "+client_script 'client/main.lua'" not in out
+    assert "+dependency 'oxmysql'" not in out
+    full = out.split("```lua\n", 1)[1].rsplit("```", 1)[0]
+    assert full.startswith(EXISTING)
+    assert (tmp_path / "fxmanifest.lua").read_text(encoding="utf-8") == EXISTING  # not written
+
+
+def test_update_mode_errors_and_no_change(tmp_path):
+    assert generate_manifest("r", "gta5", "lua", "standalone", mode="update").startswith("Error")
+    assert generate_manifest("r", "gta5", "lua", "standalone", mode="update",
+                             workspace_path=str(tmp_path)).startswith("Error: fxmanifest.lua not found")
+    (tmp_path / "fxmanifest.lua").write_text(EXISTING, encoding="utf-8")
+    assert generate_manifest("r", "gta5", "lua", "standalone", mode="update", workspace_path=str(tmp_path),
+                             dependencies=["oxmysql"]).startswith("No changes")
