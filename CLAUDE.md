@@ -8,7 +8,7 @@ Project documentation for Claude Code and AI assistants working on this reposito
 
 CFX Developer Tools is a Cursor IDE plugin for FiveM and RedM (CFX) resource development. It includes 10 skills, 6 rules, 25 code snippets, 11 starter templates, and a companion Python MCP server with 10 tools for resource scaffolding, native lookup, manifest generation, framework detection, live doc and event search, and txAdmin server control.
 
-**Works with:** Cursor (plugin), Claude Code (terminal and in-editor), and any MCP-compatible client.
+**Works with:** Cursor (plugin), Claude Code (terminal and in-editor), and any MCP-compatible client. The plugin registers the MCP server via `mcp.json`; Claude Code uses the root `.mcp.json` inside this repo, or `claude mcp add cfx-dev-tools -- python /absolute/path/to/mcp-server/server.py` elsewhere (see the README's MCP Server section).
 
 This is a monorepo. Skills, rules, snippets, templates, and the companion MCP server live in the same repository because CFX resource development crosses all of those layers in a single workflow.
 
@@ -44,7 +44,7 @@ CFX-Developer-Tools/
 
 | Skill | Description |
 |-------|-------------|
-| `resource-scaffolding` | Generate a complete CFX resource skeleton (fxmanifest, client/server entries, NUI scaffolding) |
+| `resource-scaffolding` | Generate a complete CFX resource skeleton (fxmanifest, client/server entries; NUI layout guidance) |
 | `native-functions` | Look up GTA5, RDR3, and CFX-platform native functions with parameter and return types |
 | `fxmanifest` | Author and validate `fxmanifest.lua` (fx_version, games, dependencies, NUI files, exports) |
 | `client-server-patterns` | Event routing, NetEvents vs Events, callback patterns, state synchronization |
@@ -61,9 +61,9 @@ CFX-Developer-Tools/
 |------|-------|-------------|
 | `cfx-lua-conventions.mdc` | `**/*.lua` | Flag CFX-specific Lua antipatterns (string concat in tight loops, missing `local`, deprecated natives) |
 | `cfx-javascript-conventions.mdc` | `**/*.js`, `**/*.ts` | Flag JS/TS antipatterns in CFX context (NUI message routing, async event handlers) |
-| `cfx-csharp-conventions.mdc` | `**/*.cs` | Flag C# patterns specific to FiveM (BaseScript, Tick handlers, async exports) |
+| `cfx-csharp-conventions.mdc` | `**/*.cs`, `**/*.csproj` | Flag C# patterns specific to FiveM (BaseScript, Tick handlers, async exports) |
 | `fxmanifest-standards.mdc` | `**/fxmanifest.lua` | Flag missing `fx_version`, `games`, `'cerulean'` declarations and deprecated directives like `lua54 'yes'` |
-| `security-best-practices.mdc` | Global | Flag hardcoded API keys, server-trust violations, unsafe NUI callbacks, missing input validation |
+| `security-best-practices.mdc` | `**/*.lua`, `**/*.js`, `**/*.cs` | Flag hardcoded API keys, server-trust violations, unsafe NUI callbacks, missing input validation |
 | `performance-rules.mdc` | CFX resource files | Flag thread blockers, unbounded loops, missing `Wait()` in `CreateThread`, expensive natives in tight loops |
 
 ## MCP Server (10 tools)
@@ -72,9 +72,9 @@ The companion MCP server is Python-based (FastMCP). It exposes CFX-aware tools t
 
 | Tool | Description |
 |------|-------------|
-| `scaffold_resource_tool` | Generate a complete CFX resource (fxmanifest, client/server entries, optional NUI) from a name and framework selection |
+| `scaffold_resource_tool` | Generate a CFX resource (fxmanifest, config, client/server entries; C# projects for csharp) from a name, game, language and framework; refuses to overwrite existing files unless `overwrite` is set |
 | `lookup_native_tool` | Search GTA5, RDR3, and CFX-platform natives by name, hash, or namespace; returns parameters, return type, and usage notes |
-| `generate_manifest_tool` | Author or update an `fxmanifest.lua` with required keys, dependencies, and NUI declarations |
+| `generate_manifest_tool` | Return `fxmanifest.lua` content with required keys, dependencies, scripts and NUI declarations, optionally detected from an existing resource folder (it does not edit files) |
 | `search_events_tool` | Search the indexed CFX events database for canonical net-event and exports usage patterns |
 | `detect_framework_tool` | Detect ESX / QBCore / Qbox / ox_core / VORP / RSG / standalone from a workspace path |
 | `search_docs_tool` | Search the indexed `docs.fivem.net` snapshot for parameters, gotchas, and code samples |
@@ -107,11 +107,14 @@ python server.py
 
 ### Running validation
 
-```bash
-# JSON schema and content-count checks (run by CI)
-python .github/scripts/validate_plugin.py
+Validation (JSON schemas, manifest fields, content counts, Lua/JS syntax, credential and dash checks) runs inline in `.github/workflows/validate.yml`; there is no separate validator script. Locally:
 
-# Native database refresh (manual; usually run by update-natives.yml)
+```bash
+# MCP server tests (also run by CI)
+cd mcp-server && pip install -r requirements-dev.txt && python -m pytest
+
+# Native database refresh (manual; usually run by update-natives.yml,
+# which first downloads the upstream JSON to /tmp)
 python .github/scripts/transform_natives.py
 ```
 
@@ -122,8 +125,8 @@ Releases are automated. The `release.yml` workflow runs only after the `Validate
 1. Reads conventional commits since the last tag.
 2. Computes the next semver bump (PATCH for `fix:`/`perf:`, MINOR for `feat:`, MAJOR for `<type>!:` or a `BREAKING CHANGE:` footer). Pushes with only `docs:`, `chore:`, `ci:`, `test:`, `refactor:` and similar commits do not release.
 3. Updates `plugin.json` `version` and the README version badge.
-4. Creates the tag, the GitHub Release, and floating major / minor tags.
-5. Invokes `release-doc-sync` to update `**Version:**` in this file and prepend a CHANGELOG entry.
+4. Creates the `vX.Y.Z` tag and the GitHub Release.
+5. Invokes `release-doc-sync` to update `**Version:**` in this file, prepend a CHANGELOG entry, and update the `ROADMAP.md` current version. Do not hand-write release entries in CHANGELOG.md.
 6. Syncs the GitHub repo "About" section (description, homepage, topics) with live artifact counts.
 
 Do not hand-edit `plugin.json` `version`, the README badge, or the `**Version:**` line above. The release pipeline owns them.
@@ -132,8 +135,8 @@ Do not hand-edit `plugin.json` `version`, the README badge, or the `**Version:**
 
 - **No em dashes.** Use regular dashes (`-`) or rewrite the sentence. CI flags em and en dashes in markdown.
 - **No hardcoded credentials.** Use environment variables, server-side `convar`s, or secrets stores. CI flags suspicious patterns.
-- **Skill frontmatter:** `name` (matching directory) and `description` only.
-- **Rule frontmatter:** `description`, `alwaysApply`, and `globs` (when path-scoped).
+- **Skill frontmatter:** `title`, `description`, and `standards-version`, plus `globs` when the skill applies to specific files. The directory name is the skill id.
+- **Rule frontmatter:** `title`, `description`, `alwaysApply`, `standards-version`, and `globs` (when path-scoped).
 - **Snippets:** must compile or load cleanly inside a CFX resource (Lua / JS / C#), no placeholder credentials.
 - **Templates:** every `fxmanifest.lua` must declare `fx_version`, `games`, and `'cerulean'`. Do not include any `lua54` directive: Lua 5.4 is the only runtime, `lua54 'yes'` is deprecated and ignored, and `lua54 true` is not valid Lua (a bare call needs a string or table argument), so the manifest fails to parse.
 - **MCP tool naming:** snake_case Python functions decorated with `@mcp.tool()`, suffix `_tool` for clarity in agent prompts.

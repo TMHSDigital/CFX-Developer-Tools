@@ -11,15 +11,16 @@ This file tells AI coding agents how the CFX Developer Tools repo works and how 
 This is a Cursor IDE plugin for FiveM/RedM (CFX) resource development. It contains:
 
 - **`.cursor-plugin/plugin.json`** -- plugin manifest (version, skills, rules)
-- **`skills/`** -- 9 SKILL.md files teaching the AI domain-specific CFX knowledge
+- **`skills/`** -- 10 SKILL.md files teaching the AI domain-specific CFX knowledge
 - **`rules/`** -- 6 .mdc rule files enforcing coding conventions
 - **`snippets/`** -- 25 code snippet files (Lua, JS, C#)
 - **`templates/`** -- 11 resource starter templates (standalone, ESX, QBCore, Qbox, ox_core, VORP, RSG, JS, C#, NUI Vite, NUI Svelte)
-- **`mcp-server/`** -- Python MCP server with 6 tools and JSON data files
+- **`examples/`** -- 5 complete, runnable reference resources
+- **`mcp-server/`** -- Python MCP server (FastMCP, stdio) with 10 tools, JSON data files and a pytest suite
 - **`docs/`** -- ARCHITECTURE.md, ROADMAP.md, CONTRIBUTING.md, GETTING-STARTED.md, index.md (docs site landing page)
-- **`CHANGELOG.md`** -- manually maintained release history (not auto-generated)
+- **`CHANGELOG.md`** -- release history; the release workflow's `release-doc-sync` step prepends each release entry
 - **`mkdocs.yml`** -- MkDocs Material configuration for the documentation site
-- **`.github/workflows/`** -- CI/CD automation
+- **`.github/workflows/`** -- CI/CD automation (validate, release, drift-check, update-natives, update-docs-index, deploy-docs, stale)
 
 ## Branching and commit model
 
@@ -58,13 +59,13 @@ Automatic flow (skipped entirely when Validate fails or there are no release-wor
 
 Has a concurrency guard -- only one release can run at a time to prevent race conditions.
 
-After a successful release, the workflow also syncs the GitHub repository "About" section (description, homepage URL, and topics) via `gh repo edit`. The description is dynamically generated from live artifact counts (skills, rules, snippets, templates, events, MCP tools).
+After a successful release, the workflow also syncs the GitHub repository "About" section (description, homepage URL, and topics) via `gh repo edit`. The description is generated from artifact counts computed from the tree (skills, rules, snippets, templates, events, MCP tools, natives).
 
 **Do not manually edit the version in plugin.json or the README badge.** The release workflow owns both.
 
 **Do not manually edit the GitHub repo About section** (description, homepage, topics). The release workflow syncs it automatically on every release.
 
-**CHANGELOG.md is manually maintained.** Update it when making significant changes. The release workflow does not auto-update it.
+**CHANGELOG.md release entries are written by the release workflow** (`release-doc-sync`). Do not hand-write version entries; edit the generated entry afterwards only to add detail.
 
 ### `update-natives.yml` (weekly on Monday 06:00 UTC, or manual dispatch)
 
@@ -107,14 +108,14 @@ Marks issues/PRs as stale after inactivity and closes them after further inactiv
 
 ### New skill
 
-1. Create `skills/<skill-name>/SKILL.md` with YAML frontmatter (title, description, globs)
+1. Create `skills/<skill-name>/SKILL.md` with YAML frontmatter (`title`, `description`, `standards-version`, and `globs` when file-scoped)
 2. Add the path to `plugin.json` under `"skills"`
 3. Update counts in README.md stats line and skills table
 4. Use `fix:` or `feat:` commit prefix depending on scope
 
 ### New rule
 
-1. Create `rules/<rule-name>.mdc` with frontmatter (`description`, `globs`, `alwaysApply`)
+1. Create `rules/<rule-name>.mdc` with frontmatter (`title`, `description`, `globs`, `alwaysApply`, `standards-version`)
 2. Add the path to `plugin.json` under `"rules"`
 
 ### New snippet
@@ -137,7 +138,8 @@ Do not manually edit `mcp-server/data/natives_*.json`. The `update-natives.yml` 
 ## MCP server
 
 - Entry point: `mcp-server/server.py`
-- Tools: `mcp-server/tools/` (scaffold.py, natives.py, manifest_gen.py, event_search.py, docs_search.py, detect_framework.py)
+- Tools: `mcp-server/tools/` (scaffold.py, natives.py, manifest_gen.py, event_search.py, docs_search.py, detect_framework.py, txadmin.py, txadmin_client.py)
+- Tests: `mcp-server/tests/` (`python -m pytest` after `pip install -r requirements-dev.txt`)
 - Shared logic: `mcp-server/tools/manifest_common.py`
 - Data: `mcp-server/data/` (natives_gta5.json, natives_rdr3.json, events.json, docs_index.json)
 - Dependencies: `mcp-server/requirements.txt` (pinned ranges)

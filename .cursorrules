@@ -3,42 +3,45 @@ You are working on CFX Developer Tools, a Cursor IDE plugin for FiveM and RedM r
 ## Repo structure
 
 - `.cursor-plugin/plugin.json` -- plugin manifest (version is auto-managed by CI)
-- `skills/` -- 9 SKILL.md files (resource scaffolding, natives, fxmanifest, client-server, framework detection, performance, NUI, database, state bags)
+- `skills/` -- 10 SKILL.md files (resource scaffolding, natives, fxmanifest, client-server, framework detection, performance, NUI, database, state bags, txAdmin integration)
 - `rules/` -- 6 .mdc rule files (Lua, JS, C# conventions, fxmanifest standards, security, performance)
 - `snippets/` -- 25 code snippets organized by language (lua, javascript, csharp)
 - `templates/` -- 11 resource templates (standalone, esx, qbcore, qbox, oxcore, vorp, rsg, javascript, csharp, nui-vite, nui-svelte)
-- `mcp-server/` -- Python FastAPI MCP server with 6 tools and JSON data files
+- `examples/` -- 5 complete, runnable reference resources
+- `mcp-server/` -- Python MCP server (FastMCP over stdio) with 10 tools, JSON data files and a pytest suite
 - `docs/` -- architecture, roadmap, contributing, getting started
-- `.github/workflows/` -- validate, release, update-natives, update-docs-index, stale, deploy-docs
+- `.github/workflows/` -- validate, release, drift-check, update-natives, update-docs-index, stale, deploy-docs
 - `mkdocs.yml` -- MkDocs Material config; docs site auto-deploys on push to main
 - `AGENTS.md` -- full workflow and contribution guide for AI agents
-- `CHANGELOG.md` -- manually maintained release history
+- `CHANGELOG.md` -- release history; release entries are prepended by the release workflow (`release-doc-sync`)
 
 ## Commit conventions
 
 Use conventional commits. The release workflow auto-bumps version based on prefix:
 - `feat:` = minor bump
-- `feat!:` or `BREAKING CHANGE` = major bump
-- `fix:`, `chore:`, `docs:`, `refactor:`, etc. = patch bump
+- any `<type>!:` or a `BREAKING CHANGE:` footer = major bump
+- `fix:` or `perf:` = patch bump
+- `chore:`, `docs:`, `ci:`, `test:`, `refactor:`, etc. = no release
 
 ## Version management
 
-Never manually edit the version in `plugin.json` or the README version badge. The release workflow (`release.yml`) auto-updates both on push to main.
+Never manually edit the version in `plugin.json` or the README version badge. The release workflow (`release.yml`) auto-updates both after Validate passes on main.
 
 ## Hard rules
 
 - No em dashes or en dashes anywhere. Use hyphens or rewrite.
-- No `lua54 'yes'` in any template or generated manifest. Lua 5.4 is the only runtime; the directive is deprecated.
+- No `lua54` directive in any template, example or generated manifest. Lua 5.4 is the only runtime (`lua54 'yes'` is ignored and `lua54 true` is invalid Lua).
 - No hardcoded credentials, tokens, API keys, or passwords.
 - All fxmanifest.lua must use `fx_version 'cerulean'` and include `games`.
-- Python in `mcp-server/` must pass `py_compile`.
+- Python in `mcp-server/` must compile and pass the pytest suite (`cd mcp-server && python -m pytest`).
 - Server-side event handlers must validate `source`.
-- C# resources use a single compiled DLL referenced in both `client_scripts` and `server_scripts`.
+- C# resources use one project per side (`Client/<name>.Client.csproj`, `Server/<name>.Server.csproj`) building `dist/<name>.Client.net.dll` and `dist/<name>.Server.net.dll`, listed in `client_scripts` and `server_scripts`.
 
 ## When editing skills or rules
 
 - Skills are SKILL.md with YAML frontmatter. Keep them accurate to current FiveM/RedM APIs.
-- Rules are .mdc with frontmatter (`description`, `globs`, `alwaysApply`). They enforce conventions in generated code.
+- Skill frontmatter: `title`, `description`, `standards-version` (plus `globs` when file-scoped).
+- Rules are .mdc with frontmatter (`title`, `description`, `globs`, `alwaysApply`, `standards-version`). They enforce conventions in generated code.
 - After adding/removing a skill or rule, update `plugin.json` to register it and update counts in README.md.
 - CI validates that README counts match actual file counts on disk.
 
@@ -51,23 +54,23 @@ Never manually edit the version in `plugin.json` or the README version badge. Th
 ## When editing templates
 
 - Every template directory needs at minimum a `fxmanifest.lua`.
-- Never include `lua54 'yes'`.
-- Follow the existing pattern: fxmanifest.lua + client.lua/js + server.lua/js (or .csproj + .cs).
+- Never include a `lua54` directive.
+- Follow the existing pattern: `fxmanifest.lua` + `config.lua` + `client/main.lua` + `server/main.lua` (JS: `client/main.js`, `server/main.js`; C#: `Client/` and `Server/` projects).
 
 ## When editing workflows
 
 - `release.yml` uses `[skip ci]` on its version bump commit. Don't remove that.
-- `release.yml` paths-ignore excludes `.github/**`, `docs/**`, `*.md`, `LICENSE`. Content-only changes won't trigger releases.
+- `release.yml` runs via `workflow_run` after Validate succeeds on main, and only releases when there are `feat`, `fix`, `perf` or breaking commits since the last tag.
 - `release.yml` has a concurrency guard. Only one release can run at a time.
 - `release.yml` auto-syncs the GitHub repo About section (description, homepage, topics) after every release. Do not manually edit the About section.
 - `deploy-docs.yml` builds the MkDocs Material site and deploys to GitHub Pages on every push to main.
-- `update-natives.yml` commits with `chore:` prefix (patch bump). Don't change to `feat:`.
+- `update-natives.yml` and `update-docs-index.yml` commit with a `chore:` prefix, which does not release. Don't change to `feat:`.
 - `validate.yml` runs on both PR and push. Keep checks fast.
-- `CHANGELOG.md` is manually maintained. Update it for significant changes.
+- `CHANGELOG.md` release entries come from `release-doc-sync`; don't hand-write version entries.
 
 ## Native databases
 
-Data sourced from `runtime.fivem.net/doc/` (GTA5, RDR3, CFX). ~6000+ GTA5, ~5800+ RDR3 natives.
+Data sourced from `runtime.fivem.net/doc/` (GTA5, RDR3, CFX). ~6300 GTA5 and ~5400 RDR3 natives (CFX platform natives are included per game).
 
 The flat JSON schema for natives:
 ```json
