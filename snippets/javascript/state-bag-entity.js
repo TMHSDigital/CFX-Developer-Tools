@@ -1,10 +1,15 @@
 // CFX Entity State Bag Pattern (JavaScript)
 // Attach persistent data to a networked entity (requires OneSync).
+// The two halves below belong in different files: the first in a server
+// script, the second in a client script.
 
-// Server: set state on entity
-const vehicle = GetVehiclePedIsIn(GetPlayerPed(source), false);
-Entity(vehicle).state.set('myResource:fuel', 100.0, true);
+// --- server/main.js: set state on the player's current vehicle ---
+onNet('myResource:refuel', () => {
+    const serverVehicle = GetVehiclePedIsIn(GetPlayerPed(source), false);
+    if (serverVehicle === 0) return;
+    Entity(serverVehicle).state.set('myResource:fuel', 100.0, true);
+});
 
-// Client: read state from entity
-const vehicle = GetVehiclePedIsIn(PlayerPedId(), false);
-const fuel = Entity(vehicle).state['myResource:fuel'];
+// --- client/main.js: read state from the current vehicle ---
+const clientVehicle = GetVehiclePedIsIn(PlayerPedId(), false);
+const fuel = clientVehicle !== 0 ? Entity(clientVehicle).state['myResource:fuel'] : undefined;

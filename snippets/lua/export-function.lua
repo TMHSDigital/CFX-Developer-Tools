@@ -2,6 +2,11 @@
 -- Expose a function that other resources can call.
 -- Other resources use: exports['your-resource']:GetSomething(param)
 
+-- Replace with your own logic.
+local function doSomeCalculation(param)
+    return param
+end
+
 exports('GetSomething', function(param)
     -- param: whatever the caller passes in
     -- Return a value back to the caller

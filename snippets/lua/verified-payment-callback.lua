@@ -95,7 +95,10 @@ local function reply(res, code, text)
 end
 
 local function handleCallback(req, res, body)
-    local timestamp = tonumber(req.headers['x-timestamp'])
+    -- Integer seconds only: a value like "1763600000.5" is rejected here
+    -- instead of failing later in the %d format below.
+    local rawTimestamp = tonumber(req.headers['x-timestamp'])
+    local timestamp = rawTimestamp and math.tointeger(rawTimestamp)
     local signature = req.headers['x-signature']
     if not timestamp or not signature then return reply(res, 400, 'bad request') end
 
