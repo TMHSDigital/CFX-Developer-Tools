@@ -27,8 +27,12 @@ local function setHud(show)
     end
 end
 
--- Single thread for the whole HUD. It paces itself: Wait(0) only while driving,
--- Wait(500) on foot. This keeps the resource near 0.00ms when out of a vehicle.
+-- Minimum time between speed updates sent to the NUI page.
+local SEND_INTERVAL_MS = 100
+
+-- Single thread for the whole HUD. It paces itself: Wait(SEND_INTERVAL_MS)
+-- while driving, Wait(500) on foot. This keeps the resource near 0.00ms when
+-- out of a vehicle.
 CreateThread(function()
     while true do
         local ped = PlayerPedId()
@@ -40,15 +44,17 @@ CreateThread(function()
             local speed = toDisplaySpeed(GetEntitySpeed(vehicle))
             local now = GetGameTimer()
 
-            -- Rate-limit: only push a 'speed' message when the displayed integer
-            -- changes, or at most once every 100ms to keep the readout fresh.
-            if speed ~= lastSpeed or (now - lastSent) >= 100 then
+            -- Rate-limit: push a 'speed' message only when the displayed integer
+            -- changed AND at least SEND_INTERVAL_MS passed since the last one,
+            -- so the NUI gets at most ~10 messages per second while driving and
+            -- none while the value is steady.
+            if speed ~= lastSpeed and (now - lastSent) >= SEND_INTERVAL_MS then
                 lastSpeed = speed
                 lastSent = now
                 SendNUIMessage({ action = 'speed', value = speed, unit = Config.Unit })
             end
 
-            Wait(0)
+            Wait(SEND_INTERVAL_MS)
         else
             -- On foot: hide the HUD and idle. No SetNuiFocus is used anywhere
             -- because this is a passive overlay and never captures input.

@@ -31,8 +31,8 @@ speedometer-hud/
 
 This resource follows the repo's performance rules. Two choices keep it cheap:
 
-1. **In-vehicle-only work.** The thread runs `Wait(0)` (per-frame) only while the player is in a vehicle. On foot it switches to `Wait(500)` and hides the HUD, so the resource idles near 0.00ms whenever you are not driving.
-2. **Change-gated messages.** A `speed` message is only sent when the displayed integer speed actually changes, or at most once every ~100ms. The `display` message is sent only when visibility flips. NUI traffic, not the Lua loop, is the expensive part, so gating messages is what keeps the HUD light.
+1. **In-vehicle-only work.** The thread polls every 100ms only while the player is in a vehicle. On foot it switches to `Wait(500)` and hides the HUD, so the resource idles near 0.00ms whenever you are not driving.
+2. **Change-gated messages.** A `speed` message is only sent when the displayed integer speed actually changes, and at most once every 100ms, so a steady speed sends nothing and fast changes are capped at about 10 messages per second. The `display` message is sent only when visibility flips. NUI traffic, not the Lua loop, is the expensive part, so gating messages is what keeps the HUD light.
 
 ## Why the transparent body matters
 
