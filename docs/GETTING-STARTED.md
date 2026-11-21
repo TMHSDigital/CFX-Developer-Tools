@@ -242,7 +242,7 @@ cd mcp-server
 pip install -r requirements.txt
 ```
 
-The first command moves into the `mcp-server` folder. The second installs three Python packages the server needs. You will see some download progress and then a success message.
+The first command moves into the `mcp-server` folder. The second installs the `mcp` Python package (the MCP SDK) and its dependencies. You will see some download progress and then a success message.
 
 You do **not** need to manually start the MCP server. Cursor starts it automatically the first time the AI calls one of its tools. The configuration lives in `.cursor/mcp.json`.
 
