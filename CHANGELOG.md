@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.17.0] - 2026-11-21
+
+See [release notes](https://github.com/TMHSDigital/CFX-Developer-Tools/releases/tag/v0.17.0) for details.
+
 ## [0.16.0] - 2026-11-21
 
 See [release notes](https://github.com/TMHSDigital/CFX-Developer-Tools/releases/tag/v0.16.0) for details.
