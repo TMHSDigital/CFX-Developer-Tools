@@ -1,7 +1,11 @@
 name: Release
 
+# Release only after Validate has passed for a push to main, so a failing
+# commit never produces a version bump, tag or GitHub Release.
 on:
-  push:
+  workflow_run:
+    workflows: [Validate]
+    types: [completed]
     branches: [main]
 
 permissions:
@@ -15,9 +19,13 @@ jobs:
   version-and-release:
     name: Bump version, tag, and release
     runs-on: ubuntu-latest
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push'
     steps:
       - uses: actions/checkout@v7
         with:
+          ref: main
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -31,22 +39,28 @@ jobs:
       - name: Determine bump type from commits
         id: bump
         run: |
-          # Get commits since last tag (or all if no tags)
+          # Commits since last tag (or all if no tags)
           last_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
-          if [ -z "$last_tag" ]; then
-            commits=$(git log --oneline --format="%s")
-          else
-            commits=$(git log "$last_tag"..HEAD --oneline --format="%s")
+          range="HEAD"
+          if [ -n "$last_tag" ]; then
+            range="$last_tag..HEAD"
           fi
+          subjects=$(git log "$range" --format="%s")
+          bodies=$(git log "$range" --format="%B")
 
           echo "Commits since last release:"
-          echo "$commits"
+          echo "$subjects"
 
-          bump="patch"
-          if echo "$commits" | grep -qiE "^(feat|feature)(\(.+\))?!:|BREAKING CHANGE"; then
+          # major: any "<type>(scope)!:" subject or a BREAKING CHANGE footer
+          # minor: feat; patch: fix or perf; otherwise (docs, chore, ci,
+          # test, refactor, style, build) no release.
+          bump="none"
+          if echo "$subjects" | grep -qE "^[a-zA-Z]+(\(.+\))?!:" || echo "$bodies" | grep -qE "^BREAKING[ -]CHANGE:"; then
             bump="major"
-          elif echo "$commits" | grep -qiE "^(feat|feature)(\(.+\))?:"; then
+          elif echo "$subjects" | grep -qiE "^(feat|feature)(\(.+\))?:"; then
             bump="minor"
+          elif echo "$subjects" | grep -qiE "^(fix|perf)(\(.+\))?:"; then
+            bump="patch"
           fi
 
           echo "bump=$bump" >> "$GITHUB_OUTPUT"
@@ -64,6 +78,7 @@ jobs:
             major) major=$((major + 1)); minor=0; patch=0 ;;
             minor) minor=$((minor + 1)); patch=0 ;;
             patch) patch=$((patch + 1)) ;;
+            none) ;;
           esac
 
           new_version="$major.$minor.$patch"

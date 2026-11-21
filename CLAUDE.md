@@ -117,10 +117,10 @@ python .github/scripts/transform_natives.py
 
 ## Release Workflow
 
-Releases are automated. The `release.yml` workflow:
+Releases are automated. The `release.yml` workflow runs only after the `Validate` workflow succeeds for a push to `main`, and:
 
 1. Reads conventional commits since the last tag.
-2. Computes the next semver bump (PATCH for `fix:`, MINOR for `feat:`, MAJOR for `BREAKING CHANGE`).
+2. Computes the next semver bump (PATCH for `fix:`/`perf:`, MINOR for `feat:`, MAJOR for `<type>!:` or a `BREAKING CHANGE:` footer). Pushes with only `docs:`, `chore:`, `ci:`, `test:`, `refactor:` and similar commits do not release.
 3. Updates `plugin.json` `version` and the README version badge.
 4. Creates the tag, the GitHub Release, and floating major / minor tags.
 5. Invokes `release-doc-sync` to update `**Version:**` in this file and prepend a CHANGELOG entry.

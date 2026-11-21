@@ -26,8 +26,9 @@ This is a Cursor IDE plugin for FiveM/RedM (CFX) resource development. It contai
 - **Single branch**: `main` only. No develop/release branches.
 - **Conventional commits** are required. The release workflow parses them:
   - `feat:` or `feat(scope):` -- triggers a **minor** version bump
-  - `feat!:` or `BREAKING CHANGE` -- triggers a **major** version bump
-  - Everything else (`fix:`, `chore:`, `docs:`, `refactor:`, etc.) -- triggers a **patch** bump
+  - Any `<type>!:` (for example `feat!:` or `fix!:`) or a `BREAKING CHANGE:` footer -- triggers a **major** version bump
+  - `fix:` or `perf:` -- triggers a **patch** bump
+  - Everything else (`chore:`, `docs:`, `ci:`, `test:`, `refactor:`, etc.) -- no release
 - Commit messages should be concise and describe the "why", not the "what".
 
 ## CI/CD workflows
@@ -44,9 +45,9 @@ Checks:
 - fxmanifest.lua templates have `fx_version`, `games`, `'cerulean'`
 - Python syntax for all MCP server modules
 
-### `release.yml` (runs on push to main, ignores docs/md/github changes)
+### `release.yml` (runs after `validate.yml` succeeds for a push to main)
 
-Automatic flow:
+Automatic flow (skipped entirely when Validate fails or there are no release-worthy commits):
 1. Reads current version from `plugin.json`
 2. Determines bump type from conventional commit messages since last tag
 3. Computes new semver version
