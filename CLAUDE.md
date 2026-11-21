@@ -70,7 +70,7 @@ Every rule is path-scoped (`alwaysApply: false`) and applies to the files matche
 
 ## MCP Server (11 tools)
 
-The companion MCP server is Python-based (FastMCP). It exposes CFX-aware tools that read from local data files (`mcp-server/data/`) and the working tree. The txAdmin tools additionally talk to a running txAdmin panel over HTTP, using credentials from the `TXADMIN_URL` / `TXADMIN_USERNAME` / `TXADMIN_PASSWORD` environment variables.
+The companion MCP server is Python-based (FastMCP). It exposes CFX-aware tools that read from local data files (`mcp-server/data/`) and the working tree. The txAdmin tools additionally talk to a running txAdmin panel over HTTP, using credentials from the `TXADMIN_URL` / `TXADMIN_USERNAME` / `TXADMIN_PASSWORD` environment variables. It also exposes every skill and rule as an MCP resource (`cfx://skills/<name>`, `cfx://rules/<name>`) and each skill as a prompt (`cfx-<name>`), for clients without the Cursor plugin loader.
 
 | Tool | Description |
 |------|-------------|

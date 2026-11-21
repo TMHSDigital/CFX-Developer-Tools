@@ -20,6 +20,16 @@ A Model Context Protocol (MCP) server that provides AI-powered tools for FiveM a
 
 `?` marks optional parameters.
 
+## Resources and prompts
+
+For MCP clients without the Cursor plugin loader, the server also exposes the plugin's knowledge:
+
+- `cfx://skills/<name>` - each `skills/<name>/SKILL.md` as a Markdown resource
+- `cfx://rules/<name>` - each `rules/<name>.mdc` as a Markdown resource
+- `cfx-<name>` - a prompt per skill that loads the skill as guidance
+
+Files are read from the repository on every request, so edits appear without restarting, and a new skill directory is exposed on the next start. The server must run from a full checkout (it reads `skills/` and `rules/` next to `mcp-server/`).
+
 ## Setup
 
 ### Prerequisites

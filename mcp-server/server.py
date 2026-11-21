@@ -15,6 +15,7 @@ from tools.scaffold import scaffold_resource
 from tools.natives import lookup_native
 from tools.manifest_gen import generate_manifest
 from tools.manifest_validate import validate_manifest_report
+from tools import knowledge
 from tools.event_search import search_events
 from tools.docs_search import search_docs
 from tools.detect_framework import detect_framework
@@ -31,6 +32,10 @@ mcp = FastMCP("cfx-dev-tools")
 # local data; the txAdmin control and kick tools change a live server.
 READ_ONLY = ToolAnnotations(readOnlyHint=True, openWorldHint=False)
 DESTRUCTIVE = ToolAnnotations(readOnlyHint=False, destructiveHint=True, idempotentHint=False, openWorldHint=True)
+
+# Skills and rules as MCP resources (cfx://skills/<name>, cfx://rules/<name>)
+# and skill prompts (cfx-<name>) for clients without the Cursor plugin.
+knowledge.register(mcp)
 
 # Data directory for natives, events and the docs index. Defaults to the
 # data/ folder next to this file so the server works from any working
