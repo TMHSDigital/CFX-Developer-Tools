@@ -107,12 +107,17 @@ class TxAdminClient:
             with self._opener.open(request, timeout=REQUEST_TIMEOUT) as response:
                 raw = response.read().decode("utf-8")
         except urllib.error.HTTPError as exc:
+            # Any 4xx/5xx is a failure, even when the body is JSON: a
+            # rejected command must never be reported as sent.
             raw = exc.read().decode("utf-8", errors="replace")
             parsed = _safe_json(raw)
+            detail = ""
             if parsed is not None:
-                return parsed
+                detail = str(parsed.get("error") or parsed.get("msg") or "")
+                if parsed.get("logout"):
+                    detail = detail or "session rejected (logged out)"
             raise TxAdminError(
-                f"HTTP {exc.code} from {path}: {raw[:200] or exc.reason}"
+                f"HTTP {exc.code} from {path}: {detail or raw[:200] or exc.reason}"
             ) from exc
         except urllib.error.URLError as exc:
             raise TxAdminError(

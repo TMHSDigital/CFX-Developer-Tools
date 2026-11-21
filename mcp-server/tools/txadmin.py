@@ -28,11 +28,16 @@ RESOURCE_ACTIONS = {
 
 def _render_toast(result: dict, fallback: str) -> str:
     """Render an ApiToastResp ({type, msg}) as markdown."""
-    toast_type = (result.get("type") or "info").lower()
+    if not isinstance(result, dict) or result.get("logout"):
+        return f"**[ERROR]** Unexpected response from txAdmin: {result}"
+    if result.get("error") and not result.get("type"):
+        return f"**[ERROR]** {result['error']}"
+    toast_type = str(result.get("type") or "").lower()
+    icon = {"success": "OK", "info": "INFO", "warning": "WARN", "error": "ERROR"}.get(toast_type)
+    if icon is None:
+        # No recognised toast shape: do not claim the request was sent.
+        return f"**[ERROR]** Unexpected response from txAdmin: {result}"
     msg = result.get("msg") or result.get("error") or fallback
-    icon = {"success": "OK", "warning": "WARN", "error": "ERROR"}.get(
-        toast_type, "INFO"
-    )
     return f"**[{icon}]** {msg}"
 
 
@@ -126,8 +131,14 @@ def txadmin_player_search(
     if not players:
         return "No players matched the search."
 
+    try:
+        limit = max(1, int(limit))
+    except (TypeError, ValueError):
+        limit = 25
+    shown = players[:limit]
+
     lines = [f"Found {len(players)} player(s):", ""]
-    for player in players[: max(1, limit)]:
+    for player in shown:
         name = player.get("displayName") or player.get("name") or "unknown"
         license_id = player.get("license") or "no license"
         details = []
@@ -140,9 +151,9 @@ def txadmin_player_search(
         suffix = f" ({', '.join(details)})" if details else ""
         lines.append(f"- **{name}** - `{license_id}`{suffix}")
 
-    if len(players) > limit:
+    if len(players) > len(shown):
         lines.append("")
-        lines.append(f"... and {len(players) - limit} more (raise `limit` to see them).")
+        lines.append(f"... and {len(players) - len(shown)} more (raise `limit` to see them).")
 
     return "\n".join(lines)
 
@@ -155,10 +166,14 @@ def txadmin_kick_player(netid: int, reason: str = "", mutex: str = "current") ->
         reason: Optional kick reason shown to the player.
         mutex: Server instance mutex; 'current' (default) targets the running server.
     """
+    if isinstance(netid, bool):
+        return f"Error: netid must be a number, got '{netid}'."
     try:
         netid_int = int(netid)
     except (TypeError, ValueError):
         return f"Error: netid must be a number, got '{netid}'."
+    if netid_int <= 0:
+        return f"Error: netid must be a positive server id, got {netid_int}."
 
     reason = (reason or "").strip()
 
