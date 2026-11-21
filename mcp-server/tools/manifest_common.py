@@ -22,8 +22,9 @@ VALID_GAMES = {"gta5", "rdr3", "both"}
 VALID_LANGUAGES = {"lua", "javascript", "csharp"}
 VALID_FRAMEWORKS = {"standalone", "esx", "qbcore", "qbox", "oxcore", "vorp", "rsg"}
 
-AUTHOR_RE = re.compile(r"""author\s+['"]([^'"]+)['"]""")
-DESC_RE = re.compile(r"""description\s+['"]([^'"]+)['"]""")
+# Match the opening quote so values like "O'Brien" are read whole.
+AUTHOR_RE = re.compile(r"""author\s+(?P<q>['"])(?P<value>.*?)(?P=q)""")
+DESC_RE = re.compile(r"""description\s+(?P<q>['"])(?P<value>.*?)(?P=q)""")
 
 
 RESOURCE_NAME_RE = re.compile(r"^[a-z0-9][a-z0-9_-]{0,63}$")
@@ -89,11 +90,11 @@ def read_workspace_context(workspace_path: str) -> dict[str, str]:
 
             author_match = AUTHOR_RE.search(content)
             if author_match and "author" not in context:
-                context["author"] = author_match.group(1)
+                context["author"] = author_match.group("value")
 
             desc_match = DESC_RE.search(content)
             if desc_match and "description" not in context:
-                context["description"] = desc_match.group(1)
+                context["description"] = desc_match.group("value")
 
             if "author" in context:
                 return context
@@ -142,16 +143,30 @@ def scan_script_files(directory: str) -> dict[str, list[str]]:
     return scripts
 
 
-def detect_nui_presence(directory: str) -> bool:
-    """Check if a directory contains NUI files (index.html, ui/, html/, web/)."""
+def find_nui_page(directory: str) -> str | None:
+    """Return the relative path of the NUI entry page in a resource, or None.
+
+    Built output (``<dir>/dist/index.html``) is preferred over a source
+    ``index.html`` in the same folder, since that is what FXServer serves.
+    """
     for nui_dir in ("html", "ui", "web", "nui"):
         candidate = os.path.join(directory, nui_dir)
-        if os.path.isdir(candidate):
-            for f in os.listdir(candidate):
+        if not os.path.isdir(candidate):
+            continue
+        for sub in ("dist", ""):
+            folder = os.path.join(candidate, sub) if sub else candidate
+            if not os.path.isdir(folder):
+                continue
+            for f in sorted(os.listdir(folder)):
                 if f.lower() in ("index.html", "index.htm"):
-                    return True
-            if os.path.isdir(os.path.join(candidate, "dist")):
-                return True
+                    return "/".join(p for p in (nui_dir, sub, f) if p)
+        if os.path.isdir(os.path.join(candidate, "dist")):
+            return f"{nui_dir}/dist/index.html"
     if os.path.exists(os.path.join(directory, "index.html")):
-        return True
-    return False
+        return "index.html"
+    return None
+
+
+def detect_nui_presence(directory: str) -> bool:
+    """Check if a directory contains NUI files (index.html, ui/, html/, web/)."""
+    return find_nui_page(directory) is not None

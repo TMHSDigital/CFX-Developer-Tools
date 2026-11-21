@@ -7,13 +7,50 @@ Can optionally scan a workspace directory to auto-populate scripts and NUI.
 
 from __future__ import annotations
 
+import posixpath
+
 from tools.manifest_common import (
     FRAMEWORK_DEPS,
+    find_nui_page,
+    lua_string,
     validate_inputs,
     read_workspace_context,
     scan_script_files,
-    detect_nui_presence,
 )
+
+DEFAULT_UI_PAGE = "html/index.html"
+
+
+def _classify_script(path: str) -> str:
+    """Return 'client', 'server' or 'shared' for a caller-supplied script path."""
+    lower = path.replace("\\", "/").lower()
+    base = lower.rsplit("/", 1)[-1]
+    parts = lower.split("/")
+    if base.startswith("cl_") or "client" in parts[:-1] or base.startswith("client"):
+        return "client"
+    if base.startswith("sv_") or "server" in parts[:-1] or base.startswith("server"):
+        return "server"
+    return "shared"
+
+
+def _block(directive: str, entries: list[str]) -> list[str]:
+    """Render a Lua table directive with comma-separated quoted entries."""
+    lines = [f"{directive} {{"]
+    for i, entry in enumerate(entries):
+        comma = "," if i < len(entries) - 1 else ""
+        lines.append(f"    '{lua_string(entry)}'{comma}")
+    lines.append("}")
+    return lines
+
+
+def _dedupe(items: list[str]) -> list[str]:
+    seen: set[str] = set()
+    out: list[str] = []
+    for item in items:
+        if item and item not in seen:
+            seen.add(item)
+            out.append(item)
+    return out
 
 
 def generate_manifest(
@@ -28,9 +65,9 @@ def generate_manifest(
 ) -> str:
     """Generate fxmanifest.lua content and return it as a string."""
 
-    game = game.strip().lower()
-    language = language.strip().lower()
-    framework = framework.strip().lower()
+    game = (game or "").strip().lower()
+    language = (language or "").strip().lower()
+    framework = (framework or "").strip().lower()
 
     error = validate_inputs(game, language, framework)
     if error:
@@ -38,34 +75,54 @@ def generate_manifest(
 
     author = "YourName"
     description = name
+    ui_page = DEFAULT_UI_PAGE
+
+    client: list[str] = []
+    server: list[str] = []
+    shared: list[str] = []
+    scanned_any = False
 
     if workspace_path:
         ctx = read_workspace_context(workspace_path)
         author = ctx.get("author", author)
         description = ctx.get("description", description)
 
-        scanned = scan_script_files(workspace_path)
-        if not scripts and any(scanned.values()):
-            scripts = []
-            for f in scanned.get("client", []):
-                scripts.append(f)
-            for f in scanned.get("server", []):
-                scripts.append(f)
+        if not scripts:
+            scanned = scan_script_files(workspace_path)
+            if any(scanned.values()):
+                scanned_any = True
+                client = list(scanned.get("client", []))
+                server = list(scanned.get("server", []))
+                shared = list(scanned.get("shared", []))
 
-        if not has_nui:
-            has_nui = detect_nui_presence(workspace_path)
+        detected_page = find_nui_page(workspace_path)
+        if detected_page:
+            has_nui = True
+            ui_page = detected_page
 
-    if game == "both":
-        games_str = "{ 'gta5', 'rdr3' }"
-    else:
-        games_str = f"{{ '{game}' }}"
+    if scripts:
+        for s in scripts:
+            {"client": client, "server": server, "shared": shared}[_classify_script(s)].append(s)
+
+    # Default entries only for sides that have no scanned or caller-supplied
+    # scripts; an explicit file list already names its scripts, so adding the
+    # glob as well would list the same files twice.
+    if not scanned_any:
+        defaults = {
+            "lua": (["config.lua"], ["client/*.lua"], ["server/*.lua"]),
+            "javascript": ([], ["client/*.js"], ["server/*.js"]),
+            "csharp": ([], ["Client/ClientMain.net.dll"], ["Server/ServerMain.net.dll"]),
+        }[language]
+        shared = shared or list(defaults[0])
+        client = client or list(defaults[1])
+        server = server or list(defaults[2])
 
     lines: list[str] = [
         "fx_version 'cerulean'",
-        f"games {games_str}",
+        "games { 'gta5', 'rdr3' }" if game == "both" else f"games {{ '{game}' }}",
         "",
-        f"author '{author}'",
-        f"description '{description}'",
+        f"author '{lua_string(author)}'",
+        f"description '{lua_string(description)}'",
         "version '1.0.0'",
         "",
     ]
@@ -76,53 +133,36 @@ def generate_manifest(
         all_deps.append(fw_dep)
     if dependencies:
         all_deps.extend(dependencies)
+    all_deps = _dedupe(all_deps)
 
     for dep in all_deps:
-        lines.append(f"dependency '{dep}'")
+        lines.append(f"dependency '{lua_string(dep)}'")
     if all_deps:
         lines.append("")
 
-    if language == "lua":
-        lines.append("shared_scripts {")
-        lines.append("    'config.lua'")
-        lines.append("}")
-        lines.append("")
-        client_entries = ["'client/*.lua'"]
-        server_entries = ["'server/*.lua'"]
-    elif language == "javascript":
+    if language == "javascript":
         lines.append("node_version '22'")
         lines.append("")
-        client_entries = ["'client/*.js'"]
-        server_entries = ["'server/*.js'"]
-    elif language == "csharp":
-        client_entries = [f"'{name}.net.dll'"]
-        server_entries = [f"'{name}.net.dll'"]
 
-    if scripts:
-        for s in scripts:
-            if "client" in s.lower() or s.startswith("cl_"):
-                client_entries.append(f"'{s}'")
-            elif "server" in s.lower() or s.startswith("sv_"):
-                server_entries.append(f"'{s}'")
-            else:
-                client_entries.append(f"'{s}'")
+    blocks: list[list[str]] = []
+    for directive, entries in (
+        ("shared_scripts", _dedupe(shared)),
+        ("client_scripts", _dedupe(client)),
+        ("server_scripts", _dedupe(server)),
+    ):
+        if entries:
+            blocks.append(_block(directive, entries))
 
-    lines.append("client_scripts {")
-    for entry in client_entries:
-        lines.append(f"    {entry}")
-    lines.append("}")
-    lines.append("")
-    lines.append("server_scripts {")
-    for entry in server_entries:
-        lines.append(f"    {entry}")
-    lines.append("}")
+    for i, block in enumerate(blocks):
+        if i:
+            lines.append("")
+        lines.extend(block)
 
     if has_nui:
+        nui_root = posixpath.dirname(ui_page)
         lines.append("")
-        lines.append("ui_page 'html/index.html'")
+        lines.append(f"ui_page '{lua_string(ui_page)}'")
         lines.append("")
-        lines.append("files {")
-        lines.append("    'html/**'")
-        lines.append("}")
+        lines.extend(_block("files", [f"{nui_root}/**" if nui_root else ui_page]))
 
     return "\n".join(lines) + "\n"
