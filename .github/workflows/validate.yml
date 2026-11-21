@@ -217,7 +217,7 @@ jobs:
           EOF
 
   validate-templates:
-    name: Validate fxmanifest templates
+    name: Validate templates, examples and snippets
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -225,33 +225,70 @@ jobs:
       - name: Check fxmanifest.lua files have required fields
         run: |
           python3 << 'EOF'
-          import os, re, sys
+          import re, subprocess, sys
 
+          files = subprocess.check_output(
+              ["git", "ls-files", "templates/*/fxmanifest.lua", "examples/*/fxmanifest.lua"], text=True
+          ).split()
           errors = []
-          for root, dirs, files in os.walk("templates"):
-              for f in files:
-                  if f == "fxmanifest.lua":
-                      path = os.path.join(root, f)
-                      content = open(path).read()
-
-                      if "fx_version" not in content:
-                          errors.append(f"{path}: missing fx_version")
-                      if "games" not in content:
-                          errors.append(f"{path}: missing games")
-                      if "'cerulean'" not in content:
-                          errors.append(f"{path}: fx_version should be cerulean")
+          for path in files:
+              content = open(path, encoding="utf-8").read()
+              if not re.search(r"^fx_version 'cerulean'", content, re.M):
+                  errors.append(f"{path}: missing fx_version 'cerulean'")
+              if not re.search(r"^games? [{']", content, re.M):
+                  errors.append(f"{path}: missing games declaration")
 
           if errors:
               for e in errors:
                   print(f"::error::{e}", file=sys.stderr)
               sys.exit(1)
 
-          print("All fxmanifest.lua templates valid")
+          print(f"All {len(files)} fxmanifest.lua files valid")
           EOF
 
+      - name: Validate template package.json files
+        run: |
+          python3 << 'EOF'
+          import json, subprocess
+          files = subprocess.check_output(["git", "ls-files", "templates/**package.json"], text=True).split()
+          for path in files:
+              json.load(open(path, encoding="utf-8"))
+          print(f"{len(files)} package.json files valid")
+          EOF
+
+      - name: Syntax-check JavaScript (snippets, templates, examples)
+        run: |
+          # Bundler-only sources under web/ (TS, Svelte) are built by their own tooling.
+          status=0
+          for f in $(git ls-files 'snippets/*.js' 'templates/*.js' 'examples/*.js' | grep -v '/web/'); do
+            node --check "$f" || { echo "::error file=$f::JavaScript syntax error"; status=1; }
+          done
+          exit $status
+
+      - name: Install Lua
+        run: sudo apt-get update -q && sudo apt-get install -y -q lua5.4
+
+      - name: Syntax-check Lua (snippets, templates, examples, all .lua)
+        run: |
+          status=0
+          tmp=$(mktemp --suffix=.lua)
+          for f in $(git ls-files '*.lua'); do
+            # CfxLua compile-time hashes (`adder`) are not stock Lua syntax.
+            sed 's/`[^`]*`/0/g' "$f" > "$tmp"
+            if ! out=$(luac5.4 -p "$tmp" 2>&1); then
+              echo "::error file=$f::${out//$tmp/$f}"
+              status=1
+            fi
+          done
+          exit $status
+
   validate-python:
-    name: Validate MCP server
-    runs-on: ubuntu-latest
+    name: Validate MCP server (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
@@ -262,21 +299,18 @@ jobs:
       - name: Install dependencies
         run: pip install -r mcp-server/requirements-dev.txt
 
-      - name: Check Python syntax
-        run: python3 -m py_compile mcp-server/server.py
+      - name: Check Python syntax (all modules)
+        run: python -m compileall -q mcp-server .github/scripts
 
-      - name: Check tool modules syntax
+      - name: Import server and check tool registration
+        working-directory: mcp-server
+        run: python -c "import asyncio, server; tools = asyncio.run(server.mcp.list_tools()); assert len(tools) == 10, [t.name for t in tools]; print(len(tools), 'tools registered')"
+
+      - name: Smoke-call data tools
+        working-directory: mcp-server
         run: |
-          python3 -m py_compile mcp-server/tools/manifest_common.py
-          python3 -m py_compile mcp-server/tools/scaffold.py
-          python3 -m py_compile mcp-server/tools/natives.py
-          python3 -m py_compile mcp-server/tools/manifest_gen.py
-          python3 -m py_compile mcp-server/tools/event_search.py
-          python3 -m py_compile mcp-server/tools/docs_search.py
-          python3 -m py_compile mcp-server/tools/detect_framework.py
-          python3 -m py_compile mcp-server/tools/txadmin_client.py
-          python3 -m py_compile mcp-server/tools/txadmin.py
+          python -c "import server; assert server.search_events_tool('').startswith('Event reference database'); assert server.search_docs_tool('').startswith('Documentation index'); assert server.search_docs_tool('x', section='bogus').startswith('Error: invalid section'); assert 'GetPlayerPed' in server.lookup_native_tool('GET_PLAYER_PED'); print('data tools ok')"
 
       - name: Run MCP server tests
         working-directory: mcp-server
-        run: python3 -m pytest -q
+        run: python -m pytest -q
